@@ -1,0 +1,31 @@
+//
+//  Strategy.cpp
+//  Algorithmic Trading COMP3011
+//
+//  Created on 03/03/15.
+//  Copyright (c) Revitpo. All rights reserved.
+//
+
+#include "Strategy.h"
+
+
+namespace std {
+
+    Strategy::Strategy(Logger &logger, vector<TradeDay> trades) :
+    logger(logger), trades(trades) {}
+    
+    StrategyResult Strategy::execute() {
+        //things to do for every strategy
+        
+        logger.log("Base: Strategy Execute");
+        
+        for (TradeDay tradeDay : trades) {
+            nextTradeDay(tradeDay);
+        }
+        
+        return calculateTradingStategy();
+
+    }
+
+
+}

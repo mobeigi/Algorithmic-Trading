@@ -1,5 +1,5 @@
 //
-//  TradeDay.h
+//  Logger.h
 //  Algorithmic Trading COMP3011
 //
 //  Created on 03/03/15.
@@ -7,25 +7,30 @@
 //
 
 
-#ifndef __Algorithmic_Trading__TradeDay__
-#define __Algorithmic_Trading__TradeDay__
+#ifndef __Algorithmic_Trading__Logger__
+#define __Algorithmic_Trading__Logger__
 
 namespace std {
-    class TradeDay;
+    class Logger;
 }
 
 #include "GlobalIncludes.h"
 
+#include <iostream>
+
 
 namespace std {
     
     
-    class TradeDay {
+    class Logger {
         
     private:
+        Logger();
 
     public:
-
+        static Logger standardLogger();
+        
+        void log(string msg);
     };
     
 }
