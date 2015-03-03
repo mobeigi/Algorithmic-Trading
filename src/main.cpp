@@ -9,10 +9,10 @@
 #include <iostream>
 #include <string>
 
-namespace std {
 
-	int main(int argc, const char * argv[]) {
-		cout << "Hello Merth";
-	}
-
+int main(int argc, const char * argv[]) {
+    std::cout << "Hello Merth\n";
+    return 0;
 }
+
+
