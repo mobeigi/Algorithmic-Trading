@@ -10,6 +10,14 @@
 
 
 namespace std {
+    
+    TradeDay::TradeDay(double lastPrice) {
+        this->lastPrice = lastPrice;
+    }
+    
+    double TradeDay::getLastPrice() {
+        return lastPrice;
+    }
 
 
 }

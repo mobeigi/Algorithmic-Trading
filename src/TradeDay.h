@@ -23,8 +23,11 @@ namespace std {
     class TradeDay {
         
     private:
+        double lastPrice;
 
     public:
+        TradeDay(double lastPrice);
+        double getLastPrice();
 
     };
     

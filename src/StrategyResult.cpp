@@ -13,14 +13,59 @@ namespace std {
 
     StrategyResult::StrategyResult() {
         isNullResult = true;
+        transferAmount = 0.0;
+        type = ResultType::Nothing;
+    }
+    
+    StrategyResult::StrategyResult(ResultType type, double equityTransfer) {
+        isNullResult = false;
+        transferAmount = equityTransfer;
+        this->type = type;
     }
     
     StrategyResult StrategyResult::nullResult() {
         return StrategyResult::StrategyResult();
     }
     
+    StrategyResult StrategyResult::buyEquity() {
+        return StrategyResult::StrategyResult(ResultType::Buy, 0);
+    }
+    StrategyResult StrategyResult::sellEquity() {
+        return StrategyResult::StrategyResult(ResultType::Sell, 0);
+    }
+    StrategyResult StrategyResult::buyEquity(double amount) {
+        if (amount == 0.0)
+            return StrategyResult::doNothing();
+        return StrategyResult::StrategyResult(ResultType::Buy, amount);
+    }
+    StrategyResult StrategyResult::sellEquity(double amount) {
+        if (amount == 0.0)
+            return StrategyResult::doNothing();
+        return StrategyResult::StrategyResult(ResultType::Sell, amount);
+    }
+    StrategyResult StrategyResult::doNothing() {
+        return StrategyResult::StrategyResult(ResultType::Nothing, 0);
+    }
+    
     bool StrategyResult::isNull() {
         return isNullResult;
     }
+    
+    string StrategyResult::description() {
+        if (isNull())
+            return "NULL";
+        if (type == Nothing)
+            return "Dont buy or sell";
+        string actDescr = "Sell";
+        if (type == Buy)
+            actDescr = "Buy";
+        
+        if (transferAmount != 0.0) {
+            return actDescr + " " + Helper::formatPrice(transferAmount) + " of equity";
+        }
+        return actDescr + " equity";
+    }
 
 }
+
+

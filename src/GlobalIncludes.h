@@ -11,8 +11,29 @@
 #define __Algorithmic_Trading__GlobalIncludes__
 
 
+
 #include <string>
 #include <vector>
+#include <stdio.h>
+
+namespace std {
+    class Helper {
+    public:
+        static string formatPrice(double price) {
+            char buff[100];
+            snprintf(buff, 100, "$%.2f", price);
+            string amountStr = string(buff);
+            return amountStr;
+        }
+        static string formatDouble(double price) {
+            char buff[100];
+            snprintf(buff, 100, "%.4f", price);
+            string amountStr = string(buff);
+            return amountStr;
+        }
+    };
+}
+
 
 #endif 
 

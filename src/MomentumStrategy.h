@@ -27,12 +27,16 @@ namespace std {
     private:
         typedef Strategy super;
         
+        int returnsInCalculation; //number of returns to use in equation (n from spec)
+        double previousPrice;
+        vector<double> returns;
+        
     protected:
         virtual void nextTradeDay(TradeDay tradeDay);
         virtual StrategyResult calculateTradingStategy();
 
     public:
-        MomentumStrategy(Logger &logger, vector<TradeDay> trades);
+        MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation);
         virtual StrategyResult execute();
 
     };
