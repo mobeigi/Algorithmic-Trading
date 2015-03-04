@@ -37,34 +37,34 @@ void test() {
 int main(int argc, const char * argv[]) {
     test();
 
-   //  std::ifstream d;
-   //  std::string m, b;
-   //  std::vector<std::string> c;
-   //  std::vector<std::vector<std::string> > t;
-   //  d.open("BHP_Daily_Since2000.csv");
-   //  if(d.is_open()) {
-   //       while(getline(d, m)) {
-   //             if(m.at(0) == '#') continue;
-   //             for(unsigned i = 0; i < m.length(); ++i) {
-   //                   if(m[i] != ',') {
-   //                         b += m[i];
-   //                   } else {
-   //                         c.push_back(b);
-   //                         b = "";
-   //                   }
-   //             }
-   //             t.push_back(c);
-   //       }
-   // }
-   // d.close();
-   // for(unsigned n = 0; n != t.size(); n++) {
-   //       c = t.at(n);
-   //       for(unsigned o = 0; o != c.size(); o++) {
-   //             if(c.at(o).empty()) std::cout << "(null)" << '\n';
-   //             else std::cout << c.at(o) << '\n';
-   //       }
-   //       std::cout << "-------------------------" << '\n';
-   // }
+    // if(argc != 2) return false;
+    std::ifstream file;
+    std::string line, tmp;
+    std::vector<std::string> data;
+    std::vector<std::vector<std::string> > tradingData;
+    file.open("BHP_Daily_Since2000.csv");
+    if(file.is_open()) {
+          while(getline(file, line)) {
+                if(line.at(0) == '#') continue;
+                for(unsigned i = 0; i < line.length(); i++) {
+                      if(line[i] != ',' && i + 1 != line.length()) {
+                            tmp += line[i];
+                            continue;
+                      }
+                      data.push_back(tmp);
+                      tmp = "";
+                }
+                tradingData.push_back(data);
+          }
+    }
+    file.close();
+    // for(unsigned n = 0; n != tradingData.size(); n++) {
+    //       data = tradingData.at(n);
+    //       for(unsigned o = 0; o != data.size(); o++) {
+    //             if(data.at(o).empty()) std::cout << "(null)" << '\n';
+    //             else std::cout << data.at(o) << '\n';
+    //       }
+    // }
 
 
     return 0;
