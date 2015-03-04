@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
    //       while(getline(d, m)) {
    //             if(m.at(0) == '#') continue;
    //             for(unsigned i = 0; i < m.length(); ++i) {
-   //                   if(m[i] != ',') {
+   //                   if(m[i] != ',' && i + 1 != m.length()) {
    //                         b += m[i];
    //                   } else {
    //                         c.push_back(b);
@@ -63,7 +63,6 @@ int main(int argc, const char * argv[]) {
    //             if(c.at(o).empty()) std::cout << "(null)" << '\n';
    //             else std::cout << c.at(o) << '\n';
    //       }
-   //       std::cout << "-------------------------" << '\n';
    // }
 
 
