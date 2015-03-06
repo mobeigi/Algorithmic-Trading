@@ -11,9 +11,11 @@
 
 namespace std {
 
-    MomentumStrategy::MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation) :
+    MomentumStrategy::MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation, double threshold) :
     super(logger, trades) {
         this->returnsInCalculation = returnsInCalculation;
+        this->threshold = threshold;
+        this->lastHadMovingAverage = false;
     }
     
     StrategyResult MomentumStrategy::execute() {
@@ -51,6 +53,20 @@ namespace std {
             }
             double SMAt = sumRt / returnsInCalculation;
             logger.log("SMAt: " + Helper::formatDouble(SMAt));
+            
+            if (lastHadMovingAverage) {
+                double diff = SMAt - lastMovingAverage;
+                if (diff > threshold) {
+                    logger.log("Buy Signal");
+                } else if (diff < -threshold) {
+                    logger.log("Sell Signal");
+                } else {
+                    
+                }
+            }
+            
+            lastHadMovingAverage = true;
+            lastMovingAverage = SMAt;
         }
         
         

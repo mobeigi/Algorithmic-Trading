@@ -21,14 +21,14 @@
 
 void test(std::vector<std::TradeDay> trades) {
     std::Logger logger = std::Logger::standardLogger();
-    std::StrategyResult result = std::MomentumStrategy(logger, trades, 3).execute();
+    std::StrategyResult result = std::MomentumStrategy(logger, trades, 4, 0.001).execute();
     logger.log(result.description());
 }
 
 int main(int argc, const char * argv[]) {
-    // we can either store the file into memory? or just grab the shit we need?
+    // we can either store the file into memory? or just grab what we need?
     // since we need to implement different strategies later?
-    std::ifstream d;
+    /*std::ifstream d;
     std::string m;
     std::vector<std::string> tradingData, temp;
     std::vector<std::TradeDay> trades;
@@ -52,7 +52,23 @@ int main(int argc, const char * argv[]) {
                 if(!temp.at(8).empty()) trades.push_back(std::TradeDay(std::atof(temp.at(8).c_str())));
                 temp.clear();
           }
-    }
-    test(trades);
+    }*/
+    
+    std::vector<std::TradeDay> testTrades = {
+        std::TradeDay::TradeDay(30),
+        std::TradeDay::TradeDay(30.34),
+        std::TradeDay::TradeDay(30.71),
+        std::TradeDay::TradeDay(31.09),
+        std::TradeDay::TradeDay(31.29),
+        std::TradeDay::TradeDay(31.54),
+        std::TradeDay::TradeDay(31.76),
+        std::TradeDay::TradeDay(31.98),
+        std::TradeDay::TradeDay(32.58)};
+    
+    test(testTrades);
     return 0;
 }
+
+
+
+

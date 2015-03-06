@@ -30,13 +30,16 @@ namespace std {
         int returnsInCalculation; //number of returns to use in equation (n from spec)
         double previousPrice;
         vector<double> returns;
+        double threshold;
+        bool lastHadMovingAverage;
+        double lastMovingAverage;
         
     protected:
         virtual void nextTradeDay(TradeDay tradeDay);
         virtual StrategyResult calculateTradingStategy();
 
     public:
-        MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation);
+        MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation, double threshold);
         virtual StrategyResult execute();
 
     };
