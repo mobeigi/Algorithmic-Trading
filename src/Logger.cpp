@@ -14,7 +14,7 @@ namespace std {
     Logger::Logger() {}
     
     Logger Logger::standardLogger() {
-        return Logger::Logger();
+        return Logger();
     }
     
     void Logger::log(string msg) {

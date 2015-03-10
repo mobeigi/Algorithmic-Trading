@@ -55,15 +55,14 @@ int main(int argc, const char * argv[]) {
     }*/
     
     std::vector<std::TradeDay> testTrades = {
-        std::TradeDay::TradeDay(30),
-        std::TradeDay::TradeDay(30.34),
-        std::TradeDay::TradeDay(30.71),
-        std::TradeDay::TradeDay(31.09),
-        std::TradeDay::TradeDay(31.29),
-        std::TradeDay::TradeDay(31.54),
-        std::TradeDay::TradeDay(31.76),
-        std::TradeDay::TradeDay(31.98),
-        std::TradeDay::TradeDay(32.58)};
+        std::TradeDay(30),
+        std::TradeDay(30.34),
+        std::TradeDay(30.71),
+        std::TradeDay(31.09),
+        std::TradeDay(31.54),
+        std::TradeDay(31.76),
+        std::TradeDay(31.98),
+        std::TradeDay(32.58)};
     
     test(testTrades);
     return 0;

@@ -24,27 +24,27 @@ namespace std {
     }
     
     StrategyResult StrategyResult::nullResult() {
-        return StrategyResult::StrategyResult();
+        return StrategyResult();
     }
     
     StrategyResult StrategyResult::buyEquity() {
-        return StrategyResult::StrategyResult(ResultType::Buy, 0);
+        return StrategyResult(ResultType::Buy, 0);
     }
     StrategyResult StrategyResult::sellEquity() {
-        return StrategyResult::StrategyResult(ResultType::Sell, 0);
+        return StrategyResult(ResultType::Sell, 0);
     }
     StrategyResult StrategyResult::buyEquity(double amount) {
         if (amount == 0.0)
-            return StrategyResult::doNothing();
-        return StrategyResult::StrategyResult(ResultType::Buy, amount);
+            return doNothing();
+        return StrategyResult(ResultType::Buy, amount);
     }
     StrategyResult StrategyResult::sellEquity(double amount) {
         if (amount == 0.0)
-            return StrategyResult::doNothing();
-        return StrategyResult::StrategyResult(ResultType::Sell, amount);
+            return doNothing();
+        return StrategyResult(ResultType::Sell, amount);
     }
     StrategyResult StrategyResult::doNothing() {
-        return StrategyResult::StrategyResult(ResultType::Nothing, 0);
+        return StrategyResult(ResultType::Nothing, 0);
     }
     
     bool StrategyResult::isNull() {
