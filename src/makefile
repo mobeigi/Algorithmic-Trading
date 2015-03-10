@@ -25,4 +25,4 @@ Logger.o: Logger.cpp
 	$(CC) $(CFLAGS) Logger.cpp
 
 clean:
-	rm *o AlgorithmicTrading
+	rm *.o AlgorithmicTrading
