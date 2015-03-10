@@ -36,12 +36,10 @@ namespace std {
         
     protected:
         virtual void nextTradeDay(TradeDay tradeDay);
-        virtual StrategyResult calculateTradingStategy();
 
     public:
-        MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation, double threshold);
-        virtual StrategyResult execute();
-
+        MomentumStrategy(Logger &logger, int returnsInCalculation, double threshold);
+        
     };
     
 }

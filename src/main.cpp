@@ -21,8 +21,11 @@
 
 void test(std::vector<std::TradeDay> trades) {
     std::Logger logger = std::Logger::standardLogger();
-    std::StrategyResult result = std::MomentumStrategy(logger, trades, 4, 0.001).execute();
-    logger.log(result.description());
+    std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.001);
+    for (std::TradeDay tradeDay : trades) {
+        strategy.nextDay(tradeDay);
+    }
+    //logger.log(result.description());
 }
 
 int main(int argc, const char * argv[]) {

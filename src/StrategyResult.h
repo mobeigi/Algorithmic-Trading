@@ -41,11 +41,11 @@ namespace std {
         
         static StrategyResult nullResult();
         
-        static StrategyResult buyEquity();
+        /*static StrategyResult buyEquity();
         static StrategyResult sellEquity();
         static StrategyResult buyEquity(double amount);
         static StrategyResult sellEquity(double amount);
-        static StrategyResult doNothing();
+        static StrategyResult doNothing();*/
         
         bool isNull();
         string description();

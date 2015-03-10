@@ -28,15 +28,13 @@ namespace std {
         
     protected:
         Logger &logger;
-        vector<TradeDay> trades;
         
         virtual void nextTradeDay(TradeDay tradeDay) = 0; // to be implemented (template)
-        virtual StrategyResult calculateTradingStategy() = 0; // to be implemented (template)
         
 
     public:
-        Strategy(Logger &logger, vector<TradeDay> trades);
-        virtual StrategyResult execute();
+        Strategy(Logger &logger);
+        StrategyResult nextDay(TradeDay tradeDay);
 
     };
     

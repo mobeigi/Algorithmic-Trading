@@ -11,20 +11,23 @@
 
 namespace std {
 
-    MomentumStrategy::MomentumStrategy(Logger &logger, vector<TradeDay> trades, int returnsInCalculation, double threshold) :
-    super(logger, trades) {
+    MomentumStrategy::MomentumStrategy(Logger &logger, int returnsInCalculation, double threshold) :
+    super(logger) {
         this->returnsInCalculation = returnsInCalculation;
         this->threshold = threshold;
         this->lastHadMovingAverage = false;
+        previousPrice = 0.0;
+        returns = vector<double>();
     }
     
-    StrategyResult MomentumStrategy::execute() {
+    
+    /*StrategyResult MomentumStrategy::execute() {
         //setup before main strategy exec
         previousPrice = 0.0;
         returns = vector<double>();
         
         return super::execute();
-    }
+    }*/
     
     void MomentumStrategy::nextTradeDay(TradeDay tradeDay) {
         double thisPrice = tradeDay.getLastPrice();
@@ -73,10 +76,6 @@ namespace std {
         previousPrice = thisPrice;
     }
     
-    StrategyResult MomentumStrategy::calculateTradingStategy() {
-        logger.log("Momentum: Calculate Trading Strategy");
-        return StrategyResult::nullResult();
-    }
 
 }
 

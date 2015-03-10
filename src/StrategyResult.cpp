@@ -27,7 +27,7 @@ namespace std {
         return StrategyResult();
     }
     
-    StrategyResult StrategyResult::buyEquity() {
+    /*StrategyResult StrategyResult::buyEquity() {
         return StrategyResult(ResultType::Buy, 0);
     }
     StrategyResult StrategyResult::sellEquity() {
@@ -45,7 +45,7 @@ namespace std {
     }
     StrategyResult StrategyResult::doNothing() {
         return StrategyResult(ResultType::Nothing, 0);
-    }
+    }*/
     
     bool StrategyResult::isNull() {
         return isNullResult;

@@ -11,10 +11,10 @@
 
 namespace std {
 
-    Strategy::Strategy(Logger &logger, vector<TradeDay> trades) :
-    logger(logger), trades(trades) {}
+    Strategy::Strategy(Logger &logger) :
+    logger(logger) {}
     
-    StrategyResult Strategy::execute() {
+    /*StrategyResult Strategy::execute() {
         //things to do for every strategy
         
         logger.log("Base: Strategy Execute");
@@ -25,7 +25,16 @@ namespace std {
         
         return calculateTradingStategy();
 
+    }*/
+    
+    
+    StrategyResult Strategy::nextDay(TradeDay tradeDay) {
+        nextTradeDay(tradeDay);
+        return StrategyResult::nullResult();
     }
 
 
 }
+
+
+
