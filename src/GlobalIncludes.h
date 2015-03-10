@@ -15,25 +15,24 @@
 #include <string>
 #include <vector>
 #include <stdio.h>
+#include <iomanip>
+#include <sstream>
 
 namespace std {
     class Helper {
     public:
         static string formatPrice(double price) {
-            char buff[100];
-            snprintf(buff, 100, "$%.2f", price);
-            string amountStr = string(buff);
-            return amountStr;
+			stringstream ss;
+			ss << setprecision(2) << std::fixed << "$" << price;
+			return ss.str();
         }
         static string formatDouble(double price) {
-            char buff[100];
-            snprintf(buff, 100, "%.4f", price);
-            string amountStr = string(buff);
-            return amountStr;
+			stringstream ss;
+			ss << setprecision(4) << std::fixed << "" << price;
+			return ss.str();
         }
     };
 }
-
 
 #endif 
 

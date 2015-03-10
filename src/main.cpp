@@ -65,6 +65,7 @@ int main(int argc, const char * argv[]) {
         std::TradeDay(32.58)};
     
     test(testTrades);
+
     return 0;
 }
 
