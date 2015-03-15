@@ -10,11 +10,24 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AlgorithmicTrading
 TEMPLATE = app
+CONFIG += c++11
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp\
+        Logger.cpp\
+        MomentumStrategy.cpp\
+        Strategy.cpp\
+        StrategyResult.cpp\
+        TradeDay.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h\
+         GlobalIncludes.h\
+         Logger.h\
+         MomentumStrategy.h\
+         Strategy.h\
+         StrategyResult.h\
+         TradeDay.h
 
 FORMS    += mainwindow.ui
+
