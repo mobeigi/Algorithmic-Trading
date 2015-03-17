@@ -24,10 +24,13 @@ namespace std {
         
     private:
         double lastPrice;
+        string company;
 
     public:
-        TradeDay(double lastPrice);
+        TradeDay(double lastPrice, string company);
         double getLastPrice();
+        
+        string getCompany();
 
     };
     
