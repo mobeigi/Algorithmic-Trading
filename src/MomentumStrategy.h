@@ -16,7 +16,10 @@ namespace std {
 
 #include "GlobalIncludes.h"
 
+#include <map>
+
 #include "Strategy.h"
+#include "MomentumStrategyData.h"
 
 
 namespace std {
@@ -27,12 +30,10 @@ namespace std {
     private:
         typedef Strategy super;
         
+        map<string, MomentumStrategyData> companyData;
+        
         int returnsInCalculation; //number of returns to use in equation (n from spec)
-        double previousPrice;
-        vector<double> returns;
         double threshold;
-        bool lastHadMovingAverage;
-        double lastMovingAverage;
         
     protected:
         virtual void nextTradeDay(TradeDay tradeDay);
