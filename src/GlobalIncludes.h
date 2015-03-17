@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
+#include <cmath>
 
 namespace std {
     class Helper {

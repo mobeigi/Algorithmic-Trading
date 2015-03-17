@@ -10,13 +10,13 @@
 
 #include <iostream>
 
-#include <fstream>
 #include <vector>
 #include <cstdlib>
 
 #include "MomentumStrategy.h"
 #include "Logger.h"
 #include "TradeDay.h"
+#include "Params.h"
 
 
 void test(std::vector<std::TradeDay> trades) {
@@ -68,8 +68,25 @@ int main(int argc, const char * argv[]) {
         std::TradeDay(31.98, "test"),
         std::TradeDay(32.58, "test")};
     
-    test(testTrades);
+    //test(testTrades);
 
+    bool b;
+    std::Params params = std::Params("paramfile.param", &b);
+    
+    if (!params.getParam("test_string").isNull)
+        std::cout << params.getParam("test_string").stringVal << "\n";
+    
+    if (    !params.getParam("test_integer").isNull
+        &&  !params.getParam("test_double").isNull
+        &&  params.getParam("test_integer").isNumber
+        &&  params.getParam("test_double").isNumber) {
+        
+        double val = params.getParam("test_integer").doubleVal
+                +    params.getParam("test_double").doubleVal;
+        std::cout << params.getParam("test_integer").stringVal + " + " +
+            params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
+    }
+    
     return 0;
 }
 

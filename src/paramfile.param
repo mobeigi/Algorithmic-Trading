@@ -1,0 +1,11 @@
+*** This is a test parameter file! ***
+
+A test string
+:test_string:Bla bla bla\
+
+A test integer
+:test_integer:123\
+
+A test decimal value
+:test_double:32.343\
+
