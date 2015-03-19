@@ -18,6 +18,7 @@ namespace std {
                         file.push_back(line);
                   }
             }
+            data.close();
       }
       bool Reader::nextTrade() {
             if(at + 1 < file.size()) {

@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
 
       std::Reader reader = std::Reader("BHP_Daily_Since2000.csv");
       while(reader.nextTrade()) {
-            // do something
+//            std::cout << reader.getTrade().at(8) << std::endl;
       }
 
     std::vector<std::TradeDay> testTrades = {
