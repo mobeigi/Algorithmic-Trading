@@ -1,6 +1,6 @@
 //
 //  Logger.h
-//  Algorithmic Trading COMP3011
+//  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
 //  Copyright (c) Revitpo. All rights reserved.
@@ -20,22 +20,21 @@ namespace std {
 
 
 namespace std {
-    
-    
+
+
     class Logger {
-        
+
     private:
         Logger();
 
     public:
         static Logger standardLogger();
-        
+
         void log(string msg);
     };
-    
+
 }
 
 
 
-#endif 
-
+#endif
