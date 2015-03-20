@@ -33,7 +33,7 @@ namespace std {
             line = file.at(at);
             for(unsigned i = 0; i < line.length(); i++) {
                   unsigned b = i;
-                  for(; line[i] != ',' && i + 1 != line.length(); i++);
+                  for(; line[i] != __CSV_DELIM && i + 1 != line.length(); i++);
                   temp.push_back(line.substr(b, i - b));
             }
             return temp;

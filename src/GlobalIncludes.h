@@ -10,7 +10,7 @@
 #ifndef __Algorithmic_Trading__GlobalIncludes__
 #define __Algorithmic_Trading__GlobalIncludes__
 
-
+#define __CSV_DELIM ((char)0x2c)
 
 #include <string>
 #include <vector>
@@ -36,5 +36,4 @@ namespace std {
     };
 }
 
-#endif 
-
+#endif
