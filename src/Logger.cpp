@@ -16,15 +16,15 @@ namespace std {
     Logger Logger::standardLogger() {
         return Logger();
     }
-    void Logger::addCSVLine(string companyName, string date, double price, bool signal) {
+
+    void Logger::addCSVLine(string companyName, string date, double price, char signal) {
           stringstream ss;
           ss << companyName << __CSV_DELIM;
           ss << date << __CSV_DELIM;
           ss << price << __CSV_DELIM;
           ss << 100 << __CSV_DELIM;
           ss << 100 * price << __CSV_DELIM;
-          if(signal) ss << __CSV_SELL_SIGNAL << endl;
-          else ss << __CSV_BUY_SIGNAL << endl;
+          ss << signal << endl;
           csvData.push_back(ss.str());
    }
    void Logger::addLogLine(int type, string message) {
