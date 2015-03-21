@@ -27,17 +27,16 @@ namespace std {
 
     private:
         Logger();
-        void writeCSV(string filename);
-        void writeLog(string filename);
-        bool loggerLock;
+        void writeFile(string filename, vector<string> data);
+
         vector<string> csvData;
         vector<string> logData;
+
     public:
         static Logger standardLogger();
-        // signal (bool) true if B and false if S
+        // signal: true if B and false if S
         void addCSVLine(string companyName, string date, double price, bool signal);
         void addLogLine();
-        void startLogger();
         void stopLogger();
 
         void log(string msg);

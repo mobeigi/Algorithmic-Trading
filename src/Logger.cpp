@@ -10,49 +10,38 @@
 
 #include <fstream>
 
+#define __CSV_SELL_SIGNAL ((char)0x42)
+#define __CSV_BUY_SIGNAL ((char)0x53)
+
 namespace std {
 
-    Logger::Logger() {
-          loggerLock = true;
-   }
+    Logger::Logger() {}
 
-    void Logger::startLogger() {
-          loggerLock = false;
-   }
     Logger Logger::standardLogger() {
         return Logger();
     }
     void Logger::addCSVLine(string companyName, string date, double price, bool signal) {
-          if(loggerLock == true) return;
           stringstream ss;
           ss << companyName << __CSV_DELIM;
           ss << date << __CSV_DELIM;
-          ss << Helper::formatPrice(price) << __CSV_DELIM;
+          ss << price << __CSV_DELIM;
           ss << 100 << __CSV_DELIM;
-          ss << Helper::formatPrice(100 * price) << __CSV_DELIM;
-          if(signal) ss << 'S' << endl;
-          else ss << 'B' << endl;
+          ss << 100 * price << __CSV_DELIM;
+          if(signal) ss << __CSV_SELL_SIGNAL << endl;
+          else ss << __CSV_BUY_SIGNAL << endl;
           csvData.push_back(ss.str());
    }
 
    void Logger::addLogLine() {
-         if(loggerLock == true) return;
+         stringstream ss;
 
    }
-   void Logger::writeCSV(string filename) {
-         ofstream outputCSV = ofstream(filename, ios::app | ios::trunc);
-         if(outputCSV.is_open()) {
-               for(string line : csvData) outputCSV << line;
+   void Logger::writeFile(string filename, vector<string> data) {
+         ofstream output = ofstream(filename, ios::trunc);
+         if(output.is_open()) {
+               for(string line : data) output << line;
          }
-         outputCSV.close();
-   }
-
-   void Logger::writeLog(string filename) {
-         ofstream outputLog = ofstream(filename, ios::app | ios::trunc);
-         if(outputLog.is_open()) {
-               for(string line : logData) outputLog << line;
-         }
-         outputLog.close();
+         output.close();
    }
     void Logger::log(string msg) {
         cout << msg + "\n";
@@ -60,9 +49,8 @@ namespace std {
 
 
     void Logger::stopLogger() {
-          loggerLock = true;
-          writeCSV("output.csv");
-          writeLog("output.log");
+          writeFile("output.csv", csvData);
+          writeFile("output.log", logData);
    }
 
 }
