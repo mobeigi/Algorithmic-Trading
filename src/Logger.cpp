@@ -7,11 +7,7 @@
 //
 
 #include "Logger.h"
-
 #include <fstream>
-
-#define __CSV_SELL_SIGNAL ((char)0x42)
-#define __CSV_BUY_SIGNAL ((char)0x53)
 
 namespace std {
 
@@ -31,10 +27,19 @@ namespace std {
           else ss << __CSV_BUY_SIGNAL << endl;
           csvData.push_back(ss.str());
    }
-
-   void Logger::addLogLine() {
+   void Logger::addLogLine(int type, string message) {
          stringstream ss;
-
+         switch(type) {
+               case __LOG_INFO:
+               ss << "[INFO] ";
+               break;
+               case __LOG_ERROR:
+               ss << "[ERROR] ";
+               break;
+         }
+         ss << Helper::datetime() << ' ';
+         ss << message << endl;
+         logData.push_back(ss.str());
    }
    void Logger::writeFile(string filename, vector<string> data) {
          ofstream output = ofstream(filename, ios::trunc);

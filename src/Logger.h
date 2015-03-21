@@ -16,7 +16,6 @@ namespace std {
 }
 
 #include "GlobalIncludes.h"
-
 #include <iostream>
 
 
@@ -28,7 +27,6 @@ namespace std {
     private:
         Logger();
         void writeFile(string filename, vector<string> data);
-
         vector<string> csvData;
         vector<string> logData;
 
@@ -36,7 +34,7 @@ namespace std {
         static Logger standardLogger();
         // signal: true if B and false if S
         void addCSVLine(string companyName, string date, double price, bool signal);
-        void addLogLine();
+        void addLogLine(int type, string message);
         void stopLogger();
 
         void log(string msg);
