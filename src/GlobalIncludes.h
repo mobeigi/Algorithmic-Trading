@@ -47,7 +47,7 @@ namespace std {
         }
         static string formatDouble(double price) {
 			stringstream ss;
-			ss << setprecision(4) << std::fixed << "" << price;
+			ss << setprecision(4) << std::fixed << price;
 			return ss.str();
         }
     };
