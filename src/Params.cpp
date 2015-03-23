@@ -60,6 +60,8 @@ namespace std {
                             currentParamId = "";
                             currentParamBody = "";
                             waitingForIdStart = true;
+                        } else {
+                            currentParamBody.append(1, c);
                         }
                     } else if (c == __PARAM_DELIM) {
                         lastCharWasDelim = true;

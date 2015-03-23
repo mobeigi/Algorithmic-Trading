@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
 
       std::Reader reader = std::Reader("BHP_Daily_Since2000.csv");
       while(reader.nextTrade()) {
-            std::cout << reader.getTrade().at(8) << std::endl;
+            //std::cout << reader.getTrade().at(8) << std::endl;
       }
 
     std::vector<std::TradeDay> testTrades = {
@@ -53,7 +53,7 @@ int main(int argc, const char * argv[]) {
     std::Params params = std::Params("paramfile.param", &b);
 
     if (!params.getParam("test_string").isNull) {
-        //std::cout << params.getParam("test_string").stringVal << "\n";
+        std::cout << params.getParam("test_string").stringVal << "\n";
     }
 
     if (    !params.getParam("test_integer").isNull
@@ -63,8 +63,8 @@ int main(int argc, const char * argv[]) {
 
         double val = params.getParam("test_integer").doubleVal
                 +    params.getParam("test_double").doubleVal;
-        //std::cout << params.getParam("test_integer").stringVal + " + " +
-            //params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
+        std::cout << params.getParam("test_integer").stringVal + " + " +
+            params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
     }
 
     return 0;
