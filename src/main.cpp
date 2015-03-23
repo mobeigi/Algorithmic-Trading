@@ -18,7 +18,7 @@
 #include "TradeDay.h"
 #include "Params.h"
 #include "Reader.h"
-
+#include "UnitTester.h"
 
 void test(std::vector<std::TradeDay> trades) {
     std::Logger logger = std::Logger::standardLogger();
@@ -31,7 +31,14 @@ void test(std::vector<std::TradeDay> trades) {
 
 int main(int argc, const char * argv[]) {
 
-      std::Reader reader = std::Reader("BHP_Daily_Since2000.csv");
+	//Test our application using the unit tester
+	std::UnitTester ut;
+	bool isErrorFree = ut.testAll();
+
+	if (!isErrorFree)
+		std::cout << "Warning: There are errors present in the code.";
+
+	std::Reader reader = std::Reader("BHP_Daily_Since2000.csv");
       while(reader.nextTrade()) {
           std::vector<std::string> line = reader.getTrade();
           std::cout << line.at(8) << std::endl;
