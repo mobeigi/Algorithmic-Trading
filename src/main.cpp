@@ -67,6 +67,13 @@ int main(int argc, const char * argv[]) {
         std::cout << params.getParam("test_integer").stringVal + " + " +
             params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
     }
+	
+	//To keep window open in visual studio
+	//Remove before compiling release builds
+	#ifdef _MSC_VER
+	std::cin.get();
+	std::cin.ignore();
+	#endif
 
     return 0;
 }
