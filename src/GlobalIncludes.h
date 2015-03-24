@@ -49,7 +49,7 @@ namespace std {
 
         static string formatPrice(double price) {
 			stringstream ss;
-			ss << setprecision(2) << std::fixed << "$" << price;
+			ss << setprecision(2) << std::fixed << ((price < 0) ? "-$" : "$") << abs(price);
 			return ss.str();
         }
         static string formatDouble(double price) {

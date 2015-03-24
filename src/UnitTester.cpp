@@ -27,10 +27,23 @@ namespace std
 	//GlobalIncludes.h
 	bool testGlobalIncludes() {
 		//Test Formating functions
-		//assert(Helper::formatPrice(1) == "$1.00");
-		//assert(Helper::formatPrice(1) == "$1.00");
 
-		std::cout << Helper::formatPrice(1);
+		//Price format
+		assert(Helper::formatPrice(0) == "$0.00");
+		assert(Helper::formatPrice(1) == "$1.00");
+		assert(Helper::formatPrice(2.33) == "$2.33");
+		assert(Helper::formatPrice(-500.88) == "-$500.88");
+		assert(Helper::formatPrice(-20.3041) == "-$20.30"); //round down
+		assert(Helper::formatPrice(-20.3061) == "-$20.31"); //round up
+
+		//Double format
+		assert(Helper::formatDouble(0) == "0.0000");
+		assert(Helper::formatDouble(1) == "1.0000");
+		assert(Helper::formatDouble(2.33) == "2.3300");
+		assert(Helper::formatDouble(-500.88) == "-500.8800");
+		assert(Helper::formatDouble(-2344.5673) == "-2344.5673");
+		assert(Helper::formatDouble(345465.23423546) == "345465.2342");
+
 		return true;
 	}
 
