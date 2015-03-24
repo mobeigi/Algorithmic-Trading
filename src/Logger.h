@@ -35,7 +35,8 @@ namespace std {
         // signal: true if B and false if S
         void addCSVLine(string companyName, string date, double price, char signal);
         void addLogLine(int type, string message);
-        void stopLogger();
+        void startLogging();
+        void stopLogging();
 
         void log(string msg);
     };

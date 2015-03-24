@@ -52,8 +52,11 @@ namespace std {
         cout << msg + "\n";
     }
 
+    void Logger::startLogging() {
 
-    void Logger::stopLogger() {
+    }
+
+    void Logger::stopLogging() {
           writeFile("output.csv", csvData);
           writeFile("output.log", logData);
    }

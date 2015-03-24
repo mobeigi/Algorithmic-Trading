@@ -11,7 +11,7 @@
 namespace std
 {
     
-	CSVReader::CSVReader(string dataFile) {
+    CSVReader::CSVReader(string dataFile) : *file(dataFile, ios::read) {
         string line;
         stillReading = true;
         
