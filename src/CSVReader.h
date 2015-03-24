@@ -21,12 +21,13 @@ namespace std
     class CSVReader
     {
     private:
-		ifstream &file;
-        bool stillReading;
-        //vector<string> file;
-        //unsigned at;
+		ifstream *file;
+        bool hasNextLine;
+        string currentLine;
+        
     public:
         CSVReader(string dataFile);
+        ~CSVReader();
         bool nextTrade();
         vector<string> getTrade();
         void stopReading();

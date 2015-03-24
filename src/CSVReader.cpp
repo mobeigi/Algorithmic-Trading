@@ -11,82 +11,57 @@
 namespace std
 {
     
-    CSVReader::CSVReader(string dataFile) : *file(dataFile, ios::read) {
-        string line;
-        stillReading = true;
+    CSVReader::CSVReader(string dataFile) {
         
+        file = new ifstream(dataFile, ios::in);
+        hasNextLine = false;
         
-        /*if(data.is_open()) {
-            while(getline(data, line)) {
-                file.push_back(line);
-            }
+        if (file->is_open() && getline(*file, currentLine)) {
+            hasNextLine = true;
+        } else {
+            if (file->is_open())
+                file->close();
+            delete file;
+            file = nullptr;
         }
-        data.close();*/
+    }
+    
+    CSVReader::~CSVReader() {
+        stopReading();
     }
     
     bool CSVReader::nextTrade() {
-        
-        /*if (stillReading) {
-            
-            if (file.is_open())
-        }
-        
-        return false;
-        
-        if(at + 1 < file.size()) {
-            at = at + 1;
-            return true;
-        }
-         return false;*/
-        return false;
+        return hasNextLine;
     }
     
     vector<string> CSVReader::getTrade() {
-        /*vector<string> temp;
+        
+        if (!nextTrade()) return vector<string>();
+        
+        vector<string> temp;
         string line;
-        line = file.at(at);
+        line = currentLine;
         for(unsigned i = 0; i < line.length(); i++) {
             unsigned b = i;
             for(; line[i] != __CSV_DELIM && i + 1 != line.length(); i++);
             temp.push_back(line.substr(b, i - b));
         }
-         return temp;*/
-        return vector<string>();
+        
+        if ( !(file != nullptr && file->is_open() && getline(*file, currentLine)) ) {
+            stopReading(); //close file or no more
+        }
+        
+        return temp;
     }
     
     void CSVReader::stopReading() {
-        //file.close();
-        stillReading = false;
+        hasNextLine = false;
+        if (file != nullptr) {
+            file->close();
+            delete file;
+            file = nullptr;
+        }
+        
     }
-    
-    
-      /*CSVReader::CSVReader(string dataFile) {
-            at = 0;
-            string line;
-            ifstream data = ifstream(dataFile, ios::in);
-            if(data.is_open()) {
-                  while(getline(data, line)) {
-                        file.push_back(line);
-                  }
-            }
-            data.close();
-      }
-      bool CSVReader::nextTrade() {
-            if(at + 1 < file.size()) {
-                  at = at + 1;
-                  return true;
-            }
-            return false;
-      }
-      vector<string> CSVReader::getTrade() {
-            vector<string> temp;
-            string line;
-            line = file.at(at);
-            for(unsigned i = 0; i < line.length(); i++) {
-                  unsigned b = i;
-                  for(; line[i] != __CSV_DELIM && i + 1 != line.length(); i++);
-                  temp.push_back(line.substr(b, i - b));
-            }
-            return temp;
-      }*/
+
 }
