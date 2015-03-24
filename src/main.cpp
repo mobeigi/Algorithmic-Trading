@@ -38,12 +38,12 @@ int main(int argc, const char * argv[]) {
 	if (!isErrorFree)
 		std::cout << "Warning: There are errors present in the code.";
 
-    /*std::CSVReader reader = std::CSVReader("BHP_Daily_Since2000.csv");
+    std::CSVReader reader = std::CSVReader("BHP_Daily_Since2000.csv");
     while(reader.nextTrade()) {
         std::vector<std::string> line = reader.getTrade();
         std::cout << line.at(8) << std::endl;
     }
-    reader.stopReading();*/
+    reader.stopReading();
 
     std::vector<std::TradeDay> testTrades = {
         std::TradeDay(30, "test"),

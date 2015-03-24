@@ -12,7 +12,7 @@ namespace std
 {
     
     CSVReader::CSVReader(string dataFile) {
-        at = 0;
+        /*at = 0;
         string line;
         ifstream data = ifstream(dataFile, ios::in);
         if(data.is_open()) {
@@ -20,19 +20,19 @@ namespace std
                 file.push_back(line);
             }
         }
-        data.close();
+        data.close();*/
     }
     
     bool CSVReader::nextTrade() {
-        if(at + 1 < file.size()) {
+        /*if(at + 1 < file.size()) {
             at = at + 1;
             return true;
         }
-        return false;
+         return false;*/return false;
     }
     
     vector<string> CSVReader::getTrade() {
-        vector<string> temp;
+        /*vector<string> temp;
         string line;
         line = file.at(at);
         for(unsigned i = 0; i < line.length(); i++) {
@@ -40,7 +40,11 @@ namespace std
             for(; line[i] != __CSV_DELIM && i + 1 != line.length(); i++);
             temp.push_back(line.substr(b, i - b));
         }
-        return temp;
+         return temp;*/return vector<string>();
+    }
+    
+    void CSVReader::stopReading() {
+        
     }
     
     
