@@ -8,6 +8,9 @@
 
 #include "UnitTester.h"
 #include "GlobalIncludes.h"
+#include "Strategy.h"
+#include "StrategyResult.h"
+#include "Logger.h"
 
 #include <iostream>
 
@@ -15,12 +18,14 @@ namespace std
 {
 	//Function Declarations
 	bool testGlobalIncludes();
+	bool testStrategyResult();
 
 	UnitTester::UnitTester() {}
 
 	//Test all components using this function
 	bool UnitTester::testAll() {
-		testGlobalIncludes();
+		assert(testGlobalIncludes());
+		assert(testStrategyResult());
 		return true;
 	}
 
@@ -47,4 +52,9 @@ namespace std
 		return true;
 	}
 
+	//StrategyResult
+	bool testStrategyResult() {
+		assert(StrategyResult::nullResult().isNull()); //check static nullResult is actually null
+		return true;
+	}
 }
