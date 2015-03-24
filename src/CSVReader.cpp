@@ -11,7 +11,7 @@
 namespace std
 {
     
-    CSVReader::CSVReader(string dataFile) : file(dataFile, ios::in) {
+	CSVReader::CSVReader(string dataFile) {
         string line;
         stillReading = true;
         
@@ -55,7 +55,7 @@ namespace std
     }
     
     void CSVReader::stopReading() {
-        file.close();
+        //file.close();
         stillReading = false;
     }
     

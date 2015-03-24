@@ -26,7 +26,11 @@ namespace std
 
 	//GlobalIncludes.h
 	bool testGlobalIncludes() {
+		//Test Formating functions
+		//assert(Helper::formatPrice(1) == "$1.00");
+		//assert(Helper::formatPrice(1) == "$1.00");
 
+		std::cout << Helper::formatPrice(1);
 		return true;
 	}
 

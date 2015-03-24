@@ -21,7 +21,7 @@ namespace std
     class CSVReader
     {
     private:
-        ifstream file;
+		//ifstream file;
         bool stillReading;
         //vector<string> file;
         //unsigned at;
