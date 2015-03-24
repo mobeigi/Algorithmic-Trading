@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-c -std=c++11
-O= main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o Reader.o
+O= main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o CSVReader.o
 
 all: AlgorithmicTrading
 
@@ -31,7 +31,7 @@ MomentumStrategyData.o: MomentumStrategyData.cpp
 Params.o: Params.cpp
 	$(CC) $(CFLAGS) Params.cpp
 
-Reader.o:
-	$(CC) $(CFLAGS) Reader.cpp
+CSVReader.o:
+	$(CC) $(CFLAGS) CSVReader.cpp
 clean:
 	rm *.o AlgorithmicTrading
