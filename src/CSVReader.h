@@ -15,15 +15,22 @@ namespace std {
 
 #include <vector>
 #include "GlobalIncludes.h"
-namespace std {
-      class CSVReader {
-      private:
-            vector<string> file;
-            unsigned at;
-      public:
-            CSVReader(string dataFile);
-            bool nextTrade();
-            vector<string> getTrade();
-      };
+
+namespace std
+{
+    class CSVReader
+    {
+    private:
+        ifstream file;
+        bool stillReading;
+        //vector<string> file;
+        //unsigned at;
+    public:
+        CSVReader(string dataFile);
+        bool nextTrade();
+        vector<string> getTrade();
+        void stopReading();
+    };
 }
+
 #endif
