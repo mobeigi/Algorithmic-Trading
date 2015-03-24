@@ -1,27 +1,27 @@
 //
-//  Reader.h
+//  CSVReader.h
 //  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
 //  Copyright (c) Revitpo. All rights reserved.
 //
 
-#ifndef __Algorithmic_Trading_Reader__
-#define __Algorithmic_Trading_Reader__
+#ifndef __Algorithmic_Trading_CSVReader__
+#define __Algorithmic_Trading_CSVReader__
 
 namespace std {
-      class Reader;
+      class CSVReader;
 }
 
 #include <vector>
 #include "GlobalIncludes.h"
 namespace std {
-      class Reader {
+      class CSVReader {
       private:
             vector<string> file;
             unsigned at;
       public:
-            Reader(string dataFile);
+            CSVReader(string dataFile);
             bool nextTrade();
             vector<string> getTrade();
       };

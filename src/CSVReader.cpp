@@ -1,15 +1,15 @@
 //
-//  Reader.cpp
+//  CSVReader.cpp
 //  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
 //  Copyright (c) Revitpo. All rights reserved.
 //
 
-#include "Reader.h"
+#include "CSVReader.h"
 
 namespace std {
-      Reader::Reader(string dataFile) {
+      CSVReader::CSVReader(string dataFile) {
             at = 0;
             string line;
             ifstream data = ifstream(dataFile, ios::in);
@@ -20,14 +20,14 @@ namespace std {
             }
             data.close();
       }
-      bool Reader::nextTrade() {
+      bool CSVReader::nextTrade() {
             if(at + 1 < file.size()) {
                   at = at + 1;
                   return true;
             }
             return false;
       }
-      vector<string> Reader::getTrade() {
+      vector<string> CSVReader::getTrade() {
             vector<string> temp;
             string line;
             line = file.at(at);
