@@ -7,17 +7,26 @@
 //
 
 #include "UnitTester.h"
+#include "GlobalIncludes.h"
 
 #include <iostream>
 
 namespace std 
 {
+	//Function Declarations
+	bool testGlobalIncludes();
 
 	UnitTester::UnitTester() {}
 
 	//Test all components using this function
 	bool UnitTester::testAll() {
-		cout << "ALL TESTS PASSED!!!!";
+		testGlobalIncludes();
+		return true;
+	}
+
+	//GlobalIncludes.h
+	bool testGlobalIncludes() {
+
 		return true;
 	}
 
