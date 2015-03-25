@@ -36,22 +36,22 @@ namespace std {
 
         double thisPrice = tradeDay.getLastPrice();
 
-        logger.log(__LOG_INFO,"");
+        logger.log(__LOG_DEBUG,"");
         double Rt = 0.0;
 
         //return calculation
         if (data->previousPrice == 0.0) {
-            logger.log(__LOG_INFO, "Rt: ");
+            logger.log(__LOG_DEBUG, "Rt: 0.0");
         } else {
             Rt = (thisPrice - data->previousPrice) / data->previousPrice;
-            logger.addLogline(__LOG_INFO, "Rt: " + Helper::formatDouble(Rt));
+            logger.log(__LOG_DEBUG, "Rt: " + Helper::formatDouble(Rt));
         }
 
         data->returns.push_back(Rt);
 
         //SMA calculation
         if (data->returns.size() < returnsInCalculation) {
-            logger.log(__LOG_INFO,"SMAt: ");
+            logger.log(__LOG_DEBUG, "SMAt: 0.0");
         } else {
             //enough returns to start calculating moving average
             double sumRt = 0.0;
@@ -59,14 +59,14 @@ namespace std {
                 sumRt += data->returns[i];
             }
             double SMAt = sumRt / returnsInCalculation;
-            logger.log(__LOG_INFO,"SMAt: " + Helper::formatDouble(SMAt));
+            logger.log(__LOG_DEBUG,"SMAt: " + Helper::formatDouble(SMAt));
 
             if (data->lastHadMovingAverage) {
                 double diff = SMAt - data->lastMovingAverage;
                 if (diff > threshold) {
-                    logger.log(__LOG_INFO,"Buy Signal");
+                    logger.log(__LOG_DEBUG,"Buy Signal");
                 } else if (diff < -threshold) {
-                    logger.log(__LOG_INFO,"Sell Signal");
+                    logger.log(__LOG_DEBUG,"Sell Signal");
                 } else {
 
                 }

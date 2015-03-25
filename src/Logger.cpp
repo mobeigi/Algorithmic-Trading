@@ -7,16 +7,16 @@
 //
 
 #include "Logger.h"
+#include "CSVWriter.h"
 
 namespace std {
 
-    Logger::Logger(string devTeam, string modName, string params) {
+    Logger::Logger() {
           isLogging = true;
-          logData.push_back(devTeam);
-          logData.push_back(modName);
-          logData.push_back(params);
+          logData.push_back("Revitpo Version: 1.00\n");
+          logData.push_back("Developed By: Samuel Whitton, Mohammad Ghasembegi, Ian Wong, Jason Ng and Antheny Yu\n");
 
-    }
+   }
     // Logger Logger::standardLogger() {
     //     return Logger("devTeam", "ModName", "params");
     // }
@@ -30,6 +30,9 @@ namespace std {
                      case __LOG_ERROR:
                      ss << "[ERROR] ";
                      break;
+                     case __LOG_DEBUG:
+                     ss << "[DEBUG] ";
+                     break;
                }
                ss << Helper::datetime() << ' ';
                ss << message << endl;
@@ -41,13 +44,10 @@ namespace std {
     //     cout << msg + "\n";
     // }
 
-    Logger::~Logger() {
-          Helper::writeFile("output.log", logData);
-   }
 
-   Logger::stopLogging() {
+    void Logger::stopLogging() {
          isLogging  = false;
-         ~Logger();
+         Helper::writeFile("output.log", logData);
    }
 
 }

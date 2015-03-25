@@ -25,7 +25,7 @@ namespace std
     public:
           CSVWriter();
           ~CSVWriter();
-          stopWriting();
+          void stopWriting();
           void addCSVLine(string companyName, string date, double price, char signal);
     };
 }

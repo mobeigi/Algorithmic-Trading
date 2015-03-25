@@ -16,6 +16,7 @@
 
 #define __LOG_INFO 0
 #define __LOG_ERROR 1
+#define __LOG_DEBUG 2
 
 #include <string>
 #include <vector>

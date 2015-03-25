@@ -25,7 +25,7 @@ namespace std {
                   csvData.push_back(ss.str());
             }
       }
-      CSVWriter::stopWriting() {
+      void CSVWriter::stopWriting() {
             ~CSVWriter();
             isOpen = false;
       }
