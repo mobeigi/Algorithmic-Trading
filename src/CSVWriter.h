@@ -24,7 +24,6 @@ namespace std
           vector<string> csvData;
     public:
           CSVWriter();
-          ~CSVWriter();
           void stopWriting();
           void addCSVLine(string companyName, string date, double price, char signal);
     };

@@ -26,10 +26,7 @@ namespace std {
             }
       }
       void CSVWriter::stopWriting() {
-            ~CSVWriter();
-            isOpen = false;
-      }
-      CSVWriter::~CSVWriter() {
             Helper::writeFile("output.csv", csvData);
+            isOpen = false;
       }
 }
