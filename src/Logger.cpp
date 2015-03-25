@@ -7,26 +7,18 @@
 //
 
 #include "Logger.h"
-#include <fstream>
 
 namespace std {
 
-    Logger::Logger() {}
+    Logger::Logger(string devTeam, string modName, string params) {
+          logData.push_back(devTeam);
+          logData.push_back(modName);
+          logData.push_back(params);
 
-    Logger Logger::standardLogger() {
-        return Logger();
     }
-
-    void Logger::addCSVLine(string companyName, string date, double price, char signal) {
-          stringstream ss;
-          ss << companyName << __CSV_DELIM;
-          ss << date << __CSV_DELIM;
-          ss << price << __CSV_DELIM;
-          ss << 100 << __CSV_DELIM;
-          ss << 100 * price << __CSV_DELIM;
-          ss << signal << endl;
-          csvData.push_back(ss.str());
-   }
+    Logger Logger::standardLogger() {
+        return Logger("devTeam", "ModName", "params");
+    }
    void Logger::addLogLine(int type, string message) {
          stringstream ss;
          switch(type) {
@@ -41,24 +33,12 @@ namespace std {
          ss << message << endl;
          logData.push_back(ss.str());
    }
-   void Logger::writeFile(string filename, vector<string> data) {
-         ofstream output = ofstream(filename, ios::trunc);
-         if(output.is_open()) {
-               for(string line : data) output << line;
-         }
-         output.close();
-   }
+
     void Logger::log(string msg) {
         cout << msg + "\n";
     }
-
-    void Logger::startLogging() {
-
-    }
-
-    void Logger::stopLogging() {
-          writeFile("output.csv", csvData);
-          writeFile("output.log", logData);
+    Logger::~Logger() {
+          Helper::writeFile("output.log", logData);
    }
 
 }

@@ -25,19 +25,14 @@ namespace std {
     class Logger {
 
     private:
-        Logger();
         void writeFile(string filename, vector<string> data);
-        vector<string> csvData;
         vector<string> logData;
 
     public:
         static Logger standardLogger();
-        // signal: true if B and false if S
-        void addCSVLine(string companyName, string date, double price, char signal);
         void addLogLine(int type, string message);
-        void startLogging();
-        void stopLogging();
-
+        Logger(string devTeam, string modName, string params);
+        ~Logger();
         void log(string msg);
     };
 
