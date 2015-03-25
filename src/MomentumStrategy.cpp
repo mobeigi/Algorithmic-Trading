@@ -16,42 +16,42 @@ namespace std {
         this->returnsInCalculation = returnsInCalculation;
         this->threshold = threshold;
     }
-    
-    
+
+
     /*StrategyResult MomentumStrategy::execute() {
         //setup before main strategy exec
         previousPrice = 0.0;
         returns = vector<double>();
-        
+
         return super::execute();
     }*/
-    
+
     void MomentumStrategy::nextTradeDay(TradeDay tradeDay) {
-        
+
         if (companyData.find(tradeDay.getCompany()) == companyData.end()) {
             companyData[tradeDay.getCompany()] = MomentumStrategyData();
         }
-        
+
         MomentumStrategyData *data = &companyData[tradeDay.getCompany()];
-        
+
         double thisPrice = tradeDay.getLastPrice();
-        
-        logger.log("");
+
+        logger.log(__LOG_INFO,"");
         double Rt = 0.0;
-        
+
         //return calculation
         if (data->previousPrice == 0.0) {
-            logger.log("Rt: ");
+            logger.log(__LOG_INFO, "Rt: ");
         } else {
             Rt = (thisPrice - data->previousPrice) / data->previousPrice;
-            logger.log("Rt: " + Helper::formatDouble(Rt));
+            logger.addLogline(__LOG_INFO, "Rt: " + Helper::formatDouble(Rt));
         }
-        
+
         data->returns.push_back(Rt);
-        
+
         //SMA calculation
         if (data->returns.size() < returnsInCalculation) {
-            logger.log("SMAt: ");
+            logger.log(__LOG_INFO,"SMAt: ");
         } else {
             //enough returns to start calculating moving average
             double sumRt = 0.0;
@@ -59,29 +59,26 @@ namespace std {
                 sumRt += data->returns[i];
             }
             double SMAt = sumRt / returnsInCalculation;
-            logger.log("SMAt: " + Helper::formatDouble(SMAt));
-            
+            logger.log(__LOG_INFO,"SMAt: " + Helper::formatDouble(SMAt));
+
             if (data->lastHadMovingAverage) {
                 double diff = SMAt - data->lastMovingAverage;
                 if (diff > threshold) {
-                    logger.log("Buy Signal");
+                    logger.log(__LOG_INFO,"Buy Signal");
                 } else if (diff < -threshold) {
-                    logger.log("Sell Signal");
+                    logger.log(__LOG_INFO,"Sell Signal");
                 } else {
-                    
+
                 }
             }
-            
+
             data->lastHadMovingAverage = true;
             data->lastMovingAverage = SMAt;
         }
-        
-        
+
+
         data->previousPrice = thisPrice;
     }
-    
+
 
 }
-
-
-

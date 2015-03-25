@@ -26,6 +26,7 @@ namespace std {
             }
       }
       CSVWriter::stopWriting() {
+            ~CSVWriter();
             isOpen = false;
       }
       CSVWriter::~CSVWriter() {

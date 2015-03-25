@@ -13,7 +13,6 @@ namespace std {
       class CSVWriter;
 }
 
-#include <vector>
 #include "GlobalIncludes.h"
 
 namespace std

@@ -13,7 +13,6 @@ namespace std {
       class CSVReader;
 }
 
-#include <vector>
 #include "GlobalIncludes.h"
 
 namespace std
@@ -21,10 +20,10 @@ namespace std
     class CSVReader
     {
     private:
-		ifstream *file;
+          ifstream *file;
         bool hasNextLine;
         string currentLine;
-        
+
     public:
         CSVReader(string dataFile);
         ~CSVReader();

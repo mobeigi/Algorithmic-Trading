@@ -28,6 +28,7 @@
 namespace std {
       class Helper {
       public:
+            // writes a vector<string> into a file
             static void writeFile(string filename, vector<string> data) {
                   ofstream output = ofstream(filename, ios::trunc);
                   if(output.is_open()) {

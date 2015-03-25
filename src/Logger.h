@@ -27,13 +27,15 @@ namespace std {
     private:
         void writeFile(string filename, vector<string> data);
         vector<string> logData;
+        ~Logger();
+        bool isLogging;
 
     public:
-        static Logger standardLogger();
-        void addLogLine(int type, string message);
+        void stopLogging();
+      //   static Logger standardLogger();
+        void log(int type, string message);
         Logger(string devTeam, string modName, string params);
-        ~Logger();
-        void log(string msg);
+      //   void log(string msg);
     };
 
 }
