@@ -29,15 +29,6 @@
 namespace std {
       class Helper {
       public:
-            // writes a vector<string> into a file
-            static void writeFile(string filename, vector<string> data) {
-                  ofstream output = ofstream(filename, ios::trunc);
-                  if(output.is_open()) {
-                        for(string line : data) output << line;
-                  }
-                  output.close();
-            }
-
             //Returns a date as a string in format HH:MM:SS DD:MM:YYYY
             static string datetime() {
                   time_t t = time(0);

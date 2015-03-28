@@ -19,9 +19,8 @@ namespace std
 {
     class CSVWriter {
     private:
-          void writeFile(string filename);
           bool isOpen;
-          vector<string> csvData;
+          ofstream output;
     public:
           CSVWriter();
           void stopWriting();

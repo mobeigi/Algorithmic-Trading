@@ -16,7 +16,6 @@ namespace std {
 }
 
 #include "GlobalIncludes.h"
-#include <iostream>
 
 
 namespace std {
@@ -25,14 +24,13 @@ namespace std {
     class Logger {
 
     private:
-        void writeFile(string filename, vector<string> data);
-        vector<string> logData;
         bool isLogging;
+        ofstream output;
 
     public:
         void stopLogging();
         void log(int type, string message);
-        Logger();
+        Logger(string dataFile);
     };
 
 }

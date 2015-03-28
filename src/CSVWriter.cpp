@@ -10,8 +10,11 @@
 
 namespace std {
       CSVWriter::CSVWriter() {
-            csvData.push_back("#Company, Date, Price, Volume, Value, Signal\n");
-            isOpen = true;
+            output = ofstream("output.csv", ios::trunc);
+            if(output.is_open()) {
+                  output << "#Company, Date, Price, Volume, Value, Signal" << endl;
+                  isOpen = true;
+            }
       }
       void CSVWriter::addCSVLine(string companyName, string date, double price, char signal) {
             if(isOpen) {
@@ -21,12 +24,12 @@ namespace std {
                   ss << price << __CSV_DELIM;
                   ss << 100 << __CSV_DELIM;
                   ss << 100 * price << __CSV_DELIM;
-                  ss << signal << endl;
-                  csvData.push_back(ss.str());
+                  ss << signal;
+                  output << ss.str() << endl;
             }
       }
       void CSVWriter::stopWriting() {
-            Helper::writeFile("output.csv", csvData);
+            output.close();
             isOpen = false;
       }
 }

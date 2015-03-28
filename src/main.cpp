@@ -20,7 +20,7 @@
 #include "UnitTester.h"
 
 void test(std::vector<std::TradeDay> trades) {
-    std::Logger logger = std::Logger::standardLogger();
+    std::Logger logger = std::Logger("output.log");
     std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.001);
     for (std::TradeDay tradeDay : trades) {
         strategy.nextDay(tradeDay);
@@ -30,19 +30,14 @@ void test(std::vector<std::TradeDay> trades) {
 
 int main(int argc, const char * argv[]) {
 
-	//Test our application using the unit tester
-	std::UnitTester ut;
-	bool isErrorFree = ut.testAll();
+	// //Test our application using the unit tester
+	// std::UnitTester ut;
+	// bool isErrorFree = ut.testAll();
+      //
+	// if (!isErrorFree)
+	// 	std::cout << "Warning: There are errors present in the code.";
 
-	if (!isErrorFree)
-		std::cout << "Warning: There are errors present in the code.";
 
-    std::CSVReader reader = std::CSVReader("BHP_Daily_Since2000.csv");
-    while(reader.nextTrade()) {
-        std::vector<std::string> line = reader.getTrade();
-        std::cout << line.at(8) << std::endl;
-    }
-    reader.stopReading();
 
     std::vector<std::TradeDay> testTrades = {
         std::TradeDay(30, "test"),
@@ -55,25 +50,25 @@ int main(int argc, const char * argv[]) {
         std::TradeDay(31.98, "test"),
         std::TradeDay(32.58, "test")};
 
-    //test(testTrades);
+    test(testTrades);
 
-    bool b;
-    std::Params params = std::Params("paramfile.param", &b);
-
-    if (!params.getParam("test_string").isNull) {
-        std::cout << params.getParam("test_string").stringVal << "\n";
-    }
-
-    if (    !params.getParam("test_integer").isNull
-        &&  !params.getParam("test_double").isNull
-        &&  params.getParam("test_integer").isNumber
-        &&  params.getParam("test_double").isNumber) {
-
-        double val = params.getParam("test_integer").doubleVal
-                +    params.getParam("test_double").doubleVal;
-        std::cout << params.getParam("test_integer").stringVal + " + " +
-            params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
-    }
+    // bool b;
+    // std::Params params = std::Params("paramfile.param", &b);
+    //
+    // if (!params.getParam("test_string").isNull) {
+    //     std::cout << params.getParam("test_string").stringVal << "\n";
+    // }
+    //
+    // if (    !params.getParam("test_integer").isNull
+    //     &&  !params.getParam("test_double").isNull
+    //     &&  params.getParam("test_integer").isNumber
+    //     &&  params.getParam("test_double").isNumber) {
+    //
+    //     double val = params.getParam("test_integer").doubleVal
+    //             +    params.getParam("test_double").doubleVal;
+    //     std::cout << params.getParam("test_integer").stringVal + " + " +
+    //         params.getParam("test_double").stringVal + " = " + std::to_string(val) << "\n";
+    // }
 
 	//To keep window open in visual studio
 	//Remove before compiling release builds
