@@ -56,6 +56,7 @@ namespace std {
 		isCSV = true;
 	}
 	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
+		startCSV(companyName);
 		if(isCSV) csv->addCSVLine(companyName, date, price, signal);
 	}
 	void Logger::stopCSV() {

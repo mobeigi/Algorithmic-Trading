@@ -29,12 +29,11 @@ namespace std {
         map<string, CSVWriter> csvData;
         bool isLogging, isCSV;
         ofstream output;
-
+        void startCSV(string dataFile);
+        void stopCSV();
     public:
         void stopLogging();
         void log(int type, string message);
-        void startCSV(string dataFile);
-        void stopCSV();
         void writeToCSV(string companyName, string date, double price, char signal);
         Logger(string dataFile);
     };
