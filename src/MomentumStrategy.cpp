@@ -31,11 +31,9 @@ namespace std {
         if (companyData.find(tradeDay.getCompany()) == companyData.end()) {
             companyData[tradeDay.getCompany()] = MomentumStrategyData();
         }
-
+        logger.startCSV(tradeDay.getCompany());
         MomentumStrategyData *data = &companyData[tradeDay.getCompany()];
-
         double thisPrice = tradeDay.getLastPrice();
-
         logger.log(__LOG_DEBUG,"");
         double Rt = 0.0;
 
@@ -65,8 +63,11 @@ namespace std {
                 double diff = SMAt - data->lastMovingAverage;
                 if (diff > threshold) {
                     logger.log(__LOG_DEBUG,"Buy Signal");
+                    logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __CSV_BUY_SIGNAL);
                 } else if (diff < -threshold) {
                     logger.log(__LOG_DEBUG,"Sell Signal");
+                    logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __CSV_SELL_SIGNAL);
+
                 } else {
 
                 }

@@ -17,7 +17,7 @@ namespace std {
 
 #include "GlobalIncludes.h"
 #include "CSVWriter.h"
-
+#include <map>
 
 namespace std {
 
@@ -25,7 +25,8 @@ namespace std {
     class Logger {
 
     private:
-        CSVWriter csv;
+        CSVWriter * csv;
+        map<string, CSVWriter> csvData;
         bool isLogging, isCSV;
         ofstream output;
 

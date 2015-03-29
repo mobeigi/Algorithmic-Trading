@@ -25,7 +25,9 @@ void test(std::vector<std::TradeDay> trades) {
     for (std::TradeDay tradeDay : trades) {
         strategy.nextDay(tradeDay);
     }
+    logger.stopCSV();
     //logger.log(result.description());
+    logger.stopLogging();
 }
 
 int main(int argc, const char * argv[]) {
@@ -40,15 +42,15 @@ int main(int argc, const char * argv[]) {
 
 
     std::vector<std::TradeDay> testTrades = {
-        std::TradeDay(30, "test"),
-        std::TradeDay(30.34, "test"),
-        std::TradeDay(30.71, "test"),
-        std::TradeDay(31.09, "test"),
-        std::TradeDay(31.29, "test"),
-        std::TradeDay(31.54, "test"),
-        std::TradeDay(31.76, "test"),
-        std::TradeDay(31.98, "test"),
-        std::TradeDay(32.58, "test")};
+        std::TradeDay(30, "test", "10-04-1990"),
+        std::TradeDay(30.34, "test", "11-04-1990"),
+        std::TradeDay(30.71, "test", "12-04-1990"),
+        std::TradeDay(31.09, "test", "13-04-1990"),
+        std::TradeDay(31.29, "test", "14-04-1990"),
+        std::TradeDay(31.54, "test", "15-04-1990"),
+        std::TradeDay(31.76, "test", "16-04-1990"),
+        std::TradeDay(31.98, "test", "17-04-1990"),
+        std::TradeDay(32.58, "test", "18-04-1990")};
 
     test(testTrades);
 

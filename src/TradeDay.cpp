@@ -10,19 +10,23 @@
 
 
 namespace std {
-    
-    TradeDay::TradeDay(double lastPrice, string company) {
-        this->lastPrice = lastPrice;
-        this->company = company;
-    }
-    
-    double TradeDay::getLastPrice() {
-        return lastPrice;
-    }
-    
-    string TradeDay::getCompany() {
-        return company;
-    }
+
+      TradeDay::TradeDay(double lastPrice, string company, string date) {
+            this->lastPrice = lastPrice;
+            this->company = company;
+            this->date = date;
+      }
+
+      double TradeDay::getLastPrice() {
+            return lastPrice;
+      }
+
+      string TradeDay::getDate() {
+            return date;
+      }
+      string TradeDay::getCompany() {
+            return company;
+      }
 
 
 }

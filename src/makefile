@@ -41,4 +41,4 @@ CSVWriter.o:
 	$(CC) $(CFLAGS) CSVWriter.cpp
 	
 clean:
-	rm *.o AlgorithmicTrading a.out *.log
+	rm *.o AlgorithmicTrading *.log *.csv

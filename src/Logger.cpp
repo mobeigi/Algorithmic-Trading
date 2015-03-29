@@ -37,21 +37,26 @@ namespace std {
 		}
 	}
 
-	void Logger::startCSV(string dataFile) {
-		csv.startWriting(dataFile);
+	void Logger::startCSV(string companyName) {
+		if(csvData.find(companyName) == csvData.end()) {
+			csvData[companyName] = CSVWriter();
+			csvData[companyName].startWriting(companyName);
+		}
+		csv = &csvData[companyName];
 		isCSV = true;
 	}
 	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
-		if(isCSV) csv.addCSVLine(companyName, date, price, signal);
+		if(isCSV) csv->addCSVLine(companyName, date, price, signal);
 	}
 	void Logger::stopCSV() {
-		csv.stopWriting();
+		if(isCSV) csv->stopWriting();
 		isCSV = false;
 	}
 	void Logger::stopLogging() {
-		if(isLogging)
+		if(isLogging) {
 			isLogging  = false;
-		output.close();
+			output.close();
+		}
 	}
 
 }
