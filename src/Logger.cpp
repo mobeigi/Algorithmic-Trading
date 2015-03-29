@@ -13,8 +13,8 @@ namespace std {
 		output = ofstream(dataFile, ios::trunc);
 		if(output.is_open()) {
 			isLogging = true;
-			output << "Revitpo Version: 1.00" << endl;
-			output << "Developed By: Samuel Whitton, Mohammad Ghasembegi, Ian Wong, Jason Ng and Antheny Yu" << endl;
+			output << "Revitpo: Version 1.0.0" << endl;
+			output << "Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton" << endl;
 			log(__LOG_INFO, "Output LOG File: " + dataFile);
 			log(__LOG_INFO, "Started Execution: " + Helper::datetime());
 		}
@@ -64,6 +64,7 @@ namespace std {
 	}
 	void Logger::stopLogging() {
 		if(isLogging) {
+			log(__LOG_INFO, "SUCCESSFUL EXECUTION!!");
 			log(__LOG_INFO, "Ended Execution: " + Helper::datetime());
 			log(__LOG_INFO, "Elapsed Time: ");
 			isLogging  = false;
