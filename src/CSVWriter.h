@@ -23,6 +23,7 @@ namespace std
           ofstream output;
     public:
           CSVWriter();
+          void startWriting(string dateFile);
           void stopWriting();
           void addCSVLine(string companyName, string date, double price, char signal);
     };

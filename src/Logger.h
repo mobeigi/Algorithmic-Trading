@@ -16,6 +16,7 @@ namespace std {
 }
 
 #include "GlobalIncludes.h"
+#include "CSVWriter.h"
 
 
 namespace std {
@@ -24,12 +25,16 @@ namespace std {
     class Logger {
 
     private:
-        bool isLogging;
+        CSVWriter csv;
+        bool isLogging, isCSV;
         ofstream output;
 
     public:
         void stopLogging();
         void log(int type, string message);
+        void startCSV(string dataFile);
+        void stopCSV();
+        void writeToCSV(string companyName, string date, double price, char signal);
         Logger(string dataFile);
     };
 

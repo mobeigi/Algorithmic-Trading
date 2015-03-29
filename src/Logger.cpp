@@ -37,7 +37,17 @@ namespace std {
 		}
 	}
 
-
+	void Logger::startCSV(string dataFile) {
+		csv.startWriting(dataFile);
+		isCSV = true;
+	}
+	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
+		if(isCSV) csv.addCSVLine(companyName, date, price, signal);
+	}
+	void Logger::stopCSV() {
+		csv.stopWriting();
+		isCSV = false;
+	}
 	void Logger::stopLogging() {
 		if(isLogging)
 			isLogging  = false;
