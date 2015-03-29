@@ -10,12 +10,12 @@
 
 namespace std
 {
-    
+
     CSVReader::CSVReader(string dataFile) {
-        
+
         file = new ifstream(dataFile, ios::in);
         hasNextLine = false;
-        
+
         if (file->is_open() && getline(*file, currentLine)) {
             hasNextLine = true;
         } else {
@@ -25,19 +25,19 @@ namespace std
             file = nullptr;
         }
     }
-    
+
     CSVReader::~CSVReader() {
         stopReading();
     }
-    
+
     bool CSVReader::nextTrade() {
         return hasNextLine;
     }
-    
+
     vector<string> CSVReader::getTrade() {
-        
+
         if (!nextTrade()) return vector<string>();
-        
+
         vector<string> temp;
         string line;
         line = currentLine;
@@ -46,14 +46,14 @@ namespace std
             for(; line[i] != __CSV_DELIM && i + 1 != line.length(); i++);
             temp.push_back(line.substr(b, i - b));
         }
-        
+
         if ( !(file != nullptr && file->is_open() && getline(*file, currentLine)) ) {
             stopReading(); //close file or no more
         }
-        
+
         return temp;
     }
-    
+
     void CSVReader::stopReading() {
         hasNextLine = false;
         if (file != nullptr) {
@@ -61,7 +61,7 @@ namespace std
             delete file;
             file = nullptr;
         }
-        
+
     }
 
 }

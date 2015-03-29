@@ -9,14 +9,16 @@
 #include "CSVWriter.h"
 
 namespace std {
-      CSVWriter::CSVWriter() {
-            output = ofstream("output.csv", ios::trunc);
+      CSVWriter::CSVWriter(string companyName) {
+            stringstream ss;
+            ss << companyName << ".csv";
+            output = ofstream(ss.str(), ios::trunc);
             if(output.is_open()) {
                   output << "#Company, Date, Price, Volume, Value, Signal" << endl;
                   isOpen = true;
             }
       }
-      void CSVWriter::addCSVLine(string companyName, string date, double price, char signal) {
+      void CSVWriter::addCSVLine(string date, double price, char signal) {
             if(isOpen) {
                   stringstream ss;
                   ss << companyName << __CSV_DELIM;
@@ -29,7 +31,8 @@ namespace std {
             }
       }
       void CSVWriter::stopWriting() {
-            output.close();
+            if(isOpen)
+                  output.close();
             isOpen = false;
       }
 }
