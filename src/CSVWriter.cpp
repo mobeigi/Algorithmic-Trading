@@ -30,8 +30,7 @@ namespace std {
             }
       }
       void CSVWriter::stopWriting() {
-            if(isOpen)
-                  output.close();
+            if(isOpen) output.close();
             isOpen = false;
       }
 }

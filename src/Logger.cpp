@@ -15,6 +15,8 @@ namespace std {
 			isLogging = true;
 			output << "Revitpo Version: 1.00" << endl;
 			output << "Developed By: Samuel Whitton, Mohammad Ghasembegi, Ian Wong, Jason Ng and Antheny Yu" << endl;
+			log(__LOG_INFO, "Output LOG File: " + dataFile);
+			log(__LOG_INFO, "Started Execution: " + Helper::datetime());
 		}
 	}
 	void Logger::log(int type, string message) {
@@ -27,20 +29,28 @@ namespace std {
 				case __LOG_ERROR:
 				ss << "[ERROR] ";
 				break;
+				case __LOG_FATAL:
+				ss << "[FATAL] ";
+				exit(1);
+				break;
+#ifdef DEBUG
 				case __LOG_DEBUG:
 				ss << "[DEBUG] ";
 				break;
+#endif
+				default:
+					return;
+				break;
 			}
-			ss << Helper::datetime() << ' ';
 			ss << message;
 			output << ss.str() << endl;
 		}
 	}
-
 	void Logger::startCSV(string companyName) {
 		if(csvData.find(companyName) == csvData.end()) {
 			csvData[companyName] = CSVWriter();
 			csvData[companyName].startWriting(companyName);
+			log(__LOG_INFO, "Output DATA File: " + companyName + ".csv");
 		}
 		csv = &csvData[companyName];
 		isCSV = true;
@@ -54,9 +64,12 @@ namespace std {
 	}
 	void Logger::stopLogging() {
 		if(isLogging) {
+			log(__LOG_INFO, "Ended Execution: " + Helper::datetime());
+			log(__LOG_INFO, "Elapsed Time: ");
 			isLogging  = false;
 			for(auto const& p : csvData) csvData[p.first].stopWriting();
 			output.close();
 		}
 	}
+
 }

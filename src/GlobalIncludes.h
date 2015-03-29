@@ -10,14 +10,19 @@
 #ifndef __Algorithmic_Trading__GlobalIncludes__
 #define __Algorithmic_Trading__GlobalIncludes__
 
+// define DEBUG for debugging (remove for production releases)
+#define DEBUG 0
+
 #define __CSV_DELIM ((char)0x2c)
 #define __CSV_BUY_SIGNAL ((char)0x42)
 #define __CSV_SELL_SIGNAL ((char)0x53)
 
 #define __LOG_INFO 0
 #define __LOG_ERROR 1
+#ifdef DEBUG
 #define __LOG_DEBUG 2
-
+#endif
+#define __LOG_FATAL 3
 #include <string>
 #include <vector>
 #include <stdio.h>
@@ -31,16 +36,20 @@ namespace std {
       public:
             //Returns a date as a string in format HH:MM:SS DD:MM:YYYY
             static string datetime() {
-                  time_t t = time(0);
-                  struct tm * now = localtime(&t);
+                  struct tm * now = Helper::ntime();
                   stringstream ss;
                   ss << padDigit(now->tm_hour) << ':';
                   ss << padDigit(now->tm_min) << ':';
                   ss << padDigit(now->tm_sec) << ' ';
-                  ss << padDigit(now->tm_mday) << ':';
-                  ss << padDigit(now->tm_mon + 1) << ':';
+                  ss << padDigit(now->tm_mday) << '/';
+                  ss << padDigit(now->tm_mon + 1) << '/';
                   ss << now->tm_year + 1900;
                   return ss.str();
+            }
+
+            static tm * ntime() {
+                  time_t t = time(0);
+                  return localtime(&t);
             }
 
             //Pad digits smaller than 10 with zeros to maintain length of components such as dates
