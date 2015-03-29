@@ -55,8 +55,8 @@ namespace std {
 	void Logger::stopLogging() {
 		if(isLogging) {
 			isLogging  = false;
+			for(auto const& p : csvData) csvData[p.first].stopWriting();
 			output.close();
 		}
 	}
-
 }
