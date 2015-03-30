@@ -14,8 +14,8 @@
 #define DEBUG 0
 
 #define __CSV_DELIM ((char)0x2c)
-#define __CSV_BUY_SIGNAL ((char)0x42)
-#define __CSV_SELL_SIGNAL ((char)0x53)
+#define __BUY_SIGNAL ((char)0x42)
+#define __SELL_SIGNAL ((char)0x53)
 
 #define __LOG_INFO 0
 #define __LOG_ERROR 1
