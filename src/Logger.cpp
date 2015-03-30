@@ -31,7 +31,6 @@ namespace std {
 				break;
 				case __LOG_FATAL:
 				ss << "[FATAL] ";
-				exit(1);
 				break;
 #ifdef DEBUG
 				case __LOG_DEBUG:
