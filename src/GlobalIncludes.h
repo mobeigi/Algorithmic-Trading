@@ -11,6 +11,7 @@
 #define __Algorithmic_Trading__GlobalIncludes__
 
 // define DEBUG for debugging (remove for production releases)
+#define DEBUG 0
 
 #define __CSV_DELIM ((char)0x2c)
 
