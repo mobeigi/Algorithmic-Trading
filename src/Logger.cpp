@@ -38,29 +38,21 @@ namespace std {
 				break;
 #endif
 				default:
-					return;
+				return;
 				break;
 			}
 			ss << message;
 			output << ss.str() << endl;
 		}
 	}
-	void Logger::startCSV(string companyName) {
+	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
 		if(csvData.find(companyName) == csvData.end()) {
 			csvData[companyName] = CSVWriter();
-			csvData[companyName].startWriting(companyName);
+			csvData[companyName].startWriting(companyName + ".csv");
 			log(__LOG_INFO, "[OUTPUT] " + companyName + ".csv");
 		}
 		csv = &csvData[companyName];
-		isCSV = true;
-	}
-	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
-		startCSV(companyName);
-		if(isCSV) csv->addCSVLine(companyName, date, price, signal);
-	}
-	void Logger::stopCSV() {
-		if(isCSV) csv->stopWriting();
-		isCSV = false;
+		csv->addCSVLine(companyName, date, price, signal);
 	}
 	void Logger::stopLogging() {
 		if(isLogging) {

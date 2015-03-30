@@ -19,13 +19,14 @@
 
 int main(int argc, const char * argv[]) {
       std::Logger logger = std::Logger("output.log");
-      std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.01);
+      std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.001);
       std::CSVReader reader = std::CSVReader("../BHP_Daily_Since2000.csv");
       while(reader.nextTrade()) {
             std::vector<std::string> temp = reader.getTrade();
             try {
                   double lastPrice = std::stod(temp.at(8));
-                  strategy.nextDay(std::TradeDay(lastPrice, temp.at(0), temp.at(1)));
+                  std::TradeDay trade = std::TradeDay(lastPrice, temp.at(0), temp.at(1));
+                  strategy.nextDay(trade);
             } catch(std::invalid_argument) {}
       }
 

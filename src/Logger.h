@@ -29,8 +29,6 @@ namespace std {
         map<string, CSVWriter> csvData;
         bool isLogging, isCSV;
         ofstream output;
-        void startCSV(string dataFile);
-        void stopCSV();
     public:
         void stopLogging();
         void log(int type, string message);

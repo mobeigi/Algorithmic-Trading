@@ -13,7 +13,7 @@ namespace std {
 
     MomentumStrategyData::MomentumStrategyData() {
         this->lastHadMovingAverage = false;
-        this->previousSignal = -1;
+        previousSignal = -1;
         previousPrice = 0.0;
         returns = vector<double>();
     }

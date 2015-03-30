@@ -11,7 +11,7 @@
 namespace std {
       CSVWriter::CSVWriter() {}
       void CSVWriter::startWriting(string fileName) {
-            output = ofstream(fileName + ".csv", ios::trunc);
+            output = ofstream(fileName, ios::trunc);
             if(output.is_open()) {
                   output << "#Company, Date, Price, Volume, Value, Signal" << endl;
                   isOpen = true;
@@ -22,9 +22,9 @@ namespace std {
                   stringstream ss;
                   ss << companyName << __CSV_DELIM;
                   ss << date << __CSV_DELIM;
-                  ss << price << __CSV_DELIM;
+                  ss << setprecision(2) << std::fixed << price << __CSV_DELIM;
                   ss << 100 << __CSV_DELIM;
-                  ss << 100 * price << __CSV_DELIM;
+                  ss << setprecision(2) << std::fixed << 100 * price << __CSV_DELIM;
                   ss << signal;
                   output << ss.str() << endl;
             }
