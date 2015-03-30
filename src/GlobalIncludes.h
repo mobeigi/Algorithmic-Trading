@@ -11,7 +11,6 @@
 #define __Algorithmic_Trading__GlobalIncludes__
 
 // define DEBUG for debugging (remove for production releases)
-#define DEBUG 0
 
 #define __CSV_DELIM ((char)0x2c)
 #define __BUY_SIGNAL ((char)0x42)
@@ -19,9 +18,7 @@
 
 #define __LOG_INFO 0
 #define __LOG_ERROR 1
-#ifdef DEBUG
 #define __LOG_DEBUG 2
-#endif
 #define __LOG_FATAL 3
 #include <string>
 #include <vector>

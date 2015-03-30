@@ -15,7 +15,7 @@ namespace std {
 			isLogging = true;
 			output << "Revitpo: Version 1.0.0" << endl;
 			output << "Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton" << endl;
-			log(__LOG_INFO, "Output LOG File: " + dataFile);
+			log(__LOG_INFO, "[OUTPUT] " + dataFile);
 			log(__LOG_INFO, "Started Execution: " + Helper::datetime());
 		}
 	}
@@ -49,7 +49,7 @@ namespace std {
 		if(csvData.find(companyName) == csvData.end()) {
 			csvData[companyName] = CSVWriter();
 			csvData[companyName].startWriting(companyName);
-			log(__LOG_INFO, "Output DATA File: " + companyName + ".csv");
+			log(__LOG_INFO, "[OUTPUT] " + companyName + ".csv");
 		}
 		csv = &csvData[companyName];
 		isCSV = true;
@@ -64,7 +64,6 @@ namespace std {
 	}
 	void Logger::stopLogging() {
 		if(isLogging) {
-			log(__LOG_INFO, "SUCCESSFUL EXECUTION!!");
 			log(__LOG_INFO, "Ended Execution: " + Helper::datetime());
 			log(__LOG_INFO, "Elapsed Time: ");
 			isLogging  = false;

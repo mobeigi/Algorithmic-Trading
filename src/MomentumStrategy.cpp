@@ -62,16 +62,16 @@ namespace std {
                 double diff = SMAt - data->lastMovingAverage;
                 if (diff > threshold) {
                     logger.log(__LOG_DEBUG, "Buy Signal");
-                    if(data->previousSignal != __BUY_SIGNAL) { 
+                    if(data->previousSignal != __BUY_SIGNAL) {
                           data->previousSignal = __BUY_SIGNAL;
                           logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __BUY_SIGNAL);
-                    }
+                    } else logger.log(__LOG_DEBUG, "Ignored Signal");
                 } else if (diff < -threshold) {
                     logger.log(__LOG_DEBUG, "Sell Signal");
                     if(data->previousSignal != __SELL_SIGNAL) {
                           data->previousSignal = __SELL_SIGNAL;
                           logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __SELL_SIGNAL);
-                   }
+                   } else logger.log(__LOG_DEBUG, "Ignored Signal");
 
                 } else {
 

@@ -6,11 +6,10 @@
 //  Copyright (c) Revitpo. All rights reserved.
 //
 
-#include "GlobalIncludes.h"
-
 #include <iostream>
 #include <cstdlib>
 
+#include "GlobalIncludes.h"
 #include "MomentumStrategy.h"
 #include "Logger.h"
 #include "TradeDay.h"
