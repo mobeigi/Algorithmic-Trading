@@ -27,6 +27,12 @@ namespace std {
         if (!this->csvFile->open()) {
             logError("Unable to write to csv file: " + csvFile, false);
         }
+        
+        log("Revitpo: Version 1.0.0");
+        log("Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton");
+        log("Log file: " + logFile);
+        log("CSV file: " + csvFile);
+        log("Started Execution: " + Helper::datetime());
 
 	}
     
@@ -38,7 +44,7 @@ namespace std {
     
     void Logger::logDebug(string log) {
         if (debug) {
-            cout << "[DEBUG] " + log;
+            cout << "[DEBUG] " + log << endl;
         }
     }
     
