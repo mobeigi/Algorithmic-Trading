@@ -62,11 +62,15 @@ int main(int argc, const char * argv[]) {
             return 0;
       }
 
-      std::Logger logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
+    
       std::Param inputCSVFile = parameters.getParam("input_csvFile");
       if(inputCSVFile.isNull) {
-            logger.logError("'input_csvFile' parameter not found\n", true);
+          std::cerr << "'input_csvFile' parameter not found\n" << std::endl;
+          return 0;
       }
+    
+      std::Logger logger(outputLogFile.stringVal, outputCSVFile.stringVal, false, parameters.paramList(), inputCSVFile.stringVal);
+    
       std::Param returns = parameters.getParam("returnsInCalculation");
       if(returns.isNull || !returns.isNumber) {
             logger.logError("'returnsInCalculation' parameter not found\n", false);
@@ -81,6 +85,8 @@ int main(int argc, const char * argv[]) {
       if(!foundFile) logger.logError("'input_csvFile' not found\n", true);
 
       run(logger, reader, strategy);
+    
+      logger.log("Execution Status: Success!");
       logger.stopLogging();
 
 	  //To keep window open in visual studio

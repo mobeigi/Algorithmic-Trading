@@ -11,7 +11,7 @@
 
 namespace std {
     
-	Logger::Logger(string logFile, string csvFile, bool debug) {
+	Logger::Logger(string logFile, string csvFile, bool debug, string paramsDescr, string inputFileName) {
         
         this->logFile = nullptr;
         this->csvFile = nullptr;
@@ -28,10 +28,14 @@ namespace std {
             logError("Unable to write to csv file: " + csvFile, false);
         }
         
-        log("Revitpo: Version 1.0.0");
+        startTimeEpoch = Helper::sysTimeMS();
+        
+        log("Revitpo: Version " __PRODUCT_RELEASE_VERSION);
         log("Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton");
-        log("Log file: " + logFile);
-        log("CSV file: " + csvFile);
+        log("Parameters parsed: " + paramsDescr);
+        log("Input CSV file: " + inputFileName);
+        log("Output Log file: " + logFile);
+        log("Output CSV file: " + csvFile);
         log("Started Execution: " + Helper::datetime());
 
 	}
@@ -50,9 +54,12 @@ namespace std {
     
     void Logger::logError(string errorDescr, bool fatal) {
         if (fatal) {
+            log("[FATAL ERROR] " + errorDescr);
             cout << "[FATAL ERROR] " + errorDescr;
+            stopLogging();
             exit(1);
         }
+        log("[ERROR] " + errorDescr);
         cout << "[ERROR] " + errorDescr;
     }
     
@@ -77,7 +84,7 @@ namespace std {
         
         if (logFile != nullptr) {
             log("Ended Execution: " + Helper::datetime());
-            log("Elapsed Time: ");
+            log("Elapsed Time: " + to_string(Helper::sysTimeMS() - startTimeEpoch) + " ms");
             
             if (logFile->is_open()) logFile->close();
             delete logFile;

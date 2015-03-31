@@ -29,11 +29,13 @@ namespace std {
         CSVWriter *csvFile;
         ofstream *logFile;
         bool debug;
+        
+        unsigned long startTimeEpoch;
         //map<string, CSVWriter> csvData;
         //bool isLogging, isCSV;
         //ofstream output;
     public:
-        Logger(string logFile, string csvFile, bool debug);
+        Logger(string logFile, string csvFile, bool debug, string paramsDescr, string inputFileName);
         ~Logger();
         
         void stopLogging();

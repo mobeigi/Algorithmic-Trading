@@ -13,6 +13,8 @@
 // define DEBUG for debugging (remove for production releases)
 #define DEBUG 0
 
+#define __PRODUCT_RELEASE_VERSION "1.0.0"
+
 #define __CSV_DELIM ((char)0x2c)
 
 #define __BUY_SIGNAL ((char)0x42)
@@ -63,6 +65,10 @@ namespace std {
                   ss << setprecision(4) << std::fixed << price;
                   return ss.str();
             }
+          
+          static unsigned long sysTimeMS() {
+              return time(NULL) * 1000;
+          }
       };
 }
 

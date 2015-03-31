@@ -109,6 +109,18 @@ namespace std {
 
         params[paramId] = param;
     }
+    
+    string Params::paramList() {
+        string pList = "";
+        
+        string join = "";
+        for (auto &p : params) {
+            pList += join + p.first;
+            join = ", ";
+        }
+        
+        return pList;
+    }
 
 
     Param Params::getParam(string paramId) {

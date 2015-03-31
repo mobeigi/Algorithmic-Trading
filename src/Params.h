@@ -39,6 +39,7 @@ namespace std {
     public:
         Params(string paramFileDir, bool *foundFile);
         Param getParam(string paramId);
+        string paramList();
         static Param nullParam();
     };
     
