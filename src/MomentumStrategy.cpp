@@ -68,7 +68,7 @@ namespace std {
                     } else logger.logDebug("Ignored Signal");
                 } else if (diff < -threshold) {
                     logger.logDebug("Sell Signal");
-                    if(data->previousSignal == __BUY_SIGNAL) {
+                    if(data->previousSignal != __SELL_SIGNAL) {
                           data->previousSignal = __SELL_SIGNAL;
                           logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __SELL_SIGNAL);
                    } else logger.logDebug("Ignored Signal");
