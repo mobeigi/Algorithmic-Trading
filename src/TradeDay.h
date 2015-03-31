@@ -24,13 +24,19 @@ namespace std {
 
     private:
         double lastPrice;
+        double openPrice;
+        double highPrice;
+        double lowPrice;
         string company;
         string date;
 
     public:
-        TradeDay(double lastPrice, string company, string date);
+          TradeDay(double openPrice, double highPrice, double lowPrice, double lastPrice, string company, string date);
         double getLastPrice();
-        string getDate();
+        double getLowPrice();
+        double getHighPrice();
+        double getOpenPrice();
+	string getDate();
         string getCompany();
 
     };

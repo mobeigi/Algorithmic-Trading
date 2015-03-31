@@ -11,10 +11,25 @@
 
 namespace std {
 
-      TradeDay::TradeDay(double lastPrice, string company, string date) {
-            this->lastPrice = lastPrice;
+      TradeDay::TradeDay(double openPrice, double highPrice, double lowPrice, double lastPrice, string company, string date) {
+            this->openPrice = openPrice;
+		this->highPrice = highPrice;
+		this->lowPrice = lowPrice;
+		this->lastPrice = lastPrice;
             this->company = company;
             this->date = date;
+      }
+
+      double TradeDay::getOpenPrice() {
+            return openPrice;
+      }
+
+      double TradeDay::getHighPrice() {
+            return highPrice;
+      }
+
+      double TradeDay::getLowPrice() {
+            return lowPrice;
       }
 
       double TradeDay::getLastPrice() {
