@@ -11,21 +11,23 @@
 namespace std
 {
 
-    CSVReader::CSVReader(string dataFile) {
+    CSVReader::CSVReader(string dataFile, bool * foundFile) {
 
         file = new ifstream(dataFile, ios::in);
+        * foundFile = false;
         hasNextLine = false;
 
         if (file->is_open() && getline(*file, currentLine)) {
+            * foundFile = true;
             hasNextLine = true;
         } else {
             if (file->is_open())
-                file->close();
+                  file->close();
             delete file;
             file = nullptr;
         }
     }
-    
+
     bool CSVReader::open() {
         return (file != nullptr && file->is_open());
     }

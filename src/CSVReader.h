@@ -25,7 +25,7 @@ namespace std
         string currentLine;
 
     public:
-        CSVReader(string dataFile);
+        CSVReader(string dataFile, bool* foundFile);
         ~CSVReader();
         bool open();
         bool nextTrade();

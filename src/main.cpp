@@ -71,7 +71,8 @@ int main(int argc, const char * argv[]) {
       } else thresholdValue = threshold.doubleVal;
 
       std::MomentumStrategy strategy(logger, returnsValue, thresholdValue);
-      std::CSVReader reader(inputCSVFile.stringVal);
+      std::CSVReader reader(inputCSVFile.stringVal, & foundFile);
+      if(!foundFile) logger.logError("'input_csvFile' not found\n", true);
 
       run(logger, reader, strategy);
       logger.stopLogging();
