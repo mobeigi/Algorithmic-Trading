@@ -28,7 +28,7 @@ namespace std {
             logError("Unable to write to csv file: " + csvFile, false);
         }
         
-        startTimeEpoch = Helper::sysTimeMS();
+        startTimeEpoch = Helper::sysTimeUS();
         
         log("Revitpo: Version " __PRODUCT_RELEASE_VERSION);
         log("Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton");
@@ -84,7 +84,7 @@ namespace std {
         
         if (logFile != nullptr) {
             log("Ended Execution: " + Helper::datetime());
-            log("Elapsed Time: " + to_string(Helper::sysTimeMS() - startTimeEpoch) + " ms");
+            log("Elapsed Time: " + to_string(Helper::sysTimeUS() - startTimeEpoch) + " us");
             
             if (logFile->is_open()) logFile->close();
             delete logFile;

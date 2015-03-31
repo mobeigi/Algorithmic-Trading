@@ -82,7 +82,7 @@ namespace std {
                   return ss.str();
             }
           
-          static unsigned long sysTimeMS() {
+          static unsigned long sysTimeUS() {
               
               
             #ifdef _WIN32 //windows 32 and 64bit
