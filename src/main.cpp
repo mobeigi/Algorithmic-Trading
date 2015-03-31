@@ -17,12 +17,6 @@
 #include "CSVReader.h"
 #include "UnitTester.h"
 
-/*<<<<<<< HEAD
-int main(int argc, const char * argv[]) {
-      std::Logger logger("output.log", "cvsOut.csv", false);
-      std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.001);
-      std::CSVReader reader = std::CSVReader("BHP_Daily_Since2000.csv");
-=======*/
 void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
       while(reader.nextTrade()) {
             std::vector<std::string> temp = reader.getTrade();
@@ -38,13 +32,41 @@ void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
 }
 
 int main(int argc, const char * argv[]) {
+
+
       std::UnitTester tester = std::UnitTester();
       tester.testAll();
-      
- 
-        std::Logger logger("output.log", "cvsOut.csv", false);
-      std::MomentumStrategy strategy(logger, 4, 0.001);
-      std::CSVReader reader = std::CSVReader("../BHP_Daily_Since2000.csv");
+
+      bool foundFile;
+      std::Param parameters = std::Param(argv[1] &foundFile);
+      if(!foundFile) {
+            // well fuck you
+      }
+      Param outputLogFile = parameters.getParam('output_logFile');
+      if(outputLogFile.isNull) {
+            // well fuck you too
+      }
+
+      std::Logger logger = std::Logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
+      Param outputLogFile = parameters.getParam('output_csvFile');
+      if(outputLogFile.isNull) {
+            log.logError('\'output_csvfile\' parameter not found', true);
+      }
+      Param returns = parameters.getParam('returnsInCalculation');
+      if(returns.isNull || !returns.isNumber) {
+            log.logError('\'returnsInCalculation\' parameter not found', true);
+      }
+      Param threshold = parameters.getParam('threshold');
+      if(threshold.isNull || !threshold.isNumber) {
+            log.logError('\'threshold\' parameter not found', true);
+      }
+      Param inputCSVFile = parameters.getParam('input_csvFile');
+      if(inputCSVFile.isNull) {
+            log.logError('\'input_csvFile\' parameter not found', true);
+      }
+
+      std::MomentumStrategy strategy(logger, returns.intVal, threshold.doubleVal);
+      std::CSVReader reader = std::CSVReader(inputCSVFile.stringVal);
 
       run(logger, reader, strategy);
 
