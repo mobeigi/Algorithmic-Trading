@@ -33,39 +33,43 @@ void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
 
 int main(int argc, const char * argv[]) {
 
-
+      int returnsValue = 4;
+      double thresholdValue = 0.001;
       std::UnitTester tester = std::UnitTester();
       tester.testAll();
 
       bool foundFile;
-      std::Param parameters = std::Param(argv[1] &foundFile);
+      std::Params parameters = std::Params(argv[1], &foundFile);
       if(!foundFile) {
-            // well fuck you
+            // well fuck you ..
+            return 1;
       }
-      Param outputLogFile = parameters.getParam('output_logFile');
+      std::Param outputLogFile = parameters.getParam("output_logFile");
       if(outputLogFile.isNull) {
-            // well fuck you too
+            // well fuck you ..
+            return 1;
+      }
+      std::Param outputCSVFile = parameters.getParam("output_csvFile");
+      if(outputCSVFile.isNull) {
+            // well i give up ..
+            return 1;
       }
 
       std::Logger logger = std::Logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
-      Param outputLogFile = parameters.getParam('output_csvFile');
-      if(outputLogFile.isNull) {
-            log.logError('\'output_csvfile\' parameter not found', true);
-      }
-      Param returns = parameters.getParam('returnsInCalculation');
-      if(returns.isNull || !returns.isNumber) {
-            log.logError('\'returnsInCalculation\' parameter not found', true);
-      }
-      Param threshold = parameters.getParam('threshold');
-      if(threshold.isNull || !threshold.isNumber) {
-            log.logError('\'threshold\' parameter not found', true);
-      }
-      Param inputCSVFile = parameters.getParam('input_csvFile');
+      std::Param inputCSVFile = parameters.getParam("input_csvFile");
       if(inputCSVFile.isNull) {
-            log.logError('\'input_csvFile\' parameter not found', true);
+            logger.logError("'input_csvFile' parameter not found", true);
       }
+      std::Param returns = parameters.getParam("returnsInCalculation");
+      if(returns.isNull || !returns.isNumber) {
+            logger.logError("'returnsInCalculation' parameter not found", false);
+      } else returnsValue = returns.intVal;
+      std::Param threshold = parameters.getParam("threshold");
+      if(threshold.isNull || !threshold.isNumber) {
+            logger.logError("'threshold' parameter not found", false);
+      } else thresholdValue = threshold.doubleVal;
 
-      std::MomentumStrategy strategy(logger, returns.intVal, threshold.doubleVal);
+      std::MomentumStrategy strategy(logger, returnsValue, thresholdValue);
       std::CSVReader reader = std::CSVReader(inputCSVFile.stringVal);
 
       run(logger, reader, strategy);
