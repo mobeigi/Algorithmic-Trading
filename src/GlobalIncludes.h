@@ -33,6 +33,22 @@
 #include <fstream>
 #include <cmath>
 
+
+#ifdef _WIN32 //windows 32 and 64bit
+#include <Windows.h>
+#else
+
+#ifdef __MACH__ //OS X
+#include <mach/clock.h>
+#include <mach/mach.h>
+
+#else //linux/unix
+#include <time.h>
+#include <sys/time.h>
+#endif
+
+#endif
+
 namespace std {
       class Helper {
       public:
@@ -67,9 +83,38 @@ namespace std {
             }
           
           static unsigned long sysTimeMS() {
-              return time(NULL) * 1000;
+              
+              
+            #ifdef _WIN32 //windows 32 and 64bit
+              SYSTEMTIME st;
+              GetSystemTime(&st);
+              return (unsigned long)(st.wMilliseconds + (st.wSecond * 1000));
+            #else
+              
+                #ifdef __MACH__ //OS X
+                    struct timespec ts;
+                    clock_serv_t cclock;
+                    mach_timespec_t mts;
+                    host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+                    clock_get_time(cclock, &mts);
+                    mach_port_deallocate(mach_task_self(), cclock);
+                    ts.tv_sec = mts.tv_sec;
+                    ts.tv_nsec = mts.tv_nsec;
+                    return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
+              
+                #else //linux/unix
+                    struct timespec ts;
+                    clock_gettime(CLOCK_REALTIME, &ts);
+                    return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
+                #endif
+
+            #endif
+              
           }
       };
 }
 
 #endif
+
+
+
