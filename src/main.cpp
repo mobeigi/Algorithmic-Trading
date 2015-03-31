@@ -25,7 +25,7 @@ void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
                   double lowPrice = std::stod(temp.at(7));
                   double highPrice = std::stod(temp.at(6));
                   double openPrice = std::stod(temp.at(5));
-                  std::TradeDay trade = std::TradeDay(openPrice, highPrice, lowPrice, lastPrice, temp.at(0), temp.at(1));
+                  std::TradeDay trade(openPrice, highPrice, lowPrice, lastPrice, temp.at(0), temp.at(1));
                   strategy.nextDay(trade);
             } catch(std::invalid_argument) {}
       }
@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
             return 1;
       }
 
-      std::Logger logger = std::Logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
+      std::Logger logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
       std::Param inputCSVFile = parameters.getParam("input_csvFile");
       if(inputCSVFile.isNull) {
             logger.logError("'input_csvFile' parameter not found\n", true);
@@ -71,7 +71,7 @@ int main(int argc, const char * argv[]) {
       } else thresholdValue = threshold.doubleVal;
 
       std::MomentumStrategy strategy(logger, returnsValue, thresholdValue);
-      std::CSVReader reader = std::CSVReader(inputCSVFile.stringVal);
+      std::CSVReader reader(inputCSVFile.stringVal);
 
       run(logger, reader, strategy);
       logger.stopLogging();
