@@ -14,26 +14,26 @@
 
 
 namespace std {
-    
+
     Params::Params(string paramFileDir, bool *foundFile) : params() {
 
-        ifstream paramFile = ifstream(paramFileDir, ios::in);
+        ifstream paramFile(paramFileDir, ios::in);
         *foundFile = false;
-        
+
         if (paramFile.is_open()) {
             *foundFile = true;
-            
+
             //parsing setup
             bool waitingForIdStart = true; //waiting for initial start character
             bool readingParamId = true;
             bool lastCharWasDelim = false;
             string currentParamId = "";
             string currentParamBody = "";
-            
+
             int ic = paramFile.get();
             while (ic != EOF) {
                 char c = (char)ic;
-                
+
                 //do nothing in the interum of waiting for start character
                 if (waitingForIdStart) {
                     if (c == __PARAM_ID_START) {
@@ -43,7 +43,7 @@ namespace std {
                     ic = paramFile.get();
                     continue;
                 }
-            
+
                 if (readingParamId) {
                     if (c == __PARAM_VALUE_START) {
                         readingParamId = false;
@@ -51,7 +51,7 @@ namespace std {
                         currentParamId.append(1, c);
                     }
                 } else {
-                    
+
                     //delim; double delim = use as character, single = forget, new character after delim then add param
                     if (lastCharWasDelim) {
                         lastCharWasDelim = false;
@@ -65,61 +65,61 @@ namespace std {
                         }
                     } else if (c == __PARAM_DELIM) {
                         lastCharWasDelim = true;
-                       
+
                     } else {
                         currentParamBody.append(1, c);
                     }
-                    
+
                 }
-                
+
                 ic = paramFile.get();
             }
-            
+
             //add param at end of file
             if (lastCharWasDelim) {
                 addParam(currentParamId, currentParamBody);
             }
-            
+
             paramFile.close();
-            
+
         }
     }
-    
+
 
     void Params::addParam(string paramId, string paramValue) {
-        
+
         Param param;
         param.isNull = false;
         param.stringVal = paramValue;
-        
+
         //defaults
         param.intVal = -1;
         param.doubleVal = -1;
         param.isNumber = false;
-        
+
         try {
             string::size_type sz;
             double dval = stod(paramValue, &sz);
             param.isNumber = true;
             param.doubleVal = dval;
             param.intVal = static_cast<int>(round(dval));
-            
+
         } catch (invalid_argument) {
         } catch (out_of_range) {}
-        
+
         params[paramId] = param;
     }
-    
-    
+
+
     Param Params::getParam(string paramId) {
-        
+
         if (params.find(paramId) == params.end()) {
             return nullParam();
         }
-        
+
         return params[paramId];
     }
-    
+
     Param Params::nullParam() {
         Param np;
         np.isNull = true;
@@ -128,9 +128,3 @@ namespace std {
 
 
 }
-
-
-
-
-
-
