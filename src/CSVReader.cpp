@@ -25,6 +25,10 @@ namespace std
             file = nullptr;
         }
     }
+    
+    bool CSVReader::open() {
+        return (file != nullptr && file->is_open());
+    }
 
     CSVReader::~CSVReader() {
         stopReading();

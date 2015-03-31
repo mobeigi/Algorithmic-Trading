@@ -19,13 +19,15 @@ namespace std
 {
     class CSVWriter {
     private:
-          bool isOpen;
-          ofstream output;
+        bool isOpen;
+        ofstream *output;
     public:
-          CSVWriter();
-          void startWriting(string dateFile);
-          void stopWriting();
-          void addCSVLine(string companyName, string date, double price, char signal);
+        CSVWriter(string dateFile);
+        ~CSVWriter();
+        bool open();
+        //void startWriting(string dateFile);
+        void stopWriting();
+        void addCSVLine(string companyName, string date, double price, char signal);
     };
 }
 

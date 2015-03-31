@@ -8,60 +8,86 @@
 
 #include "Logger.h"
 
+
 namespace std {
-	Logger::Logger(string dataFile) {
-		output = ofstream(dataFile, ios::trunc);
-		if(output.is_open()) {
-			isLogging = true;
-			output << "Revitpo: Version 1.0.0" << endl;
-			output << "Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton" << endl;
-			log(__LOG_INFO, "[OUTPUT] " + dataFile);
-			log(__LOG_INFO, "Started Execution: " + Helper::datetime());
-		}
+    
+	Logger::Logger(string logFile, string csvFile, bool debug) {
+        
+        this->logFile = nullptr;
+        this->csvFile = nullptr;
+        this->debug = debug;
+        
+        this->logFile = new ofstream(logFile, ios::trunc);
+        this->csvFile = new CSVWriter(csvFile);
+        
+        if (!this->logFile->is_open()) {
+            logError("Unable to write to log file: " + logFile, false);
+        }
+        
+        if (!this->csvFile->open()) {
+            logError("Unable to write to csv file: " + csvFile, false);
+        }
+
 	}
-	void Logger::log(int type, string message) {
-		if(isLogging) {
-			stringstream ss;
-			switch(type) {
-				case __LOG_INFO:
-				ss << "[INFO] ";
-				break;
-				case __LOG_ERROR:
-				ss << "[ERROR] ";
-				break;
-				case __LOG_FATAL:
-				ss << "[FATAL] ";
-				break;
-#ifdef DEBUG
-				case __LOG_DEBUG:
-				ss << "[DEBUG] ";
-				break;
-#endif
-				default:
-				return;
-				break;
-			}
-			ss << message;
-			output << ss.str() << endl;
-		}
-	}
+    
+    Logger::~Logger() {
+        stopLogging();
+    }
+    
+    
+    
+    void Logger::logDebug(string log) {
+        if (debug) {
+            cout << "[DEBUG] " + log;
+        }
+    }
+    
+    void Logger::logError(string errorDescr, bool fatal) {
+        if (fatal) {
+            cout << "[FATAL ERROR] " + errorDescr;
+            exit(1);
+        }
+        cout << "[ERROR] " + errorDescr;
+    }
+    
+    void Logger::log(string log) {
+        
+        if (logFile != nullptr && logFile->is_open()) {
+            stringstream ss;
+            ss << log;
+            *logFile << log << endl;
+        }
+    }
+    
 	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
-		if(csvData.find(companyName) == csvData.end()) {
-			csvData[companyName] = CSVWriter();
-			csvData[companyName].startWriting(companyName + ".csv");
-			log(__LOG_INFO, "[OUTPUT] " + companyName + ".csv");
-		}
-		csv = &csvData[companyName];
-		csv->addCSVLine(companyName, date, price, signal);
+        
+        if (csvFile != nullptr && csvFile->open()) {
+            csvFile->addCSVLine(companyName, date, price, signal);
+        }
 	}
+    
+    
 	void Logger::stopLogging() {
-		if(isLogging) {
-			log(__LOG_INFO, "Ended Execution: " + Helper::datetime());
-			log(__LOG_INFO, "Elapsed Time: ");
-			isLogging  = false;
-			for(auto const& p : csvData) csvData[p.first].stopWriting();
-			output.close();
-		}
+        
+        if (logFile != nullptr) {
+            log("Ended Execution: " + Helper::datetime());
+            log("Elapsed Time: ");
+            
+            if (logFile->is_open()) logFile->close();
+            delete logFile;
+            logFile = nullptr;
+        }
+        
+        if (csvFile != nullptr) {
+            if (csvFile->open()) csvFile->stopWriting();
+            delete csvFile;
+            csvFile = nullptr;
+        }
+        
 	}
 
 }
+
+
+
+

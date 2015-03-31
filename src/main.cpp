@@ -18,9 +18,9 @@
 #include "UnitTester.h"
 
 int main(int argc, const char * argv[]) {
-      std::Logger logger = std::Logger("output.log");
+      std::Logger logger("output.log", "cvsOut.csv", false);
       std::MomentumStrategy strategy = std::MomentumStrategy(logger, 4, 0.001);
-      std::CSVReader reader = std::CSVReader("../BHP_Daily_Since2000.csv");
+      std::CSVReader reader = std::CSVReader("BHP_Daily_Since2000.csv");
       while(reader.nextTrade()) {
             std::vector<std::string> temp = reader.getTrade();
             try {

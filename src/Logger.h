@@ -18,6 +18,7 @@ namespace std {
 #include "GlobalIncludes.h"
 #include "CSVWriter.h"
 #include <map>
+#include <iostream>
 
 namespace std {
 
@@ -25,15 +26,26 @@ namespace std {
     class Logger {
 
     private:
-        CSVWriter * csv;
-        map<string, CSVWriter> csvData;
-        bool isLogging, isCSV;
-        ofstream output;
+        CSVWriter *csvFile;
+        ofstream *logFile;
+        bool debug;
+        //map<string, CSVWriter> csvData;
+        //bool isLogging, isCSV;
+        //ofstream output;
     public:
+        Logger(string logFile, string csvFile, bool debug);
+        ~Logger();
+        
         void stopLogging();
-        void log(int type, string message);
+        
+        void logDebug(string log);
+        void logError(string errorDescr, bool fatal);
+        
+        void log(string log);
         void writeToCSV(string companyName, string date, double price, char signal);
-        Logger(string dataFile);
+        
+        //void log(int type, string message);
+        
     };
 
 }
