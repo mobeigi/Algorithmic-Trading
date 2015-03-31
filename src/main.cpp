@@ -62,15 +62,15 @@ int main(int argc, const char * argv[]) {
       std::Logger logger = std::Logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
       std::Param inputCSVFile = parameters.getParam("input_csvFile");
       if(inputCSVFile.isNull) {
-            logger.logError("'input_csvFile' parameter not found", true);
+            logger.logError("'input_csvFile' parameter not found\n", true);
       }
       std::Param returns = parameters.getParam("returnsInCalculation");
       if(returns.isNull || !returns.isNumber) {
-            logger.logError("'returnsInCalculation' parameter not found", false);
+            logger.logError("'returnsInCalculation' parameter not found\n", false);
       } else returnsValue = returns.intVal;
       std::Param threshold = parameters.getParam("threshold");
       if(threshold.isNull || !threshold.isNumber) {
-            logger.logError("'threshold' parameter not found", false);
+            logger.logError("'threshold' parameter not found\n", false);
       } else thresholdValue = threshold.doubleVal;
 
       std::MomentumStrategy strategy(logger, returnsValue, thresholdValue);
