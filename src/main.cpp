@@ -38,7 +38,7 @@ int main(int argc, const char * argv[]) {
       std::UnitTester tester = std::UnitTester();
       tester.testAll();
 
-      if(argc != 1) {
+      if(argc < 2) {
             // well fuck you ..
             return 1;
       }
