@@ -35,10 +35,12 @@ int main(int argc, const char * argv[]) {
 
       int returnsValue = 4;
       double thresholdValue = 0.001;
+      
       std::UnitTester tester;
       tester.testAll();
 
-	  //Ensure we have the corrent number of arguments
+	 // Ensure we have the corrent number of arguments
+       // or the nasty seg fault monster will come and steal all the sugar
       if(argc < 2) {
             return 1;
       }
