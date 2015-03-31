@@ -35,27 +35,31 @@ int main(int argc, const char * argv[]) {
 
       int returnsValue = 4;
       double thresholdValue = 0.001;
-      
+
       std::UnitTester tester;
       tester.testAll();
 
 	 // Ensure we have the corrent number of arguments
        // or the nasty seg fault monster will come and steal all the sugar
       if(argc < 2) {
-            return 1;
+            std::cerr << "usage: ./" << argv[0] << " [parameter file]" << std::endl;
+            return 0;
       }
       bool foundFile;
       std::Params parameters(argv[1], &foundFile);
       if(!foundFile) {
-            return 1;
+            std::cerr << "parameter file not found" << std::endl;
+            return 0;
       }
       std::Param outputLogFile = parameters.getParam("output_logFile");
       if(outputLogFile.isNull) {
-            return 1;
+            std::cerr << "'output_logFile' parameter not found" << std::endl;
+            return 0;
       }
       std::Param outputCSVFile = parameters.getParam("output_csvFile");
       if(outputCSVFile.isNull) {
-            return 1;
+            std::cerr << "'output_csvFile' parameter not found" << std::endl;
+            return 0;
       }
 
       std::Logger logger(outputLogFile.stringVal, outputCSVFile.stringVal, false);
