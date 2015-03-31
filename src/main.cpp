@@ -40,23 +40,19 @@ int main(int argc, const char * argv[]) {
 
 	  //Ensure we have the corrent number of arguments
       if(argc < 2) {
-            // well fuck you ..
             return 1;
       }
       bool foundFile;
-      std::Params parameters = std::Params(argv[1], &foundFile);
+      std::Params parameters(argv[1], &foundFile);
       if(!foundFile) {
-            // so stupid ..
             return 1;
       }
       std::Param outputLogFile = parameters.getParam("output_logFile");
       if(outputLogFile.isNull) {
-            // please, so rude..
             return 1;
       }
       std::Param outputCSVFile = parameters.getParam("output_csvFile");
       if(outputCSVFile.isNull) {
-            // well i give up ..
             return 1;
       }
 
@@ -78,7 +74,6 @@ int main(int argc, const char * argv[]) {
       std::CSVReader reader = std::CSVReader(inputCSVFile.stringVal);
 
       run(logger, reader, strategy);
-
       logger.stopLogging();
 
 	  //To keep window open in visual studio

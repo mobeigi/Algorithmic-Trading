@@ -1,0 +1,4 @@
+:input_csvFile:../sample_data_file.csv\
+:output_csvFile:BHP.csv\
+:output_logFile:AlgorithmicTrading.log\
+
