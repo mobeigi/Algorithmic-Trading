@@ -38,15 +38,19 @@ int main(int argc, const char * argv[]) {
       std::UnitTester tester = std::UnitTester();
       tester.testAll();
 
+      if(argc != 1) {
+            // well fuck you ..
+            return 1;
+      }
       bool foundFile;
       std::Params parameters = std::Params(argv[1], &foundFile);
       if(!foundFile) {
-            // well fuck you ..
+            // so stupid ..
             return 1;
       }
       std::Param outputLogFile = parameters.getParam("output_logFile");
       if(outputLogFile.isNull) {
-            // well fuck you ..
+            // please, so rude..
             return 1;
       }
       std::Param outputCSVFile = parameters.getParam("output_csvFile");
