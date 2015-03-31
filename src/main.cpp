@@ -35,9 +35,10 @@ int main(int argc, const char * argv[]) {
 
       int returnsValue = 4;
       double thresholdValue = 0.001;
-      std::UnitTester tester = std::UnitTester();
+      std::UnitTester tester;
       tester.testAll();
 
+	  //Ensure we have the corrent number of arguments
       if(argc < 2) {
             // well fuck you ..
             return 1;
@@ -78,12 +79,14 @@ int main(int argc, const char * argv[]) {
 
       run(logger, reader, strategy);
 
-      //To keep window open in visual studio
-      //Remove before compiling release builds
-      #ifdef _MSC_VER
-      std::cin.get();
-      std::cin.ignore();
-      #endif
       logger.stopLogging();
+
+	  //To keep window open in visual studio
+	  //Remove before compiling release builds
+	  #ifdef _MSC_VER
+	  std::cin.get();
+	  std::cin.ignore();
+	  #endif
+
       return 0;
 }
