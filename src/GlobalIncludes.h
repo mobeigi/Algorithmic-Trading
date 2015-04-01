@@ -50,68 +50,68 @@
 #endif
 
 namespace std {
-      class Helper {
-      public:
-            //Returns a date as a string in format HH:MM:SS DD:MM:YYYY
-            static string datetime() {
-                  time_t t = time(0);
-                  struct tm * now = localtime(&t);
-                  stringstream ss;
-                  ss << padDigit(now->tm_hour) << ':';
-                  ss << padDigit(now->tm_min) << ':';
-                  ss << padDigit(now->tm_sec) << ' ';
-                  ss << padDigit(now->tm_mday) << '/';
-                  ss << padDigit(now->tm_mon + 1) << '/';
-                  ss << now->tm_year + 1900;
-                  return ss.str();
-            }
-
-            //Pad digits smaller than 10 with zeros to maintain length of components such as dates
-            static inline string padDigit(int number) {
-                  return ((number < 10) ? ("0" + to_string(number)) : to_string(number));
-            }
-
-            static string formatPrice(double price) {
-                  stringstream ss;
-                  ss << setprecision(2) << std::fixed << ((price < 0) ? "-$" : "$") << abs(price);
-                  return ss.str();
-            }
-            static string formatDouble(double price) {
-                  stringstream ss;
-                  ss << setprecision(4) << std::fixed << price;
-                  return ss.str();
-            }
-          
-          static unsigned long sysTimeUS() {
-              
-              
-            #ifdef _WIN32 //windows 32 and 64bit
-              SYSTEMTIME st;
-              GetSystemTime(&st);
-              return (unsigned long)(st.wMilliseconds + (st.wSecond * 1000));
-            #else
-              
-                #ifdef __MACH__ //OS X
-                    struct timespec ts;
-                    clock_serv_t cclock;
-                    mach_timespec_t mts;
-                    host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
-                    clock_get_time(cclock, &mts);
-                    mach_port_deallocate(mach_task_self(), cclock);
-                    ts.tv_sec = mts.tv_sec;
-                    ts.tv_nsec = mts.tv_nsec;
-                    return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
-              
-                #else //linux/unix
-                    struct timespec ts;
-                    clock_gettime(CLOCK_REALTIME, &ts);
-                    return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
-                #endif
-
-            #endif
-              
-          }
-      };
+    class Helper {
+    public:
+        //Returns a date as a string in format HH:MM:SS DD:MM:YYYY
+        static string datetime() {
+            time_t t = time(0);
+            struct tm * now = localtime(&t);
+            stringstream ss;
+            ss << padDigit(now->tm_hour) << ':';
+            ss << padDigit(now->tm_min) << ':';
+            ss << padDigit(now->tm_sec) << ' ';
+            ss << padDigit(now->tm_mday) << '/';
+            ss << padDigit(now->tm_mon + 1) << '/';
+            ss << now->tm_year + 1900;
+            return ss.str();
+        }
+        
+        //Pad digits smaller than 10 with zeros to maintain length of components such as dates
+        static inline string padDigit(int number) {
+            return ((number < 10) ? ("0" + to_string(number)) : to_string(number));
+        }
+        
+        static string formatPrice(double price) {
+            stringstream ss;
+            ss << setprecision(2) << std::fixed << ((price < 0) ? "-$" : "$") << abs(price);
+            return ss.str();
+        }
+        static string formatDouble(double price) {
+            stringstream ss;
+            ss << setprecision(4) << std::fixed << price;
+            return ss.str();
+        }
+        
+        static unsigned long sysTimeUS() {
+            
+            
+#ifdef _WIN32 //windows 32 and 64bit
+            SYSTEMTIME st;
+            GetSystemTime(&st);
+            return (unsigned long)(st.wMilliseconds + (st.wSecond * 1000));
+#else
+            
+#ifdef __MACH__ //OS X
+            struct timespec ts;
+            clock_serv_t cclock;
+            mach_timespec_t mts;
+            host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+            clock_get_time(cclock, &mts);
+            mach_port_deallocate(mach_task_self(), cclock);
+            ts.tv_sec = mts.tv_sec;
+            ts.tv_nsec = mts.tv_nsec;
+            return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
+            
+#else //linux/unix
+            struct timespec ts;
+            clock_gettime(CLOCK_REALTIME, &ts);
+            return (unsigned long)(ts.tv_nsec + ts.tv_sec*1000000000L) / 1000;
+#endif
+            
+#endif
+            
+        }
+    };
 }
 
 #endif

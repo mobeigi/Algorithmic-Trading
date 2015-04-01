@@ -18,10 +18,10 @@ namespace std {
 
 
 namespace std {
-
-
+    
+    
     class TradeDay {
-
+        
     private:
         double lastPrice;
         double openPrice;
@@ -29,18 +29,18 @@ namespace std {
         double lowPrice;
         string company;
         string date;
-
+        
     public:
-          TradeDay(double openPrice, double highPrice, double lowPrice, double lastPrice, string company, string date);
+        TradeDay(double openPrice, double highPrice, double lowPrice, double lastPrice, string company, string date);
         double getLastPrice();
         double getLowPrice();
         double getHighPrice();
         double getOpenPrice();
-	string getDate();
+        string getDate();
         string getCompany();
-
+        
     };
-
+    
 }
 
 

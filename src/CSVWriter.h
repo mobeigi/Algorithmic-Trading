@@ -10,7 +10,7 @@
 #define __Algorithmic_Trading_CSVWriter__
 
 namespace std {
-      class CSVWriter;
+    class CSVWriter;
 }
 
 #include "GlobalIncludes.h"

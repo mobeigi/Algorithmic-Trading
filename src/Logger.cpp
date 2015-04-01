@@ -11,7 +11,7 @@
 
 namespace std {
     
-	Logger::Logger(string logFile, string csvFile, bool debug, string paramsDescr, string inputFileName) {
+    Logger::Logger(string logFile, string csvFile, bool debug, string paramsDescr, string inputFileName) {
         
         this->logFile = nullptr;
         this->csvFile = nullptr;
@@ -37,8 +37,8 @@ namespace std {
         log("Output Log file: " + logFile);
         log("Output CSV file: " + csvFile);
         log("Started Execution: " + Helper::datetime());
-
-	}
+        
+    }
     
     Logger::~Logger() {
         stopLogging();
@@ -72,15 +72,15 @@ namespace std {
         }
     }
     
-	void Logger::writeToCSV(string companyName, string date, double price, char signal) {
+    void Logger::writeToCSV(string companyName, string date, double price, char signal) {
         
         if (csvFile != nullptr && csvFile->open()) {
             csvFile->addCSVLine(companyName, date, price, signal);
         }
-	}
+    }
     
     
-	void Logger::stopLogging() {
+    void Logger::stopLogging() {
         
         if (logFile != nullptr) {
             log("Ended Execution: " + Helper::datetime());
@@ -97,8 +97,8 @@ namespace std {
             csvFile = nullptr;
         }
         
-	}
-
+    }
+    
 }
 
 

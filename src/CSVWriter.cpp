@@ -24,14 +24,6 @@ namespace std {
     }
     
     
-    /*void CSVWriter::startWriting(string fileName) {
-        output = ofstream(fileName, ios::trunc);
-        if(output.is_open()) {
-            output << "#Company, Date, Price, Volume, Value, Signal" << endl;
-            isOpen = true;
-        }
-    }*/
-    
     bool CSVWriter::open() {
         return isOpen;
     }

@@ -10,7 +10,7 @@
 
 
 namespace std {
-
+    
     StrategyResult::StrategyResult() {
         isNullResult = true;
         transferAmount = 0.0;
@@ -27,25 +27,6 @@ namespace std {
         return StrategyResult();
     }
     
-    /*StrategyResult StrategyResult::buyEquity() {
-        return StrategyResult(ResultType::Buy, 0);
-    }
-    StrategyResult StrategyResult::sellEquity() {
-        return StrategyResult(ResultType::Sell, 0);
-    }
-    StrategyResult StrategyResult::buyEquity(double amount) {
-        if (amount == 0.0)
-            return doNothing();
-        return StrategyResult(ResultType::Buy, amount);
-    }
-    StrategyResult StrategyResult::sellEquity(double amount) {
-        if (amount == 0.0)
-            return doNothing();
-        return StrategyResult(ResultType::Sell, amount);
-    }
-    StrategyResult StrategyResult::doNothing() {
-        return StrategyResult(ResultType::Nothing, 0);
-    }*/
     
     bool StrategyResult::isNull() {
         return isNullResult;
@@ -65,7 +46,7 @@ namespace std {
         }
         return actDescr + " equity";
     }
-
+    
 }
 
 

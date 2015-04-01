@@ -18,20 +18,20 @@ namespace std {
 
 
 namespace std {
-
-
+    
+    
     class MomentumStrategyData {
-
+        
     public:
         MomentumStrategyData();
-       int previousSignal;
+        int previousSignal;
         double previousPrice;
         vector<double> returns;
         bool lastHadMovingAverage;
         double lastMovingAverage;
-
+        
     };
-
+    
 }
 
 

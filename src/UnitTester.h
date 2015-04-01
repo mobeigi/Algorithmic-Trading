@@ -12,19 +12,19 @@
 //Includes
 #include <cassert>
 
-namespace std 
+namespace std
 {
-	class UnitTester 
-	{
-
-	public:
-		UnitTester(); // Constructor
-
-		/*
-		 * Returns true if all components passed all tests. False otherwise. 
-		*/
-		bool testAll(); // Test all components
-	};
+    class UnitTester
+    {
+        
+    public:
+        UnitTester(); // Constructor
+        
+        /*
+         * Returns true if all components passed all tests. False otherwise.
+         */
+        bool testAll(); // Test all components
+    };
 }
 
 #endif

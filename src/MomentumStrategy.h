@@ -37,7 +37,7 @@ namespace std {
         
     protected:
         virtual void nextTradeDay(TradeDay tradeDay);
-
+        
     public:
         MomentumStrategy(Logger &logger, int returnsInCalculation, double threshold);
         
@@ -47,5 +47,5 @@ namespace std {
 
 
 
-#endif 
+#endif
 

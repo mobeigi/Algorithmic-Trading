@@ -21,19 +21,17 @@ namespace std {
 #include <iostream>
 
 namespace std {
-
-
+    
+    
     class Logger {
-
+        
     private:
         CSVWriter *csvFile;
         ofstream *logFile;
         bool debug;
         
         unsigned long startTimeEpoch;
-        //map<string, CSVWriter> csvData;
-        //bool isLogging, isCSV;
-        //ofstream output;
+
     public:
         Logger(string logFile, string csvFile, bool debug, string paramsDescr, string inputFileName);
         ~Logger();
@@ -46,10 +44,9 @@ namespace std {
         void log(string log);
         void writeToCSV(string companyName, string date, double price, char signal);
         
-        //void log(int type, string message);
         
     };
-
+    
 }
 
 

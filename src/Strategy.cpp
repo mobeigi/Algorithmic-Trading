@@ -10,30 +10,18 @@
 
 
 namespace std {
-
+    
     Strategy::Strategy(Logger &logger) :
     logger(logger) {}
     
-    /*StrategyResult Strategy::execute() {
-        //things to do for every strategy
-        
-        logger.log("Base: Strategy Execute");
-        
-        for (TradeDay tradeDay : trades) {
-            nextTradeDay(tradeDay);
-        }
-        
-        return calculateTradingStategy();
-
-    }*/
     
     
     StrategyResult Strategy::nextDay(TradeDay tradeDay) {
         nextTradeDay(tradeDay);
         return StrategyResult::nullResult();
     }
-
-
+    
+    
 }
 
 

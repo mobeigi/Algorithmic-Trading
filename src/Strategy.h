@@ -31,11 +31,11 @@ namespace std {
         
         virtual void nextTradeDay(TradeDay tradeDay) = 0; // to be implemented (template)
         
-
+        
     public:
         Strategy(Logger &logger);
         StrategyResult nextDay(TradeDay tradeDay);
-
+        
     };
     
 }

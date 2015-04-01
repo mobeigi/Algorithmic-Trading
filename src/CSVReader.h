@@ -10,7 +10,7 @@
 #define __Algorithmic_Trading_CSVReader__
 
 namespace std {
-      class CSVReader;
+    class CSVReader;
 }
 
 #include "GlobalIncludes.h"
@@ -23,7 +23,7 @@ namespace std
         ifstream *file;
         bool hasNextLine;
         string currentLine;
-
+        
     public:
         CSVReader(string dataFile, bool* foundFile);
         ~CSVReader();
