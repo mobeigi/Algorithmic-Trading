@@ -3,7 +3,7 @@
 //  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
-//  Copyright (c) Revitpo. All rights reserved.
+//  Copyright (c) Trock. All rights reserved.
 //
 
 #include <iostream>
@@ -36,8 +36,8 @@ int main(int argc, const char * argv[]) {
     int returnsValue = 4;
     double thresholdValue = 0.001;
     
-    std::UnitTester tester;
-    tester.testAll();
+    //std::UnitTester tester;
+    //tester.testAll();
     
     // Ensure we have the corrent number of arguments
     // or the nasty seg fault monster will come and steal all the sugar

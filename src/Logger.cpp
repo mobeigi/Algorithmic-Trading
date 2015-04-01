@@ -3,7 +3,7 @@
 //  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
-//  Copyright (c) Revitpo. All rights reserved.
+//  Copyright (c) Trock. All rights reserved.
 //
 
 #include "Logger.h"
@@ -30,7 +30,7 @@ namespace std {
         
         startTimeEpoch = Helper::sysTimeUS();
         
-        log("Revitpo: Version " __PRODUCT_RELEASE_VERSION);
+        log("Trock: Version " __PRODUCT_RELEASE_VERSION);
         log("Antheny Yu, Ian Wong, Jason Ng, Mohammad Ghasembegi and Samuel Whitton");
         log("Parameters parsed: " + paramsDescr);
         log("Input CSV file: " + inputFileName);

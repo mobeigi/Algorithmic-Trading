@@ -3,7 +3,7 @@
 //  Algorithmic Trading SENG3011
 //
 //  Created on 03/03/15.
-//  Copyright (c) Revitpo. All rights reserved.
+//  Copyright (c) Trock. All rights reserved.
 //
 
 #include "MomentumStrategyData.h"
