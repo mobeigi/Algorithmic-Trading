@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-c -std=c++11
-O= main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o CSVReader.o UnitTester.o CSVWriter.o
+CFLAGS=-c -std=c++11 -lrt
+O= -lrt main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o CSVReader.o UnitTester.o CSVWriter.o
 
 all: AlgorithmicTrading
 
