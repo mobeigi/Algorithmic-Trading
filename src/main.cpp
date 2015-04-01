@@ -101,12 +101,5 @@ int main(int argc, const char * argv[]) {
     logger.log("Execution Status: Success!");
     logger.stopLogging();
     
-    //To keep window open in visual studio
-    //Remove before compiling release builds
-#ifdef _MSC_VER
-    std::cin.get();
-    std::cin.ignore();
-#endif
-    
     return 0;
 }

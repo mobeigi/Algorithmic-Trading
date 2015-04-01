@@ -6,14 +6,13 @@
 //  Copyright (c) Revitpo. All rights reserved.
 //
 
-
 #ifndef __Algorithmic_Trading__GlobalIncludes__
 #define __Algorithmic_Trading__GlobalIncludes__
 
 // define DEBUG for debugging (remove for production releases)
 #define DEBUG 0
 
-#define __PRODUCT_RELEASE_VERSION "1.0.0"
+#define __PRODUCT_RELEASE_VERSION "1.00"
 
 #define __CSV_DELIM ((char)0x2c)
 

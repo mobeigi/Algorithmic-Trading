@@ -11,7 +11,7 @@
 
 namespace std {
     
-    MomentumStrategy::MomentumStrategy(Logger &logger, int returnsInCalculation, double threshold) :
+  MomentumStrategy::MomentumStrategy(Logger &logger, unsigned int returnsInCalculation, double threshold) :
     super(logger), companyData() {
         this->returnsInCalculation = returnsInCalculation;
         this->threshold = threshold;
@@ -44,7 +44,7 @@ namespace std {
         } else {
             //enough returns to start calculating moving average
             double sumRt = 0.0;
-            for (long i = data->returns.size() - returnsInCalculation; i < data->returns.size(); i++) {
+            for (unsigned long i = data->returns.size() - returnsInCalculation; i < data->returns.size(); i++) {
                 sumRt += data->returns[i];
             }
             double SMAt = sumRt / returnsInCalculation;
