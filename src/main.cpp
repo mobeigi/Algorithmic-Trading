@@ -35,42 +35,68 @@ int main(int argc, const char * argv[]) {
     
     int returnsValue = 4;
     double thresholdValue = 0.001;
-    
-    //std::UnitTester tester;
-    //tester.testAll();
+
+#ifdef DEBUG
+    std::UnitTester tester;
+    tester.testAll();
+#endif // DEBUG
     
     // Ensure we have the corrent number of arguments
     // or the nasty seg fault monster will come and steal all the sugar
     if(argc < 2) {
-        std::cerr << "usage: ./" << argv[0] << " [parameter file]" << std::endl;
+        std::cerr << "usage: " << argv[0] << " [parameter file]" << std::endl;
         return 0;
     }
+
+    //Check to see if we can find parameter file
     bool foundFile;
     std::Params parameters(argv[1], &foundFile);
     if(!foundFile) {
-        std::cerr << "parameter file not found" << std::endl;
+      std::cerr << "Fatal Error: The parameter file was not found." << std::endl;
         return 0;
     }
+
+    //Check to see if outputLogfile exists
     std::Param outputLogFile = parameters.getParam("output_logFile");
     if(outputLogFile.isNull) {
-        std::cerr << "'output_logFile' parameter not found" << std::endl;
+        std::cerr << "Fatal Error: Failed to load file specified in 'output_logFile' parameter." << std::endl;
         return 0;
     }
+
+    //Check to see if  csv file exists
     std::Param outputCSVFile = parameters.getParam("output_csvFile");
     if(outputCSVFile.isNull) {
-        std::cerr << "'output_csvFile' parameter not found" << std::endl;
+        std::cerr << "Fatal Error: Failed to load file specified in 'output_csvFile' parameter." << std::endl;
         return 0;
     }
-    
-    
+
+    //Check to see if input csv file exists
     std::Param inputCSVFile = parameters.getParam("input_csvFile");
-    if(inputCSVFile.isNull) {
-        std::cerr << "'input_csvFile' parameter not found\n" << std::endl;
-        return 0;
+    if (inputCSVFile.isNull) {
+      std::cerr << "Fatal Error: Failed to load file specified in 'input_csvFile' parameter." << std::endl;
+      return 0;
+    }
+
+    //Check if outputCSV is equal to inputCSV and fail if it is (to prevent overwriting input)
+    if (outputCSVFile.stringVal.compare(inputCSVFile.stringVal) == 0) {
+      std::cerr << "Fatal Error: 'input_csvFile' parameter and 'output_csvFile' parameter must be different." << std::endl;
+      return 0;
+    }
+
+    //Check if outputLog is the inputCSV file (we don't want to output csv to the log file)
+    if (outputLogFile.stringVal.compare(inputCSVFile.stringVal) == 0) {
+      std::cerr << "Fatal Error: 'input_csvFile' parameter and 'output_logFile' parameter must be different." << std::endl;
+      return 0;
+    }
+
+    //Check if outputlog and outCSV are the same, we don't want to output log and CSV to same file
+    if (outputLogFile.stringVal.compare(outputCSVFile.stringVal) == 0) {
+      std::cerr << "Fatal Error: 'output_csvFile' parameter and 'output_logFile' parameter must be different." << std::endl;
+      return 0;
     }
     
+    //Set up logger
     std::Logger logger(outputLogFile.stringVal, outputCSVFile.stringVal, false, parameters.paramList(), inputCSVFile.stringVal);
-    
     
     logger.log("Parameter: 'output_csvFile' Value: " + outputCSVFile.stringVal);
     logger.log("Parameter: 'output_logFile' Value: " + outputLogFile.stringVal);
