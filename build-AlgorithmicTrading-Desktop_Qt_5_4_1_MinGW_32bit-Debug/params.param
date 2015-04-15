@@ -1,0 +1,5 @@
+:input_csvFile:\
+:output_csvFile:output.csv\
+:output_logFile:AlgorithmicTrading.log\
+:returnsInCalculation:0\
+:threshold:0.000000\
