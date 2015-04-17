@@ -55,8 +55,8 @@ int MainWindow::on_execute_button_clicked()
     outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
     outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
     outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
-    outputFile << (":startDate:" + ui->start_date->date().toString().toStdString() + "\\\n");
-    outputFile << (":endDate:" + ui->end_date->date().toString().toStdString() + "\\\n");
+    outputFile << (":startDate:" + ui->start_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
+    outputFile << (":endDate:" + ui->end_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
     outputFile.close();
 
     //Run the program by feeding param file
