@@ -26,14 +26,17 @@ namespace std {
     
     class Strategy {
         
+    private:
+        string dStart, dEnd;
+        
     protected:
         Logger &logger;
         
-        virtual void nextTradeDay(TradeDay tradeDay) = 0; // to be implemented (template)
+        virtual void nextTradeDay(TradeDay tradeDay, bool enableTrading) = 0; // to be implemented (template)
         
         
     public:
-        Strategy(Logger &logger);
+        Strategy(Logger &logger, string startDate, string endDate);
         StrategyResult nextDay(TradeDay tradeDay);
         
     };

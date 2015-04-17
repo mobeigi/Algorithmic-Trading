@@ -11,14 +11,14 @@
 
 namespace std {
     
-  MomentumStrategy::MomentumStrategy(Logger &logger, unsigned int returnsInCalculation, double threshold) :
-    super(logger), companyData() {
+  MomentumStrategy::MomentumStrategy(Logger &logger, string startDate, string endDate, unsigned int returnsInCalculation, double threshold) :
+    super(logger, startDate, endDate), companyData() {
         this->returnsInCalculation = returnsInCalculation;
         this->threshold = threshold;
     }
     
     
-    void MomentumStrategy::nextTradeDay(TradeDay tradeDay) {
+    void MomentumStrategy::nextTradeDay(TradeDay tradeDay, bool enableTrading) {
         
         if (companyData.find(tradeDay.getCompany()) == companyData.end()) {
             companyData[tradeDay.getCompany()] = MomentumStrategyData();
@@ -51,20 +51,25 @@ namespace std {
             
             if (data->lastHadMovingAverage) {
                 double diff = SMAt - data->lastMovingAverage;
-                if (diff > threshold) {
-                    logger.logDebug("Buy Signal");
-                    if(data->previousSignal != __BUY_SIGNAL) {
-                        data->previousSignal = __BUY_SIGNAL;
-                        logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __BUY_SIGNAL);
-                    } else logger.logDebug("Ignored Signal");
-                } else if (diff < -threshold) {
-                    logger.logDebug("Sell Signal");
-                    if(data->previousSignal != __SELL_SIGNAL) {
-                        data->previousSignal = __SELL_SIGNAL;
-                        logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __SELL_SIGNAL);
-                    } else logger.logDebug("Ignored Signal");
+                
+                if (enableTrading) {
                     
-                } else {
+                    if (diff > threshold) {
+                        logger.logDebug("Buy Signal");
+                        if(data->previousSignal != __BUY_SIGNAL) {
+                            data->previousSignal = __BUY_SIGNAL;
+                            logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __BUY_SIGNAL);
+                        } else logger.logDebug("Ignored Signal");
+                    } else if (diff < -threshold) {
+                        logger.logDebug("Sell Signal");
+                        if(data->previousSignal != __SELL_SIGNAL) {
+                            data->previousSignal = __SELL_SIGNAL;
+                            logger.writeToCSV(tradeDay.getCompany(), tradeDay.getDate(), tradeDay.getLastPrice(), __SELL_SIGNAL);
+                        } else logger.logDebug("Ignored Signal");
+                        
+                    } else {
+                        
+                    }
                     
                 }
             }

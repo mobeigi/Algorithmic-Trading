@@ -17,7 +17,7 @@
 #include "CSVReader.h"
 #include "UnitTester.h"
 
-void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
+void run(std::Logger &logger, std::CSVReader &reader, std::Strategy *strategy) {
     while(reader.nextTrade()) {
         std::vector<std::string> temp = reader.getTrade();
         try {
@@ -26,7 +26,7 @@ void run(std::Logger &logger, std::CSVReader &reader, std::Strategy &strategy) {
             double highPrice = std::stod(temp.at(6));
             double openPrice = std::stod(temp.at(5));
             std::TradeDay trade(openPrice, highPrice, lowPrice, lastPrice, temp.at(0), temp.at(1));
-            strategy.nextDay(trade);
+            strategy->nextDay(trade);
         } catch(std::invalid_argument) {}
     }
 }
@@ -118,7 +118,16 @@ int main(int argc, const char * argv[]) {
         logger.log("Parameter: 'threshold' Value: " + std::to_string(thresholdValue));
     }
     
-    std::MomentumStrategy strategy(logger, returnsValue, thresholdValue);
+    std::Param startDate = parameters.getParam("startDate");
+    std::Param endDate = parameters.getParam("endDate");
+    
+    std::MomentumStrategy *strategy = nullptr;
+    
+    if (startDate.isNull || endDate.isNull) {
+        strategy = new std::MomentumStrategy(logger, "", "", returnsValue, thresholdValue);
+    } else {
+        strategy = new std::MomentumStrategy(logger, startDate.stringVal, endDate.stringVal, returnsValue, thresholdValue);
+    }
     std::CSVReader reader(inputCSVFile.stringVal, & foundFile);
     if(!foundFile) logger.logError("'input_csvFile' not found\n", true);
     
@@ -127,5 +136,13 @@ int main(int argc, const char * argv[]) {
     logger.log("Execution Status: Success!");
     logger.stopLogging();
     
+    delete strategy;
+    
     return 0;
 }
+
+
+
+
+
+

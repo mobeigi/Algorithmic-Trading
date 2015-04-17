@@ -75,7 +75,7 @@ int AnalysisData::daysDifference(string dateFrom, string dateTo) {
 
     int diff = 0;
 
-    while (from.year < to.year || (from.year == to.year && from.month < to.month || (from.month == to.month && from.day < to.day) ) ) {
+    while (from.year < to.year || (from.year == to.year && (from.month < to.month || (from.month == to.month && from.day < to.day)) ) ) {
         diff++;
         from.day++;
         if (from.day > daysInMonth(from.month, from.year)) {

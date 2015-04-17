@@ -36,10 +36,10 @@ namespace std {
         double threshold;
         
     protected:
-        virtual void nextTradeDay(TradeDay tradeDay);
+        virtual void nextTradeDay(TradeDay tradeDay, bool enableTrading);
         
     public:
-      MomentumStrategy(Logger &logger, unsigned int returnsInCalculation, double threshold);
+      MomentumStrategy(Logger &logger, string startDate, string endDate, unsigned int returnsInCalculation, double threshold);
         
     };
     

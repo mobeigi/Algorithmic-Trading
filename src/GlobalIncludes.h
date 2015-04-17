@@ -49,8 +49,103 @@
 #endif
 
 namespace std {
+    
+    struct Date {
+        int day;
+        int month;
+        int year;
+    };
+    
+    enum DateComparisonResult {
+        dateSame,
+        dateBefore,
+        dateAfter,
+        dateError
+    };
+    
     class Helper {
     public:
+        
+        
+        
+        static Date parseDate(string dateStr) {
+            
+            Date date;
+            date.day = -1;
+            date.month = -1;
+            date.year = -1;
+            
+            if (dateStr.size() == 11) {
+                
+                date.day = stoi(dateStr.substr(0,2).c_str());
+                date.year = stoi(dateStr.substr(7,4).c_str());
+                
+                string strMonth = dateStr.substr(3, 3);
+                if (strMonth.compare("JAN") == 0)
+                    date.month = 1;
+                else if (strMonth.compare("FEB") == 0)
+                    date.month = 2;
+                else if (strMonth.compare("MAR") == 0)
+                    date.month = 3;
+                else if (strMonth.compare("APR") == 0)
+                    date.month = 4;
+                else if (strMonth.compare("MAY") == 0)
+                    date.month = 5;
+                else if (strMonth.compare("JUN") == 0)
+                    date.month = 6;
+                else if (strMonth.compare("JUL") == 0)
+                    date.month = 7;
+                else if (strMonth.compare("AUG") == 0)
+                    date.month = 8;
+                else if (strMonth.compare("SEP") == 0)
+                    date.month = 9;
+                else if (strMonth.compare("OCT") == 0)
+                    date.month = 10;
+                else if (strMonth.compare("NOV") == 0)
+                    date.month = 11;
+                else if (strMonth.compare("DEC") == 0)
+                    date.month = 12;
+            }
+            
+            return date;
+        }
+        
+        static DateComparisonResult compareDates(string dateRef, string dateComp) {
+            
+            Date ref = Helper::parseDate(dateRef);
+            Date comp = Helper::parseDate(dateComp);
+            
+            if (comp.day == -1 || ref.day == -1 || comp.month == -1 || ref.month == -1 || comp.year == -1 || ref.year == -1) {
+                return dateError; //error, date parse failed
+            }
+            
+            if (comp.year == ref.year && comp.month == ref.month == comp.month && ref.day == comp.day)
+                return dateSame;
+            
+            if (comp.year < ref.year || (comp.year == ref.year && (comp.month < ref.month || (comp.month == ref.month && comp.day < ref.day)) ) ) {
+                return dateBefore;
+            }
+            
+            return dateAfter;
+        }
+        
+        static int daysInMonth(int month, int year) {
+            month--; //change from 1-12 to 0-11
+            int numberOfDays;
+            if (month == 4 || month == 6 || month == 9 || month == 11) {
+                numberOfDays = 30;
+            } else if (month == 2) {
+                bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                if (isLeapYear)
+                    numberOfDays = 29;
+                else
+                    numberOfDays = 28;
+            } else {
+                numberOfDays = 31;
+            }
+            return numberOfDays;
+        }
+        
         //Returns a date as a string in format HH:MM:SS DD:MM:YYYY
         static string datetime() {
             time_t t = time(0);
