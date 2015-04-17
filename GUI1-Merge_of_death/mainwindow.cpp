@@ -37,9 +37,9 @@ int MainWindow::on_execute_button_clicked()
         //There are errors - return the appropriate messages corresponding to each message
         for (int i = 0; i < invalidities_size; i++) {
             if (invalidities[i] == INPUTCSV_EQ_OUTPUTCSV) {
-                ui->inputcsv_valid->setText("Please select a different CSV file.");
+                //ui->inputcsv_valid->setText("Please select a different CSV file.");
             } else if (invalidities[i] == ENDDATE_BEFORE_STARTDATE) {
-                ui->date_valid->setText("End date has to be after start date.");
+                //ui->date_valid->setText("End date has to be after start date.");
             }
         }
         return 0; //early exit
@@ -55,8 +55,8 @@ int MainWindow::on_execute_button_clicked()
     outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
     outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
     outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
-    outputFile << (":startDate:" + ui->start_date->date().toString().toStdString() + "\\\n");
-    outputFile << (":endDate:" + ui->end_date->date().toString().toStdString() + "\\\n");
+    outputFile << (":startDate:" + ui->start_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
+    outputFile << (":endDate:" + ui->end_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
     outputFile.close();
 
     //Run the program by feeding param file
@@ -68,7 +68,7 @@ int MainWindow::on_execute_button_clicked()
     command_str.append(" ");
     command_str.append(params_location); //params file location
 
-    system(command_str.c_str()); //windows/mac/linux way of executing file
+    system(command_str.c_str()); //windows way of executing file
     ui->execution_status->setText("Execution Complete");
 
     AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/output.csv");
