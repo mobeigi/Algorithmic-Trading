@@ -37,13 +37,17 @@ int MainWindow::on_execute_button_clicked()
         //There are errors - return the appropriate messages corresponding to each message
         for (int i = 0; i < invalidities_size; i++) {
             if (invalidities[i] == INPUTCSV_EQ_OUTPUTCSV) {
-                //ui->inputcsv_valid->setText("Please select a different CSV file.");
+                ui->inputcsv_valid->setText("Please select a different CSV file.");
             } else if (invalidities[i] == ENDDATE_BEFORE_STARTDATE) {
-                //ui->date_valid->setText("End date has to be after start date.");
+                ui->date_valid->setText("End date has to be after start date.");
             }
         }
         return 0; //early exit
     }
+
+    //Construct the date strings
+    string start_date_str = construct_date_string(ui->start_date->date().day(),ui->start_date->date().month(),ui->start_date->date().year());
+    string end_date_str = construct_date_string(ui->end_date->date().day(),ui->end_date->date().month(),ui->end_date->date().year());
 
     //Generate the params file from fields
     //NOTE: Output csv is the same directory as this executable path
@@ -55,8 +59,8 @@ int MainWindow::on_execute_button_clicked()
     outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
     outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
     outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
-    outputFile << (":startDate:" + ui->start_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
-    outputFile << (":endDate:" + ui->end_date->date().toString("dd-MMM-yyyy").toUpper().toStdString() + "\\\n");
+    outputFile << (":startDate:" + start_date_str + "\\\n");
+    outputFile << (":endDate:" + end_date_str + "\\\n");
     outputFile.close();
 
     //Run the program by feeding param file
@@ -70,8 +74,6 @@ int MainWindow::on_execute_button_clicked()
 
     system(command_str.c_str()); //windows way of executing file
     ui->execution_status->setText("Execution Complete");
-
-    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/output.csv");
 
     return EXIT_SUCCESS;
 }
@@ -98,4 +100,38 @@ vector<int> MainWindow::check_params(void) {
     }
 
     return invalidities;
+}
+
+string MainWindow::construct_date_string(int day, int month, int year) {
+    string date_str;
+
+    //construct the day
+    if (day < 10) {
+        date_str.append("0" + to_string(day));
+    } else {
+        date_str.append(to_string(day));
+    }
+    date_str.append("-");
+
+    //construct the month
+    switch (month) {
+        case 1: date_str.append("JAN"); break;
+        case 2: date_str.append("FEB"); break;
+        case 3: date_str.append("MAR"); break;
+        case 4: date_str.append("APR"); break;
+        case 5: date_str.append("MAY"); break;
+        case 6: date_str.append("JUN"); break;
+        case 7: date_str.append("JUL"); break;
+        case 8: date_str.append("AUG"); break;
+        case 9: date_str.append("SEP"); break;
+        case 10: date_str.append("OCT"); break;
+        case 11: date_str.append("NOV"); break;
+        case 12: date_str.append("DEC"); break;
+    }
+    date_str.append("-");
+
+    //construct the year
+    date_str.append(to_string(year));
+
+    return date_str;
 }
