@@ -48,7 +48,9 @@ public:
     QLabel *start_date_label;
     QLabel *end_date_label;
     QDateEdit *end_date;
+    QLabel *date_valid;
     QLabel *execution_status;
+    QLabel *inputcsv_valid;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -56,7 +58,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(472, 394);
+        MainWindow->resize(495, 437);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         inpu_csv_label = new QLabel(centralWidget);
@@ -79,10 +81,10 @@ public:
         browseModule->setGeometry(QRect(310, 50, 75, 23));
         execute_button = new QPushButton(centralWidget);
         execute_button->setObjectName(QStringLiteral("execute_button"));
-        execute_button->setGeometry(QRect(360, 330, 91, 31));
+        execute_button->setGeometry(QRect(370, 360, 91, 31));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(50, 150, 331, 161));
+        groupBox->setGeometry(QRect(50, 170, 331, 171));
         QFont font;
         font.setBold(false);
         font.setWeight(50);
@@ -112,9 +114,15 @@ public:
         end_date = new QDateEdit(groupBox);
         end_date->setObjectName(QStringLiteral("end_date"));
         end_date->setGeometry(QRect(160, 110, 81, 22));
+        date_valid = new QLabel(groupBox);
+        date_valid->setObjectName(QStringLiteral("date_valid"));
+        date_valid->setGeometry(QRect(40, 140, 141, 21));
         execution_status = new QLabel(centralWidget);
         execution_status->setObjectName(QStringLiteral("execution_status"));
-        execution_status->setGeometry(QRect(60, 330, 171, 16));
+        execution_status->setGeometry(QRect(50, 350, 151, 21));
+        inputcsv_valid = new QLabel(centralWidget);
+        inputcsv_valid->setObjectName(QStringLiteral("inputcsv_valid"));
+        inputcsv_valid->setGeometry(QRect(50, 140, 141, 21));
         MainWindow->setCentralWidget(centralWidget);
         groupBox->raise();
         inpu_csv_label->raise();
@@ -125,6 +133,7 @@ public:
         browseModule->raise();
         execute_button->raise();
         execution_status->raise();
+        inputcsv_valid->raise();
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
@@ -150,7 +159,9 @@ public:
         returnsInCalculation_label->setText(QApplication::translate("MainWindow", "Returns in calculation", 0));
         start_date_label->setText(QApplication::translate("MainWindow", "Start Date", 0));
         end_date_label->setText(QApplication::translate("MainWindow", "End Date", 0));
+        date_valid->setText(QString());
         execution_status->setText(QString());
+        inputcsv_valid->setText(QString());
     } // retranslateUi
 
 };
