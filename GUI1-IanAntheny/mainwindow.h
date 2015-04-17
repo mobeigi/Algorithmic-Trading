@@ -32,6 +32,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
     void on_browseModule_clicked();
     void on_browseCSV_clicked();
@@ -40,6 +41,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    string construct_date_string(int day, int month, int year);
 };
 
 #endif // MAINWINDOW_H
