@@ -34,9 +34,8 @@ namespace std {
         } else {
             Rt = (thisPrice - data->previousPrice) / data->previousPrice;
             logger.logDebug("Rt: " + Helper::formatDouble(Rt));
+            data->returns.push_back(Rt);
         }
-        
-        data->returns.push_back(Rt);
         
         //SMA calculation
         if (data->returns.size() < returnsInCalculation) {

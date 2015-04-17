@@ -4,7 +4,11 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QDir> //for processing directories
-#include <windows.h>
+
+#ifdef _WIN32 //windows 32 and 64bit
+#include <Windows.h>
+#endif
+
 #include <string>
 #include <iostream>
 #include <fstream>  //for creating a params file
