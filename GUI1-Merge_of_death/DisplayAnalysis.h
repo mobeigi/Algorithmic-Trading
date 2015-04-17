@@ -1,0 +1,38 @@
+#ifndef DISPLAYANALYSIS_H
+#define DISPLAYANALYSIS_H
+
+#include "GlobalIncludes.h"
+
+#include "AnalysisData.h"
+
+#include <QMainWindow>
+
+#include <QGraphicsEllipseItem>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
+
+namespace Ui {
+class DisplayAnalysis;
+}
+
+class DisplayAnalysis : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit DisplayAnalysis(QWidget *parent = 0);
+    ~DisplayAnalysis();
+
+    void setDisplayId(long displayId);
+    void displayAnalysis(std::AnalysisData *data);
+
+    virtual void closeEvent(QCloseEvent *event);
+
+private:
+    Ui::DisplayAnalysis *ui;
+    QGraphicsScene *scene;
+    long displayId;
+};
+
+#endif // DISPLAYANALYSIS_H
