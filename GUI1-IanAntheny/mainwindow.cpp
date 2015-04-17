@@ -29,14 +29,21 @@ int MainWindow::on_execute_button_clicked()
 {
     //Retrieve string of current directory
     string curr_path = QDir::currentPath().toStdString();
-    printf("%s\n",curr_path.c_str());
 
     // Ensure params are valid
-
-    //TODO
-    //Check that input csv file is NOT the output csv
-    //Check that threshold is > 0
-    //Check that end date is after start date
+    vector<int> invalidities = check_params();
+    int invalidities_size = invalidities.size();
+    if (invalidities_size != 0) {
+        //There are errors - return the appropriate messages corresponding to each message
+        for (int i = 0; i < invalidities_size; i++) {
+            if (invalidities[i] == INPUTCSV_EQ_OUTPUTCSV) {
+                ui->inputcsv_valid->setText("Please select a different CSV file.");
+            } else if (invalidities[i] == ENDDATE_BEFORE_STARTDATE) {
+                ui->date_valid->setText("End date has to be after start date.");
+            }
+        }
+        return 0; //early exit
+    }
 
     //Generate the params file from fields
     //NOTE: Output csv is the same directory as this executable path
@@ -67,12 +74,26 @@ int MainWindow::on_execute_button_clicked()
     return EXIT_SUCCESS;
 }
 
-//Return a string of the current exe path
-/*
-string ExePath() {
-    char buffer[MAX_PATH];
-    GetModuleFileName( NULL, buffer, MAX_PATH ); //Windows way of retrieving path of executable
-    string::size_type pos = string( buffer ).find_last_of( "\\/" );
-    return string( buffer ).substr( 0, pos);
+vector<int> MainWindow::check_params(void) {
+    vector<int> invalidities;
+    //Get path of current directory
+    string curr_path = QDir::currentPath().toStdString();
+
+    //Check that input csv file is NOT the output csv
+    string input_csv_path = ui->input_csv_location->text().toStdString();
+    string output_csv_path = curr_path + "/output.csv";
+    if (input_csv_path.compare(output_csv_path) == 0) {
+        //Strings are equal
+        invalidities.push_back(INPUTCSV_EQ_OUTPUTCSV);
+    }
+
+    //Check that end date is after start date
+    QDate start_date = ui->start_date->date();
+    QDate end_date = ui->end_date->date();
+    if (end_date < start_date) {
+        //End date is before start date
+        invalidities.push_back(ENDDATE_BEFORE_STARTDATE);
+    }
+
+    return invalidities;
 }
-*/
