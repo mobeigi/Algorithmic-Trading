@@ -55,6 +55,13 @@
       </layout>
      </item>
      <item>
+      <widget class="QLabel" name="strategyModule_label">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="inpu_csv_label">
        <property name="text">
         <string>Input CSV</string>
@@ -74,6 +81,13 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="inputcsv_valid">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label">
@@ -128,7 +142,7 @@
        <item>
         <widget class="QLabel" name="start_date_label">
          <property name="text">
-          <string>Start Date</string>
+          <string>Start Date:</string>
          </property>
         </widget>
        </item>
@@ -138,7 +152,7 @@
        <item>
         <widget class="QLabel" name="end_date_label">
          <property name="text">
-          <string>End Date</string>
+          <string>End Date:</string>
          </property>
         </widget>
        </item>
@@ -146,6 +160,13 @@
         <widget class="QDateEdit" name="end_date"/>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="date_valid">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QGridLayout" name="executeLayout">
@@ -159,6 +180,12 @@
            <horstretch>80</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="text">
           <string/>
@@ -176,11 +203,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>threshold_label</zorder>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>strategy_module_label</zorder>
-   <zorder>strategy_module_label</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
