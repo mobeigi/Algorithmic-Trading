@@ -102,6 +102,7 @@ public:
         threshold = new QDoubleSpinBox(groupBox);
         threshold->setObjectName(QStringLiteral("threshold"));
         threshold->setGeometry(QRect(230, 30, 62, 22));
+        threshold->setDecimals(4);
         start_date_label = new QLabel(groupBox);
         start_date_label->setObjectName(QStringLiteral("start_date_label"));
         start_date_label->setGeometry(QRect(40, 90, 71, 16));

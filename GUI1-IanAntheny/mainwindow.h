@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QDir> //for processing directories
 #include <windows.h>
 #include <string>
 #include <iostream>

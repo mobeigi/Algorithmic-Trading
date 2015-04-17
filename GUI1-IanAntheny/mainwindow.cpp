@@ -27,36 +27,34 @@ void MainWindow::on_browseCSV_clicked()
 
 int MainWindow::on_execute_button_clicked()
 {
+    //Retrieve string of current directory
+    string curr_path = QDir::currentPath().toStdString();
+    printf("%s\n",curr_path.c_str());
+
     // Ensure params are valid
 
     //TODO
     //Check that input csv file is NOT the output csv
-/*
-    char *output_csv_file = new char[ExePath().length() + 1];
-    strcpy(output_csv_file, ExePath().c_str());
-    strcat(output_csv_file, "/output.csv");
-    QString output_csvFile(output_csv_file);
+    //Check that threshold is > 0
+    //Check that end date is after start date
 
-    if (ui->input_csv_location->text().compare(output_csvFile) == 0) {
-        return 0;
-    }
-*/
     //Generate the params file from fields
-    //NOTE: Output csv is the same directory as this
+    //NOTE: Output csv is the same directory as this executable path
 
     ofstream outputFile;
     outputFile.open ("params.param");
     outputFile << (":input_csvFile:" + ui->input_csv_location->text().toStdString() + "\\\n");
-    outputFile << (":output_csvFile:output.csv\\\n");
-    outputFile << (":output_logFile:AlgorithmicTrading.log\\\n");
+    outputFile << (":output_csvFile:"+ curr_path +"/output.csv\\\n");
+    outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
     outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
     outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
+    outputFile << (":startDate:" + ui->start_date->date().toString().toStdString() + "\\\n");
+    outputFile << (":endDate:" + ui->end_date->date().toString().toStdString() + "\\\n");
     outputFile.close();
 
     //Run the program by feeding param file
-
-    //Retrieve location of param file
-    string params_location = "";
+    //Construct location of params file
+    string params_location = curr_path + "/params.param";
 
     //Construct the command string
     string command_str = ui->strategy_module_location->text().toStdString(); //program location
@@ -64,7 +62,6 @@ int MainWindow::on_execute_button_clicked()
     command_str.append(params_location); //params file location
 
     system(command_str.c_str()); //windows way of executing file
-
     ui->execution_status->setText("Execution Complete");
 
     return EXIT_SUCCESS;
