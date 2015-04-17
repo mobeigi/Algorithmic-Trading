@@ -6,235 +6,181 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>394</height>
+    <width>460</width>
+    <height>448</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>80</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="inpu_csv_label">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>80</y>
-      <width>131</width>
-      <height>31</height>
+      <x>20</x>
+      <y>0</y>
+      <width>431</width>
+      <height>401</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Input CSV</string>
-    </property>
+    <layout class="QVBoxLayout" name="programLayout">
+     <item>
+      <widget class="QLabel" name="strategy_module_label">
+       <property name="text">
+        <string>Strategy Module</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="strategyModuleLayout">
+       <item>
+        <widget class="QLineEdit" name="strategy_module_location"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseModule">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="inpu_csv_label">
+       <property name="text">
+        <string>Input CSV</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="inputCSVLayout">
+       <item>
+        <widget class="QLineEdit" name="input_csv_location"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseCSV">
+         <property name="text">
+          <string>Browse</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Parameters</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="tresholdLayout">
+       <property name="leftMargin">
+        <number>1</number>
+       </property>
+       <item row="0" column="1">
+        <widget class="QLabel" name="threshold_label">
+         <property name="text">
+          <string>Threshold</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QDoubleSpinBox" name="threshold">
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="returnInCalculationLayout">
+       <item>
+        <widget class="QLabel" name="returnsInCalculation_label">
+         <property name="text">
+          <string>Returns in calculation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="returnsInCalculation"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="dateLayout">
+       <item>
+        <widget class="QLabel" name="start_date_label">
+         <property name="text">
+          <string>Start Date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="start_date"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="end_date_label">
+         <property name="text">
+          <string>End Date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="end_date"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="executeLayout">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item row="0" column="0" alignment="Qt::AlignLeft">
+        <widget class="QLabel" name="execution_status">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>80</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" alignment="Qt::AlignRight">
+        <widget class="QPushButton" name="execute_button">
+         <property name="text">
+          <string>Execute</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
-   <widget class="QLineEdit" name="strategy_module_location">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>50</y>
-      <width>251</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="input_csv_location">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>110</y>
-      <width>251</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="strategy_module_label">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Strategy Module</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="browseCSV">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>110</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="browseModule">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>50</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Browse</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="execute_button">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>330</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Execute</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>150</y>
-      <width>331</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="title">
-     <string>Parameters</string>
-    </property>
-    <widget class="QDateEdit" name="start_date">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>110</y>
-       <width>81</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="threshold_label">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>51</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Threshold</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="returnsInCalculation_label">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>60</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Returns in calculation</string>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="returnsInCalculation">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>60</y>
-       <width>61</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="threshold">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>30</y>
-       <width>62</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="decimals">
-      <number>4</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="start_date_label">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>90</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Start Date</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="end_date_label">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>90</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>End Date</string>
-     </property>
-    </widget>
-    <widget class="QDateEdit" name="end_date">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>110</y>
-       <width>81</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="execution_status">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>330</y>
-      <width>171</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <zorder>groupBox</zorder>
-   <zorder>inpu_csv_label</zorder>
-   <zorder>strategy_module_location</zorder>
-   <zorder>input_csv_location</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>threshold_label</zorder>
+   <zorder>verticalLayoutWidget</zorder>
    <zorder>strategy_module_label</zorder>
-   <zorder>browseCSV</zorder>
-   <zorder>browseModule</zorder>
-   <zorder>execute_button</zorder>
-   <zorder>execution_status</zorder>
+   <zorder>strategy_module_label</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
