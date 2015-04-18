@@ -23,12 +23,6 @@ struct TradeData {
     //double value; not needed atm
 };
 
-struct Date {
-    int day;
-    int month;
-    int year;
-};
-
 
 class AnalysisData
 {
@@ -41,8 +35,6 @@ private:
     double priceHigh;
 
     int daysDifference(string dateFrom, string dateTo);
-    int daysInMonth(int month, int year);
-    Date parseDate(string dateStr); //day, month, year
 
 public:
     AnalysisData(string company);

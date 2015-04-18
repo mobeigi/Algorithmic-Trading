@@ -26,14 +26,55 @@ void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
     this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
 
     double daySize = 7.0;
-    double chartHeight = 200.0;
+    double chartHeight = 240.0;
 
     if (scene != nullptr)
         delete scene;
     scene = new QGraphicsScene();
-    scene->setSceneRect( (-daySize) * data->daysTrading() / 2, -(chartHeight/2.0), daySize * data->daysTrading(), chartHeight );
+
+    double extraWidth = 150.0;
+    double extraBase = 30.0;
+    scene->setSceneRect( (-daySize) * data->daysTrading() / 2 - extraWidth/2.0, -(chartHeight/2.0), daySize * data->daysTrading() + extraWidth, chartHeight + extraBase);
 
     QPen pen;
+
+
+    double startX = (-daySize) * data->daysTrading() / 2 + daySize/2;
+    double startY = chartHeight/2.0 + daySize + 4;
+
+    //draw price markers
+    double markerPriceX = startX - 70.0;
+    int numPriceMarkers = 5;
+
+    //chartHeight/2.0 - chartHeight * pricePercentToMax + daySize/2.0;
+
+    for (int i = 0; i != numPriceMarkers; ++i) {
+        double percentMarker = static_cast<double>(i) / (static_cast<double>(numPriceMarkers) - 1.0);
+        double markerPriceY = chartHeight/2.0 - chartHeight * percentMarker + daySize/2.0;
+        scene->addText(QString::fromStdString(std::Helper::formatPrice(percentMarker * (data->highestPrice() - data->lowestPrice()) + data->lowestPrice())), QFont("Times", 13))->setPos(markerPriceX, markerPriceY);
+        scene->addLine(markerPriceX, markerPriceY, markerPriceX + daySize * data->daysTrading() + extraWidth, markerPriceY, pen);
+    }
+
+    //draw dates and lines
+    if (data->tradeDataAvaliable() > 0) {
+        std::TradeData firstTrade = data->getData(0);
+
+        int daysBetweenDateMarkers = 14;
+        int dayUpto = 0;
+        std::Date currDate = std::Helper::parseDate(firstTrade.date);
+
+
+        while (dayUpto < data->daysTrading()) {
+            //scene->addText("asdasdsad", QFont("Times", 13))->setPos(startX + dayUpto*daySize, startY);
+            scene->addLine(startX + dayUpto*daySize, startY, startX + dayUpto*daySize, -startY, pen);
+            scene->addText(QString::fromStdString(std::Helper::dateString(currDate)), QFont("Times", 13))->setPos(startX + dayUpto*daySize - 9.0, startY);
+            currDate = std::Helper::addDays(currDate, daysBetweenDateMarkers);
+            dayUpto += daysBetweenDateMarkers;
+        }
+
+    }
+
+    //scene->addText("asd", QFont());
 
     int startOfDaysPos = (-daySize) * data->daysTrading() / 2;
 

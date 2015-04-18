@@ -9,6 +9,8 @@
 #include <Windows.h>
 #endif
 
+#include "AnalysisDisplays.h"
+
 #include <string>
 #include <iostream>
 #include <fstream>      //for creating a params file
