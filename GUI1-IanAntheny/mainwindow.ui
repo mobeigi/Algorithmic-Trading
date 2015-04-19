@@ -55,7 +55,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QLabel" name="inpu_csv_label">
+      <widget class="QLabel" name="input_csv_label">
        <property name="text">
         <string>Input CSV</string>
        </property>
@@ -76,7 +76,20 @@
       </layout>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="inputcsv_valid">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="parameters_label">
        <property name="font">
         <font>
          <weight>75</weight>
@@ -148,6 +161,16 @@
       </layout>
      </item>
      <item>
+      <widget class="QLabel" name="date_valid">
+       <property name="styleSheet">
+        <string notr="true">color:red;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QGridLayout" name="executeLayout">
        <property name="spacing">
         <number>5</number>
@@ -176,11 +199,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>threshold_label</zorder>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>strategy_module_label</zorder>
-   <zorder>strategy_module_label</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -196,4 +214,3 @@
  <resources/>
  <connections/>
 </ui>
-
