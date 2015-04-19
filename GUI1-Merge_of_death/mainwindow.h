@@ -17,8 +17,10 @@
 #include <vector>       //for params error checking
 
 //For checking params
+#define OK 0                        //ok status
 #define INPUTCSV_EQ_OUTPUTCSV 1
 #define ENDDATE_BEFORE_STARTDATE 2
+#define NO_OUTPUTCSV_SELECTED 3
 
 using namespace std;
 
@@ -36,10 +38,17 @@ public:
 
 
 private slots:
+
+    //for analysing a module
     void on_browseModule_clicked();
     void on_browseCSV_clicked();
     int on_execute_button_clicked();
     vector<int> check_params(void);
+
+    //for analysing an output csv
+    void on_browse_outputcsv_clicked();
+    int on_analyse_button_clicked();
+    int check_outputcsv(void);
 
 private:
     Ui::MainWindow *ui;
