@@ -80,32 +80,6 @@ int MainWindow::on_execute_button_clicked()
     return EXIT_SUCCESS;
 }
 
-void MainWindow::on_browse_outputcsv_clicked() {
-    ui->output_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Output CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
-    ui->output_csv_location->displayText();
-}
-
-int MainWindow::on_analyse_button_clicked() {
-    // Check validity of output_csv
-    int output_csv_validity = check_outputcsv();
-    if (output_csv_validity != OK) {
-        //Print the appropriate error message
-        switch (output_csv_validity) {
-            case NO_OUTPUTCSV_SELECTED: ui->output_csv_valid->setText("Please select an output file."); break;
-        }
-        return 0; //early exit
-    }
-
-    //Remove any error messages that exist before
-    ui->output_csv_valid->setText("");
-
-    //Analyse output file
-    AnalysisDisplays::instance()->analyzeCSVOutput(ui->output_csv_location->text().toStdString());
-    return EXIT_SUCCESS;
-}
-
-
-// ----  HELPER FUNCTIONS ---- //
 vector<int> MainWindow::check_params(void) {
     vector<int> invalidities;
     //Get path of current directory
@@ -162,11 +136,4 @@ string MainWindow::construct_date_string(int day, int month, int year) {
     date_str.append(to_string(year));
 
     return date_str;
-}
-
-int MainWindow::check_outputcsv(void) {
-    if (ui->output_csv_location->text().compare("") == 0) {
-        return NO_OUTPUTCSV_SELECTED;
-    }
-    return OK;
 }
