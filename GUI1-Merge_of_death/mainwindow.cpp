@@ -37,13 +37,19 @@ int MainWindow::on_execute_button_clicked()
         //There are errors - return the appropriate messages corresponding to each message
         for (int i = 0; i < invalidities_size; i++) {
             if (invalidities[i] == INPUTCSV_EQ_OUTPUTCSV) {
-                //ui->inputcsv_valid->setText("Please select a different CSV file.");
+                ui->inputcsv_valid->setText("Please select a different CSV file.");
             } else if (invalidities[i] == ENDDATE_BEFORE_STARTDATE) {
-                //ui->date_valid->setText("End date has to be after start date.");
+                ui->date_valid->setText("End date has to be after start date.");
+            } else if (invalidities[i] == NO_INPUTCSV_SELECTED) {
+                ui->inputcsv_valid->setText("Please select an input CSV file.");
             }
         }
         return 0; //early exit
     }
+
+    //Remove any error messages that may have occurred beforehand
+    ui->inputcsv_valid->setText("");
+    ui->date_valid->setText("");
 
     //Construct the date strings
     string start_date_str = construct_date_string(ui->start_date->date().day(),ui->start_date->date().month(),ui->start_date->date().year());
@@ -80,13 +86,45 @@ int MainWindow::on_execute_button_clicked()
     return EXIT_SUCCESS;
 }
 
+void MainWindow::on_browse_outputcsv_clicked() {
+    ui->output_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Output CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
+    ui->output_csv_location->displayText();
+}
+
+int MainWindow::on_analyse_button_clicked() {
+    // Check validity of output_csv
+    int output_csv_validity = check_outputcsv();
+    if (output_csv_validity != OK) {
+        //Print the appropriate error message
+        switch (output_csv_validity) {
+            case NO_OUTPUTCSV_SELECTED: ui->output_csv_valid->setText("Please select an output file."); break;
+        }
+        return 0; //early exit
+    }
+
+    //Remove any error messages that exist before
+    ui->output_csv_valid->setText("");
+
+    //Analyse output file
+    AnalysisDisplays::instance()->analyzeCSVOutput(ui->output_csv_location->text().toStdString());
+    return EXIT_SUCCESS;
+}
+
+
+// ----  HELPER FUNCTIONS ---- //
 vector<int> MainWindow::check_params(void) {
     vector<int> invalidities;
     //Get path of current directory
     string curr_path = QDir::currentPath().toStdString();
 
-    //Check that input csv file is NOT the output csv
+    //Get path of specified input csv file
     string input_csv_path = ui->input_csv_location->text().toStdString();
+
+    //Check that input csv file is provided
+    if (input_csv_path.compare("") == 0) {
+        invalidities.push_back(NO_INPUTCSV_SELECTED);
+    }
+    //Check that input csv file is NOT the output csv
     string output_csv_path = curr_path + "/output.csv";
     if (input_csv_path.compare(output_csv_path) == 0) {
         //Strings are equal
@@ -136,4 +174,11 @@ string MainWindow::construct_date_string(int day, int month, int year) {
     date_str.append(to_string(year));
 
     return date_str;
+}
+
+int MainWindow::check_outputcsv(void) {
+    if (ui->output_csv_location->text().compare("") == 0) {
+        return NO_OUTPUTCSV_SELECTED;
+    }
+    return OK;
 }

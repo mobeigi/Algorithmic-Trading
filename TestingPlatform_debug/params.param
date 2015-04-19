@@ -1,0 +1,7 @@
+:input_csvFile:C:/Users/Ian/Desktop/SENG TP Backup/sample_data_file.csv\
+:output_csvFile:C:/Users/Ian/Desktop/15s1/SENG3011/Algorithmic-Trading/TestingPlatform_debug/output.csv\
+:output_logFile:C:/Users/Ian/Desktop/15s1/SENG3011/Algorithmic-Trading/TestingPlatform_debug/AlgorithmicTrading.log\
+:returnsInCalculation:4\
+:threshold:0.005000\
+:startDate:01-JAN-2000\
+:endDate:01-JAN-2001\
