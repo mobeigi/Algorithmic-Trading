@@ -20,6 +20,7 @@
 void run(std::Logger &logger, std::CSVReader &reader, std::Strategy *strategy) {
     while(reader.nextTrade()) {
         std::vector<std::string> temp = reader.getTrade();
+        if(temp.at(4).compare("No Trades") == 0) continue;
         try {
             double lastPrice = std::stod(temp.at(8));
             double lowPrice = std::stod(temp.at(7));
