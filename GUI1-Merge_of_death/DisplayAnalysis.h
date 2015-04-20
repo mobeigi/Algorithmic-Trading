@@ -5,11 +5,14 @@
 
 #include "AnalysisData.h"
 
+#include <cmath>
+
 #include <QMainWindow>
 
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QScrollBar>
 
 
 namespace Ui {
