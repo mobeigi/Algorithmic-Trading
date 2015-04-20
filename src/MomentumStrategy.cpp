@@ -68,7 +68,8 @@ namespace std {
                         } else logger.logDebug("Ignored Signal");
                         
                     } else {
-                        
+                        data->previousSignal = 0;
+                        logger.logDebug("Ignored Signal");
                     }
                     
                 }
