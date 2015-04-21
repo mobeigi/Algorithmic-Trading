@@ -186,19 +186,19 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
 
             if (get<1>(sell_trade) > get<1>(buy_trade)) {
                 //a buy-sell pair
-                printf("Buy@%lf,", get<0>(buy_trade).price);
-                printf("Sell@%lf. ", get<0>(sell_trade).price);
+                printf("Buy@%.2lf,", get<0>(buy_trade).price);
+                printf("Sell@%.2lf. ", get<0>(sell_trade).price);
                 printf("Date: %s. ",get<0>(sell_trade).date.c_str());
             } else {
                 //a sell-buy pair
-                printf("Buy@%lf,", get<0>(sell_trade).price);
-                printf("Sell@%lf. ", get<0>(buy_trade).price);
+                printf("Buy@%.2lf,", get<0>(sell_trade).price);
+                printf("Sell@%.2lf. ", get<0>(buy_trade).price);
                 printf("Date: %s. ",get<0>(buy_trade).date.c_str());
             }
 
             //Calculate return
             double return_perc = (get<0>(sell_trade).price - get<0>(buy_trade).price) / get<0>(buy_trade).price;
-            printf("Return: %lf\n",return_perc);
+            printf("Return: %.2lf\n",return_perc);
 
             //update total return
             net_return_perc += return_perc;
@@ -209,7 +209,7 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
         }
     }
 
-    printf("FINAL NET RETURN: %lf\n",net_return_perc);
+    printf("FINAL NET RETURN: %.2lf\n",net_return_perc);
 
 }
 
