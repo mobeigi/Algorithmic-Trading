@@ -30,6 +30,9 @@ public:
     void setDisplayId(long displayId);
     void displayAnalysis(std::AnalysisData *data);
 
+    void displayGraphAnalysis(std::AnalysisData *data);
+    void displayReturnsAnalysis(std::AnalysisData *data);
+
     virtual void closeEvent(QCloseEvent *event);
 
 private:

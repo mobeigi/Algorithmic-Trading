@@ -22,7 +22,7 @@ AnalysisDisplays *AnalysisDisplays::instance() {
 }
 
 
-void AnalysisDisplays::analyzeCSVOutput(std::string csvFile) {
+void AnalysisDisplays::analyzeCSVOutput(std::string csvFile, QWidget *parent) {
 
     std::ParseCSVData parseCSV = std::ParseCSVData(csvFile);
 
@@ -34,6 +34,10 @@ void AnalysisDisplays::analyzeCSVOutput(std::string csvFile) {
         currentDisplayId++;
         w->show();
         w->displayAnalysis(parseCSV.getDataForEquityType(eqType));
+    }
+
+    if (parseCSV.getAllEquityTypes().size() == 0) {
+        QMessageBox::question(parent, "No Equity Trades", "The strategy suggested no equity trades.", QMessageBox::Ok);
     }
 
 }

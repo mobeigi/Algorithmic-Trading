@@ -5,6 +5,7 @@
 #include "ParseCSVData.h"
 #include "GlobalIncludes.h"
 
+#include<QMessageBox>
 
 #include <map>
 
@@ -21,7 +22,7 @@ public:
     ~AnalysisDisplays();
     static AnalysisDisplays *instance();
 
-    void analyzeCSVOutput(std::string csvFile);
+    void analyzeCSVOutput(std::string csvFile, QWidget *parent);
     void displayClosing(long displayId);
 };
 
