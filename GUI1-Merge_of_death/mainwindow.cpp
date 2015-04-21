@@ -81,7 +81,7 @@ int MainWindow::on_execute_button_clicked()
     system(command_str.c_str()); //windows way of executing file
     ui->execution_status->setText("Execution Complete");
 
-    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/output.csv");
+    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/output.csv", this);
 
     return EXIT_SUCCESS;
 }
@@ -106,7 +106,7 @@ int MainWindow::on_analyse_button_clicked() {
     ui->output_csv_valid->setText("");
 
     //Analyse output file
-    AnalysisDisplays::instance()->analyzeCSVOutput(ui->output_csv_location->text().toStdString());
+    AnalysisDisplays::instance()->analyzeCSVOutput(ui->output_csv_location->text().toStdString(), this);
     return EXIT_SUCCESS;
 }
 

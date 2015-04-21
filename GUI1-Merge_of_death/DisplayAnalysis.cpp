@@ -23,12 +23,7 @@ void DisplayAnalysis::closeEvent(QCloseEvent *event) {
     AnalysisDisplays::instance()->displayClosing(displayId);
 }
 
-void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
-
-    this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
-
-
-
+void DisplayAnalysis::displayGraphAnalysis(std::AnalysisData *data) {
     double daySize = 7.0;
     double chartHeight = 240.0;
 
@@ -162,8 +157,20 @@ void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
     //ui->graphicsGraphDisplay->setHorizontalScrollBar();
     //ui->graphicsGraphDisplay->scrollContentsBy(0, 0);
     //ui->scrollArea_2->horizontalScrollBar()->setValue(0);
+}
 
 
+void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
+
+}
+
+
+void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
+
+    this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
+
+    this->displayGraphAnalysis(data);
+    this->displayReturnsAnalysis(data);
 }
 
 DisplayAnalysis::~DisplayAnalysis()
