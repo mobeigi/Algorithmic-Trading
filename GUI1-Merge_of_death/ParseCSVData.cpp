@@ -22,11 +22,11 @@ ParseCSVData::ParseCSVData(string fileStr) {
             //find the columns
             int index = 0;
             for (string strCol : columnTitles) {
-                if (strCol.compare("#Company") == 0) colCompany = index;
-                else if (strCol.compare("Date") == 0) colDate = index;
+                if (strCol.compare("#Company") == 0 || strCol.compare("Company Name") == 0) colCompany = index;
+                else if (strCol.compare("Date") == 0 || strCol.compare("Date/Time") == 0) colDate = index;
                 else if (strCol.compare("Price") == 0) colPrice = index;
                 else if (strCol.compare("Volume") == 0) colVolume = index;
-                else if (strCol.compare("Signal") == 0) colSignal = index;
+                else if (strCol.compare("Signal") == 0 || strCol.compare("Bid/ask") == 0) colSignal = index;
                 index++;
             }
 
@@ -45,7 +45,7 @@ ParseCSVData::ParseCSVData(string fileStr) {
                     data = allData[row[colCompany]];
 
                     signal sig = BUY;
-                    if (row[colSignal].compare("S") == 0)
+                    if (row[colSignal].compare("S") == 0 || row[colSignal].compare("Sell") == 0)
                         sig = SELL;
 
                     data->addNextTradeData(sig, row[colDate], stod(row[colPrice]), stoi(row[colVolume]));

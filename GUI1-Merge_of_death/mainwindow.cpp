@@ -55,13 +55,17 @@ int MainWindow::on_execute_button_clicked()
     string start_date_str = construct_date_string(ui->start_date->date().day(),ui->start_date->date().month(),ui->start_date->date().year());
     string end_date_str = construct_date_string(ui->end_date->date().day(),ui->end_date->date().month(),ui->end_date->date().year());
 
+    //delete old orders file if it exists
+    QFile::remove(QString::fromStdString(curr_path + "/orders.csv"));
+   // remove((const char *)(curr_path + "/orders.csv"));
+
     //Generate the params file from fields
     //NOTE: Output csv is the same directory as this executable path
 
     ofstream outputFile;
     outputFile.open ("params.param");
     outputFile << (":input_csvFile:" + ui->input_csv_location->text().toStdString() + "\\\n");
-    outputFile << (":output_csvFile:"+ curr_path +"/output.csv\\\n");
+    outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
     outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
     outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
     outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
@@ -69,19 +73,35 @@ int MainWindow::on_execute_button_clicked()
     outputFile << (":endDate:" + end_date_str + "\\\n");
     outputFile.close();
 
+    ofstream outputFile2;
+    outputFile2.open ("params2.param");
+    outputFile2 << ("N,TH,DateRange\n");
+    outputFile2 << (to_string(ui->returnsInCalculation->value()) + ","
+                    + to_string(ui->threshold->value()) + ","
+                    + to_string(ui->start_date->date().year())
+                    + "-" + to_string(ui->end_date->date().year()) + "\n");
+    outputFile2.close();
+
     //Run the program by feeding param file
     //Construct location of params file
     string params_location = curr_path + "/params.param";
 
+    string csv_input_location = ui->input_csv_location->text().toStdString();
+    string params2_location = curr_path + "/params2.param";
+
     //Construct the command string
     string command_str = ui->strategy_module_location->text().toStdString(); //program location
+    command_str.append(" ");
+    command_str.append(csv_input_location); //csv location (the wolf of seng support)
+    command_str.append(" ");
+    command_str.append(params2_location); //params2 file location (the wolf of seng support)
     command_str.append(" ");
     command_str.append(params_location); //params file location
 
     system(command_str.c_str()); //windows way of executing file
     ui->execution_status->setText("Execution Complete");
 
-    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/output.csv", this);
+    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/orders.csv", this);
 
     return EXIT_SUCCESS;
 }
