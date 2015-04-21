@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
 
     //Check to see if we can find parameter file
     bool foundFile;
-    std::Params parameters(argv[argc], &foundFile);
+    std::Params parameters(argv[argc - 1], &foundFile);
     if(!foundFile) {
       std::cerr << "Fatal Error: The parameter file was not found." << std::endl;
         return 0;
