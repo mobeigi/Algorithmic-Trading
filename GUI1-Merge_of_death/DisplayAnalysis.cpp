@@ -168,10 +168,10 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
     ui->returnsAnalysis->setHorizontalHeaderLabels(QString("Buy-Sell Pair;Date;Return Value;Return %").split(";")); //insert column names
 
    //adjusting header sizes
-    ui->returnsAnalysis->horizontalHeader()->resizeSection(0,230);
-    ui->returnsAnalysis->horizontalHeader()->resizeSection(1,205);
-    ui->returnsAnalysis->horizontalHeader()->resizeSection(2,150);
-    ui->returnsAnalysis->horizontalHeader()->resizeSection(2,150);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(0,215);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(1,170);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(2,145);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(3,155);
 
 
     //maintain queues of trades, one for buy and one for sell
