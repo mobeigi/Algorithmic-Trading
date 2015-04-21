@@ -14,7 +14,7 @@
 #include <QGraphicsView>
 #include <QScrollBar>
 
-using namespace std;
+using namespace std; //for vectors
 
 namespace Ui {
 class DisplayAnalysis;
@@ -33,6 +33,11 @@ public:
 
     void displayGraphAnalysis(std::AnalysisData *data);
     void displayReturnsAnalysis(std::AnalysisData *data);
+
+    void insertRowIntoReturnsAnalysis(std::string buySellPair,
+                                      std::string date,
+                                      std::string returnValue,
+                                      std::string returnPerc);
 
     virtual void closeEvent(QCloseEvent *event);
 

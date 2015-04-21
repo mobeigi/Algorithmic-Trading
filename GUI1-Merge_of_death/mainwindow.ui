@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
+    <width>506</width>
     <height>506</height>
    </rect>
   </property>
@@ -101,9 +101,6 @@
               <bold>true</bold>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">color:red;</string>
-            </property>
             <property name="text">
              <string/>
             </property>
@@ -167,11 +164,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="start_date">
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
+             <widget class="QDateEdit" name="start_date"/>
             </item>
             <item>
              <widget class="QLabel" name="end_date_label">
@@ -181,11 +174,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="end_date">
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
+             <widget class="QDateEdit" name="end_date"/>
             </item>
            </layout>
           </item>
@@ -231,14 +220,8 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
-       <property name="accessibleName">
-        <string/>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
        <attribute name="title">
-        <string>Choose an Output CSV</string>
+        <string>Choose an output csv</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>

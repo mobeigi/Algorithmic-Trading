@@ -51,7 +51,7 @@ void DisplayAnalysis::displayGraphAnalysis(std::AnalysisData *data) {
     //draw y axis label "Equity Price"
     double yAxisLabelY = shiftY - 70.0;
     double yAxisLabelX = shiftX + (-daySize) * data->daysTrading() / 2 - 92.0;//150.0;
-    scene->addText("E\nq\nu\ni\nt\ny\n \nP\nr\ni\nc\ne", QFont("Times", 16))->setPos(yAxisLabelX, yAxisLabelY);
+    scene->addText("P\nr\ni\nc\ne", QFont("Times", 16))->setPos(yAxisLabelX, yAxisLabelY);
 
     //draw x axis label "date"
     double xAxisLabelY = shiftY + chartHeight/2.0 + 35.0;
@@ -161,16 +161,35 @@ void DisplayAnalysis::displayGraphAnalysis(std::AnalysisData *data) {
 
 
 void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
+
+    //Prepare the table
+    ui->returnsAnalysis->setColumnCount(4);                     //for the four headings: buy,sell,date,and return
+    ui->returnsAnalysis->verticalHeader()->setVisible(false);   //hide line numbers
+    ui->returnsAnalysis->setHorizontalHeaderLabels(QString("Buy-Sell Pair;Date;Return Value;Return %").split(";")); //insert column names
+
+   //adjusting header sizes
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(0,230);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(1,205);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(2,150);
+    ui->returnsAnalysis->horizontalHeader()->resizeSection(2,150);
+
+
     //maintain queues of trades, one for buy and one for sell
     // int is for maintaining which one came first
     vector<tuple<TradeData, int>> buy_trades;
     vector<tuple<TradeData, int>> sell_trades;
 
     //maintain total return percentage
+    double net_return_value = 0;
     double net_return_perc = 0;
 
     //read the trade orders line by line
     for (int i = 0; i < data->tradeDataAvailable(); i++) {
+        //Prepare some variables
+        string buySellPair; //details buy and sell price
+        string date;        //when the buy-sell / sell-buy pair occurs
+        string returnValue; //the numeric return value
+        string returnPerc;  //the percentage return value
 
         //load the vectors as appropriate
         if (data->getData(i).tradeSignal == BUY) {
@@ -184,23 +203,50 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
             tuple<TradeData,int> buy_trade = buy_trades.front();
             tuple<TradeData,int> sell_trade = sell_trades.front();
 
-            if (get<1>(sell_trade) > get<1>(buy_trade)) {
-                //a buy-sell pair
-                printf("Buy@%.2lf,", get<0>(buy_trade).price);
-                printf("Sell@%.2lf. ", get<0>(sell_trade).price);
-                printf("Date: %s. ",get<0>(sell_trade).date.c_str());
-            } else {
-                //a sell-buy pair
-                printf("Buy@%.2lf,", get<0>(sell_trade).price);
-                printf("Sell@%.2lf. ", get<0>(buy_trade).price);
-                printf("Date: %s. ",get<0>(buy_trade).date.c_str());
+            char buySellPairBuffer[50]; //for converting buy-sell values into a string
+
+            if (get<1>(sell_trade) > get<1>(buy_trade)) { //a buy-sell pair
+
+                //Construct buy-sell pair string
+                sprintf(buySellPairBuffer,"Buy: $%.2lf, Sell: $%.2lf",get<0>(buy_trade).price,get<0>(sell_trade).price);
+                buySellPair = std::string(buySellPairBuffer);
+
+                //Construct Date string
+                date.append(get<0>(sell_trade).date.c_str());
+
+            } else { //a sell-buy pair
+
+                //Construct buy-sell pair string
+                sprintf(buySellPairBuffer,"Sell: $%.2lf, Buy: $%.2lf",get<0>(sell_trade).price,get<0>(buy_trade).price);
+                buySellPair = std::string(buySellPairBuffer);
+
+                //Construct Date string
+                date.append(get<0>(buy_trade).date.c_str());
+
             }
 
-            //Calculate return
-            double return_perc = (get<0>(sell_trade).price - get<0>(buy_trade).price) / get<0>(buy_trade).price;
-            printf("Return: %.2lf\n",return_perc);
+            //Calculate and construct return value string
+            double return_value =(get<0>(sell_trade).price - get<0>(buy_trade).price);
+            char returnValueBuffer[50];
+            if (return_value < 0) {
+                sprintf(returnValueBuffer,"-$%.2lf",return_value * (-1));
+            } else {
+                sprintf(returnValueBuffer,"$%.2lf",return_value);
+            }
+            returnValue = std::string(returnValueBuffer);
 
-            //update total return
+            //Calculate and construct return percentage string
+            double return_perc = (get<0>(sell_trade).price - get<0>(buy_trade).price) * 100 / get<0>(buy_trade).price;
+            char returnPercBuffer[50];
+            sprintf(returnPercBuffer,"%.2lf",return_perc);
+            returnPerc = std::string(returnPercBuffer);
+            returnPerc.append("%");
+
+            //Insert results into table
+            insertRowIntoReturnsAnalysis(buySellPair, date, returnValue, returnPerc);
+
+            //update total return value and percentage
+            net_return_value += return_value;
             net_return_perc += return_perc;
 
             //Remove the first trades from both queues
@@ -209,8 +255,52 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
         }
     }
 
-    printf("FINAL NET RETURN: %.2lf\n",net_return_perc);
+    //Display net return
+    QString net_return_perc_str;
+    char netReturnValueBuffer[50];
+    if (net_return_value < 0) {
+        sprintf(netReturnValueBuffer,"-$%.2lf",net_return_value * (-1));
+    } else {
+        sprintf(netReturnValueBuffer,"$%.2lf",net_return_value);
+    }
+    net_return_perc_str.append(netReturnValueBuffer);
 
+    net_return_perc_str.append(" (");
+    net_return_perc_str.append(QString::number(net_return_perc));
+    net_return_perc_str.append("%)");
+    ui->net_return_value_label->setText(net_return_perc_str);
+
+}
+
+void DisplayAnalysis::insertRowIntoReturnsAnalysis(std::string buySellPair,
+                                                   std::string date,
+                                                    std::string returnValue,
+                                                   std::string returnPerc) {
+
+    //increase table rows by 1
+    int currRows = ui->returnsAnalysis->rowCount();
+    ui->returnsAnalysis->setRowCount(currRows + 1);
+
+
+    QTableWidgetItem* col0 = new QTableWidgetItem(QString::fromStdString(buySellPair), QTableWidgetItem::Type);
+    col0->setFlags(col0->flags() ^ Qt::ItemIsEditable);
+    col0->setTextAlignment(Qt::AlignHCenter);
+    ui->returnsAnalysis->setItem(currRows,0, col0);
+
+    QTableWidgetItem* col1 = new QTableWidgetItem(QString::fromStdString(date), QTableWidgetItem::Type);
+    col1->setFlags(col1->flags() ^ Qt::ItemIsEditable);
+    col1->setTextAlignment(Qt::AlignHCenter);
+    ui->returnsAnalysis->setItem(currRows, 1, col1);
+
+    QTableWidgetItem* col2 = new QTableWidgetItem(QString::fromStdString(returnValue), QTableWidgetItem::Type);
+    col2->setFlags(col2->flags() ^ Qt::ItemIsEditable);
+    col2->setTextAlignment(Qt::AlignHCenter);
+    ui->returnsAnalysis->setItem(currRows, 2, col2);
+
+    QTableWidgetItem* col3 = new QTableWidgetItem(QString::fromStdString(returnPerc), QTableWidgetItem::Type);
+    col3->setFlags(col2->flags() ^ Qt::ItemIsEditable);
+    col3->setTextAlignment(Qt::AlignHCenter);
+    ui->returnsAnalysis->setItem(currRows, 3, col3);
 }
 
 
