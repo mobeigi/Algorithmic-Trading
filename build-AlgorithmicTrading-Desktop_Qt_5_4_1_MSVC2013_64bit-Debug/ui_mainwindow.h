@@ -79,7 +79,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(506, 506);
+        MainWindow->resize(520, 506);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(80);
         sizePolicy.setVerticalStretch(0);
@@ -158,6 +158,7 @@ public:
         font.setBold(true);
         font.setWeight(75);
         inputcsv_valid->setFont(font);
+        inputcsv_valid->setStyleSheet(QStringLiteral("color:red;"));
 
         programLayout->addWidget(inputcsv_valid);
 
@@ -211,6 +212,7 @@ public:
 
         start_date = new QDateEdit(widget);
         start_date->setObjectName(QStringLiteral("start_date"));
+        start_date->setCalendarPopup(true);
 
         dateLayout->addWidget(start_date);
 
@@ -221,6 +223,7 @@ public:
 
         end_date = new QDateEdit(widget);
         end_date->setObjectName(QStringLiteral("end_date"));
+        end_date->setCalendarPopup(true);
 
         dateLayout->addWidget(end_date);
 
@@ -257,6 +260,7 @@ public:
         analysis_prep->addTab(widget, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
+        tab_2->setAutoFillBackground(false);
         verticalLayout = new QVBoxLayout(tab_2);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -337,11 +341,14 @@ public:
         execution_status->setText(QString());
         execute_button->setText(QApplication::translate("MainWindow", "Execute", 0));
         analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Choose a Module", 0));
+#ifndef QT_NO_ACCESSIBILITY
+        tab_2->setAccessibleName(QString());
+#endif // QT_NO_ACCESSIBILITY
         outputcsv_label->setText(QApplication::translate("MainWindow", "Output CSV File", 0));
         browse_outputcsv->setText(QApplication::translate("MainWindow", "Browse", 0));
         output_csv_valid->setText(QString());
         analyse_button->setText(QApplication::translate("MainWindow", "Analyse", 0));
-        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Choose an output csv", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Choose an Output CSV", 0));
     } // retranslateUi
 
 };
