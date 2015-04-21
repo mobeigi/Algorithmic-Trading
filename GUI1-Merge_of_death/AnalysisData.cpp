@@ -22,7 +22,7 @@ void AnalysisData::addNextTradeData(signal tradeSignal, string date, double pric
     } else if (price < priceLow || priceLow == -1) {
         priceLow = price;
     }
-    if (tradeDataAvaliable() == 0) {
+    if (tradeDataAvailable() == 0) {
         trade.tradeDayOffset = 0;
         totalDaysTrading = 1;
     } else {
@@ -32,7 +32,7 @@ void AnalysisData::addNextTradeData(signal tradeSignal, string date, double pric
     tradeData.push_back(trade);
 }
 
-int AnalysisData::tradeDataAvaliable() {
+int AnalysisData::tradeDataAvailable() {
     return tradeData.size();
 }
 
@@ -45,7 +45,7 @@ string AnalysisData::firstTradeDate() {
 }
 
 string AnalysisData::lastTradeDate() {
-    return tradeData[tradeDataAvaliable() - 1].date;
+    return tradeData[tradeDataAvailable() - 1].date;
 }
 
 string AnalysisData::getCompany() {

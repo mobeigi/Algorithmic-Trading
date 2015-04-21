@@ -42,7 +42,7 @@ public:
 
     void addNextTradeData(signal tradeSignal, string date, double price, int volume);
 
-    int tradeDataAvaliable();
+    int tradeDataAvailable();
     TradeData getData(int index);
 
     string firstTradeDate();

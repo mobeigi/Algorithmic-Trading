@@ -5,7 +5,7 @@
 #include "ParseCSVData.h"
 #include "GlobalIncludes.h"
 
-#include<QMessageBox>
+#include <QMessageBox>
 
 #include <map>
 

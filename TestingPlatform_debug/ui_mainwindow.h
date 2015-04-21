@@ -25,7 +25,6 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -35,9 +34,10 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout_2;
     QTabWidget *analysis_prep;
     QWidget *widget;
-    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout_3;
     QVBoxLayout *programLayout;
     QLabel *strategy_module_label;
     QHBoxLayout *strategyModuleLayout;
@@ -49,7 +49,7 @@ public:
     QPushButton *browseCSV;
     QLabel *inputcsv_valid;
     QLabel *parameters_label;
-    QGridLayout *tresholdLayout;
+    QGridLayout *_2;
     QLabel *threshold_label;
     QDoubleSpinBox *threshold;
     QHBoxLayout *returnInCalculationLayout;
@@ -65,23 +65,21 @@ public:
     QLabel *execution_status;
     QPushButton *execute_button;
     QWidget *tab_2;
-    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *strategyModuleLayout_2;
     QLabel *outputcsv_label;
     QLineEdit *output_csv_location;
     QPushButton *browse_outputcsv;
-    QPushButton *analyse_button;
-    QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *output_csv_valid;
-    QToolBar *mainToolBar;
+    QPushButton *analyse_button;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(506, 495);
+        MainWindow->resize(506, 506);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(80);
         sizePolicy.setVerticalStretch(0);
@@ -89,20 +87,29 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
+        centralWidget->setSizePolicy(sizePolicy1);
+        centralWidget->setMinimumSize(QSize(520, 450));
+        verticalLayout_2 = new QVBoxLayout(centralWidget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         analysis_prep = new QTabWidget(centralWidget);
         analysis_prep->setObjectName(QStringLiteral("analysis_prep"));
-        analysis_prep->setGeometry(QRect(30, 20, 451, 441));
         widget = new QWidget();
         widget->setObjectName(QStringLiteral("widget"));
-        verticalLayoutWidget = new QWidget(widget);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 431, 401));
-        programLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout_3 = new QVBoxLayout(widget);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        programLayout = new QVBoxLayout();
         programLayout->setSpacing(6);
-        programLayout->setContentsMargins(11, 11, 11, 11);
         programLayout->setObjectName(QStringLiteral("programLayout"));
-        programLayout->setContentsMargins(0, 0, 0, 0);
-        strategy_module_label = new QLabel(verticalLayoutWidget);
+        strategy_module_label = new QLabel(widget);
         strategy_module_label->setObjectName(QStringLiteral("strategy_module_label"));
 
         programLayout->addWidget(strategy_module_label);
@@ -110,12 +117,12 @@ public:
         strategyModuleLayout = new QHBoxLayout();
         strategyModuleLayout->setSpacing(6);
         strategyModuleLayout->setObjectName(QStringLiteral("strategyModuleLayout"));
-        strategy_module_location = new QLineEdit(verticalLayoutWidget);
+        strategy_module_location = new QLineEdit(widget);
         strategy_module_location->setObjectName(QStringLiteral("strategy_module_location"));
 
         strategyModuleLayout->addWidget(strategy_module_location);
 
-        browseModule = new QPushButton(verticalLayoutWidget);
+        browseModule = new QPushButton(widget);
         browseModule->setObjectName(QStringLiteral("browseModule"));
         browseModule->setEnabled(true);
 
@@ -124,7 +131,7 @@ public:
 
         programLayout->addLayout(strategyModuleLayout);
 
-        input_csv_label = new QLabel(verticalLayoutWidget);
+        input_csv_label = new QLabel(widget);
         input_csv_label->setObjectName(QStringLiteral("input_csv_label"));
 
         programLayout->addWidget(input_csv_label);
@@ -132,12 +139,12 @@ public:
         inputCSVLayout = new QHBoxLayout();
         inputCSVLayout->setSpacing(6);
         inputCSVLayout->setObjectName(QStringLiteral("inputCSVLayout"));
-        input_csv_location = new QLineEdit(verticalLayoutWidget);
+        input_csv_location = new QLineEdit(widget);
         input_csv_location->setObjectName(QStringLiteral("input_csv_location"));
 
         inputCSVLayout->addWidget(input_csv_location);
 
-        browseCSV = new QPushButton(verticalLayoutWidget);
+        browseCSV = new QPushButton(widget);
         browseCSV->setObjectName(QStringLiteral("browseCSV"));
 
         inputCSVLayout->addWidget(browseCSV);
@@ -145,7 +152,7 @@ public:
 
         programLayout->addLayout(inputCSVLayout);
 
-        inputcsv_valid = new QLabel(verticalLayoutWidget);
+        inputcsv_valid = new QLabel(widget);
         inputcsv_valid->setObjectName(QStringLiteral("inputcsv_valid"));
         QFont font;
         font.setBold(true);
@@ -154,39 +161,39 @@ public:
 
         programLayout->addWidget(inputcsv_valid);
 
-        parameters_label = new QLabel(verticalLayoutWidget);
+        parameters_label = new QLabel(widget);
         parameters_label->setObjectName(QStringLiteral("parameters_label"));
         parameters_label->setFont(font);
 
         programLayout->addWidget(parameters_label);
 
-        tresholdLayout = new QGridLayout();
-        tresholdLayout->setSpacing(6);
-        tresholdLayout->setObjectName(QStringLiteral("tresholdLayout"));
-        tresholdLayout->setContentsMargins(1, -1, -1, -1);
-        threshold_label = new QLabel(verticalLayoutWidget);
+        _2 = new QGridLayout();
+        _2->setSpacing(6);
+        _2->setObjectName(QStringLiteral("_2"));
+        _2->setContentsMargins(1, -1, -1, -1);
+        threshold_label = new QLabel(widget);
         threshold_label->setObjectName(QStringLiteral("threshold_label"));
 
-        tresholdLayout->addWidget(threshold_label, 0, 1, 1, 1);
+        _2->addWidget(threshold_label, 0, 1, 1, 1);
 
-        threshold = new QDoubleSpinBox(verticalLayoutWidget);
+        threshold = new QDoubleSpinBox(widget);
         threshold->setObjectName(QStringLiteral("threshold"));
         threshold->setDecimals(4);
 
-        tresholdLayout->addWidget(threshold, 0, 2, 1, 1);
+        _2->addWidget(threshold, 0, 2, 1, 1);
 
 
-        programLayout->addLayout(tresholdLayout);
+        programLayout->addLayout(_2);
 
         returnInCalculationLayout = new QHBoxLayout();
         returnInCalculationLayout->setSpacing(6);
         returnInCalculationLayout->setObjectName(QStringLiteral("returnInCalculationLayout"));
-        returnsInCalculation_label = new QLabel(verticalLayoutWidget);
+        returnsInCalculation_label = new QLabel(widget);
         returnsInCalculation_label->setObjectName(QStringLiteral("returnsInCalculation_label"));
 
         returnInCalculationLayout->addWidget(returnsInCalculation_label);
 
-        returnsInCalculation = new QSpinBox(verticalLayoutWidget);
+        returnsInCalculation = new QSpinBox(widget);
         returnsInCalculation->setObjectName(QStringLiteral("returnsInCalculation"));
 
         returnInCalculationLayout->addWidget(returnsInCalculation);
@@ -197,22 +204,22 @@ public:
         dateLayout = new QHBoxLayout();
         dateLayout->setSpacing(6);
         dateLayout->setObjectName(QStringLiteral("dateLayout"));
-        start_date_label = new QLabel(verticalLayoutWidget);
+        start_date_label = new QLabel(widget);
         start_date_label->setObjectName(QStringLiteral("start_date_label"));
 
         dateLayout->addWidget(start_date_label);
 
-        start_date = new QDateEdit(verticalLayoutWidget);
+        start_date = new QDateEdit(widget);
         start_date->setObjectName(QStringLiteral("start_date"));
 
         dateLayout->addWidget(start_date);
 
-        end_date_label = new QLabel(verticalLayoutWidget);
+        end_date_label = new QLabel(widget);
         end_date_label->setObjectName(QStringLiteral("end_date_label"));
 
         dateLayout->addWidget(end_date_label);
 
-        end_date = new QDateEdit(verticalLayoutWidget);
+        end_date = new QDateEdit(widget);
         end_date->setObjectName(QStringLiteral("end_date"));
 
         dateLayout->addWidget(end_date);
@@ -220,7 +227,7 @@ public:
 
         programLayout->addLayout(dateLayout);
 
-        date_valid = new QLabel(verticalLayoutWidget);
+        date_valid = new QLabel(widget);
         date_valid->setObjectName(QStringLiteral("date_valid"));
         date_valid->setStyleSheet(QStringLiteral("color:red;"));
 
@@ -229,73 +236,80 @@ public:
         executeLayout = new QGridLayout();
         executeLayout->setSpacing(5);
         executeLayout->setObjectName(QStringLiteral("executeLayout"));
-        execution_status = new QLabel(verticalLayoutWidget);
+        execution_status = new QLabel(widget);
         execution_status->setObjectName(QStringLiteral("execution_status"));
         sizePolicy.setHeightForWidth(execution_status->sizePolicy().hasHeightForWidth());
         execution_status->setSizePolicy(sizePolicy);
 
         executeLayout->addWidget(execution_status, 0, 0, 1, 1, Qt::AlignLeft);
 
-        execute_button = new QPushButton(verticalLayoutWidget);
+        execute_button = new QPushButton(widget);
         execute_button->setObjectName(QStringLiteral("execute_button"));
 
-        executeLayout->addWidget(execute_button, 0, 1, 1, 1, Qt::AlignRight);
+        executeLayout->addWidget(execute_button, 0, 1, 1, 1);
 
 
         programLayout->addLayout(executeLayout);
 
+
+        verticalLayout_3->addLayout(programLayout);
+
         analysis_prep->addTab(widget, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        layoutWidget = new QWidget(tab_2);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 20, 429, 45));
-        strategyModuleLayout_2 = new QHBoxLayout(layoutWidget);
+        verticalLayout = new QVBoxLayout(tab_2);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        strategyModuleLayout_2 = new QHBoxLayout();
         strategyModuleLayout_2->setSpacing(6);
-        strategyModuleLayout_2->setContentsMargins(11, 11, 11, 11);
         strategyModuleLayout_2->setObjectName(QStringLiteral("strategyModuleLayout_2"));
-        strategyModuleLayout_2->setContentsMargins(0, 0, 0, 0);
-        outputcsv_label = new QLabel(layoutWidget);
+        outputcsv_label = new QLabel(tab_2);
         outputcsv_label->setObjectName(QStringLiteral("outputcsv_label"));
 
         strategyModuleLayout_2->addWidget(outputcsv_label);
 
-        output_csv_location = new QLineEdit(layoutWidget);
+        output_csv_location = new QLineEdit(tab_2);
         output_csv_location->setObjectName(QStringLiteral("output_csv_location"));
 
         strategyModuleLayout_2->addWidget(output_csv_location);
 
-        browse_outputcsv = new QPushButton(layoutWidget);
+        browse_outputcsv = new QPushButton(tab_2);
         browse_outputcsv->setObjectName(QStringLiteral("browse_outputcsv"));
         browse_outputcsv->setEnabled(true);
 
         strategyModuleLayout_2->addWidget(browse_outputcsv);
 
-        analyse_button = new QPushButton(tab_2);
-        analyse_button->setObjectName(QStringLiteral("analyse_button"));
-        analyse_button->setGeometry(QRect(360, 370, 75, 23));
-        horizontalLayoutWidget = new QWidget(tab_2);
-        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 60, 431, 41));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+
+        verticalLayout->addLayout(strategyModuleLayout_2);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        output_csv_valid = new QLabel(horizontalLayoutWidget);
+        horizontalLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        output_csv_valid = new QLabel(tab_2);
         output_csv_valid->setObjectName(QStringLiteral("output_csv_valid"));
         output_csv_valid->setAutoFillBackground(false);
         output_csv_valid->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
 
         horizontalLayout->addWidget(output_csv_valid);
 
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        analyse_button = new QPushButton(tab_2);
+        analyse_button->setObjectName(QStringLiteral("analyse_button"));
+
+        verticalLayout->addWidget(analyse_button);
+
         analysis_prep->addTab(tab_2, QString());
+
+        verticalLayout_2->addWidget(analysis_prep);
+
         MainWindow->setCentralWidget(centralWidget);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
+        statusBar->setEnabled(true);
         MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
@@ -325,8 +339,8 @@ public:
         analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Choose a Module", 0));
         outputcsv_label->setText(QApplication::translate("MainWindow", "Output CSV File", 0));
         browse_outputcsv->setText(QApplication::translate("MainWindow", "Browse", 0));
-        analyse_button->setText(QApplication::translate("MainWindow", "Analyse", 0));
         output_csv_valid->setText(QString());
+        analyse_button->setText(QApplication::translate("MainWindow", "Analyse", 0));
         analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Choose an output csv", 0));
     } // retranslateUi
 

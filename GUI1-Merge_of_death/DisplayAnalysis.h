@@ -14,6 +14,7 @@
 #include <QGraphicsView>
 #include <QScrollBar>
 
+using namespace std;
 
 namespace Ui {
 class DisplayAnalysis;
