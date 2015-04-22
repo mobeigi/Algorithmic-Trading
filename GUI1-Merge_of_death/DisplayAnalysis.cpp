@@ -96,7 +96,7 @@ void DisplayAnalysis::displayGraphAnalysis(std::AnalysisData *data) {
             //double percentMarker = (floor(priceIncr) / (data->highestPrice() - data->lowestPrice()));
 
             double markerPriceY = shiftY + chartHeight/2.0 - chartHeight * percentMarker + daySize/2.0;
-            scene->addText(QString::fromStdString(std::Helper::formatPrice(percentMarker * (data->highestPrice() - data->lowestPrice()) + data->lowestPrice())), QFont("Times", 13))->setPos(markerPriceX, markerPriceY);
+            scene->addText(QString::fromStdString(std::Helper::formatPrice(percentMarker * (data->highestPrice() - data->lowestPrice()) + data->lowestPrice())), QFont("Times", 9))->setPos(markerPriceX, markerPriceY);
             scene->addLine(markerPriceX, markerPriceY, markerPriceX + daySize * data->daysTrading() + extraWidth, markerPriceY, pen);
         }
 
@@ -114,7 +114,7 @@ void DisplayAnalysis::displayGraphAnalysis(std::AnalysisData *data) {
         while (dayUpto < data->daysTrading()) {
             //scene->addText("asdasdsad", QFont("Times", 13))->setPos(startX + dayUpto*daySize, startY);
             scene->addLine(startX + dayUpto*daySize, startY, startX + dayUpto*daySize, -startY, pen);
-            scene->addText(QString::fromStdString(std::Helper::dateString(currDate)), QFont("Times", 13))->setPos(startX + dayUpto*daySize - 9.0, startY);
+            scene->addText(QString::fromStdString(std::Helper::dateString(currDate)), QFont("Times", 9))->setPos(startX + dayUpto*daySize - 9.0, startY);
             currDate = std::Helper::addDays(currDate, daysBetweenDateMarkers);
             dayUpto += daysBetweenDateMarkers;
         }
