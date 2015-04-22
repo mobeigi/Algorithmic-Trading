@@ -32,10 +32,10 @@ int MainWindow::on_execute_button_clicked()
 
     // Ensure params are valid
     vector<int> invalidities = check_params();
-    int invalidities_size = invalidities.size();
+    size_t invalidities_size = invalidities.size();
     if (invalidities_size != 0) {
         //There are errors - return the appropriate messages corresponding to each message
-        for (int i = 0; i < invalidities_size; i++) {
+        for (size_t i = 0; i < invalidities_size; i++) {
             if (invalidities[i] == INPUTCSV_EQ_OUTPUTCSV) {
                 ui->inputcsv_valid->setText("Please select a different CSV file.");
             } else if (invalidities[i] == ENDDATE_BEFORE_STARTDATE) {
