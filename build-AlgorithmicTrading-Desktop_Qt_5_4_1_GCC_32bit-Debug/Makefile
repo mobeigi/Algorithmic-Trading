@@ -35,7 +35,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = AlgorithmicTrading1.0.0
 DISTDIR = /home/samlinux/Documents/Algorithmic-Trading/GUI1-Merge_of_death/.tmp/AlgorithmicTrading1.0.0
 LINK          = g++
-LFLAGS        = -Wl,-rpath,/home/samlinux/Qt/5.4/gcc -Wl,-rpath,/home/samlinux/Qt/5.4/gcc/lib
+LFLAGS        = -Wl,-rpath,'$$ORIGIN' -Wl,-rpath,/home/samlinux/Qt/5.4/gcc -Wl,-rpath,/home/samlinux/Qt/5.4/gcc/lib
 LIBS          = $(SUBLIBS) -L/home/samlinux/Qt/5.4/gcc/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
@@ -931,7 +931,60 @@ mainwindow.o: ../GUI1-Merge_of_death/mainwindow.cpp ../GUI1-Merge_of_death/mainw
 		../GUI1-Merge_of_death/ParseCSVData.h \
 		../../../Qt/5.4/gcc/include/QtWidgets/QMessageBox \
 		../../../Qt/5.4/gcc/include/QtWidgets/qmessagebox.h \
-		ui_mainwindow.h
+		../GUI1-Merge_of_death/ui_mainwindow.h \
+		../../../Qt/5.4/gcc/include/QtCore/QVariant \
+		../../../Qt/5.4/gcc/include/QtWidgets/QAction \
+		../../../Qt/5.4/gcc/include/QtWidgets/qaction.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qactiongroup.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QApplication \
+		../../../Qt/5.4/gcc/include/QtWidgets/qapplication.h \
+		../../../Qt/5.4/gcc/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.4/gcc/include/QtCore/qeventloop.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.4/gcc/include/QtGui/qguiapplication.h \
+		../../../Qt/5.4/gcc/include/QtGui/qinputmethod.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QButtonGroup \
+		../../../Qt/5.4/gcc/include/QtWidgets/qbuttongroup.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QDateEdit \
+		../../../Qt/5.4/gcc/include/QtWidgets/qdatetimeedit.h \
+		../../../Qt/5.4/gcc/include/QtCore/qdatetime.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt/5.4/gcc/include/QtGui/qvalidator.h \
+		../../../Qt/5.4/gcc/include/QtCore/qregularexpression.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QDoubleSpinBox \
+		../../../Qt/5.4/gcc/include/QtWidgets/qspinbox.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QGridLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/qgridlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qboxlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QHBoxLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/QHeaderView \
+		../../../Qt/5.4/gcc/include/QtWidgets/qheaderview.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../../../Qt/5.4/gcc/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/5.4/gcc/include/QtCore/qitemselectionmodel.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstyleoption.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qslider.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstyle.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qtabbar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QLabel \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlabel.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QLineEdit \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlineedit.h \
+		../../../Qt/5.4/gcc/include/QtGui/qtextcursor.h \
+		../../../Qt/5.4/gcc/include/QtGui/qtextformat.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QPushButton \
+		../../../Qt/5.4/gcc/include/QtWidgets/qpushbutton.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractbutton.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QSpinBox \
+		../../../Qt/5.4/gcc/include/QtWidgets/QStatusBar \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstatusbar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QTabWidget \
+		../../../Qt/5.4/gcc/include/QtWidgets/QVBoxLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../GUI1-Merge_of_death/mainwindow.cpp
 
 main.o: ../GUI1-Merge_of_death/main.cpp ../GUI1-Merge_of_death/mainwindow.h \
@@ -1204,7 +1257,56 @@ DisplayAnalysis.o: ../GUI1-Merge_of_death/DisplayAnalysis.cpp ../GUI1-Merge_of_d
 		../../../Qt/5.4/gcc/include/QtWidgets/QScrollBar \
 		../../../Qt/5.4/gcc/include/QtWidgets/qscrollbar.h \
 		../../../Qt/5.4/gcc/include/QtWidgets/qabstractslider.h \
-		ui_DisplayAnalysis.h \
+		../GUI1-Merge_of_death/ui_DisplayAnalysis.h \
+		../../../Qt/5.4/gcc/include/QtCore/QLocale \
+		../../../Qt/5.4/gcc/include/QtCore/QVariant \
+		../../../Qt/5.4/gcc/include/QtWidgets/QAction \
+		../../../Qt/5.4/gcc/include/QtWidgets/qaction.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qactiongroup.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QApplication \
+		../../../Qt/5.4/gcc/include/QtWidgets/qapplication.h \
+		../../../Qt/5.4/gcc/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.4/gcc/include/QtCore/qeventloop.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.4/gcc/include/QtGui/qguiapplication.h \
+		../../../Qt/5.4/gcc/include/QtGui/qinputmethod.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QButtonGroup \
+		../../../Qt/5.4/gcc/include/QtWidgets/qbuttongroup.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QGridLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/qgridlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qboxlayout.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QHBoxLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/QHeaderView \
+		../../../Qt/5.4/gcc/include/QtWidgets/qheaderview.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../../../Qt/5.4/gcc/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/5.4/gcc/include/QtCore/qitemselectionmodel.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstyleoption.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt/5.4/gcc/include/QtGui/qvalidator.h \
+		../../../Qt/5.4/gcc/include/QtCore/qregularexpression.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qslider.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstyle.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qtabbar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QLabel \
+		../../../Qt/5.4/gcc/include/QtWidgets/qlabel.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QMenuBar \
+		../../../Qt/5.4/gcc/include/QtWidgets/qmenubar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qmenu.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QScrollArea \
+		../../../Qt/5.4/gcc/include/QtWidgets/QStatusBar \
+		../../../Qt/5.4/gcc/include/QtWidgets/qstatusbar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QTableWidget \
+		../../../Qt/5.4/gcc/include/QtWidgets/qtablewidget.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/qtableview.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QToolBar \
+		../../../Qt/5.4/gcc/include/QtWidgets/qtoolbar.h \
+		../../../Qt/5.4/gcc/include/QtWidgets/QVBoxLayout \
+		../../../Qt/5.4/gcc/include/QtWidgets/QWidget \
 		../GUI1-Merge_of_death/AnalysisDisplays.h \
 		../GUI1-Merge_of_death/ParseCSVData.h \
 		../../../Qt/5.4/gcc/include/QtWidgets/QMessageBox \
