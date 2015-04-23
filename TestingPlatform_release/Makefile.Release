@@ -17,13 +17,13 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -std=c++0x -frtti -Wall -We
 INCPATH       = -I'../GUI1-Merge_of_death' -I'.' -I'C:/Qt/5.4/mingw491_32/include' -I'C:/Qt/5.4/mingw491_32/include/QtWidgets' -I'C:/Qt/5.4/mingw491_32/include/QtGui' -I'C:/Qt/5.4/mingw491_32/include/QtCore' -I'release' -I'.' -I'C:/Qt/5.4/mingw491_32/mkspecs/win32-g++' 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -LC:/Qt/5.4/mingw491_32/lib -lqtmain -LC:\mingw491\mingw32\lib -LC:\Utils\icu32_53_1_mingw482\lib -LC:\utils\postgresql\pgsql\lib -LC:\utils\mysql\mysql\lib -LC:\opensll\lib -lshell32 -LC:\Qt\5.4\mingw491_32/lib -lQt5Widgets -lQt5Gui -lQt5Core 
+LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -LC:/Qt/5.4/mingw491_32/lib -lqtmain -LC:\mingw491\mingw32\lib -LC:\Utils\icu32_53_1_mingw482\lib -LC:\utils\postgresql\pgsql\lib -LC:\utils\mysql\mysql\lib -LC:\opensll\lib -lshell32 -LC:\Qt\5.4\mingw491_32/lib -lQt5Widgets -lQt5Gui -lQt5Core release/iconise_res.o 
 QMAKE         = C:/Qt/5.4/mingw491_32/bin/qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = 
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = release/iconise_res.o
 COPY          = cp -f
 SED           = sed
 COPY_FILE     = cp -f
@@ -96,8 +96,11 @@ DESTDIR_TARGET = release/AlgorithmicTrading.exe
 first: all
 all: Makefile.Release  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindow.h ui_DisplayAnalysis.h $(OBJECTS) 
+$(DESTDIR_TARGET): ui_mainwindow.h ui_DisplayAnalysis.h $(OBJECTS) release/iconise_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+release/iconise_res.o: ../GUI1-Merge_of_death/iconise.rc
+	windres -i ../GUI1-Merge_of_death/iconise.rc -o release/iconise_res.o --include-dir=./../GUI1-Merge_of_death $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -spec win32-g++ -o Makefile.Release ../GUI1-Merge_of_death/AlgorithmicTrading.pro
@@ -109,6 +112,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) release/mainwindow.o release/main.o release/AnalysisData.o release/DisplayAnalysis.o release/ParseCSVData.o release/AnalysisDisplays.o release/moc_mainwindow.o release/moc_DisplayAnalysis.o
+	-$(DEL_FILE) release/iconise_res.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
