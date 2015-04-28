@@ -173,7 +173,12 @@ int main(int argc, const char * argv[]) {
             
             thisPrice = BOUND_PRICE(thisPrice);
             
-            fprintf(file, "MEMPHISC,%d-%s-%d,,End Of Day,,%lf,%lf,%lf,%lf,%d,,,Verified\n", currDate.day, months[currDate.month], currDate.year, OPEN_DEFAULT, HIGH_DEFAULT, LOW_DEFAULT, thisPrice, VOLUME_DEFAULT);
+            //default static stuff (that looks kinda plausible)
+            double priceOpen = APPLY_VARIENCE(thisPrice, 0.05);
+            double priceHigh = thisPrice * 1.07;
+            double priceLow = thisPrice * 0.93;
+            
+            fprintf(file, "MEMPHISC,%d-%s-%d,,End Of Day,,%.2lf,%.2lf,%.2lf,%.2lf,%d,,,Verified\n", currDate.day, months[currDate.month], currDate.year, priceOpen, priceHigh, priceLow, thisPrice, VOLUME_DEFAULT);
             
             lastPrice = thisPrice;
         }
@@ -188,3 +193,6 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+
+
