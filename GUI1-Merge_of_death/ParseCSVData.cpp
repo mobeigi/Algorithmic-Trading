@@ -81,7 +81,8 @@ vector<string> ParseCSVData::parseCSVLine(string line) {
         while(line[i] == ' ') ++i;
         unsigned b = i;
         for(; line[i] != __CSV_DELIM && i != line.length(); i++);
-        parsed.push_back(line.substr(b, i - b));
+        string parsedComponent = line.substr(b, i - b);
+        parsed.push_back(Helper::trim(parsedComponent));
     }
     return parsed;
 }
