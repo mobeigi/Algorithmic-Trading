@@ -27,6 +27,10 @@
 #define PERCENTAGE_NO_TRADES 0.1
 
 #define CSV_TITLES "#RIC,Date[L],Time[L],Type,Qualifiers,Open,High,Low,Last,Volume,Open Interest,Settle,Data Source"
+#define OPEN_DEFAULT 1.0
+#define HIGH_DEFAULT 1.0
+#define LOW_DEFAULT 1.0
+#define VOLUME_DEFAULT 100000
 
 #define APPLY_VARIENCE(__value,__max_varience) (__value * ((RANDOM_VARIENCE * __max_varience) + 1.0))
 #define BOUND_PRICE(__price) (__price > HIGHEST_PRICE ? HIGHEST_PRICE : (__price < LOWEST_PRICE ? LOWEST_PRICE : __price)) //within highest and lowest bounds
@@ -169,7 +173,7 @@ int main(int argc, const char * argv[]) {
             
             thisPrice = BOUND_PRICE(thisPrice);
             
-            fprintf(file, "MEMPHISC,%d-%s-%d,,End Of Day,,,,,%lf,,,,Verified\n", currDate.day, months[currDate.month], currDate.year, thisPrice);
+            fprintf(file, "MEMPHISC,%d-%s-%d,,End Of Day,,%lf,%lf,%lf,%lf,%d,,,Verified\n", currDate.day, months[currDate.month], currDate.year, OPEN_DEFAULT, HIGH_DEFAULT, LOW_DEFAULT, thisPrice, VOLUME_DEFAULT);
             
             lastPrice = thisPrice;
         }
