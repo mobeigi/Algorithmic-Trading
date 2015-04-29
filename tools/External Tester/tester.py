@@ -33,7 +33,7 @@ def main(argv):
   testerOrderFile = curDirectoryPath + "test_orders_testerScript.csv"
   trockOrderFile = curDirectoryPath + "orders.csv";
   trockLogFile = curDirectoryPath + "test_logfile.txt";
-  genPathOutPut = curDirectoryPath + "test_genInput.csv";
+  genPathOutPut = curDirectoryPath + "test_input.csv";
   wosLogFile = curDirectoryPath + "log.txt";
   
   #Auto detect required executables () if in current directory
