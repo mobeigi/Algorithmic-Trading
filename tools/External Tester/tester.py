@@ -58,7 +58,7 @@ def main(argv):
     removemaybe(wosLogFile);
     sys.exit(1);
   
-  if (not modulePath and not modulePath):
+  if (not modulePath and not trockDataGenPath):
     if len(sys.argv) != 3:
       print 'usage:', sys.argv[0], '[module application] [TrockEquityDataGen]';
       sys.exit(1);
