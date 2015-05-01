@@ -6,3 +6,6 @@ AlgorithmicTrading
 *.csv
 a.out
 *.log
+tools/External Tester/TrockEquityDataGen.exe
+tools/Trock Equity Data Generator/TrockEquityDataGen.exe
+tools/External Tester/trockAT.exe

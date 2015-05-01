@@ -1,7 +1,0 @@
-:input_csvFile:C:/Users/Ian/Desktop/ian-antheny/sample_data_file.csv\
-:output_csvFile:C:/Users/Ian/Desktop/15s1/SENG3011/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_MinGW_32bit-Debug/output.csv\
-:output_logFile:C:/Users/Ian/Desktop/15s1/SENG3011/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_MinGW_32bit-Debug/AlgorithmicTrading.log\
-:returnsInCalculation:4\
-:threshold:0.004000\
-:startDate:Mon Jan 1 2001\
-:endDate:Sat Jan 1 2005\

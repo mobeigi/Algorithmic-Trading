@@ -1,7 +1,0 @@
-:input_csvFile:/home/samlinux/Documents/Algorithmic-Trading/sample_data_file.csv\
-:output_csvFile:/home/samlinux/Documents/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_GCC_32bit-Debug/orders.csv\
-:output_logFile:/home/samlinux/Documents/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_GCC_32bit-Debug/AlgorithmicTrading.log\
-:returnsInCalculation:2\
-:threshold:0.000000\
-:startDate:01-JAN-2000\
-:endDate:30-NOV-2000\
