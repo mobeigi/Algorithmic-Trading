@@ -10,7 +10,7 @@
 
 //an integer detailing the returns used in the moving average 
 //calculation (from spec)
-:returnsInCalculation:5\
+:returnsInCalculation:3\
 
 //a decimal >= 0, smaller means more likely to buy and sell
 :threshold:0.005\

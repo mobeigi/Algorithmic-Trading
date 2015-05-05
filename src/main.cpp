@@ -16,6 +16,7 @@
 #include "Params.h"
 #include "CSVReader.h"
 #include "UnitTester.h"
+#include "MutantFrogStrategy.h"
 
 void run(std::Logger &logger, std::CSVReader &reader, std::Strategy *strategy) {
     while(reader.nextTrade()) {
@@ -122,22 +123,34 @@ int main(int argc, const char * argv[]) {
     std::Param startDate = parameters.getParam("startDate");
     std::Param endDate = parameters.getParam("endDate");
     
-    std::MomentumStrategy *strategy = nullptr;
+    std::MomentumStrategy *momentumStrategy = nullptr;
+    std::MutantFrogStrategy *mutantFrogStrategy = nullptr;
     
     if (startDate.isNull || endDate.isNull) {
-        strategy = new std::MomentumStrategy(logger, "", "", returnsValue, thresholdValue);
+        momentumStrategy = new std::MomentumStrategy(logger, "", "", returnsValue, thresholdValue);
+        mutantFrogStrategy = new std::MutantFrogStrategy(logger, "", "");
     } else {
-        strategy = new std::MomentumStrategy(logger, startDate.stringVal, endDate.stringVal, returnsValue, thresholdValue);
+        momentumStrategy = new std::MomentumStrategy(logger, startDate.stringVal, endDate.stringVal, returnsValue, thresholdValue);
+        mutantFrogStrategy = new std::MutantFrogStrategy(logger, startDate.stringVal, endDate.stringVal);
     }
     std::CSVReader reader(inputCSVFile.stringVal, & foundFile);
     if(!foundFile) logger.logError("'input_csvFile' not found\n", true);
+    
+    //choose strategy
+    std::Param strategyParam = parameters.getParam("strategy");
+    std::Strategy *strategy = momentumStrategy; //default to momentum strategy
+    if (!strategyParam.isNull && (strategyParam.stringVal.compare("MutantFrog") == 0
+                                  || strategyParam.stringVal.compare("MF") == 0)) {
+        strategy = mutantFrogStrategy;
+    }
     
     run(logger, reader, strategy);
     
     logger.log("Execution Status: Success!");
     logger.stopLogging();
     
-    delete strategy;
+    delete momentumStrategy;
+    delete mutantFrogStrategy;
     
     return 0;
 }

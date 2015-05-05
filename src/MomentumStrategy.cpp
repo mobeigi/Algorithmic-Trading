@@ -17,8 +17,7 @@ namespace std {
         this->threshold = threshold;
     }
     
-    
-    void MomentumStrategy::nextTradeDay(TradeDay tradeDay, bool enableTrading) {
+    void MomentumStrategy::nextTradeDay(TradeDay tradeDay, bool enableTrading, double thresholdBias) {
         
         if (companyData.find(tradeDay.getCompany()) == companyData.end()) {
             companyData[tradeDay.getCompany()] = MomentumStrategyData();
@@ -50,7 +49,7 @@ namespace std {
             logger.logDebug("SMAt: " + Helper::formatDouble(SMAt));
             
             if (data->lastHadMovingAverage) {
-                double diff = SMAt - data->lastMovingAverage;
+                double diff = SMAt - data->lastMovingAverage + thresholdBias;
                 
                 if (enableTrading) {
                     
@@ -82,5 +81,11 @@ namespace std {
         data->previousPrice = thisPrice;
     }
     
+    void MomentumStrategy::nextTradeDay(TradeDay tradeDay, bool enableTrading) {
+        nextTradeDay(tradeDay, enableTrading, 0.0);
+    }
+    
     
 }
+
+

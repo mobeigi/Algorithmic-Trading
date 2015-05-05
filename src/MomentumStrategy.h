@@ -33,10 +33,12 @@ namespace std {
         map<string, MomentumStrategyData> companyData;
         
         unsigned int returnsInCalculation; //number of returns to use in equation (n from spec)
-        double threshold;
         
     protected:
+        void nextTradeDay(TradeDay tradeDay, bool enableTrading, double thresholdBias);
         virtual void nextTradeDay(TradeDay tradeDay, bool enableTrading);
+        
+        double threshold;
         
     public:
       MomentumStrategy(Logger &logger, string startDate, string endDate, unsigned int returnsInCalculation, double threshold);
