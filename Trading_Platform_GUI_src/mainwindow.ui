@@ -136,6 +136,15 @@
               <property name="decimals">
                <number>4</number>
               </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.000100000000000</double>
+              </property>
              </widget>
             </item>
            </layout>
@@ -150,7 +159,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="returnsInCalculation"/>
+             <widget class="QSpinBox" name="returnsInCalculation">
+              <property name="locale">
+               <locale language="English" country="UnitedKingdom"/>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

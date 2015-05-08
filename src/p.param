@@ -1,0 +1,19 @@
+
+//The input csv file detailing the price of equity each day
+:input_csvFile:testdata.csv\
+
+//output csv file
+:output_csvFile:outtest.csv\
+
+//the output log file
+:output_logFile:AlgorithmicTrading.log\
+
+//an integer detailing the returns used in the moving average 
+//calculation (from spec)
+:returnsInCalculation:3\
+
+//a decimal >= 0, smaller means more likely to buy and sell
+:threshold:0.01\
+
+:startDate:1-JAN-2011\
+:endDate:1-SEP-2015\

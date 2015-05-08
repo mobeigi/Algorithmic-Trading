@@ -55,12 +55,12 @@ namespace std {
     void Logger::logError(string errorDescr, bool fatal) {
         if (fatal) {
             log("[FATAL ERROR] " + errorDescr);
-            cout << "[FATAL ERROR] " + errorDescr;
+            cout << "[FATAL ERROR] " + errorDescr << endl;
             stopLogging();
             exit(1);
         }
         log("[ERROR] " + errorDescr);
-        cout << "[ERROR] " + errorDescr;
+        cout << "[ERROR] " + errorDescr << endl;
     }
     
     void Logger::log(string log) {

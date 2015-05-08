@@ -273,11 +273,11 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
     } else {
         sprintf(netReturnValueBuffer,"$%.2lf",net_return_value);
     }
-    net_return_perc_str.append(netReturnValueBuffer);
+    //net_return_perc_str.append(netReturnValueBuffer);
 
-    net_return_perc_str.append(" (");
+    //net_return_perc_str.append(" (");
     net_return_perc_str.append(QString::number(net_return_perc));
-    net_return_perc_str.append("%)");
+    net_return_perc_str.append("%");
     ui->net_return_value_label->setText(net_return_perc_str);
 
 }

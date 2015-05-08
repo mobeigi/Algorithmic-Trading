@@ -23,6 +23,10 @@ namespace std {
         DateComparisonResult compareStart = Helper::compareDates(dStart, tradeDay.getDate());
         DateComparisonResult compareEnd = Helper::compareDates(dEnd, tradeDay.getDate());
         
+        if (compareStart == dateError || compareEnd == dateError) {
+            logger.logError("Date parsing error.", true);
+        }
+        
         if (compareStart == dateBefore || compareEnd == dateAfter) {
             shouldTrade = false;
         }

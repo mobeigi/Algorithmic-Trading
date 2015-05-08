@@ -24,12 +24,18 @@ namespace std {
         
     public:
         MomentumStrategyData();
+        MomentumStrategyData(double threshold, unsigned int returnsInCalculation);
         int previousSignal;
+        double previousPriceOnSignal;
         double previousPrice;
+        int lastTradeDaysAgo;
+        bool lastSignalOdd;
         vector<double> returns;
+        vector<double> priceAtReturn;
         bool lastHadMovingAverage;
         double lastMovingAverage;
-        
+        double threshold;
+        unsigned int returnsInCalculation;
     };
     
 }

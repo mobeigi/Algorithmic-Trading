@@ -34,7 +34,7 @@ namespace std {
         virtual void nextTradeDay(TradeDay tradeDay, bool enableTrading);
         
     public:
-      MutantFrogStrategy(Logger &logger, string startDate, string endDate);
+      MutantFrogStrategy(Logger &logger, string startDate, string endDate, double threshold);
         
     };
     

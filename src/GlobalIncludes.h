@@ -12,7 +12,7 @@
 // define DEBUG for debugging (remove for production releases)
 #define DEBUG 0
 
-#define __PRODUCT_RELEASE_VERSION "1.10"
+#define __PRODUCT_RELEASE_VERSION "2.00"
 
 #define __CSV_DELIM ((char)0x2c)
 

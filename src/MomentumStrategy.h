@@ -32,13 +32,19 @@ namespace std {
         
         map<string, MomentumStrategyData> companyData;
         
-        unsigned int returnsInCalculation; //number of returns to use in equation (n from spec)
+        double defThreshold;
+        unsigned int defReturnsInCalculation; //number of returns to use in equation (n from spec)
         
     protected:
-        void nextTradeDay(TradeDay tradeDay, bool enableTrading, double thresholdBias);
+        //if forced signal != buy of sell, then ignore
+        int nextTradeDay(TradeDay tradeDay, bool enableBuyTrades, bool enableSellTrades, double thresholdBias, int forcedSignal); //returns signal
         virtual void nextTradeDay(TradeDay tradeDay, bool enableTrading);
         
-        double threshold;
+        //call has no effect on this object, also treat data as read only!
+        //also this is a valid pointer until ANY mutating call to this object is made
+        MomentumStrategyData *dataForTradeDay(TradeDay tradeDay);
+        
+        
         
     public:
       MomentumStrategy(Logger &logger, string startDate, string endDate, unsigned int returnsInCalculation, double threshold);

@@ -30,7 +30,7 @@ HEADERS  += mainwindow.h\
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui
-	
+
 RC_FILE = iconise.rc
 
 QMAKE_LFLAGS += -Wl,-rpath,"'\$$ORIGIN'"

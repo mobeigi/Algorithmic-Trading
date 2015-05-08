@@ -122,26 +122,31 @@ int main(int argc, const char * argv[]) {
     
     std::Param startDate = parameters.getParam("startDate");
     std::Param endDate = parameters.getParam("endDate");
+    logger.log("Parameter: 'startDate' Value: " + startDate.stringVal);
+    logger.log("Parameter: 'endDate' Value: " + endDate.stringVal);
     
     std::MomentumStrategy *momentumStrategy = nullptr;
     std::MutantFrogStrategy *mutantFrogStrategy = nullptr;
     
     if (startDate.isNull || endDate.isNull) {
         momentumStrategy = new std::MomentumStrategy(logger, "", "", returnsValue, thresholdValue);
-        mutantFrogStrategy = new std::MutantFrogStrategy(logger, "", "");
+        mutantFrogStrategy = new std::MutantFrogStrategy(logger, "", "", thresholdValue);
     } else {
         momentumStrategy = new std::MomentumStrategy(logger, startDate.stringVal, endDate.stringVal, returnsValue, thresholdValue);
-        mutantFrogStrategy = new std::MutantFrogStrategy(logger, startDate.stringVal, endDate.stringVal);
+        mutantFrogStrategy = new std::MutantFrogStrategy(logger, startDate.stringVal, endDate.stringVal, thresholdValue);
     }
     std::CSVReader reader(inputCSVFile.stringVal, & foundFile);
     if(!foundFile) logger.logError("'input_csvFile' not found\n", true);
     
     //choose strategy
     std::Param strategyParam = parameters.getParam("strategy");
-    std::Strategy *strategy = momentumStrategy; //default to momentum strategy
+    std::Strategy *strategy = mutantFrogStrategy; //default to mutant frog
     if (!strategyParam.isNull && (strategyParam.stringVal.compare("MutantFrog") == 0
                                   || strategyParam.stringVal.compare("MF") == 0)) {
         strategy = mutantFrogStrategy;
+    } else if (!strategyParam.isNull && (strategyParam.stringVal.compare("Momentum") == 0
+                                         || strategyParam.stringVal.compare("M") == 0)) {
+        strategy = momentumStrategy;
     }
     
     run(logger, reader, strategy);
