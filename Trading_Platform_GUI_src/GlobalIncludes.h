@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <iomanip>
 #include <sstream>
+#include <algorithm>
 
 namespace std {
 

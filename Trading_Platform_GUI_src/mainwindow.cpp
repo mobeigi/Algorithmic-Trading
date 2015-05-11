@@ -111,7 +111,8 @@ void MainWindow::on_browse_outputcsv_clicked() {
     ui->output_csv_location->displayText();
 }
 
-int MainWindow::on_analyse_button_clicked() {
+int MainWindow::on_loadorder_button_clicked() {
+
     // Check validity of output_csv
     int output_csv_validity = check_outputcsv();
     if (output_csv_validity != OK) {
@@ -119,6 +120,7 @@ int MainWindow::on_analyse_button_clicked() {
         switch (output_csv_validity) {
             case NO_OUTPUTCSV_SELECTED: ui->output_csv_valid->setText("Please select an output file."); break;
         }
+
         return 0; //early exit
     }
 
@@ -126,10 +128,45 @@ int MainWindow::on_analyse_button_clicked() {
     ui->output_csv_valid->setText("");
 
     //Analyse output file
-    AnalysisDisplays::instance()->analyzeCSVOutput(ui->output_csv_location->text().toStdString(), this);
+    ad = new AnalysisDisplays();
+    ad->showCheckList(ui->output_csv_location->text().toStdString(), ui->listWidget, this);
+
     return EXIT_SUCCESS;
 }
 
+int MainWindow::on_showanalysis_button_clicked() {
+    //Ensure the analysis display has been created
+    if (!ad) {
+        QMessageBox::information(NULL, "No Analysis!", "No Analysis!");
+        return 1;
+    }
+
+    //Check that we have at least 1 item
+    if (ad->getListItems().size() < 1) {
+        QMessageBox::information(NULL, "Not enough items!", "Not enough items!!");
+        return 1;
+    }
+
+    //Now ensure we have at least 1 selected item
+    int count = 0;
+
+    for (QListWidgetItem *item : ad->getListItems()) {
+        if (item->checkState()) {
+            ++count; //Increment counter
+            break;
+        }
+    }
+
+    //Test
+    ad->showAnalysisDisplays(this);
+
+    //Show error message if no boxes were selected
+    if (count == 0) {
+        QMessageBox::information(NULL, "0 Selected", "0 Selected");
+    }
+
+    return EXIT_SUCCESS;
+}
 
 // ----  HELPER FUNCTIONS ---- //
 vector<int> MainWindow::check_params(void) {

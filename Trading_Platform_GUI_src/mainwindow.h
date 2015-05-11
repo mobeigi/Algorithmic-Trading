@@ -48,11 +48,13 @@ private slots:
 
     //for analysing an output csv
     void on_browse_outputcsv_clicked();
-    int on_analyse_button_clicked();
+    int on_loadorder_button_clicked();
+    int on_showanalysis_button_clicked();
     int check_outputcsv(void);
 
 private:
     Ui::MainWindow *ui;
+    AnalysisDisplays *ad = nullptr;
     string construct_date_string(int day, int month, int year);
 };
 

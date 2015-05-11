@@ -1,0 +1,7 @@
+:input_csvFile:D:/Desktop/QTTestFiles/orders.csv\
+:output_csvFile:O:/Dropbox/Github/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_MinGW_32bit-Release/orders.csv\
+:output_logFile:O:/Dropbox/Github/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_MinGW_32bit-Release/AlgorithmicTrading.log\
+:returnsInCalculation:5\
+:threshold:0.000100\
+:startDate:01-JAN-2000\
+:endDate:01-JAN-2015\

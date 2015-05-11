@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Trock Testing Platform</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
@@ -184,6 +184,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="start_date">
+              <property name="displayFormat">
+               <string>dd/MM/yyyy</string>
+              </property>
               <property name="calendarPopup">
                <bool>true</bool>
               </property>
@@ -198,6 +201,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="end_date">
+              <property name="displayFormat">
+               <string>dd/MM/yyyy</string>
+              </property>
               <property name="calendarPopup">
                <bool>true</bool>
               </property>
@@ -296,14 +302,34 @@
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="analyse_button">
+         <widget class="QPushButton" name="loadorder_button">
           <property name="text">
-           <string>Analyse</string>
+           <string>Load Order CSV File</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listWidget"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="showanalysis_button">
+          <property name="text">
+           <string>Display Analysis</string>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="companylabel">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Trock Pty Ltd. Version (v1.11). Web: &lt;a href=&quot;http://www.trock.net/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.trock.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
