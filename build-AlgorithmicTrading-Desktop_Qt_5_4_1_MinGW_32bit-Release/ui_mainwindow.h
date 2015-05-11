@@ -417,7 +417,7 @@ public:
         inverseSelection->setText(QApplication::translate("MainWindow", "Inverse Selection", 0));
         showanalysis_button->setText(QApplication::translate("MainWindow", "Display Analysis", 0));
         analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Analyse Order CSV File", 0));
-        companylabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Trock Pty Ltd. Version (v1.11). Web: <a href=\"http://www.trock.net/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.trock.net/</span></a></p></body></html>", 0));
+        companylabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Trock Pty Ltd. Version (v1.20). Web: <a href=\"http://www.trock.net/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.trock.net/</span></a></p></body></html>", 0));
     } // retranslateUi
 
 };
