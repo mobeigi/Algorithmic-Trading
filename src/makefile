@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-c -std=c++11
-O=main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o CSVReader.o UnitTester.o CSVWriter.o
+O=main.o MomentumStrategy.o Strategy.o TradeDay.o StrategyResult.o Logger.o MomentumStrategyData.o Params.o CSVReader.o UnitTester.o CSVWriter.o MutantFrogStrategy.o TradingInfluences.o
 
 all: AlgorithmicTrading
 
@@ -31,14 +31,23 @@ MomentumStrategyData.o: MomentumStrategyData.cpp
 Params.o: Params.cpp
 	$(CC) $(CFLAGS) Params.cpp
 
-CSVReader.o:
+CSVReader.o: CSVReader.cpp
 	$(CC) $(CFLAGS) CSVReader.cpp
 
-UnitTester.o:
+UnitTester.o: UnitTester.cpp
 	$(CC) $(CFLAGS) UnitTester.cpp
 
-CSVWriter.o:
+CSVWriter.o: CSVWriter.cpp
 	$(CC) $(CFLAGS) CSVWriter.cpp
+
+CSVWriter.o: CSVWriter.cpp
+	$(CC) $(CFLAGS) CSVWriter.cpp
+
+MutantFrogStrategy.o: MutantFrogStrategy.cpp
+	$(CC) $(CFLAGS) MutantFrogStrategy.cpp
+
+TradingInfluences.o: TradingInfluences.cpp
+	$(CC) $(CFLAGS) TradingInfluences.cpp
 	
 clean:
 	rm *.o AlgorithmicTrading *.log *.csv
