@@ -7,7 +7,6 @@
 
 #include <cmath>
 
-#include <QMainWindow>
 #include <QWidget>
 
 #include <QGraphicsEllipseItem>

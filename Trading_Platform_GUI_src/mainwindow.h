@@ -50,6 +50,11 @@ private slots:
     void on_browse_outputcsv_clicked();
     int on_loadorder_button_clicked();
     int on_showanalysis_button_clicked();
+
+    int on_selectall_clicked();
+    int on_deselectall_clicked();
+    int on_inverseSelection_clicked();
+
     int check_outputcsv(void);
 
 private:

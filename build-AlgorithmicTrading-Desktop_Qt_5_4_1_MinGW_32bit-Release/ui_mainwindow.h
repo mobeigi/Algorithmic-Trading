@@ -76,6 +76,12 @@ public:
     QLabel *output_csv_valid;
     QPushButton *loadorder_button;
     QListWidget *listWidget;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *analysis_error_msg;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *selectall;
+    QPushButton *deselectall;
+    QPushButton *inverseSelection;
     QPushButton *showanalysis_button;
     QLabel *companylabel;
     QStatusBar *statusBar;
@@ -320,6 +326,39 @@ public:
 
         verticalLayout->addWidget(listWidget);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        analysis_error_msg = new QLabel(tab_2);
+        analysis_error_msg->setObjectName(QStringLiteral("analysis_error_msg"));
+        analysis_error_msg->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+
+        horizontalLayout_3->addWidget(analysis_error_msg);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        selectall = new QPushButton(tab_2);
+        selectall->setObjectName(QStringLiteral("selectall"));
+
+        horizontalLayout_2->addWidget(selectall);
+
+        deselectall = new QPushButton(tab_2);
+        deselectall->setObjectName(QStringLiteral("deselectall"));
+
+        horizontalLayout_2->addWidget(deselectall);
+
+        inverseSelection = new QPushButton(tab_2);
+        inverseSelection->setObjectName(QStringLiteral("inverseSelection"));
+
+        horizontalLayout_2->addWidget(inverseSelection);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
         showanalysis_button = new QPushButton(tab_2);
         showanalysis_button->setObjectName(QStringLiteral("showanalysis_button"));
 
@@ -343,7 +382,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        analysis_prep->setCurrentIndex(0);
+        analysis_prep->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -367,13 +406,17 @@ public:
         date_valid->setText(QString());
         execution_status->setText(QString());
         execute_button->setText(QApplication::translate("MainWindow", "Execute", 0));
-        analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Choose a Module", 0));
-        outputcsv_label->setText(QApplication::translate("MainWindow", "Output CSV File", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Run Strategy Module", 0));
+        outputcsv_label->setText(QApplication::translate("MainWindow", "Output Order CSV File:", 0));
         browse_outputcsv->setText(QApplication::translate("MainWindow", "Browse", 0));
         output_csv_valid->setText(QString());
         loadorder_button->setText(QApplication::translate("MainWindow", "Load Order CSV File", 0));
+        analysis_error_msg->setText(QString());
+        selectall->setText(QApplication::translate("MainWindow", "Select All", 0));
+        deselectall->setText(QApplication::translate("MainWindow", "Deselect All", 0));
+        inverseSelection->setText(QApplication::translate("MainWindow", "Inverse Selection", 0));
         showanalysis_button->setText(QApplication::translate("MainWindow", "Display Analysis", 0));
-        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Choose an output csv", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Analyse Order CSV File", 0));
         companylabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Trock Pty Ltd. Version (v1.11). Web: <a href=\"http://www.trock.net/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.trock.net/</span></a></p></body></html>", 0));
     } // retranslateUi
 

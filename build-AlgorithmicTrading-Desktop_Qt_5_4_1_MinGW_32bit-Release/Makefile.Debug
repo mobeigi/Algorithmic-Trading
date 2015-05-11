@@ -96,7 +96,7 @@ DESTDIR_TARGET = debug\AlgorithmicTrading.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindow.h ui_DisplayAnalysi.h $(OBJECTS) debug/iconise_res.o
+$(DESTDIR_TARGET): ui_mainwindow.h ui_DisplayAnalysis.h $(OBJECTS) debug/iconise_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
 
 debug/iconise_res.o: ..\Trading_Platform_GUI_src\iconise.rc
@@ -285,8 +285,7 @@ debug/moc_mainwindow.cpp: C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
 
 debug/moc_DisplayAnalysis.cpp: ../Trading_Platform_GUI_src/GlobalIncludes.h \
 		../Trading_Platform_GUI_src/AnalysisData.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qwidget.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
@@ -388,9 +387,6 @@ debug/moc_DisplayAnalysis.cpp: ../Trading_Platform_GUI_src/GlobalIncludes.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
-		C:/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsEllipseItem \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsScene \
@@ -411,14 +407,14 @@ debug/moc_DisplayAnalysis.cpp: ../Trading_Platform_GUI_src/GlobalIncludes.h \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_DisplayAnalysi.h
+compiler_uic_make_all: ui_mainwindow.h ui_DisplayAnalysis.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_DisplayAnalysi.h
+	-$(DEL_FILE) ui_mainwindow.h ui_DisplayAnalysis.h
 ui_mainwindow.h: ../Trading_Platform_GUI_src/mainwindow.ui
 	C:\Qt\5.4\mingw491_32\bin\uic.exe ..\Trading_Platform_GUI_src\mainwindow.ui -o ui_mainwindow.h
 
-ui_DisplayAnalysi.h: ../Trading_Platform_GUI_src/DisplayAnalysi.ui
-	C:\Qt\5.4\mingw491_32\bin\uic.exe ..\Trading_Platform_GUI_src\DisplayAnalysi.ui -o ui_DisplayAnalysi.h
+ui_DisplayAnalysis.h: ../Trading_Platform_GUI_src/DisplayAnalysis.ui
+	C:\Qt\5.4\mingw491_32\bin\uic.exe ..\Trading_Platform_GUI_src\DisplayAnalysis.ui -o ui_DisplayAnalysis.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -798,8 +794,7 @@ debug/AnalysisDisplays.o: ../Trading_Platform_GUI_src/AnalysisDisplays.cpp ../Tr
 		../Trading_Platform_GUI_src/DisplayAnalysis.h \
 		../Trading_Platform_GUI_src/GlobalIncludes.h \
 		../Trading_Platform_GUI_src/AnalysisData.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qwidget.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
@@ -901,9 +896,6 @@ debug/AnalysisDisplays.o: ../Trading_Platform_GUI_src/AnalysisDisplays.cpp ../Tr
 		C:/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
-		C:/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsEllipseItem \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsScene \
@@ -934,11 +926,15 @@ debug/AnalysisDisplays.o: ../Trading_Platform_GUI_src/AnalysisDisplays.cpp ../Tr
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qvalidator.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qregularexpression.h \
+		C:/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qslider.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
 		../Trading_Platform_GUI_src/mainwindow.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QFileDialog \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qdir.h \
@@ -991,8 +987,7 @@ debug/AnalysisDisplays.o: ../Trading_Platform_GUI_src/AnalysisDisplays.cpp ../Tr
 debug/DisplayAnalysis.o: ../Trading_Platform_GUI_src/DisplayAnalysis.cpp ../Trading_Platform_GUI_src/DisplayAnalysis.h \
 		../Trading_Platform_GUI_src/GlobalIncludes.h \
 		../Trading_Platform_GUI_src/AnalysisData.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qwidget.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/5.4/mingw491_32/include/QtCore/qglobal.h \
@@ -1094,9 +1089,6 @@ debug/DisplayAnalysis.o: ../Trading_Platform_GUI_src/DisplayAnalysis.cpp ../Trad
 		C:/Qt/5.4/mingw491_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.4/mingw491_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
-		C:/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
-		C:/Qt/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsEllipseItem \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QGraphicsScene \
@@ -1117,6 +1109,7 @@ debug/DisplayAnalysis.o: ../Trading_Platform_GUI_src/DisplayAnalysis.cpp ../Trad
 		C:/Qt/5.4/mingw491_32/include/QtCore/QVariant \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QAction \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.4/mingw491_32/include/QtGui/qicon.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QApplication \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qapplication.h \
@@ -1146,9 +1139,12 @@ debug/DisplayAnalysis.o: ../Trading_Platform_GUI_src/DisplayAnalysis.cpp ../Trad
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qslider.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qrubberband.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QLabel \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/QMenuBar \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
 		C:/Qt/5.4/mingw491_32/include/QtWidgets/qmenu.h \

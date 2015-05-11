@@ -112,6 +112,13 @@ void MainWindow::on_browse_outputcsv_clicked() {
 }
 
 int MainWindow::on_loadorder_button_clicked() {
+    //Clear analyse error text
+    ui->analysis_error_msg->setText("");
+
+    //Clear old AD info if it exists
+    if (ad) {
+        ad->getListItems().clear();
+    }
 
     // Check validity of output_csv
     int output_csv_validity = check_outputcsv();
@@ -135,15 +142,18 @@ int MainWindow::on_loadorder_button_clicked() {
 }
 
 int MainWindow::on_showanalysis_button_clicked() {
+    //Clear analyse error text
+    ui->analysis_error_msg->setText("");
+
     //Ensure the analysis display has been created
     if (!ad) {
-        QMessageBox::information(NULL, "No Analysis!", "No Analysis!");
+        ui->analysis_error_msg->setText("Please load some CSV order data first.");
         return 1;
     }
 
     //Check that we have at least 1 item
     if (ad->getListItems().size() < 1) {
-        QMessageBox::information(NULL, "Not enough items!", "Not enough items!!");
+        ui->analysis_error_msg->setText("There was no Equity types in the provided CSV file");
         return 1;
     }
 
@@ -157,13 +167,45 @@ int MainWindow::on_showanalysis_button_clicked() {
         }
     }
 
-    //Test
-    ad->showAnalysisDisplays(this);
+    if (count == 0) {
+        ui->analysis_error_msg->setText("You must select at least 1 Equity type to analyse.");
+    } else {
+        //Show analysis data
+        ad->showAnalysisDisplays();
+    }
 
-    //Show error message if no boxes were selected
-    //if (count == 0) {
-        //QMessageBox::information(NULL, "0 Selected", "0 Selected");
-    //}
+    return EXIT_SUCCESS;
+}
+
+int MainWindow::on_selectall_clicked() {
+    if (ad) {
+        for (QListWidgetItem *item : ad->getListItems()) {
+            item->setCheckState(Qt::Checked);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int MainWindow::on_deselectall_clicked() {
+    if (ad) {
+        for (QListWidgetItem *item : ad->getListItems()) {
+            item->setCheckState(Qt::Unchecked);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int MainWindow::on_inverseSelection_clicked() {
+    if (ad) {
+        for (QListWidgetItem *item : ad->getListItems()) {
+            if (item->checkState())
+                item->setCheckState(Qt::Unchecked);
+            else
+                item->setCheckState(Qt::Checked);
+        }
+    }
 
     return EXIT_SUCCESS;
 }

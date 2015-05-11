@@ -29,7 +29,7 @@ HEADERS  += mainwindow.h\
     DisplayAnalysis.h
 
 FORMS    += mainwindow.ui \
-    DisplayAnalysi.ui
+    DisplayAnalysis.ui
 
 RC_FILE = iconise.rc
 

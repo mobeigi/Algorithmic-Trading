@@ -4,9 +4,9 @@
 #include "AnalysisDisplays.h"
 
 DisplayAnalysis::DisplayAnalysis(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent), ui(new Ui::DisplayAnalysis)
 {
-    //ui->setupUi(this);
+    this->ui->setupUi(this);
     scene = nullptr;
     displayId = -1;
 }
@@ -313,7 +313,7 @@ void DisplayAnalysis::insertRowIntoReturnsAnalysis(std::string buySellPair,
 
 void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
 
-    //this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
+    this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
     this->displayGraphAnalysis(data);
     this->displayReturnsAnalysis(data);
 }
