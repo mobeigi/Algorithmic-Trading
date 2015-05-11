@@ -38,19 +38,17 @@ void AnalysisDisplays::showCheckList(std::string csvFile, QListWidget* lw, QWidg
         listItems.push_back(item);
     }
 
-    if (parseCSV->getAllEquityTypes().size() == 0) {
-        QMessageBox::question(parent, "No Equity Trades", "The strategy suggested no equity trades.", QMessageBox::Ok);
-    }
-
 }
 
-void AnalysisDisplays::showAnalysisDisplays() {
+void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
 
-    QMainWindow *mw = new QMainWindow();
-    mw->setFixedSize(750,700);
+    QMainWindow *mw = new QMainWindow(parent);
+
     mw->setWindowTitle("Equity Strategy Analysis");
+    mw->setMinimumSize(750, 700);
+
     QTabWidget *tabw = new QTabWidget(mw);
-    tabw->setFixedSize(750,700);
+    mw->setCentralWidget(tabw);
 
     for (QListWidgetItem *wi: listItems) {
         if (wi->checkState()) {
@@ -69,7 +67,6 @@ void AnalysisDisplays::showAnalysisDisplays() {
 
             dw->displayAnalysis(parseCSV->getDataForEquityType(eqType));
         }
-
     }
 
     //Show the main window
@@ -85,11 +82,13 @@ void AnalysisDisplays::analyzeCSVOutput(std::string csvFile, QWidget *parent) {
         return;
     }
 
-    QMainWindow *mw = new QMainWindow();
-    mw->setFixedSize(750,700);
+    QMainWindow *mw = new QMainWindow(parent);
+
     mw->setWindowTitle("Equity Strategy Analysis");
+    mw->setMinimumSize(750, 700);
+
     QTabWidget *tabw = new QTabWidget(mw);
-    tabw->setFixedSize(750,700);
+    mw->setCentralWidget(tabw);
 
     std::ParseCSVData tmpParseCSV = std::ParseCSVData(csvFile);
 

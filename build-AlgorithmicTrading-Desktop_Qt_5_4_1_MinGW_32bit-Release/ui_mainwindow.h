@@ -382,7 +382,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        analysis_prep->setCurrentIndex(1);
+        analysis_prep->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

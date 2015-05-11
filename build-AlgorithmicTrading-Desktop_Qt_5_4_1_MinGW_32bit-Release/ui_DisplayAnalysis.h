@@ -28,6 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_DisplayAnalysis
 {
 public:
+    QVBoxLayout *verticalLayout_2;
     QScrollArea *scrollArea;
     QWidget *scrollViewGraph;
     QGridLayout *gridLayout_2;
@@ -50,13 +51,21 @@ public:
         if (DisplayAnalysis->objectName().isEmpty())
             DisplayAnalysis->setObjectName(QStringLiteral("DisplayAnalysis"));
         DisplayAnalysis->resize(750, 652);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(DisplayAnalysis->sizePolicy().hasHeightForWidth());
+        DisplayAnalysis->setSizePolicy(sizePolicy);
+        verticalLayout_2 = new QVBoxLayout(DisplayAnalysis);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         scrollArea = new QScrollArea(DisplayAnalysis);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setGeometry(QRect(10, 10, 728, 631));
+        sizePolicy.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
+        scrollArea->setSizePolicy(sizePolicy);
         scrollArea->setWidgetResizable(true);
         scrollViewGraph = new QWidget();
         scrollViewGraph->setObjectName(QStringLiteral("scrollViewGraph"));
-        scrollViewGraph->setGeometry(QRect(0, 0, 726, 629));
+        scrollViewGraph->setGeometry(QRect(0, 0, 726, 628));
         gridLayout_2 = new QGridLayout(scrollViewGraph);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         verticalLayout = new QVBoxLayout();
@@ -131,6 +140,9 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 2, 0, 2, 1);
 
         scrollArea->setWidget(scrollViewGraph);
+
+        verticalLayout_2->addWidget(scrollArea);
+
 
         retranslateUi(DisplayAnalysis);
 

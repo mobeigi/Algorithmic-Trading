@@ -118,6 +118,7 @@ int MainWindow::on_loadorder_button_clicked() {
     //Clear old AD info if it exists
     if (ad) {
         ad->getListItems().clear();
+        ui->listWidget->clear();
     }
 
     // Check validity of output_csv
@@ -137,6 +138,12 @@ int MainWindow::on_loadorder_button_clicked() {
     //Analyse output file
     ad = new AnalysisDisplays();
     ad->showCheckList(ui->output_csv_location->text().toStdString(), ui->listWidget, this);
+
+    //Check for invalid file
+    if (ad && ad->getListItems().size() == 0) {
+        ui->output_csv_valid->setText("No valid equity trades were found in the provided CSV file.");
+        return 0;
+    }
 
     return EXIT_SUCCESS;
 }
@@ -171,7 +178,7 @@ int MainWindow::on_showanalysis_button_clicked() {
         ui->analysis_error_msg->setText("You must select at least 1 Equity type to analyse.");
     } else {
         //Show analysis data
-        ad->showAnalysisDisplays();
+        ad->showAnalysisDisplays(this);
     }
 
     return EXIT_SUCCESS;
