@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'DisplayAnalysis.ui'
+** Form generated from reading UI file 'DisplayAnalysis_back.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_DISPLAYANALYSIS_H
-#define UI_DISPLAYANALYSIS_H
+#ifndef UI_DISPLAYANALYSIS_BACK_H
+#define UI_DISPLAYANALYSIS_BACK_H
 
 #include <QtCore/QLocale>
 #include <QtCore/QVariant>
@@ -23,7 +23,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -37,8 +36,6 @@ public:
     QAction *actionDsdsasdsd;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QTabWidget *displayTabWidget;
-    QWidget *tab;
     QScrollArea *scrollArea;
     QWidget *scrollViewGraph;
     QGridLayout *gridLayout_2;
@@ -55,7 +52,6 @@ public:
     QLabel *label_2;
     QLabel *label_4;
     QLabel *label_3;
-    QWidget *tab_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QMenuBar *menuBar;
@@ -75,17 +71,12 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        displayTabWidget = new QTabWidget(centralWidget);
-        displayTabWidget->setObjectName(QStringLiteral("displayTabWidget"));
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        scrollArea = new QScrollArea(tab);
+        scrollArea = new QScrollArea(centralWidget);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setGeometry(QRect(10, 20, 728, 631));
         scrollArea->setWidgetResizable(true);
         scrollViewGraph = new QWidget();
         scrollViewGraph->setObjectName(QStringLiteral("scrollViewGraph"));
-        scrollViewGraph->setGeometry(QRect(0, 0, 726, 629));
+        scrollViewGraph->setGeometry(QRect(0, 0, 726, 651));
         gridLayout_2 = new QGridLayout(scrollViewGraph);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -165,12 +156,8 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 2, 0, 2, 1);
 
         scrollArea->setWidget(scrollViewGraph);
-        displayTabWidget->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QStringLiteral("tab_2"));
-        displayTabWidget->addTab(tab_2, QString());
 
-        gridLayout->addWidget(displayTabWidget, 1, 0, 1, 1);
+        gridLayout->addWidget(scrollArea, 0, 0, 1, 1);
 
         DisplayAnalysis->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(DisplayAnalysis);
@@ -185,9 +172,6 @@ public:
         DisplayAnalysis->setMenuBar(menuBar);
 
         retranslateUi(DisplayAnalysis);
-
-        displayTabWidget->setCurrentIndex(0);
-
 
         QMetaObject::connectSlotsByName(DisplayAnalysis);
     } // setupUi
@@ -204,8 +188,6 @@ public:
         label_2->setText(QApplication::translate("DisplayAnalysis", "<html><head/><body><p><span style=\" color:#009940;\">Green - Sell</span></p></body></html>", 0));
         label_4->setText(QString());
         label_3->setText(QString());
-        displayTabWidget->setTabText(displayTabWidget->indexOf(tab), QApplication::translate("DisplayAnalysis", "Tab 1", 0));
-        displayTabWidget->setTabText(displayTabWidget->indexOf(tab_2), QApplication::translate("DisplayAnalysis", "Tab 2", 0));
     } // retranslateUi
 
 };
@@ -216,4 +198,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_DISPLAYANALYSIS_H
+#endif // UI_DISPLAYANALYSIS_BACK_H

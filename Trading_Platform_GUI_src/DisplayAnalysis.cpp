@@ -4,14 +4,11 @@
 #include "AnalysisDisplays.h"
 
 DisplayAnalysis::DisplayAnalysis(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::DisplayAnalysis)
+    QWidget(parent)
 {
-    ui->setupUi(this);
+    //ui->setupUi(this);
     scene = nullptr;
     displayId = -1;
-
-    //ui->scrollArea_2->horizontalScrollBar()->setValue(0);
 }
 
 void DisplayAnalysis::setDisplayId(long displayId) {
@@ -19,7 +16,7 @@ void DisplayAnalysis::setDisplayId(long displayId) {
 }
 
 void DisplayAnalysis::closeEvent(QCloseEvent *event) {
-    QMainWindow::closeEvent(event);
+    QWidget::closeEvent(event);
     AnalysisDisplays::instance()->displayClosing(displayId);
 }
 
@@ -316,15 +313,13 @@ void DisplayAnalysis::insertRowIntoReturnsAnalysis(std::string buySellPair,
 
 void DisplayAnalysis::displayAnalysis(std::AnalysisData *data) {
 
-    this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
-
+    //this->setWindowTitle(QString::fromStdString("Equity Strategy Analysis (" + data->getCompany() + ")"));
     this->displayGraphAnalysis(data);
     this->displayReturnsAnalysis(data);
 }
 
 DisplayAnalysis::~DisplayAnalysis()
 {
-    delete ui;
     if (scene != nullptr)
         delete scene;
 }

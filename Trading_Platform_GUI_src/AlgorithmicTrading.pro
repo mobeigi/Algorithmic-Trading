@@ -17,19 +17,19 @@ SOURCES +=\
         mainwindow.cpp \
     main.cpp \ 
     AnalysisData.cpp \
-    DisplayAnalysis.cpp \
     ParseCSVData.cpp \
-    AnalysisDisplays.cpp
+    AnalysisDisplays.cpp \
+    DisplayAnalysis.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
     AnalysisData.h \
-    DisplayAnalysis.h \
     ParseCSVData.h \
-    AnalysisDisplays.h
+    AnalysisDisplays.h \
+    DisplayAnalysis.h
 
 FORMS    += mainwindow.ui \
-    DisplayAnalysis.ui
+    DisplayAnalysi.ui
 
 RC_FILE = iconise.rc
 

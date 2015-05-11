@@ -161,9 +161,9 @@ int MainWindow::on_showanalysis_button_clicked() {
     ad->showAnalysisDisplays(this);
 
     //Show error message if no boxes were selected
-    if (count == 0) {
-        QMessageBox::information(NULL, "0 Selected", "0 Selected");
-    }
+    //if (count == 0) {
+        //QMessageBox::information(NULL, "0 Selected", "0 Selected");
+    //}
 
     return EXIT_SUCCESS;
 }

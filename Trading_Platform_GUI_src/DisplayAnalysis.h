@@ -8,6 +8,7 @@
 #include <cmath>
 
 #include <QMainWindow>
+#include <QWidget>
 
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
@@ -20,7 +21,7 @@ namespace Ui {
 class DisplayAnalysis;
 }
 
-class DisplayAnalysis : public QMainWindow
+class DisplayAnalysis : public QWidget
 {
     Q_OBJECT
 
