@@ -34,6 +34,11 @@ public:
     inline string getStartDate() {return dateStart;}
     inline string getEndDate() {return dateEnd;}
 
+    /* paraTypes:
+     * paraReturns
+     * paraGranality
+     * paraVolatility
+     * */
     Para getQuantifiedParameter(QuantPara *paraType, int strategyIndex);
 
 };
