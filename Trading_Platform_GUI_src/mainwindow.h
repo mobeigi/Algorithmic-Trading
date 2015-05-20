@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "GlobalIncludes.h"
+
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QDir>         //for processing directories

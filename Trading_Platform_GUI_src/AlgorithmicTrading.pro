@@ -19,14 +19,20 @@ SOURCES +=\
     AnalysisData.cpp \
     ParseCSVData.cpp \
     AnalysisDisplays.cpp \
-    DisplayAnalysis.cpp
+    DisplayAnalysis.cpp \
+    QuantPara.cpp \
+    ParamAnalysisHelper.cpp \
+    ParamSet.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
     AnalysisData.h \
     ParseCSVData.h \
     AnalysisDisplays.h \
-    DisplayAnalysis.h
+    DisplayAnalysis.h \
+    QuantPara.h \
+    ParamAnalysisHelper.h \
+    ParamSet.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui

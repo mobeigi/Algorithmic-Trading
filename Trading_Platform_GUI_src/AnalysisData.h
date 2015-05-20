@@ -43,7 +43,7 @@ public:
     void addNextTradeData(signal tradeSignal, string date, double price, int volume);
 
     int tradeDataAvailable();
-    TradeData getData(int index);
+    inline TradeData getData(int index) {return tradeData[index];}
 
     string firstTradeDate();
     string lastTradeDate();

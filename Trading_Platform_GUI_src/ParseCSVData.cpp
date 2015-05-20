@@ -72,6 +72,8 @@ vector<string> ParseCSVData::getAllEquityTypes() {
 }
 
 AnalysisData *ParseCSVData::getDataForEquityType(string equityType) {
+    if (allData.find(equityType) == allData.end())
+        return nullptr;
     return allData[equityType];
 }
 

@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (ad != nullptr) delete ad;
 }
 
 void MainWindow::on_browseModule_clicked()
@@ -136,6 +137,9 @@ int MainWindow::on_loadorder_button_clicked() {
     ui->output_csv_valid->setText("");
 
     //Analyse output file
+    if (ad != nullptr) {
+        delete ad;
+    }
     ad = new AnalysisDisplays();
     ad->showCheckList(ui->output_csv_location->text().toStdString(), ui->listWidget, this);
 

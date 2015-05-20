@@ -9,11 +9,12 @@ AnalysisDisplays* __analysisDisplays = nullptr;
 AnalysisDisplays::AnalysisDisplays()
 {
     currentDisplayId = 0;
+    parseCSV = nullptr;
 }
 
 AnalysisDisplays::~AnalysisDisplays()
 {
-
+    if (parseCSV != nullptr) delete parseCSV;
 }
 
 AnalysisDisplays *AnalysisDisplays::instance() {
@@ -37,6 +38,7 @@ void AnalysisDisplays::showCheckList(std::string csvFile, QListWidget* lw, QWidg
         lw->addItem(item);
         listItems.push_back(item);
     }
+
 
 }
 

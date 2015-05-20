@@ -10,6 +10,8 @@
 #ifndef __Algorithmic_Trading__GlobalIncludes__
 #define __Algorithmic_Trading__GlobalIncludes__
 
+#define ERR_FATAL(info) printf(info);exit(1)
+#define ERR(info) printf(info)
 
 
 #include <string>

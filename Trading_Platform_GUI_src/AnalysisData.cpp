@@ -36,10 +36,6 @@ int AnalysisData::tradeDataAvailable() {
     return tradeData.size();
 }
 
-TradeData AnalysisData::getData(int index) {
-    return tradeData[index];
-}
-
 string AnalysisData::firstTradeDate() {
     return tradeData[0].date;
 }
