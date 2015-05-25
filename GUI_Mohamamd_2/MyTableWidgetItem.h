@@ -9,7 +9,7 @@ class MyTableWidgetItem : public QTableWidgetItem {
             QString str1 = text();
             QString str2 = other.text();
 
-            if (str1[0] == '$' || str1[0] == '€') {
+            if (str1[0] == '$') {
                 str1.remove(0, 1);
                 str2.remove(0, 1); // we assume both items have the same format
             }
