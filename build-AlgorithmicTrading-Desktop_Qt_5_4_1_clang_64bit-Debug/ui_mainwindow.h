@@ -242,6 +242,7 @@ public:
 
         analysisThreshold = new QDoubleSpinBox(frame);
         analysisThreshold->setObjectName(QStringLiteral("analysisThreshold"));
+        analysisThreshold->setDecimals(7);
 
         analysisThresholdFrame->addWidget(analysisThreshold);
 
@@ -258,6 +259,8 @@ public:
 
         analysisReturns = new QDoubleSpinBox(frame);
         analysisReturns->setObjectName(QStringLiteral("analysisReturns"));
+        analysisReturns->setDecimals(0);
+        analysisReturns->setMaximum(100);
 
         analysisReturnsFrame->addWidget(analysisReturns);
 

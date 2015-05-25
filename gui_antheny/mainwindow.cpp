@@ -300,6 +300,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
     int analysisListRows = ui->analysisStrategyList->rowCount();
     int dateListRows = ui->analysisListDate->rowCount();
 
+    vector<string> strategieStrs = vector<string>();
     vector<ParseCSVData *> allCSVData = vector<ParseCSVData *>();
     map<string, bool> equityTypesMap = map<string, bool>();
     vector<StrategyData> strategyDatas = vector<StrategyData>();
@@ -326,6 +327,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         StrategyData strategyData;
         strategyData.name = analysisStrategy.toStdString() + ", " + analysisThreshold.toStdString() + ", " + analysisReturns.toStdString();
         strategyData.dataForEachDateRange = vector<ParseCSVData *>();
+        strategieStrs.push_back(strategyData.name);
 
         int dateCount;
         for(dateCount=0;dateCount<dateListRows;dateCount++){
@@ -435,7 +437,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
     QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
     qad->show();
 
-    qad->setAnalysis(pset, equityTypes);
+    qad->setAnalysis(pset, strategieStrs);
 
 //    for (QString s : outputList){
 //        cout << s.toStdString() << endl;

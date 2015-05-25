@@ -130,7 +130,11 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QDoubleSpinBox" name="analysisThreshold"/>
+                 <widget class="QDoubleSpinBox" name="analysisThreshold">
+                  <property name="decimals">
+                   <number>7</number>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -144,7 +148,14 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QDoubleSpinBox" name="analysisReturns"/>
+                 <widget class="QDoubleSpinBox" name="analysisReturns">
+                  <property name="decimals">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <double>100.000000000000000</double>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
