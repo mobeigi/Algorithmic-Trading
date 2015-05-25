@@ -39,9 +39,9 @@
     <item>
      <widget class="QTabWidget" name="analysis_prep">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="quantitative_tab">
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
@@ -219,7 +219,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="widget">
+      <widget class="QWidget" name="run_tab">
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
@@ -436,7 +436,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="analysis_tab">
        <attribute name="title">
         <string>Analyse Order CSV File</string>
        </attribute>
