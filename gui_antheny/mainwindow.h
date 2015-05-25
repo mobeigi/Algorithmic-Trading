@@ -61,7 +61,10 @@ private slots:
     void on_analysisInputCSVButton_clicked();
     void on_analysisBrowseStrategyButton_clicked();
     void on_clearStrategyButton_clicked();
+    void on_analysisClearDateButton_clicked();
     void on_addStrategyButton_clicked();
+    void on_analysisAddDateButton_clicked();
+
 
 
 

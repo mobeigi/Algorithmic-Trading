@@ -253,6 +253,11 @@ void MainWindow::on_clearStrategyButton_clicked(){
         ui->analysisStrategyList->setRowCount(0);
 }
 
+void MainWindow::on_analysisClearDateButton_clicked(){
+        ui->analysisListDate->clearContents();
+        ui->analysisListDate->setRowCount(0);
+}
+
 void MainWindow::on_addStrategyButton_clicked(){
 
     int currRows = ui->analysisStrategyList->rowCount();
@@ -272,12 +277,20 @@ void MainWindow::on_addStrategyButton_clicked(){
     ui->analysisStrategyList->setItem(currRows,1,analysisThresholdItem);
     ui->analysisStrategyList->setItem(currRows,2,analysisReturnsItem);
     ui->analysisStrategyList->setItem(currRows,3,inputCSVItem);
+}
 
+void MainWindow::on_analysisAddDateButton_clicked(){
+    int currRows = ui->analysisListDate->rowCount();
+    ui->analysisListDate->setRowCount(currRows + 1);
 
+    string startDate = construct_date_string(ui->analysisStartDate->date().day(),ui->analysisStartDate->date().month(),ui->analysisStartDate->date().year());
+    string endDate = construct_date_string(ui->analysisEndDate->date().day(),ui->analysisEndDate->date().month(),ui->analysisEndDate->date().year());
 
-    //string widgetItem = inputCSV + "\t" + analysisStrategy;
-    //cout << widgetItem << endl;
+    QTableWidgetItem *startDateItem = new QTableWidgetItem(QString::fromStdString(startDate), QTableWidgetItem::Type);
+    QTableWidgetItem *endDateItem = new QTableWidgetItem(QString::fromStdString(endDate), QTableWidgetItem::Type);
 
+    ui->analysisListDate->setItem(currRows,0,startDateItem);
+    ui->analysisListDate->setItem(currRows,1,endDateItem);
 }
 
 // -------------------------  HELPER FUNCTIONS ------------------------ //

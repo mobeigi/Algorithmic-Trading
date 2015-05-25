@@ -219,15 +219,11 @@
               <layout class="QHBoxLayout" name="horizontalLayout_11">
                <item>
                 <widget class="QLabel" name="label_5">
+                 <property name="styleSheet">
+                  <string notr="true">qproperty-alignment: AlignCenter;</string>
+                 </property>
                  <property name="text">
                   <string>Add New Date Range</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="anaylsisAddDateButton">
-                 <property name="text">
-                  <string>Add Date Range</string>
                  </property>
                 </widget>
                </item>
@@ -258,6 +254,26 @@
               </layout>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QFrame" name="analysisDateButtonFrame">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QPushButton" name="analysisClearDateButton">
+                <property name="text">
+                 <string>Clear Date Ranges</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="analysisAddDateButton">
+                <property name="text">
+                 <string>Add Date Range</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
             <widget class="QTableWidget" name="analysisListDate">
