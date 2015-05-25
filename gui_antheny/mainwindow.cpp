@@ -8,11 +8,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+//    for (int c = 0; c < ui->analysisListDate->horizontalHeader()->count(); ++c)
+//    {
+//        ui->analysisListDate->horizontalHeader()->setSectionResizeMode(
+//            c, QHeaderView::Stretch);
+//    }
+    ui->analysisStrategyList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->analysisListDate->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+
+
     if (ad != nullptr) delete ad;
 }
 
@@ -236,6 +246,11 @@ void MainWindow::on_analysisInputCSVButton_clicked(){
 void MainWindow::on_analysisBrowseStrategyButton_clicked(){
     ui->analysisBrowseStrategyField->setText(QFileDialog::getOpenFileName());
     ui->analysisBrowseStrategyField->displayText();
+}
+
+void MainWindow::on_clearStrategyButton_clicked(){
+        ui->analysisStrategyList->clearContents();
+        ui->analysisStrategyList->setRowCount(0);
 }
 
 void MainWindow::on_addStrategyButton_clicked(){

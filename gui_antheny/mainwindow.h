@@ -60,6 +60,7 @@ private slots:
     //quantative analysis
     void on_analysisInputCSVButton_clicked();
     void on_analysisBrowseStrategyButton_clicked();
+    void on_clearStrategyButton_clicked();
     void on_addStrategyButton_clicked();
 
 

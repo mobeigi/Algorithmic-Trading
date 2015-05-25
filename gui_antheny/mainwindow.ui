@@ -71,11 +71,6 @@
          </layout>
         </item>
         <item>
-         <widget class="QGroupBox" name="gridGroupBox">
-          <layout class="QGridLayout" name="gridLayout_2"/>
-         </widget>
-        </item>
-        <item>
          <widget class="QFrame" name="frame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -90,15 +85,11 @@
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
                 <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>New Strategy</string>
+                 <property name="styleSheet">
+                  <string notr="true">qproperty-alignment: AlignCenter;</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="addStrategyButton">
                  <property name="text">
-                  <string>Add Strategy</string>
+                  <string>Strategies</string>
                  </property>
                 </widget>
                </item>
@@ -147,6 +138,26 @@
               <widget class="QDoubleSpinBox" name="analysisReturns"/>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QFrame" name="horizontalFrame">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QPushButton" name="clearStrategyButton">
+                <property name="text">
+                 <string>Clear Strategies</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addStrategyButton">
+                <property name="text">
+                 <string>Add Strategy</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
             <widget class="QTableWidget" name="analysisStrategyList">
@@ -249,7 +260,21 @@
             </layout>
            </item>
            <item>
-            <widget class="QListView" name="analysisListDate"/>
+            <widget class="QTableWidget" name="analysisListDate">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <column>
+              <property name="text">
+               <string>Start Date</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>End Date</string>
+              </property>
+             </column>
+            </widget>
            </item>
           </layout>
          </widget>
