@@ -145,7 +145,7 @@ int MainWindow::on_loadorder_button_clicked() {
         delete ad;
     }
     ad = new AnalysisDisplays();
-    ad->showCheckList(ui->output_csv_location->text().toStdString(), ui->listWidget);
+    ad->showCheckList(ui->output_csv_location->text().toStdString(), ui->listWidget, this);
 
     //Check for invalid file
     if (ad && ad->getListItems().size() == 0) {

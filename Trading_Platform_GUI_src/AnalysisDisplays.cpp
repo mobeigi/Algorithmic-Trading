@@ -1,7 +1,6 @@
 #include "AnalysisDisplays.h"
 #include "DisplayAnalysis.h"
 
-#include "MyTabWindow.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -26,7 +25,7 @@ AnalysisDisplays *AnalysisDisplays::instance() {
 }
 
 
-void AnalysisDisplays::showCheckList(std::string csvFile, QListWidget* lw) {
+void AnalysisDisplays::showCheckList(std::string csvFile, QListWidget* lw, QWidget *parent) {
 
     parseCSV = new std::ParseCSVData(csvFile);
 
@@ -50,14 +49,12 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
     mw->setWindowTitle("Equity Strategy Analysis");
     mw->setMinimumSize(750, 700);
 
-    MyTabWidget *tabw = new MyTabWidget(mw, this->parseCSV);
+    QTabWidget *tabw = new QTabWidget(mw);
     mw->setCentralWidget(tabw);
 
     for (QListWidgetItem *wi: listItems) {
         if (wi->checkState()) {
             std::string eqType = wi->text().toStdString();
-
-            tabw->addEqType(eqType);
 
             DisplayAnalysis *dw = new DisplayAnalysis();
 
@@ -69,6 +66,8 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
             dw->setDisplayId(currentDisplayId);
             currentDisplayId++;
             dw->show();
+
+            dw->displayAnalysis(parseCSV->getDataForEquityType(eqType));
         }
     }
 
