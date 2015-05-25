@@ -296,3 +296,252 @@ int MainWindow::check_outputcsv(void) {
     }
     return OK;
 }
+
+
+
+
+
+// ------------------ Quantative Analysis -----------------------
+
+
+void MainWindow::on_analysisInputCSVButton_clicked(){
+    ui->analysisInputCSVField->setText(QFileDialog::getOpenFileName());
+    ui->analysisInputCSVField->displayText();
+}
+
+void MainWindow::on_analysisBrowseStrategyButton_clicked(){
+    ui->analysisBrowseStrategyField->setText(QFileDialog::getOpenFileName());
+    ui->analysisBrowseStrategyField->displayText();
+}
+
+void MainWindow::on_clearStrategyButton_clicked(){
+        ui->analysisStrategyList->clearContents();
+        ui->analysisStrategyList->setRowCount(0);
+}
+
+void MainWindow::on_analysisClearDateButton_clicked(){
+        ui->analysisListDate->clearContents();
+        ui->analysisListDate->setRowCount(0);
+}
+
+void MainWindow::on_addStrategyButton_clicked(){
+
+    int currRows = ui->analysisStrategyList->rowCount();
+    ui->analysisStrategyList->setRowCount(currRows + 1);
+
+    QString analysisStrategy = ui->analysisBrowseStrategyField->text();
+    QString analysisThreshold = QString::number(ui->analysisThreshold->value()) ;
+    QString analysisReturns = QString::number(ui->analysisReturns->value());
+    QString inputCSV = ui->analysisInputCSVField->text();
+
+    QTableWidgetItem *analysisStrategyItem = new QTableWidgetItem(analysisStrategy, QTableWidgetItem::Type);
+    QTableWidgetItem *analysisThresholdItem = new QTableWidgetItem(analysisThreshold, QTableWidgetItem::Type);
+    QTableWidgetItem *analysisReturnsItem = new QTableWidgetItem(analysisReturns, QTableWidgetItem::Type);
+    QTableWidgetItem *inputCSVItem = new QTableWidgetItem(inputCSV, QTableWidgetItem::Type);
+
+    ui->analysisStrategyList->setItem(currRows,0,analysisStrategyItem);
+    ui->analysisStrategyList->setItem(currRows,1,analysisThresholdItem);
+    ui->analysisStrategyList->setItem(currRows,2,analysisReturnsItem);
+    ui->analysisStrategyList->setItem(currRows,3,inputCSVItem);
+}
+
+void MainWindow::on_analysisAddDateButton_clicked(){
+    int currRows = ui->analysisListDate->rowCount();
+    ui->analysisListDate->setRowCount(currRows + 1);
+
+    string startDate = construct_date_string(ui->analysisStartDate->date().day(),ui->analysisStartDate->date().month(),ui->analysisStartDate->date().year());
+    string endDate = construct_date_string(ui->analysisEndDate->date().day(),ui->analysisEndDate->date().month(),ui->analysisEndDate->date().year());
+
+    QTableWidgetItem *startDateItem = new QTableWidgetItem(QString::fromStdString(startDate), QTableWidgetItem::Type);
+    QTableWidgetItem *endDateItem = new QTableWidgetItem(QString::fromStdString(endDate), QTableWidgetItem::Type);
+
+    ui->analysisListDate->setItem(currRows,0,startDateItem);
+    ui->analysisListDate->setItem(currRows,1,endDateItem);
+}
+
+void MainWindow::on_analysisExecuteButton_clicked(){
+    //QString s = getRandomString();
+    //cout << s.toStdString() << endl;
+
+
+    //vector<ParamSet> ParamAnalysisHelper::performParamAnalysis(vector<string> equityTypes,
+      //                                    vector<tuple<string, string>> dateRanges,
+        //                                  vector<StrategyData> strategiesData)
+
+    int analysisListRows = ui->analysisStrategyList->rowCount();
+    int dateListRows = ui->analysisListDate->rowCount();
+
+    vector<string> strategieStrs = vector<string>();
+    vector<ParseCSVData *> allCSVData = vector<ParseCSVData *>();
+    map<string, bool> equityTypesMap = map<string, bool>();
+    vector<StrategyData> strategyDatas = vector<StrategyData>();
+    vector<tuple<string, string>> dateRanges = vector<tuple<string, string>>();
+    for(int dateCount=0;dateCount<dateListRows;dateCount++){
+        QString startDate = ui->analysisListDate->item(dateCount,0)->text();
+        QString endDate = ui->analysisListDate->item(dateCount,1)->text();
+        dateRanges.push_back(tuple<string, string>(startDate.toStdString(), endDate.toStdString()));
+    }
+
+
+    string curr_path = QDir::currentPath().toStdString();
+    QVector<QString> outputList;
+
+
+
+    int analysisCounter;
+    for (analysisCounter=0;analysisCounter<analysisListRows;analysisCounter++) {
+        QString analysisStrategy = ui->analysisStrategyList->item(analysisCounter,0)->text();
+        QString analysisThreshold = ui->analysisStrategyList->item(analysisCounter,1)->text();
+        QString analysisReturns = ui->analysisStrategyList->item(analysisCounter,2)->text();
+        QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
+
+        StrategyData strategyData;
+        strategyData.name = analysisStrategy.toStdString() + ", " + analysisThreshold.toStdString() + ", " + analysisReturns.toStdString();
+        strategyData.dataForEachDateRange = vector<ParseCSVData *>();
+        strategieStrs.push_back(strategyData.name);
+
+        int dateCount;
+        for(dateCount=0;dateCount<dateListRows;dateCount++){
+            QString startDate = ui->analysisListDate->item(dateCount,0)->text();
+            QString endDate = ui->analysisListDate->item(dateCount,1)->text();
+
+            if (analysisStrategy.contains(QRegularExpression("wolf"))){
+                QString startYr = getYear(startDate);
+                QString endYr = getYear(endDate);
+                cout << startYr.toStdString() << endl;
+//                cout << endYr.toStdString() << endl;
+
+                ofstream outputFile2;
+                outputFile2.open ("params.param");
+                outputFile2 << ("N,TH,DateRange\n");
+                outputFile2 << (analysisReturns.toStdString() + ","
+                                + analysisThreshold.toStdString() + ","
+                                + startYr.toStdString()
+                                + "-" + endYr.toStdString() + "\n");
+                outputFile2.close();
+
+                //construct the command string
+                string params_location = curr_path + "/params.param"; //location of the params file
+                string command_str = analysisStrategy.toStdString(); //program location
+                command_str.append(" ");
+                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
+                command_str.append(" ");
+                command_str.append(params_location); //params2 file location (the wolf of seng support)
+
+                //execute the file
+                system(command_str.c_str());
+//                cout << "execution complete wolf" << endl;
+
+                QString s = getRandomString();
+                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+                QString newOrdersCSV = QDir::currentPath() + "/wolf_" + s + ".csv";
+                cout << newOrdersCSV.toStdString() << endl;
+                QFile::rename(currOrdersCSV,newOrdersCSV);
+                outputList.append(newOrdersCSV);
+
+                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
+                strategyData.dataForEachDateRange.push_back(parseCSVDat);
+                allCSVData.push_back(parseCSVDat);
+
+                for (string equType : parseCSVDat->getAllEquityTypes()) {
+                    equityTypesMap[equType] = true;
+                }
+
+            } else {
+                ofstream outputFile;
+                outputFile.open ("params.param");
+                outputFile << (":input_csvFile:" + inputCSV.toStdString() + "\\\n");
+                outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
+                outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
+                outputFile << (":returnsInCalculation:" + analysisReturns.toStdString() + "\\\n");
+                outputFile << (":threshold:" + analysisThreshold.toStdString() + "\\\n");
+                outputFile << (":startDate:" + startDate.toStdString() + "\\\n");
+                outputFile << (":endDate:" + endDate.toStdString() + "\\\n");
+                outputFile.close();
+
+                //construct the command string
+                string params_location = curr_path + "/params.param"; //location of the params file
+                string command_str = analysisStrategy.toStdString(); //program location
+                command_str.append(" ");
+                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
+                command_str.append(" ");
+                command_str.append(params_location); //params2 file location (the wolf of seng support)
+
+                //execute the file
+                system(command_str.c_str());
+                cout << "execution complete trock" << endl;
+
+                QString s = getRandomString();
+                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+                QString newOrdersCSV = QDir::currentPath() + "/trock_" + s + ".csv";
+                cout << newOrdersCSV.toStdString() << endl;
+                QFile::rename(currOrdersCSV,newOrdersCSV);
+                outputList.append(newOrdersCSV);
+
+                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
+                strategyData.dataForEachDateRange.push_back(parseCSVDat);
+                allCSVData.push_back(parseCSVDat);
+
+                for (string equType : parseCSVDat->getAllEquityTypes()) {
+                    equityTypesMap[equType] = true;
+                }
+
+            }
+
+            strategyDatas.push_back(strategyData);
+
+        }
+    }
+
+    vector<string> equityTypes = vector<string>();
+    for(std::map<string,bool>::iterator iter = equityTypesMap.begin(); iter != equityTypesMap.end(); ++iter)
+    {
+        equityTypes.push_back(iter->first);
+    }
+
+    vector<ParamSet> pset = ParamAnalysisHelper::performParamAnalysis(equityTypes, dateRanges, strategyDatas);
+
+    for (ParseCSVData *dat : allCSVData) {
+        delete dat;
+    }
+
+    QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
+    qad->show();
+
+    qad->setAnalysis(pset, strategieStrs);
+
+//    for (QString s : outputList){
+//        cout << s.toStdString() << endl;
+//    }
+}
+
+
+
+
+
+QString MainWindow::getRandomString() const
+{
+   const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+   const int randomStringLength = 7; // assuming you want random strings of 12 characters
+
+   QString randomString;
+   for(int i=0; i<randomStringLength; ++i)
+   {
+       int index = qrand() % possibleCharacters.length();
+       QChar nextChar = possibleCharacters.at(index);
+       randomString.append(nextChar);
+   }
+   return randomString;
+}
+
+
+QString MainWindow::getYear(QString yr) {
+
+    QRegularExpression yearRE("(\\d\\d\\d\\d)$");
+    QString yearStr;
+    QRegularExpressionMatch match = yearRE.match(yr);
+    if (match.hasMatch()) {
+        yearStr = match.captured(1);
+    }
+    return yearStr;
+}

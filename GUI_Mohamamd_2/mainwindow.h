@@ -12,6 +12,8 @@
 #endif
 
 #include "AnalysisDisplays.h"
+#include "ParamAnalysisHelper.h"
+#include "QuantitativeAnalysisDisplay.h"
 
 #include <string>
 #include <iostream>
@@ -59,10 +61,21 @@ private slots:
 
     int check_outputcsv(void);
 
+    //quantative analysis
+    void on_analysisInputCSVButton_clicked();
+    void on_analysisBrowseStrategyButton_clicked();
+    void on_clearStrategyButton_clicked();
+    void on_analysisClearDateButton_clicked();
+    void on_addStrategyButton_clicked();
+    void on_analysisAddDateButton_clicked();
+    void on_analysisExecuteButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     AnalysisDisplays *ad = nullptr;
     string construct_date_string(int day, int month, int year);
+    QString getRandomString() const;
+    QString getYear(QString yr);
 };
 
 #endif // MAINWINDOW_H

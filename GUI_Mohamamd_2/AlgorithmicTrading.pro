@@ -23,7 +23,8 @@ SOURCES +=\
     QuantPara.cpp \
     ParamAnalysisHelper.cpp \
     ParamSet.cpp \
-    SummaryForm.cpp
+    SummaryForm.cpp \
+    QuantitativeAnalysisDisplay.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -36,11 +37,12 @@ HEADERS  += mainwindow.h\
     ParamSet.h \
     MyTabWindow.h \
     SummaryForm.h \
-    MyTableWidgetItem.h
+    QuantitativeAnalysisDisplay.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \
-    summaryform.ui
+    summaryform.ui \
+    QuantitativeAnalysisDisplay.ui
 
 RC_FILE = iconise.rc
 
