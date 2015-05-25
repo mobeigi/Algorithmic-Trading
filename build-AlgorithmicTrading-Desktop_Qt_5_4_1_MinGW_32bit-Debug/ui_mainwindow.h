@@ -21,6 +21,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
@@ -37,6 +38,7 @@ public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QTabWidget *analysis_prep;
+    QWidget *tab;
     QWidget *widget;
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *programLayout;
@@ -73,7 +75,16 @@ public:
     QPushButton *browse_outputcsv;
     QHBoxLayout *horizontalLayout;
     QLabel *output_csv_valid;
-    QPushButton *analyse_button;
+    QPushButton *loadorder_button;
+    QListWidget *listWidget;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *analysis_error_msg;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *selectall;
+    QPushButton *deselectall;
+    QPushButton *inverseSelection;
+    QPushButton *showanalysis_button;
+    QLabel *companylabel;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -101,6 +112,9 @@ public:
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         analysis_prep = new QTabWidget(centralWidget);
         analysis_prep->setObjectName(QStringLiteral("analysis_prep"));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        analysis_prep->addTab(tab, QString());
         widget = new QWidget();
         widget->setObjectName(QStringLiteral("widget"));
         verticalLayout_3 = new QVBoxLayout(widget);
@@ -156,15 +170,19 @@ public:
         inputcsv_valid = new QLabel(widget);
         inputcsv_valid->setObjectName(QStringLiteral("inputcsv_valid"));
         QFont font;
-        font.setBold(true);
-        font.setWeight(75);
+        font.setBold(false);
+        font.setWeight(50);
         inputcsv_valid->setFont(font);
+        inputcsv_valid->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
 
         programLayout->addWidget(inputcsv_valid);
 
         parameters_label = new QLabel(widget);
         parameters_label->setObjectName(QStringLiteral("parameters_label"));
-        parameters_label->setFont(font);
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        parameters_label->setFont(font1);
 
         programLayout->addWidget(parameters_label);
 
@@ -306,14 +324,63 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        analyse_button = new QPushButton(tab_2);
-        analyse_button->setObjectName(QStringLiteral("analyse_button"));
+        loadorder_button = new QPushButton(tab_2);
+        loadorder_button->setObjectName(QStringLiteral("loadorder_button"));
 
-        verticalLayout->addWidget(analyse_button);
+        verticalLayout->addWidget(loadorder_button);
+
+        listWidget = new QListWidget(tab_2);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+
+        verticalLayout->addWidget(listWidget);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        analysis_error_msg = new QLabel(tab_2);
+        analysis_error_msg->setObjectName(QStringLiteral("analysis_error_msg"));
+        analysis_error_msg->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+
+        horizontalLayout_3->addWidget(analysis_error_msg);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        selectall = new QPushButton(tab_2);
+        selectall->setObjectName(QStringLiteral("selectall"));
+
+        horizontalLayout_2->addWidget(selectall);
+
+        deselectall = new QPushButton(tab_2);
+        deselectall->setObjectName(QStringLiteral("deselectall"));
+
+        horizontalLayout_2->addWidget(deselectall);
+
+        inverseSelection = new QPushButton(tab_2);
+        inverseSelection->setObjectName(QStringLiteral("inverseSelection"));
+
+        horizontalLayout_2->addWidget(inverseSelection);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        showanalysis_button = new QPushButton(tab_2);
+        showanalysis_button->setObjectName(QStringLiteral("showanalysis_button"));
+
+        verticalLayout->addWidget(showanalysis_button);
 
         analysis_prep->addTab(tab_2, QString());
 
         verticalLayout_2->addWidget(analysis_prep);
+
+        companylabel = new QLabel(centralWidget);
+        companylabel->setObjectName(QStringLiteral("companylabel"));
+        companylabel->setOpenExternalLinks(true);
+
+        verticalLayout_2->addWidget(companylabel);
 
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
@@ -323,7 +390,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        analysis_prep->setCurrentIndex(0);
+        analysis_prep->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -331,7 +398,8 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Trock Testing Platform", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(tab), QApplication::translate("MainWindow", "Quantitative Analysis", 0));
         strategy_module_label->setText(QApplication::translate("MainWindow", "Strategy Module", 0));
         browseModule->setText(QApplication::translate("MainWindow", "Browse", 0));
         input_csv_label->setText(QApplication::translate("MainWindow", "Input CSV", 0));
@@ -341,16 +409,24 @@ public:
         threshold_label->setText(QApplication::translate("MainWindow", "Threshold", 0));
         returnsInCalculation_label->setText(QApplication::translate("MainWindow", "Returns in calculation", 0));
         start_date_label->setText(QApplication::translate("MainWindow", "Start Date", 0));
+        start_date->setDisplayFormat(QApplication::translate("MainWindow", "dd/MM/yyyy", 0));
         end_date_label->setText(QApplication::translate("MainWindow", "End Date", 0));
+        end_date->setDisplayFormat(QApplication::translate("MainWindow", "dd/MM/yyyy", 0));
         date_valid->setText(QString());
         execution_status->setText(QString());
         execute_button->setText(QApplication::translate("MainWindow", "Execute", 0));
-        analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Choose a Module", 0));
-        outputcsv_label->setText(QApplication::translate("MainWindow", "Output CSV File", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(widget), QApplication::translate("MainWindow", "Run Strategy Module", 0));
+        outputcsv_label->setText(QApplication::translate("MainWindow", "Output Order CSV File:", 0));
         browse_outputcsv->setText(QApplication::translate("MainWindow", "Browse", 0));
         output_csv_valid->setText(QString());
-        analyse_button->setText(QApplication::translate("MainWindow", "Analyse", 0));
-        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Choose an output csv", 0));
+        loadorder_button->setText(QApplication::translate("MainWindow", "Load Order CSV File", 0));
+        analysis_error_msg->setText(QString());
+        selectall->setText(QApplication::translate("MainWindow", "Select All", 0));
+        deselectall->setText(QApplication::translate("MainWindow", "Deselect All", 0));
+        inverseSelection->setText(QApplication::translate("MainWindow", "Inverse Selection", 0));
+        showanalysis_button->setText(QApplication::translate("MainWindow", "Display Analysis", 0));
+        analysis_prep->setTabText(analysis_prep->indexOf(tab_2), QApplication::translate("MainWindow", "Analyse Order CSV File", 0));
+        companylabel->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Trock Pty Ltd. Version (v1.30). Web: <a href=\"http://www.trock.net/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.trock.net/</span></a></p></body></html>", 0));
     } // retranslateUi
 
 };

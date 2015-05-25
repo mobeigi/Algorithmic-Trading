@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Trading_Platform_GUI_src/DisplayAnalysis.h"
+#include "../../GUI-mohammad/DisplayAnalysis.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -61,7 +61,7 @@ void DisplayAnalysis::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
 }
 
 const QMetaObject DisplayAnalysis::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_DisplayAnalysis.data,
+    { &QWidget::staticMetaObject, qt_meta_stringdata_DisplayAnalysis.data,
       qt_meta_data_DisplayAnalysis,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -76,12 +76,12 @@ void *DisplayAnalysis::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_DisplayAnalysis.stringdata))
         return static_cast<void*>(const_cast< DisplayAnalysis*>(this));
-    return QMainWindow::qt_metacast(_clname);
+    return QWidget::qt_metacast(_clname);
 }
 
 int DisplayAnalysis::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QMainWindow::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

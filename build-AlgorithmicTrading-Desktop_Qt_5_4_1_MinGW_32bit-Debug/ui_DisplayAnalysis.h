@@ -9,7 +9,6 @@
 #ifndef UI_DISPLAYANALYSIS_H
 #define UI_DISPLAYANALYSIS_H
 
-#include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -19,12 +18,8 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QScrollArea>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -33,9 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_DisplayAnalysis
 {
 public:
-    QAction *actionDsdsasdsd;
-    QWidget *centralWidget;
-    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout_2;
     QScrollArea *scrollArea;
     QWidget *scrollViewGraph;
     QGridLayout *gridLayout_2;
@@ -52,37 +45,30 @@ public:
     QLabel *label_2;
     QLabel *label_4;
     QLabel *label_3;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
-    QMenuBar *menuBar;
 
-    void setupUi(QMainWindow *DisplayAnalysis)
+    void setupUi(QWidget *DisplayAnalysis)
     {
         if (DisplayAnalysis->objectName().isEmpty())
             DisplayAnalysis->setObjectName(QStringLiteral("DisplayAnalysis"));
-        DisplayAnalysis->resize(750, 750);
-        DisplayAnalysis->setMinimumSize(QSize(700, 700));
-        DisplayAnalysis->setLocale(QLocale(QLocale::English, QLocale::Australia));
-        actionDsdsasdsd = new QAction(DisplayAnalysis);
-        actionDsdsasdsd->setObjectName(QStringLiteral("actionDsdsasdsd"));
-        centralWidget = new QWidget(DisplayAnalysis);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        scrollArea = new QScrollArea(centralWidget);
+        DisplayAnalysis->resize(750, 652);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(DisplayAnalysis->sizePolicy().hasHeightForWidth());
+        DisplayAnalysis->setSizePolicy(sizePolicy);
+        verticalLayout_2 = new QVBoxLayout(DisplayAnalysis);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        scrollArea = new QScrollArea(DisplayAnalysis);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        sizePolicy.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
+        scrollArea->setSizePolicy(sizePolicy);
         scrollArea->setWidgetResizable(true);
         scrollViewGraph = new QWidget();
         scrollViewGraph->setObjectName(QStringLiteral("scrollViewGraph"));
-        scrollViewGraph->setGeometry(QRect(0, 0, 730, 677));
+        scrollViewGraph->setGeometry(QRect(0, 0, 726, 628));
         gridLayout_2 = new QGridLayout(scrollViewGraph);
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         graphicsGraphDisplay = new QGraphicsView(scrollViewGraph);
         graphicsGraphDisplay->setObjectName(QStringLiteral("graphicsGraphDisplay"));
@@ -95,7 +81,6 @@ public:
         verticalLayout->addWidget(returnsAnalysis);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_8 = new QLabel(scrollViewGraph);
         label_8->setObjectName(QStringLiteral("label_8"));
@@ -120,7 +105,6 @@ public:
         gridLayout_2->addLayout(verticalLayout, 4, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_6 = new QLabel(scrollViewGraph);
         label_6->setObjectName(QStringLiteral("label_6"));
@@ -157,29 +141,17 @@ public:
 
         scrollArea->setWidget(scrollViewGraph);
 
-        gridLayout->addWidget(scrollArea, 0, 0, 1, 1);
+        verticalLayout_2->addWidget(scrollArea);
 
-        DisplayAnalysis->setCentralWidget(centralWidget);
-        mainToolBar = new QToolBar(DisplayAnalysis);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        DisplayAnalysis->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(DisplayAnalysis);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        DisplayAnalysis->setStatusBar(statusBar);
-        menuBar = new QMenuBar(DisplayAnalysis);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 750, 21));
-        DisplayAnalysis->setMenuBar(menuBar);
 
         retranslateUi(DisplayAnalysis);
 
         QMetaObject::connectSlotsByName(DisplayAnalysis);
     } // setupUi
 
-    void retranslateUi(QMainWindow *DisplayAnalysis)
+    void retranslateUi(QWidget *DisplayAnalysis)
     {
-        DisplayAnalysis->setWindowTitle(QApplication::translate("DisplayAnalysis", "Display Analysis", 0));
-        actionDsdsasdsd->setText(QApplication::translate("DisplayAnalysis", "dsdsasdsd", 0));
+        DisplayAnalysis->setWindowTitle(QApplication::translate("DisplayAnalysis", "Form", 0));
         label_8->setText(QApplication::translate("DisplayAnalysis", "Net Return:", 0));
         net_return_value_label->setText(QString());
         label_6->setText(QString());
