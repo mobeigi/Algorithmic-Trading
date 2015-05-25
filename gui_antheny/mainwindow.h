@@ -77,6 +77,8 @@ private:
     AnalysisDisplays *ad = nullptr;
     string construct_date_string(int day, int month, int year);
     QString getRandomString() const;
+    QString getYear(QString yr);
+
 };
 
 #endif // MAINWINDOW_H

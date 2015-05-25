@@ -310,14 +310,18 @@ void MainWindow::on_analysisExecuteButton_clicked(){
             QString endDate = ui->analysisListDate->item(dateCount,1)->text();
 
             if (analysisStrategy.contains(QRegularExpression("wolf"))){
+                QString startYr = getYear(startDate);
+                QString endYr = getYear(endDate);
+                cout << startYr.toStdString() << endl;
+//                cout << endYr.toStdString() << endl;
 
                 ofstream outputFile2;
                 outputFile2.open ("params.param");
                 outputFile2 << ("N,TH,DateRange\n");
                 outputFile2 << (analysisReturns.toStdString() + ","
                                 + analysisThreshold.toStdString() + ","
-                                + startDate.toStdString()
-                                + "-" + endDate.toStdString() + "\n");
+                                + startYr.toStdString()
+                                + "-" + endYr.toStdString() + "\n");
                 outputFile2.close();
 
                 //construct the command string
@@ -330,7 +334,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 
                 //execute the file
                 system(command_str.c_str());
-                cout << "execution complete wolf" << endl;
+//                cout << "execution complete wolf" << endl;
 
                 QString s = getRandomString();
                 QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
@@ -342,13 +346,13 @@ void MainWindow::on_analysisExecuteButton_clicked(){
             } else {
                 ofstream outputFile;
                 outputFile.open ("params.param");
-                outputFile << (":input_csvFile:" + ui->input_csv_location->text().toStdString() + "\\\n");
+                outputFile << (":input_csvFile:" + inputCSV.toStdString() + "\\\n");
                 outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
                 outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
-                outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
-                outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
-                outputFile << (":startDate:" + start_date_str + "\\\n");
-                outputFile << (":endDate:" + end_date_str + "\\\n");
+                outputFile << (":returnsInCalculation:" + analysisReturns.toStdString() + "\\\n");
+                outputFile << (":threshold:" + analysisThreshold.toStdString() + "\\\n");
+                outputFile << (":startDate:" + startDate.toStdString() + "\\\n");
+                outputFile << (":endDate:" + endDate.toStdString() + "\\\n");
                 outputFile.close();
 
                 //construct the command string
@@ -360,7 +364,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
                 command_str.append(params_location); //params2 file location (the wolf of seng support)
 
                 //execute the file
-                //system(command_str.c_str());
+                system(command_str.c_str());
                 cout << "execution complete trock" << endl;
 
                 QString s = getRandomString();
@@ -463,4 +467,14 @@ QString MainWindow::getRandomString() const
        randomString.append(nextChar);
    }
    return randomString;
+}
+QString MainWindow::getYear(QString yr) {
+
+    QRegularExpression yearRE("(\\d\\d\\d\\d)$");
+    QString yearStr;
+    QRegularExpressionMatch match = yearRE.match(yr);
+    if (match.hasMatch()) {
+        yearStr = match.captured(1);
+    }
+    return yearStr;
 }
