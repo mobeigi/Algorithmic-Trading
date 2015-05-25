@@ -132,7 +132,7 @@
                 <item>
                  <widget class="QDoubleSpinBox" name="analysisThreshold">
                   <property name="decimals">
-                   <number>7</number>
+                   <number>4</number>
                   </property>
                  </widget>
                 </item>

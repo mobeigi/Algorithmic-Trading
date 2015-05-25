@@ -12,10 +12,10 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     double runningNetValue = 0;
     double runningNetPerc = 0;
 
-    double mostProfitableReturns = -100000;
-    double leastProfitableReturns = 100000;
-    double mostProfitableReturnsPerc = 0;
-    double leastProfitableReturnsPerc = 0;
+    double mostProfitableReturns = 0;
+    double leastProfitableReturns = 0;
+    double mostProfitableReturnsPerc = -1000000;
+    double leastProfitableReturnsPerc = 1000000;
     string mostProfitableCompany;
     string leastProfitableCompany;
 
@@ -103,7 +103,7 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     //Display cummalative net returns
     QString net_return_perc_str;
 
-    if (runningNetValue < 0) {
+    if (runningNetPerc < 0) {
         ui->summary_totalnetreturns->setStyleSheet("color:red;font: 14pt \"MS Shell Dlg 2\";");
     } else {
         ui->summary_totalnetreturns->setStyleSheet("color:green;font: 14pt \"MS Shell Dlg 2\";");
@@ -118,7 +118,7 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     //Most profitable
     QString mp_net_return_perc_str;
 
-    if (mostProfitableReturns < 0) {
+    if (mostProfitableReturnsPerc < 0) {
         ui->summary_mostprofitableequity->setStyleSheet("color:red;font: 14pt \"MS Shell Dlg 2\";");
     } else {
         ui->summary_mostprofitableequity->setStyleSheet("color:green;font: 14pt \"MS Shell Dlg 2\";");
@@ -131,7 +131,7 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     //Least Profitable
     QString lp_net_return_perc_str;
 
-    if (leastProfitableReturns < 0) {
+    if (leastProfitableReturnsPerc < 0) {
         ui->summary_leastprofitableequity->setStyleSheet("color:red;font: 14pt \"MS Shell Dlg 2\";");
     } else {
         ui->summary_leastprofitableequity->setStyleSheet("color:green;font: 14pt \"MS Shell Dlg 2\";");
