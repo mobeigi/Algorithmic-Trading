@@ -32,7 +32,8 @@ HEADERS  += mainwindow.h\
     DisplayAnalysis.h \
     QuantPara.h \
     ParamAnalysisHelper.h \
-    ParamSet.h
+    ParamSet.h \
+    MyTabWindow.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui

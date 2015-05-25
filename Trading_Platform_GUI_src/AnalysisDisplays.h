@@ -27,7 +27,7 @@ public:
     inline std::vector<QListWidgetItem *> getListItems() { return listItems; }
     void analyzeCSVOutput(std::string csvFile, QWidget *parent);
     void showAnalysisDisplays(QWidget *parent);
-    void showCheckList(std::string csvFile, QListWidget* lw, QWidget *parent);
+    void showCheckList(std::string csvFile, QListWidget* lw);
     void displayClosing(long displayId);
 };
 
