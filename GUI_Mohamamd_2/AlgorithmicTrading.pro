@@ -33,13 +33,10 @@ HEADERS  += mainwindow.h\
     DisplayAnalysis.h \
     QuantPara.h \
     ParamAnalysisHelper.h \
-<<<<<<< HEAD
     ParamSet.h \
     MyTabWindow.h \
-    SummaryForm.h
-=======
-    ParamSet.h
->>>>>>> origin/master
+    SummaryForm.h \
+    MyTableWidgetItem.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \

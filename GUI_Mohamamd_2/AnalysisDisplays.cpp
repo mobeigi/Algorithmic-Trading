@@ -1,6 +1,7 @@
 #include "AnalysisDisplays.h"
 #include "DisplayAnalysis.h"
 #include "SummaryForm.h"
+#include "MyTabWindow.h"
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -50,7 +51,7 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
     mw->setWindowTitle("Equity Strategy Analysis");
     mw->setMinimumSize(750, 700);
 
-    QTabWidget *tabw = new QTabWidget(mw);
+    MyTabWidget *tabw = new MyTabWidget(mw, this->parseCSV);
     mw->setCentralWidget(tabw);
 
     //Load summary tab
@@ -76,6 +77,8 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
         if (wi->checkState()) {
             std::string eqType = wi->text().toStdString();
 
+            tabw->addEqType(eqType);
+
             DisplayAnalysis *dw = new DisplayAnalysis();
 
             displays[currentDisplayId] = dw;
@@ -85,12 +88,6 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
 
             dw->setDisplayId(currentDisplayId);
             currentDisplayId++;
-<<<<<<< HEAD
-=======
-            dw->show();
-
-            dw->displayAnalysis(parseCSV->getDataForEquityType(eqType));
->>>>>>> origin/master
         }
     }
 

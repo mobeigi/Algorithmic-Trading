@@ -1,5 +1,6 @@
 #include "SummaryForm.h"
 #include "ui_summaryform.h"
+#include "MyTableWidgetItem.h"
 
 SummaryForm::SummaryForm(QWidget *parent) :
     QWidget(parent), ui(new Ui::SummaryForm)
@@ -92,7 +93,8 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
         col0->setTextAlignment(Qt::AlignHCenter);
         ui->summary_returnsTable->setItem(currRows, 0, col0);
 
-        QTableWidgetItem* col1 = new QTableWidgetItem(QString::number(net_return_perc), QTableWidgetItem::Type);
+        //Use custom int type for this column
+        MyTableWidgetItem* col1 = new MyTableWidgetItem(QString::number(net_return_perc));
         col1->setFlags(col1->flags() ^ Qt::ItemIsEditable);
         col1->setTextAlignment(Qt::AlignHCenter);
         ui->summary_returnsTable->setItem(currRows, 1, col1);

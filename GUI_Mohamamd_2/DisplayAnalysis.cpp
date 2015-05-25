@@ -1,6 +1,6 @@
 #include "DisplayAnalysis.h"
 #include "ui_DisplayAnalysis.h"
-
+#include "MyTableWidgetItem.h"
 #include "AnalysisDisplays.h"
 
 DisplayAnalysis::DisplayAnalysis(QWidget *parent) :
@@ -290,12 +290,12 @@ void DisplayAnalysis::insertRowIntoReturnsAnalysis(std::string buySellPair,
     col1->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 1, col1);
 
-    QTableWidgetItem* col2 = new QTableWidgetItem(QString::fromStdString(returnValue), QTableWidgetItem::Type);
+    MyTableWidgetItem* col2 = new MyTableWidgetItem(QString::fromStdString(returnValue));
     col2->setFlags(col2->flags() ^ Qt::ItemIsEditable);
     col2->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 2, col2);
 
-    QTableWidgetItem* col3 = new QTableWidgetItem(QString::fromStdString(returnPerc), QTableWidgetItem::Type);
+    MyTableWidgetItem* col3 = new MyTableWidgetItem(QString::fromStdString(returnPerc));
     col3->setFlags(col2->flags() ^ Qt::ItemIsEditable);
     col3->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 3, col3);

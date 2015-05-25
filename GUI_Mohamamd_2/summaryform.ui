@@ -94,11 +94,14 @@
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QTableWidget" name="summary_returnsTable">
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>true</bool>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>340</number>
+        <number>330</number>
        </attribute>
        <attribute name="verticalHeaderDefaultSectionSize">
         <number>30</number>
@@ -108,12 +111,12 @@
        </attribute>
        <column>
         <property name="text">
-         <string>Equity Type</string>
+         <string>Equity</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>Net Returns</string>
+         <string>Net Returns (%)</string>
         </property>
        </column>
       </widget>
