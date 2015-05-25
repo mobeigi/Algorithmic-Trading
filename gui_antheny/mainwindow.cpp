@@ -324,9 +324,9 @@ void MainWindow::on_analysisExecuteButton_clicked(){
                 string params_location = curr_path + "/params.param"; //location of the params file
                 string command_str = analysisStrategy.toStdString(); //program location
                 command_str.append(" ");
-                command_str.append(inputCSV); //csv location (the wolf of seng support)
+                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
                 command_str.append(" ");
-                command_str.append(params2_location); //params2 file location (the wolf of seng support)
+                command_str.append(params_location); //params2 file location (the wolf of seng support)
 
                 //execute the file
                 system(command_str.c_str());
@@ -334,14 +334,48 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 
                 QString s = getRandomString();
                 QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
-                QString newOrdersCSV = QDir::currentPath() + "/" + s + ".csv";
+                QString newOrdersCSV = QDir::currentPath() + "/wolf_" + s + ".csv";
+                cout << newOrdersCSV.toStdString() << endl;
                 QFile::rename(currOrdersCSV,newOrdersCSV);
                 outputList.append(newOrdersCSV);
 
+            } else {
+                ofstream outputFile;
+                outputFile.open ("params.param");
+                outputFile << (":input_csvFile:" + ui->input_csv_location->text().toStdString() + "\\\n");
+                outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
+                outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
+                outputFile << (":returnsInCalculation:" + to_string(ui->returnsInCalculation->value()) + "\\\n");
+                outputFile << (":threshold:" + to_string(ui->threshold->value()) + "\\\n");
+                outputFile << (":startDate:" + start_date_str + "\\\n");
+                outputFile << (":endDate:" + end_date_str + "\\\n");
+                outputFile.close();
+
+                //construct the command string
+                string params_location = curr_path + "/params.param"; //location of the params file
+                string command_str = analysisStrategy.toStdString(); //program location
+                command_str.append(" ");
+                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
+                command_str.append(" ");
+                command_str.append(params_location); //params2 file location (the wolf of seng support)
+
+                //execute the file
+                //system(command_str.c_str());
+                cout << "execution complete trock" << endl;
+
+                QString s = getRandomString();
+                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+                QString newOrdersCSV = QDir::currentPath() + "/trock_" + s + ".csv";
+                cout << newOrdersCSV.toStdString() << endl;
+                QFile::rename(currOrdersCSV,newOrdersCSV);
+                outputList.append(newOrdersCSV);
             }
 
         }
     }
+//    for (QString s : outputList){
+//        cout << s.toStdString() << endl;
+//    }
 }
 
 // -------------------------  HELPER FUNCTIONS ------------------------ //
