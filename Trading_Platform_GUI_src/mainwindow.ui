@@ -41,6 +41,11 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Quantitative Analysis</string>
+       </attribute>
+      </widget>
       <widget class="QWidget" name="widget">
        <attribute name="title">
         <string>Run Strategy Module</string>
