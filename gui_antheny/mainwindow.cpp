@@ -291,11 +291,30 @@ void MainWindow::on_analysisAddDateButton_clicked(){
 void MainWindow::on_analysisExecuteButton_clicked(){
     //QString s = getRandomString();
     //cout << s.toStdString() << endl;
-    string curr_path = QDir::currentPath().toStdString();
-    QVector<QString> outputList;
+
+
+    //vector<ParamSet> ParamAnalysisHelper::performParamAnalysis(vector<string> equityTypes,
+      //                                    vector<tuple<string, string>> dateRanges,
+        //                                  vector<StrategyData> strategiesData)
 
     int analysisListRows = ui->analysisStrategyList->rowCount();
     int dateListRows = ui->analysisListDate->rowCount();
+
+    vector<ParseCSVData *> allCSVData = vector<ParseCSVData *>();
+    map<string, bool> equityTypesMap = map<string, bool>();
+    vector<StrategyData> strategyDatas = vector<StrategyData>();
+    vector<tuple<string, string>> dateRanges = vector<tuple<string, string>>();
+    for(int dateCount=0;dateCount<dateListRows;dateCount++){
+        QString startDate = ui->analysisListDate->item(dateCount,0)->text();
+        QString endDate = ui->analysisListDate->item(dateCount,1)->text();
+        dateRanges.push_back(tuple<string, string>(startDate.toStdString(), endDate.toStdString()));
+    }
+
+
+    string curr_path = QDir::currentPath().toStdString();
+    QVector<QString> outputList;
+
+
 
     int analysisCounter;
     for (analysisCounter=0;analysisCounter<analysisListRows;analysisCounter++) {
@@ -303,6 +322,10 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         QString analysisThreshold = ui->analysisStrategyList->item(analysisCounter,1)->text();
         QString analysisReturns = ui->analysisStrategyList->item(analysisCounter,2)->text();
         QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
+
+        StrategyData strategyData;
+        strategyData.name = analysisStrategy.toStdString() + ", " + analysisThreshold.toStdString() + ", " + analysisReturns.toStdString();
+        strategyData.dataForEachDateRange = vector<ParseCSVData *>();
 
         int dateCount;
         for(dateCount=0;dateCount<dateListRows;dateCount++){
@@ -343,6 +366,14 @@ void MainWindow::on_analysisExecuteButton_clicked(){
                 QFile::rename(currOrdersCSV,newOrdersCSV);
                 outputList.append(newOrdersCSV);
 
+                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
+                strategyData.dataForEachDateRange.push_back(parseCSVDat);
+                allCSVData.push_back(parseCSVDat);
+
+                for (string equType : parseCSVDat->getAllEquityTypes()) {
+                    equityTypesMap[equType] = true;
+                }
+
             } else {
                 ofstream outputFile;
                 outputFile.open ("params.param");
@@ -373,10 +404,39 @@ void MainWindow::on_analysisExecuteButton_clicked(){
                 cout << newOrdersCSV.toStdString() << endl;
                 QFile::rename(currOrdersCSV,newOrdersCSV);
                 outputList.append(newOrdersCSV);
+
+                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
+                strategyData.dataForEachDateRange.push_back(parseCSVDat);
+                allCSVData.push_back(parseCSVDat);
+
+                for (string equType : parseCSVDat->getAllEquityTypes()) {
+                    equityTypesMap[equType] = true;
+                }
+
             }
+
+            strategyDatas.push_back(strategyData);
 
         }
     }
+
+    vector<string> equityTypes = vector<string>();
+    for(std::map<string,bool>::iterator iter = equityTypesMap.begin(); iter != equityTypesMap.end(); ++iter)
+    {
+        equityTypes.push_back(iter->first);
+    }
+
+    vector<ParamSet> pset = ParamAnalysisHelper::performParamAnalysis(equityTypes, dateRanges, strategyDatas);
+
+    for (ParseCSVData *dat : allCSVData) {
+        delete dat;
+    }
+
+    QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
+    qad->show();
+
+    qad->setAnalysis(pset, equityTypes);
+
 //    for (QString s : outputList){
 //        cout << s.toStdString() << endl;
 //    }

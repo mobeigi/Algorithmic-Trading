@@ -22,7 +22,8 @@ SOURCES +=\
     DisplayAnalysis.cpp \
     QuantPara.cpp \
     ParamAnalysisHelper.cpp \
-    ParamSet.cpp
+    ParamSet.cpp \
+    QuantitativeAnalysisDisplay.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -32,10 +33,12 @@ HEADERS  += mainwindow.h\
     DisplayAnalysis.h \
     QuantPara.h \
     ParamAnalysisHelper.h \
-    ParamSet.h
+    ParamSet.h \
+    QuantitativeAnalysisDisplay.h
 
 FORMS    += mainwindow.ui \
-    DisplayAnalysis.ui
+    DisplayAnalysis.ui \
+    QuantitativeAnalysisDisplay.ui
 
 RC_FILE = iconise.rc
 

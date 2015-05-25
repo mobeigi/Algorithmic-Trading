@@ -12,6 +12,8 @@
 #endif
 
 #include "AnalysisDisplays.h"
+#include "ParamAnalysisHelper.h"
+#include "QuantitativeAnalysisDisplay.h"
 
 #include <string>
 #include <iostream>
