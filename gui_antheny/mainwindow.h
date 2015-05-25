@@ -64,6 +64,7 @@ private slots:
     void on_analysisClearDateButton_clicked();
     void on_addStrategyButton_clicked();
     void on_analysisAddDateButton_clicked();
+    void on_analysisExecuteButton_clicked();
 
 
 
@@ -75,6 +76,7 @@ private:
     Ui::MainWindow *ui;
     AnalysisDisplays *ad = nullptr;
     string construct_date_string(int day, int month, int year);
+    QString getRandomString() const;
 };
 
 #endif // MAINWINDOW_H

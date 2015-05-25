@@ -8,11 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-//    for (int c = 0; c < ui->analysisListDate->horizontalHeader()->count(); ++c)
-//    {
-//        ui->analysisListDate->horizontalHeader()->setSectionResizeMode(
-//            c, QHeaderView::Stretch);
-//    }
     ui->analysisStrategyList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->analysisListDate->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -120,7 +115,7 @@ int MainWindow::on_execute_button_clicked()
 
     return EXIT_SUCCESS;
 }
-
+//---------------------- Analyse CSV File -----------------------------------------------------
 void MainWindow::on_browse_outputcsv_clicked() {
     ui->output_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Output CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
     ui->output_csv_location->displayText();
@@ -293,6 +288,62 @@ void MainWindow::on_analysisAddDateButton_clicked(){
     ui->analysisListDate->setItem(currRows,1,endDateItem);
 }
 
+void MainWindow::on_analysisExecuteButton_clicked(){
+    //QString s = getRandomString();
+    //cout << s.toStdString() << endl;
+    string curr_path = QDir::currentPath().toStdString();
+    QVector<QString> outputList;
+
+    int analysisListRows = ui->analysisStrategyList->rowCount();
+    int dateListRows = ui->analysisListDate->rowCount();
+
+    int analysisCounter;
+    for (analysisCounter=0;analysisCounter<analysisListRows;analysisCounter++) {
+        QString analysisStrategy = ui->analysisStrategyList->item(analysisCounter,0)->text();
+        QString analysisThreshold = ui->analysisStrategyList->item(analysisCounter,1)->text();
+        QString analysisReturns = ui->analysisStrategyList->item(analysisCounter,2)->text();
+        QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
+
+        int dateCount;
+        for(dateCount=0;dateCount<dateListRows;dateCount++){
+            QString startDate = ui->analysisListDate->item(dateCount,0)->text();
+            QString endDate = ui->analysisListDate->item(dateCount,1)->text();
+
+            if (analysisStrategy.contains(QRegularExpression("wolf"))){
+
+                ofstream outputFile2;
+                outputFile2.open ("params.param");
+                outputFile2 << ("N,TH,DateRange\n");
+                outputFile2 << (analysisReturns.toStdString() + ","
+                                + analysisThreshold.toStdString() + ","
+                                + startDate.toStdString()
+                                + "-" + endDate.toStdString() + "\n");
+                outputFile2.close();
+
+                //construct the command string
+                string params_location = curr_path + "/params.param"; //location of the params file
+                string command_str = analysisStrategy.toStdString(); //program location
+                command_str.append(" ");
+                command_str.append(inputCSV); //csv location (the wolf of seng support)
+                command_str.append(" ");
+                command_str.append(params2_location); //params2 file location (the wolf of seng support)
+
+                //execute the file
+                system(command_str.c_str());
+                cout << "execution complete wolf" << endl;
+
+                QString s = getRandomString();
+                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+                QString newOrdersCSV = QDir::currentPath() + "/" + s + ".csv";
+                QFile::rename(currOrdersCSV,newOrdersCSV);
+                outputList.append(newOrdersCSV);
+
+            }
+
+        }
+    }
+}
+
 // -------------------------  HELPER FUNCTIONS ------------------------ //
 vector<int> MainWindow::check_params(void) {
     vector<int> invalidities;
@@ -363,4 +414,19 @@ int MainWindow::check_outputcsv(void) {
         return NO_OUTPUTCSV_SELECTED;
     }
     return OK;
+}
+
+QString MainWindow::getRandomString() const
+{
+   const QString possibleCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+   const int randomStringLength = 7; // assuming you want random strings of 12 characters
+
+   QString randomString;
+   for(int i=0; i<randomStringLength; ++i)
+   {
+       int index = qrand() % possibleCharacters.length();
+       QChar nextChar = possibleCharacters.at(index);
+       randomString.append(nextChar);
+   }
+   return randomString;
 }

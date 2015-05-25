@@ -71,140 +71,6 @@
          </layout>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="styleSheet">
-                  <string notr="true">qproperty-alignment: AlignCenter;</string>
-                 </property>
-                 <property name="text">
-                  <string>Strategies</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QLineEdit" name="analysisBrowseStrategyField"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="analysisBrowseStrategyButton">
-                 <property name="text">
-                  <string>Browse</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_6">
-             <item>
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>Threshold</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QDoubleSpinBox" name="analysisThreshold"/>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_7">
-             <item>
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>Returns In Calculation</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QDoubleSpinBox" name="analysisReturns"/>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QFrame" name="horizontalFrame">
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QPushButton" name="clearStrategyButton">
-                <property name="text">
-                 <string>Clear Strategies</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addStrategyButton">
-                <property name="text">
-                 <string>Add Strategy</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTableWidget" name="analysisStrategyList">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>460</width>
-               <height>107</height>
-              </size>
-             </property>
-             <column>
-              <property name="text">
-               <string>Strategy</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Threshold</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Returns in Calculation</string>
-              </property>
-              <property name="whatsThis">
-               <string/>
-              </property>
-              <property name="textAlignment">
-               <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>CSV file</string>
-              </property>
-             </column>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -213,6 +79,140 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_8">
+                  <item>
+                   <widget class="QLabel" name="analysisStrategyLabel">
+                    <property name="styleSheet">
+                     <string notr="true">qproperty-alignment: AlignCenter;</string>
+                    </property>
+                    <property name="text">
+                     <string>Strategies</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_5">
+                  <item>
+                   <widget class="QLineEdit" name="analysisBrowseStrategyField"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="analysisBrowseStrategyButton">
+                    <property name="text">
+                     <string>Browse</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="analysisThresholdFrame">
+                <item>
+                 <widget class="QLabel" name="label_3">
+                  <property name="text">
+                   <string>Threshold</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="analysisThreshold"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="analysisReturnsFrame">
+                <item>
+                 <widget class="QLabel" name="label_4">
+                  <property name="text">
+                   <string>Returns In Calculation</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="analysisReturns"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QFrame" name="analysisStrategyFrame">
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QPushButton" name="clearStrategyButton">
+                   <property name="text">
+                    <string>Clear Strategies</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="addStrategyButton">
+                   <property name="text">
+                    <string>Add Strategy</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="analysisStrategyList">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>460</width>
+                  <height>107</height>
+                 </size>
+                </property>
+                <column>
+                 <property name="text">
+                  <string>Strategy</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Threshold</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Returns in Calculation</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string/>
+                 </property>
+                 <property name="textAlignment">
+                  <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>CSV file</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
@@ -296,7 +296,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="analysisExecuteButton">
           <property name="text">
            <string>Execute</string>
           </property>
