@@ -38,15 +38,21 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="analysis_prep">
-      <property name="currentIndex">
-       <number>1</number>
+      <property name="focusPolicy">
+       <enum>Qt::TabFocus</enum>
       </property>
-      <widget class="QWidget" name="tab">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="quantitative_tab">
        <attribute name="title">
         <string>Quantitative Analysis</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="widget">
+      <widget class="QWidget" name="run_tab">
        <attribute name="title">
         <string>Run Strategy Module</string>
        </attribute>
@@ -260,7 +266,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="analyse_tab">
        <attribute name="title">
         <string>Analyse Order CSV File</string>
        </attribute>

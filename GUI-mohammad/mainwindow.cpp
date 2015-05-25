@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#define ANALYSIS_TAB 2
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -102,7 +104,10 @@ int MainWindow::on_execute_button_clicked()
     system(command_str.c_str()); //windows way of executing file
     ui->execution_status->setText("Execution Complete");
 
-    AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/orders.csv", this);
+    //AnalysisDisplays::instance()->analyzeCSVOutput(curr_path +"/orders.csv", this);
+    ui->output_csv_location->setText( (curr_path + "/orders.csv").c_str());
+    on_loadorder_button_clicked();  //populate analysis tab with checklist
+    ui->analysis_prep->setCurrentIndex(ANALYSIS_TAB); //change tab to analysis tab
 
     return EXIT_SUCCESS;
 }
