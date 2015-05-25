@@ -240,14 +240,28 @@ void MainWindow::on_analysisBrowseStrategyButton_clicked(){
 
 void MainWindow::on_addStrategyButton_clicked(){
 
-    string inputCSV = ui->analysisInputCSVField->text().toStdString();
-    string analysisStrategy = ui->analysisBrowseStrategyField->text().toStdString();
-    string widgetItem = inputCSV + "\t" + analysisStrategy;
-    cout << widgetItem << endl;
-    ui->analysisStrategyList->horizontalHeader()->setStretchLastSection(true);
-//    QListWidgetItem *strategy = new QListWidgetItem();
-//    strategy->setText(widgetItem);
-//    ui->analysisStrategyList->a
+    int currRows = ui->analysisStrategyList->rowCount();
+    ui->analysisStrategyList->setRowCount(currRows + 1);
+
+    QString analysisStrategy = ui->analysisBrowseStrategyField->text();
+    QString analysisThreshold = QString::number(ui->analysisThreshold->value()) ;
+    QString analysisReturns = QString::number(ui->analysisReturns->value());
+    QString inputCSV = ui->analysisInputCSVField->text();
+
+    QTableWidgetItem *analysisStrategyItem = new QTableWidgetItem(analysisStrategy, QTableWidgetItem::Type);
+    QTableWidgetItem *analysisThresholdItem = new QTableWidgetItem(analysisThreshold, QTableWidgetItem::Type);
+    QTableWidgetItem *analysisReturnsItem = new QTableWidgetItem(analysisReturns, QTableWidgetItem::Type);
+    QTableWidgetItem *inputCSVItem = new QTableWidgetItem(inputCSV, QTableWidgetItem::Type);
+
+    ui->analysisStrategyList->setItem(currRows,0,analysisStrategyItem);
+    ui->analysisStrategyList->setItem(currRows,1,analysisThresholdItem);
+    ui->analysisStrategyList->setItem(currRows,2,analysisReturnsItem);
+    ui->analysisStrategyList->setItem(currRows,3,inputCSVItem);
+
+
+
+    //string widgetItem = inputCSV + "\t" + analysisStrategy;
+    //cout << widgetItem << endl;
 
 }
 
