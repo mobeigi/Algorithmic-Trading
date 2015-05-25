@@ -15,7 +15,83 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout"/>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>374</width>
+        <height>274</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QWidget" name="widget" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>60</height>
+            </size>
+           </property>
+           <widget class="QLabel" name="label">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>151</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Display Options:</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="comboBox">
+            <property name="geometry">
+             <rect>
+              <x>130</x>
+              <y>10</y>
+              <width>174</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <item>
+             <property name="text">
+              <string>Display All</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Returns</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Granality</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Volatility</string>
+             </property>
+            </item>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -171,6 +171,11 @@ struct Date {
             ss << setprecision(4) << std::fixed << "" << price;
             return ss.str();
         }
+        static string formatDoubleSmall(double price) {
+            stringstream ss;
+            ss << setprecision(2) << std::fixed << "" << price;
+            return ss.str();
+        }
     };
 }
 

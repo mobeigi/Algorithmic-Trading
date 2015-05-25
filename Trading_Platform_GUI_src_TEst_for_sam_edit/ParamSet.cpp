@@ -51,7 +51,7 @@ vector<ParamSet> ParamSet::generateTestAnalysis() {
     paras = vector<Para>();
     para.raw = 22.3; paras.push_back(para);
     para.raw = 14; paras.push_back(para);
-    para.raw = 2.3; paras.push_back(para);
+    para.raw = 2.3; para.valid = false; paras.push_back(para);
     p2.setParam(paraVolatility, paras);
 
     return {p, p2};

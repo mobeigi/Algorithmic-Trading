@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
     qad->show();
 
-    qad->buildAnalysis(pset);
+    qad->setAnalysis(pset, {"Gimp", "Soul", "Fire"});
 
 
 
