@@ -27,7 +27,7 @@ public:
 
     //strategiesData - data for each strategy run, strategiesData.dataForEachDateRange
     //should be the same for every strategy, since they need to be compared
-    //"performParamAnalysis" does not become the owner of
+    //"performParamAnalysis" DOES NOT become the owner of
     //each strategiesData.dataForEachDateRange object
 
     //the order of indexes in strategiesData will determine the index of the strategy in each

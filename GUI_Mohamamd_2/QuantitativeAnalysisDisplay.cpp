@@ -9,6 +9,8 @@ QuantitativeAnalysisDisplay::QuantitativeAnalysisDisplay(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setAnalysisCalled = false;
+
     connect(ui->comboBox,SIGNAL(currentIndexChanged(const int)),
             this,SLOT(handleSelectionChanged(const int)));
 }
@@ -16,7 +18,7 @@ QuantitativeAnalysisDisplay::QuantitativeAnalysisDisplay(QWidget *parent) :
 #define __WID 80.0
 #define __HEI 50.0
 #define __WID_TITLES_EQUITY 3
-#define __WID_TITLES_STRATS 3
+#define __WID_TITLES_STRATS 4
 
 void QuantitativeAnalysisDisplay::drawTitle(QGridLayout *layout, std::string text, int row, int col, int width, int height) {
     QLabel *l = new QLabel();
@@ -64,7 +66,18 @@ void QuantitativeAnalysisDisplay::drawQuantValue(QGridLayout *layout, std::Para 
 };*/
 
 
+QuantitativeAnalysisDisplay::~QuantitativeAnalysisDisplay()
+{
+    delete ui;
+    for (std::ParamSet pSet : analysisData) pSet.releaseAllAnalysisData();
+}
+
+
 void QuantitativeAnalysisDisplay::setAnalysis(std::vector<std::ParamSet> analysisData, std::vector<std::string> strategies) {
+    if (setAnalysisCalled) {
+        ERR_FATAL("QuantitativeAnalysisDisplay: setAnalysis called more then once!");
+    }
+    setAnalysisCalled = true;
     this->analysisData = analysisData;
     this->strategies = strategies;
     this->currentDisplayOption = -1;
@@ -76,6 +89,8 @@ void QuantitativeAnalysisDisplay::setAnalysis(std::vector<std::ParamSet> analysi
 void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analysisData, std::vector<std::string> strategies, int displayOption) {
     //accesses the param for the first row, the second column (strategy), and the return param (out of the three types)
     //analysisData[0].getQuantifiedParameter(std::paraReturns, 1);
+
+    //int extraGap = 1;
 
     while (ui->gridLayout->count() > 0) {
         ui->gridLayout->takeAt(0)->widget()->deleteLater();
@@ -144,6 +159,13 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
                 this->drawQuantValue(ui->gridLayout, v + g + r, rowIndex + startY,
                                      __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
             }
+
+            //add button of elaboration and analysis, using the CamelPushButton :)
+            CamelPushButton *button = new CamelPushButton();
+            button->setText("Elab.");
+            button->hump = paramSet.getAnalysisDataForStrat(i);
+            QObject::connect(button, SIGNAL(clicked()),this, SLOT(clickedSlot()));
+            ui->gridLayout->addWidget(button, rowIndex + startY, __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 3, 1, 1);
         }
 
         //paramSet.getEquityType()
@@ -206,7 +228,4 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
 
 }
 
-QuantitativeAnalysisDisplay::~QuantitativeAnalysisDisplay()
-{
-    delete ui;
-}
+

@@ -4,11 +4,14 @@
 #include <QWidget>
 #include <QLabel>
 #include <QGridLayout>
+#include <QMessageBox>
 //#include <Alignment>
 
 #include <vector>
 
 #include "ParamSet.h"
+#include "CamelPushButton.h"
+#include "DisplayAnalysis.h"
 
 namespace Ui {
 class QuantitativeAnalysisDisplay;
@@ -29,9 +32,20 @@ public slots:
     {
         this->buildAnalysis(this->analysisData, this->strategies, index - 1);
     };
+    void clickedSlot()
+    {
+        std::AnalysisData *data = static_cast<std::AnalysisData *>(((CamelPushButton*)sender())->hump);
+        if (data != nullptr) {
+            DisplayAnalysis *disp = new DisplayAnalysis();
+            disp->show();
+            disp->displayAnalysis(data);
+        }
+    };
 
 private:
     Ui::QuantitativeAnalysisDisplay *ui;
+
+    bool setAnalysisCalled;
 
     void drawTitle(QGridLayout *layout, std::string text, int row, int col, int width, int height);
     void drawQuantValue(QGridLayout *layout, std::Para para, int row, int col, int width, int height);

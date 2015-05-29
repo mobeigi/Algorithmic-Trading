@@ -502,13 +502,15 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 
     vector<ParamSet> pset = ParamAnalysisHelper::performParamAnalysis(equityTypes, dateRanges, strategyDatas);
 
-    for (ParseCSVData *dat : allCSVData) {
+    //dont delete anymore!, performparamanalysis becomes owner now
+    /*for (ParseCSVData *dat : allCSVData) {
         delete dat;
-    }
+    }*/
 
     QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
     qad->show();
 
+    //QAD becomes owner of all csv data stored in pset
     qad->setAnalysis(pset, strategieStrs);
 
 //    for (QString s : outputList){

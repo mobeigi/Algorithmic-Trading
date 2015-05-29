@@ -28,6 +28,7 @@ vector<ParamSet> ParamAnalysisHelper::performParamAnalysis(vector<string> equity
             vector<Para> returnVals = vector<Para>();
             vector<Para> granalityVals = vector<Para>();
             vector<Para> volatilityVals = vector<Para>();
+            vector<AnalysisData *> analysisDataSetVals = vector<AnalysisData *>();
 
             //each strategy column
             for (StrategyData stratData : strategiesData) {
@@ -98,6 +99,7 @@ vector<ParamSet> ParamAnalysisHelper::performParamAnalysis(vector<string> equity
                     returnVals.push_back(paraReturns);
                     granalityVals.push_back(granalityReturns);
                     volatilityVals.push_back(volatilityReturns);
+                    analysisDataSetVals.push_back(dataSet);
 
                 }
 
@@ -106,6 +108,7 @@ vector<ParamSet> ParamAnalysisHelper::performParamAnalysis(vector<string> equity
             pSet.setParam(paraReturns, returnVals);
             pSet.setParam(paraGranality, granalityVals);
             pSet.setParam(paraVolatility, volatilityVals);
+            pSet.setAnalysisDataForEachStrat(analysisDataSetVals);
 
             paramSet.push_back(pSet);
         }

@@ -24,7 +24,8 @@ SOURCES +=\
     ParamAnalysisHelper.cpp \
     ParamSet.cpp \
     SummaryForm.cpp \
-    QuantitativeAnalysisDisplay.cpp
+    QuantitativeAnalysisDisplay.cpp \
+    CamelPushButton.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h\
     ParamSet.h \
     MyTabWindow.h \
     SummaryForm.h \
-    QuantitativeAnalysisDisplay.h
+    QuantitativeAnalysisDisplay.h \
+    CamelPushButton.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \
