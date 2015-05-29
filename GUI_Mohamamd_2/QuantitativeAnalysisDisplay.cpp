@@ -102,6 +102,9 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
         } else if (displayOption == 2) {
             this->drawTitle(ui->gridLayout, "Volatility", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS, 3, 1);
+        } else if (displayOption == 3) {
+            this->drawTitle(ui->gridLayout, "RGV Sum", 1, __WID_TITLES_EQUITY +
+                        strategyIndex*__WID_TITLES_STRATS, 3, 1);
         }
 
     }
@@ -136,6 +139,9 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
                                      __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
             } else if (displayOption == 2) {
                 this->drawQuantValue(ui->gridLayout, v, rowIndex + startY,
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
+            } else if (displayOption == 3) {
+                this->drawQuantValue(ui->gridLayout, v + g + r, rowIndex + startY,
                                      __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
             }
         }

@@ -14,6 +14,13 @@ struct Para {
     double qnt = 0.0;
     double raw = 0.0;
     bool valid = false; //false means there was not enough data to evaluate, or no trades etc
+
+    inline Para operator+(Para a) {
+        a.qnt += qnt;
+        a.raw += raw;
+        a.valid = a.valid && valid;
+        return a;
+    }
 };
 
 class ParamSet

@@ -81,6 +81,11 @@
               <string>Volatility</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Display Sum</string>
+             </property>
+            </item>
            </widget>
           </widget>
          </item>

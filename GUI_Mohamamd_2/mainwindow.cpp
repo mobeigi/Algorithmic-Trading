@@ -396,7 +396,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
 
         StrategyData strategyData;
-        strategyData.name = analysisStrategy.toStdString() + ", " + analysisThreshold.toStdString() + ", " + analysisReturns.toStdString();
+        strategyData.name = analysisStrategy.toStdString() + "\nTh: " + analysisThreshold.toStdString() + ", Rt: " + analysisReturns.toStdString();
         strategyData.dataForEachDateRange = vector<ParseCSVData *>();
         strategieStrs.push_back(strategyData.name);
 
@@ -488,9 +488,10 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 
             }
 
-            strategyDatas.push_back(strategyData);
+
 
         }
+        strategyDatas.push_back(strategyData);
     }
 
     vector<string> equityTypes = vector<string>();
