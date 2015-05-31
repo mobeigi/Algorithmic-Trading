@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>722</height>
+    <width>560</width>
+    <height>960</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -39,36 +39,259 @@
     <item>
      <widget class="QTabWidget" name="analysis_prep">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="quantitative_tab">
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
+       <attribute name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/resources/barchart.png</normaloff>:/images/resources/barchart.png</iconset>
+       </attribute>
        <attribute name="title">
         <string>Quantitative Analysis</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Input CSV</string>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Input CSV</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLineEdit" name="analysisInputCSVField">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="analysisInputCSVButton">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an input CSV file you wish to process using the strategy module.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="text">
+                <string>Browse</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/images/resources/file_csv.png</normaloff>:/images/resources/file_csv.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item alignment="Qt::AlignLeft">
+                <widget class="QLabel" name="analysisStrategyLabel">
+                 <property name="styleSheet">
+                  <string notr="true">qproperty-alignment: AlignCenter;</string>
+                 </property>
+                 <property name="text">
+                  <string>Strategy Module</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLineEdit" name="analysisBrowseStrategyField">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="analysisBrowseStrategyButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the strategy module you wish to analyse.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Browse</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="analysisThresholdFrame">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Threshold</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="analysisThreshold">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the threshold value to be used in the analysis.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="decimals">
+                <number>4</number>
+               </property>
+               <property name="value">
+                <double>0.000100000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="analysisReturnsFrame">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Returns In Calculation</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="analysisReturns">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the number of returns in calculations (also known as returns window size).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>100.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>5.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QFrame" name="analysisStrategyFrame">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QPushButton" name="clearStrategyButton">
+                <property name="text">
+                 <string>Clear Strategies</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addStrategyButton">
+                <property name="text">
+                 <string>Add Strategy</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="analysisStrategyList">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>120</height>
+              </size>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>115</number>
+             </attribute>
+             <attribute name="horizontalHeaderMinimumSectionSize">
+              <number>45</number>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>Strategy</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Threshold</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Returns in 
+Calculation</string>
+              </property>
+              <property name="whatsThis">
+               <string/>
+              </property>
+              <property name="textAlignment">
+               <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>CSV file</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLineEdit" name="analysisInputCSVField"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="analysisInputCSVButton">
-            <property name="text">
-             <string>Browse</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
         <item>
          <widget class="QFrame" name="frame_2">
@@ -80,162 +303,17 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QFrame" name="frame">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_9">
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_6">
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_8">
-                  <item>
-                   <widget class="QLabel" name="analysisStrategyLabel">
-                    <property name="styleSheet">
-                     <string notr="true">qproperty-alignment: AlignCenter;</string>
-                    </property>
-                    <property name="text">
-                     <string>Strategies</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_5">
-                  <item>
-                   <widget class="QLineEdit" name="analysisBrowseStrategyField"/>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="analysisBrowseStrategyButton">
-                    <property name="text">
-                     <string>Browse</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="analysisThresholdFrame">
-                <item>
-                 <widget class="QLabel" name="label_3">
-                  <property name="text">
-                   <string>Threshold</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="analysisThreshold">
-                  <property name="decimals">
-                   <number>4</number>
-                  </property>
-                  <property name="value">
-                   <double>0.000100000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="analysisReturnsFrame">
-                <item>
-                 <widget class="QLabel" name="label_4">
-                  <property name="text">
-                   <string>Returns In Calculation</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="analysisReturns">
-                  <property name="decimals">
-                   <number>0</number>
-                  </property>
-                  <property name="maximum">
-                   <double>100.000000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>5.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QFrame" name="analysisStrategyFrame">
-                <layout class="QHBoxLayout" name="horizontalLayout_9">
-                 <item>
-                  <widget class="QPushButton" name="clearStrategyButton">
-                   <property name="text">
-                    <string>Clear Strategies</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="addStrategyButton">
-                   <property name="text">
-                    <string>Add Strategy</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTableWidget" name="analysisStrategyList">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>460</width>
-                  <height>107</height>
-                 </size>
-                </property>
-                <column>
-                 <property name="text">
-                  <string>Strategy</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Threshold</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Returns in Calculation</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string/>
-                 </property>
-                 <property name="textAlignment">
-                  <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>CSV file</string>
-                 </property>
-                </column>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_11">
                <item>
                 <widget class="QLabel" name="label_5">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">qproperty-alignment: AlignCenter;</string>
                  </property>
@@ -256,7 +334,11 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="analysisStartDate"/>
+                <widget class="QDateEdit" name="analysisStartDate">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the start date to begin analysing from.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QLabel" name="label_7">
@@ -267,6 +349,9 @@
                </item>
                <item>
                 <widget class="QDateEdit" name="analysisEndDate">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the end date to stop analysing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="date">
                   <date>
                    <year>2015</year>
@@ -302,9 +387,18 @@
            </item>
            <item>
             <widget class="QTableWidget" name="analysisListDate">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>120</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>220</number>
+             </attribute>
              <column>
               <property name="text">
                <string>Start Date</string>
@@ -322,8 +416,46 @@
         </item>
         <item>
          <widget class="QPushButton" name="analysisExecuteButton">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute all stragegy modules with provided parameters for every date range and display quantitative analysis results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#MainWindow QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+border: 1px solid #555;
+font-family: Arial;
+color: #ffffff;
+font-size: 16px;
+padding: 10px 5px 10px 5px;
+text-decoration: none;
+}
+
+#MainWindow QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3cb1ff);
+}
+
+#MainWindow QPushButton:pressed {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+}</string>
+          </property>
           <property name="text">
            <string>Execute</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -333,6 +465,10 @@
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
+       <attribute name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/resources/run_program.gif</normaloff>:/images/resources/run_program.gif</iconset>
+       </attribute>
        <attribute name="title">
         <string>Run Strategy Module</string>
        </attribute>
@@ -349,12 +485,28 @@
           <item>
            <layout class="QHBoxLayout" name="strategyModuleLayout">
             <item>
-             <widget class="QLineEdit" name="strategy_module_location"/>
+             <widget class="QLineEdit" name="strategy_module_location">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>32</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="browseModule">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>32</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the strategy module you wish to analyse.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Browse</string>
@@ -373,12 +525,32 @@
           <item>
            <layout class="QHBoxLayout" name="inputCSVLayout">
             <item>
-             <widget class="QLineEdit" name="input_csv_location"/>
+             <widget class="QLineEdit" name="input_csv_location">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>32</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="browseCSV">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an input CSV file you wish to process using the strategy module.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
                <string>Browse</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/images/resources/file_csv.png</normaloff>:/images/resources/file_csv.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>32</width>
+                <height>32</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -386,6 +558,12 @@
           </item>
           <item>
            <widget class="QLabel" name="inputcsv_valid">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <weight>50</weight>
@@ -427,6 +605,9 @@
             </item>
             <item row="0" column="2">
              <widget class="QDoubleSpinBox" name="threshold">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the threshold value to be used in the analysis.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="decimals">
                <number>4</number>
               </property>
@@ -454,6 +635,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="returnsInCalculation">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the number of returns in calculations (also known as returns window size).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="locale">
                <locale language="English" country="UnitedKingdom"/>
               </property>
@@ -478,6 +662,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="start_date">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the start date to begin analysing from.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="displayFormat">
                <string>dd/MM/yyyy</string>
               </property>
@@ -495,6 +682,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="end_date">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the end date to stop analysing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="displayFormat">
                <string>dd/MM/yyyy</string>
               </property>
@@ -523,11 +713,8 @@
            </widget>
           </item>
           <item>
-           <layout class="QGridLayout" name="executeLayout">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <item row="0" column="0" alignment="Qt::AlignLeft">
+           <layout class="QVBoxLayout" name="executeLayout">
+            <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="execution_status">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -535,15 +722,56 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(0, 170, 0);</string>
+              </property>
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item>
              <widget class="QPushButton" name="execute_button">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute stragegy module providing it with the provided input CSV file and a parameter file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">#MainWindow QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+border: 1px solid #555;
+font-family: Arial;
+color: #ffffff;
+font-size: 16px;
+padding: 10px 5px 10px 5px;
+text-decoration: none;
+}
+
+#MainWindow QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3cb1ff);
+}
+
+#MainWindow QPushButton:pressed {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+}</string>
+              </property>
               <property name="text">
                <string>Execute</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -554,6 +782,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="analysis_tab">
+       <attribute name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/resources/analyse.jpg</normaloff>:/images/resources/analyse.jpg</iconset>
+       </attribute>
        <attribute name="title">
         <string>Analyse Order CSV File</string>
        </attribute>
@@ -568,15 +800,50 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="output_csv_location"/>
+           <widget class="QLineEdit" name="output_csv_location">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16000</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="browse_outputcsv">
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Click here to browse for an output order CSV file</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Browse</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/images/resources/file_csv.png</normaloff>:/images/resources/file_csv.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -603,14 +870,110 @@
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="loadorder_button">
-          <property name="text">
-           <string>Load Order CSV File</string>
-          </property>
-         </widget>
+         <widget class="QListWidget" name="listWidget"/>
         </item>
         <item>
-         <widget class="QListWidget" name="listWidget"/>
+         <layout class="QHBoxLayout" name="selectionLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="selectall">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select all equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#selectionLayout QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(231, 231, 231));
+border: 1px solid #555;
+}
+
+#selectionLayout QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(252, 252, 252));
+border: 1px solid #555;
+}</string>
+            </property>
+            <property name="text">
+             <string>Select All</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="deselectall">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deselect all equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#selectionLayout QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(231, 231, 231));
+border: 1px solid #555;
+}
+
+#selectionLayout QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(252, 252, 252));
+border: 1px solid #555;
+}</string>
+            </property>
+            <property name="text">
+             <string>Deselect All</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="inverseSelection">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Inverse your current selection.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#selectionLayout QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(231, 231, 231));
+border: 1px solid #555;
+}
+
+#selectionLayout QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1  rgb(252, 252, 252));
+border: 1px solid #555;
+}</string>
+            </property>
+            <property name="text">
+             <string>Inverse Selection</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -627,34 +990,67 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QPushButton" name="selectall">
-            <property name="text">
-             <string>Select All</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="deselectall">
-            <property name="text">
-             <string>Deselect All</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="inverseSelection">
-            <property name="text">
-             <string>Inverse Selection</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
          <widget class="QPushButton" name="showanalysis_button">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display analysis results for selected equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#MainWindow QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+border: 1px solid #555;
+font-family: Arial;
+color: #ffffff;
+font-size: 16px;
+padding: 10px 5px 10px 5px;
+text-decoration: none;
+}
+
+#MainWindow QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3cb1ff);
+}
+
+#MainWindow QPushButton:pressed {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+}</string>
+          </property>
           <property name="text">
            <string>Display Analysis</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/images/resources/displayanalysis.png</normaloff>:/images/resources/displayanalysis.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -663,14 +1059,55 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="companylabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Trock Pty Ltd. Version (v1.30). Web: &lt;a href=&quot;http://www.trock.net/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.trock.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="bottomMargin">
+       <number>0</number>
       </property>
-      <property name="openExternalLinks">
-       <bool>true</bool>
-      </property>
-     </widget>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="logo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/images/resources/logo.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="companylabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Trock Pty Ltd. Version v1.30 (build216). &lt;span style=&quot; font-weight:600;&quot;&gt;Web&lt;/span&gt;: &lt;a href=&quot;http://www.trock.net/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.trock.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -681,6 +1118,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

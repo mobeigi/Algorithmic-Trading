@@ -104,9 +104,9 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     QString net_return_perc_str;
 
     if (runningNetPerc < 0) {
-        ui->summary_totalnetreturns->setStyleSheet("color:red;font: 14pt \"MS Shell Dlg 2\";");
+        ui->summary_totalnetreturns->setStyleSheet("color:red;font: 14pt \"Verdana\";");
     } else {
-        ui->summary_totalnetreturns->setStyleSheet("color:green;font: 14pt \"MS Shell Dlg 2\";");
+        ui->summary_totalnetreturns->setStyleSheet("color:green;font: 14pt \"Verdana\";");
     }
 
     net_return_perc_str.append(QString::number(runningNetPerc));

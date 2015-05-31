@@ -105,7 +105,7 @@ int MainWindow::on_execute_button_clicked()
     ui->execution_status->setText("Execution Complete");
 
     ui->output_csv_location->setText( (curr_path + "/orders.csv").c_str());
-    on_loadorder_button_clicked();  //populate analysis tab with checklist
+    loadordercsvfile();  //populate analysis tab with checklist
     ui->analysis_prep->setCurrentIndex(ANALYSIS_TAB); //change tab to analysis tab
 
     return EXIT_SUCCESS;
@@ -114,9 +114,10 @@ int MainWindow::on_execute_button_clicked()
 void MainWindow::on_browse_outputcsv_clicked() {
     ui->output_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Output CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
     ui->output_csv_location->displayText();
+    loadordercsvfile();
 }
 
-int MainWindow::on_loadorder_button_clicked() {
+int MainWindow::loadordercsvfile() {
     //Clear analyse error text
     ui->analysis_error_msg->setText("");
 

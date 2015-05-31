@@ -21,7 +21,7 @@
        <item>
         <widget class="QLabel" name="label_6">
          <property name="styleSheet">
-          <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+          <string notr="true">font: 14pt &quot;Verdana&quot;;</string>
          </property>
          <property name="text">
           <string>Total Net Returns:</string>
@@ -45,7 +45,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="styleSheet">
-          <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+          <string notr="true">font: 14pt &quot;Verdana&quot;;</string>
          </property>
          <property name="text">
           <string>Most Profitable Equity:</string>
@@ -69,7 +69,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="styleSheet">
-          <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+          <string notr="true">font: 14pt &quot;Verdana&quot;;</string>
          </property>
          <property name="text">
           <string>Least Profitable Equity:</string>

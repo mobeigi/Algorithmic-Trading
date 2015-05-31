@@ -51,3 +51,6 @@ FORMS    += mainwindow.ui \
 RC_FILE = iconise.rc
 
 QMAKE_LFLAGS += -Wl,-rpath,"'\$$ORIGIN'"
+
+RESOURCES += \
+    resources.qrc

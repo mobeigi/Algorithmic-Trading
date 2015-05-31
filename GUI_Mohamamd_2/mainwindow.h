@@ -52,7 +52,7 @@ private slots:
 
     //for analysing an output csv
     void on_browse_outputcsv_clicked();
-    int on_loadorder_button_clicked();
+    int loadordercsvfile();
     int on_showanalysis_button_clicked();
 
     int on_selectall_clicked();
