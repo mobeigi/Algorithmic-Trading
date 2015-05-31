@@ -39,7 +39,9 @@ HEADERS  += mainwindow.h\
     MyTabWindow.h \
     SummaryForm.h \
     QuantitativeAnalysisDisplay.h \
-    CamelPushButton.h
+    CamelPushButton.h \
+    MyTableWidgetItem.h \
+    MyDateTableWidgetItem.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \

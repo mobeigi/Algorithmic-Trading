@@ -39,7 +39,7 @@
     <item>
      <widget class="QTabWidget" name="analysis_prep">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="quantitative_tab">
        <property name="layoutDirection">
@@ -134,6 +134,9 @@
                   <property name="decimals">
                    <number>4</number>
                   </property>
+                  <property name="value">
+                   <double>0.000100000000000</double>
+                  </property>
                  </widget>
                 </item>
                </layout>
@@ -154,6 +157,9 @@
                   </property>
                   <property name="maximum">
                    <double>100.000000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>5.000000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -260,7 +266,15 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="analysisEndDate"/>
+                <widget class="QDateEdit" name="analysisEndDate">
+                 <property name="date">
+                  <date>
+                   <year>2015</year>
+                   <month>1</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -486,6 +500,13 @@
               </property>
               <property name="calendarPopup">
                <bool>true</bool>
+              </property>
+              <property name="date">
+               <date>
+                <year>2015</year>
+                <month>1</month>
+                <day>1</day>
+               </date>
               </property>
              </widget>
             </item>
