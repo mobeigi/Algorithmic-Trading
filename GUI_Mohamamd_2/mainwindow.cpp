@@ -360,7 +360,7 @@ void MainWindow::on_analysisAddDateButton_clicked(){
     ui->analysisListDate->setItem(currRows,1,endDateItem);
 }
 
-void MainWindow::on_analysisExecuteButton_clicked(){
+tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool formatForCSV) {
     //QString s = getRandomString();
     //cout << s.toStdString() << endl;
 
@@ -397,7 +397,10 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
 
         StrategyData strategyData;
-        strategyData.name = analysisStrategy.toStdString() + "\nTh: " + analysisThreshold.toStdString() + ", Rt: " + analysisReturns.toStdString();
+        if (formatForCSV)
+            strategyData.name = analysisStrategy.toStdString() + " Th: " + analysisThreshold.toStdString() + " Rt: " + analysisReturns.toStdString();
+        else
+            strategyData.name = analysisStrategy.toStdString() + "\nTh: " + analysisThreshold.toStdString() + ", Rt: " + analysisReturns.toStdString();
         strategyData.dataForEachDateRange = vector<ParseCSVData *>();
         strategieStrs.push_back(strategyData.name);
 
@@ -495,6 +498,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         strategyDatas.push_back(strategyData);
     }
 
+
     vector<string> equityTypes = vector<string>();
     for(std::map<string,bool>::iterator iter = equityTypesMap.begin(); iter != equityTypesMap.end(); ++iter)
     {
@@ -508,18 +512,90 @@ void MainWindow::on_analysisExecuteButton_clicked(){
         delete dat;
     }*/
 
+    return {pset, strategieStrs};
+
+}
+
+void MainWindow::on_analysisExecuteButton_clicked(){
+
+
+    tuple<vector<ParamSet>, vector<string>> analysis = this->doExecuteAnalysis(false);
+
     QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
     qad->show();
 
     //QAD becomes owner of all csv data stored in pset
-    qad->setAnalysis(pset, strategieStrs);
+    qad->setAnalysis(get<0>(analysis), get<1>(analysis));
 
 //    for (QString s : outputList){
 //        cout << s.toStdString() << endl;
 //    }
 }
 
+void MainWindow::on_saveCSVExecuteButton_clicked() {
 
+    tuple<vector<ParamSet>, vector<string>> analysis = this->doExecuteAnalysis(true);
+    QString fileName =
+            QFileDialog::getSaveFileName(this, tr("Save Analysis"),
+                                         "/path/to/file/", tr("CSV File (*.csv)"));
+
+    //do the saving
+
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadWrite)) {
+
+        QTextStream stream(&file);
+        //stream << "bla" << endl;
+
+        for (std::string strategy : get<1>(analysis)) {
+            stream << QString::fromStdString("," + strategy + "," + strategy + "," + strategy
+                                             + "," + strategy + "," + strategy + ","
+                                             + strategy + "," + strategy);
+
+        }
+        stream << endl;
+        for (std::string strategy : get<1>(analysis)) {
+            stream << ",Returns,Returns (raw),Granality,Granality (raw),Volatility,Volatility (raw),RGV Sum";
+
+        }
+        stream << endl;
+
+
+        //int startY = 2;
+
+        //int rowIndex = -1;
+        for (std::ParamSet paramSet : get<0>(analysis)) {
+            //rowIndex++;
+            stream << QString::fromStdString(paramSet.getEquityType() +
+                            " (" + paramSet.getStartDate() + " to "
+                            + paramSet.getEndDate() + ")");
+
+            for (int i = 0; i < paramSet.getNumberOfStrategies(); ++i) {
+                std::Para r = paramSet.getQuantifiedParameter(std::paraReturns, i);
+                std::Para g = paramSet.getQuantifiedParameter(std::paraGranality, i);
+                std::Para v = paramSet.getQuantifiedParameter(std::paraVolatility, i);
+                std::Para sum = r + g + v;
+
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(r.qnt));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(r.raw));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(g.qnt));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(g.raw));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(v.qnt));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(v.raw));
+                stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(sum.qnt));
+
+
+
+            }
+
+            stream << endl;
+        }
+
+    }
+
+    for (std::ParamSet pSet : get<0>(analysis)) pSet.releaseAllAnalysisData();
+
+}
 
 
 

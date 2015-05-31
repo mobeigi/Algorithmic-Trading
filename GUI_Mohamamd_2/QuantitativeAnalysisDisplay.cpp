@@ -33,11 +33,14 @@ void QuantitativeAnalysisDisplay::drawTitle(QGridLayout *layout, std::string tex
 #define DIFF_COL 155.0
 #define COL_LOW 100.0
 
-void QuantitativeAnalysisDisplay::drawQuantValue(QGridLayout *layout, std::Para para, int row, int col, int width, int height) {
+void QuantitativeAnalysisDisplay::drawQuantValue(QGridLayout *layout, std::Para para, int row, int col, int width, int height, bool showRaw) {
     QLabel *l = new QLabel();
     if (para.valid) {
-        l->setText(QString::fromStdString(std::Helper::formatDoubleSmall(para.qnt) +
+        if (showRaw)
+            l->setText(QString::fromStdString(std::Helper::formatDoubleSmall(para.qnt) +
                                       " \n(" + std::Helper::formatDoubleSmall(para.raw) + ")"));
+        else
+            l->setText(QString::fromStdString(std::Helper::formatDoubleSmall(para.qnt)));
         l->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
         int red = 255;
         int green = 255;
@@ -141,23 +144,23 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
 
             if (displayOption == -1) {
                 this->drawQuantValue(ui->gridLayout, r, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 1, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 1, 1, true);
                 this->drawQuantValue(ui->gridLayout, g, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 1, 1, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 1, 1, 1, true);
                 this->drawQuantValue(ui->gridLayout, v, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 2, 1, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 2, 1, 1, true);
             } else if (displayOption == 0) {
                 this->drawQuantValue(ui->gridLayout, r, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1, true);
             } else if (displayOption == 1) {
                 this->drawQuantValue(ui->gridLayout, g, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1, true);
             } else if (displayOption == 2) {
                 this->drawQuantValue(ui->gridLayout, v, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1, true);
             } else if (displayOption == 3) {
                 this->drawQuantValue(ui->gridLayout, v + g + r, rowIndex + startY,
-                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1);
+                                     __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 3, 1, false);
             }
 
             //add button of elaboration and analysis, using the CamelPushButton :)

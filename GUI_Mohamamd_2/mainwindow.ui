@@ -415,12 +415,22 @@ Calculation</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="analysisExecuteButton">
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute all stragegy modules with provided parameters for every date range and display quantitative analysis results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">#MainWindow QPushButton {
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="saveCSVExecuteButton">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute all stragegy modules with provided parameters for every date range and save quantitative analysis results to a CSV file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#MainWindow QPushButton {
 background: qradialgradient(cx: 0.3, cy: -0.4,
 fx: 0.3, fy: -0.4,
 radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
@@ -443,21 +453,68 @@ background: qradialgradient(cx: 0.3, cy: -0.4,
 fx: 0.3, fy: -0.4,
 radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
 }</string>
-          </property>
-          <property name="text">
-           <string>Execute</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Save CSV</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="analysisExecuteButton">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute all stragegy modules with provided parameters for every date range and display quantitative analysis results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#MainWindow QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+border: 1px solid #555;
+font-family: Arial;
+color: #ffffff;
+font-size: 16px;
+padding: 10px 5px 10px 5px;
+text-decoration: none;
+}
+
+#MainWindow QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3cb1ff);
+}
+
+#MainWindow QPushButton:pressed {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+}</string>
+            </property>
+            <property name="text">
+             <string>Execute</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
