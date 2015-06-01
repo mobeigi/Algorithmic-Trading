@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QTextStream>
 #include <QDir>         //for processing directories
 
 #ifdef _WIN32 //windows 32 and 64bit
@@ -12,7 +13,10 @@
 #endif
 
 #include "AnalysisDisplays.h"
+#include "ParamAnalysisHelper.h"
+#include "QuantitativeAnalysisDisplay.h"
 
+#include <tuple>
 #include <string>
 #include <iostream>
 #include <fstream>      //for creating a params file
@@ -50,7 +54,7 @@ private slots:
 
     //for analysing an output csv
     void on_browse_outputcsv_clicked();
-    int on_loadorder_button_clicked();
+    int loadordercsvfile();
     int on_showanalysis_button_clicked();
 
     int on_selectall_clicked();
@@ -59,10 +63,25 @@ private slots:
 
     int check_outputcsv(void);
 
+    //quantative analysis
+    //returns param set and list of strategies (names)
+    tuple<vector<ParamSet>, vector<string>> doExecuteAnalysis(bool formatForCSV);
+    void on_analysisInputCSVButton_clicked();
+    void on_analysisBrowseStrategyButton_clicked();
+    void on_clearStrategyButton_clicked();
+    void on_analysisClearDateButton_clicked();
+    void on_addStrategyButton_clicked();
+    void on_analysisAddDateButton_clicked();
+    void on_analysisExecuteButton_clicked();
+    void on_saveCSVExecuteButton_clicked();
+
+
 private:
     Ui::MainWindow *ui;
     AnalysisDisplays *ad = nullptr;
     string construct_date_string(int day, int month, int year);
+    QString getRandomString() const;
+    QString getYear(QString yr);
 };
 
 #endif // MAINWINDOW_H

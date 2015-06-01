@@ -47,7 +47,11 @@
           <widget class="QGraphicsView" name="graphicsGraphDisplay"/>
          </item>
          <item>
-          <widget class="QTableWidget" name="returnsAnalysis"/>
+          <widget class="QTableWidget" name="returnsAnalysis">
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,20">
