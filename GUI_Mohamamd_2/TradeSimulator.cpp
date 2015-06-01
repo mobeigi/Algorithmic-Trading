@@ -188,8 +188,9 @@ void TradeSimulator::on_exportOrderFileButton_clicked() {
             size_t counter = 0;
 
             //Now output trades
-            for (auto it = userTrades.begin(); it != userTrades.end(); ++it) {
-                TradeDayData tdd = *it;
+            for (size_t i = 0; i < totalTrades; ++i) {
+                TradeDayData tdd = this->userTrades.at(i);
+
                 stream << QString::fromStdString(this->eqType) << ","
                        << QString::fromStdString(tdd.date) << ","
                        << QString::number(tdd.last) << ","

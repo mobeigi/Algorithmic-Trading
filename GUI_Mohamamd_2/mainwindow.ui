@@ -39,7 +39,7 @@
     <item>
      <widget class="QTabWidget" name="analysis_prep">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="quantitative_tab">
        <property name="layoutDirection">
@@ -1090,7 +1090,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
 }</string>
             </property>
             <property name="text">
-             <string>Save as CSV</string>
+             <string>Save Summary as CSV</string>
             </property>
             <property name="icon">
              <iconset resource="resources.qrc">
@@ -1240,7 +1240,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                <item>
                 <widget class="QPushButton" name="tradeSimulator_browseCSV">
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an input CSV file you wish to process using the strategy module.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select an input CSV file you wish to use with trade simulation mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Browse</string>
@@ -1323,7 +1323,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display analysis results for selected equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Run trade simulation mode to simulate live trading.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="styleSheet">
                <string notr="true">#MainWindow QPushButton {
