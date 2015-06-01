@@ -327,23 +327,30 @@ void MainWindow::on_analysisClearDateButton_clicked(){
 
 void MainWindow::on_addStrategyButton_clicked(){
 
-    int currRows = ui->analysisStrategyList->rowCount();
-    ui->analysisStrategyList->setRowCount(currRows + 1);
+
 
     QString analysisStrategy = ui->analysisBrowseStrategyField->text();
     QString analysisThreshold = QString::number(ui->analysisThreshold->value()) ;
     QString analysisReturns = QString::number(ui->analysisReturns->value());
-    QString inputCSV = ui->analysisInputCSVField->text();
+    //QString inputCSV = ui->analysisInputCSVField->text();
+
+    if (analysisStrategy.isEmpty()) {
+        QMessageBox::question(this, "Strategy Required", "You must choose a strategy.", QMessageBox::Ok);
+        return;
+    }
+
+    int currRows = ui->analysisStrategyList->rowCount();
+    ui->analysisStrategyList->setRowCount(currRows + 1);
 
     QTableWidgetItem *analysisStrategyItem = new QTableWidgetItem(analysisStrategy, QTableWidgetItem::Type);
     QTableWidgetItem *analysisThresholdItem = new QTableWidgetItem(analysisThreshold, QTableWidgetItem::Type);
     QTableWidgetItem *analysisReturnsItem = new QTableWidgetItem(analysisReturns, QTableWidgetItem::Type);
-    QTableWidgetItem *inputCSVItem = new QTableWidgetItem(inputCSV, QTableWidgetItem::Type);
+    //QTableWidgetItem *inputCSVItem = new QTableWidgetItem(inputCSV, QTableWidgetItem::Type);
 
     ui->analysisStrategyList->setItem(currRows,0,analysisStrategyItem);
     ui->analysisStrategyList->setItem(currRows,1,analysisThresholdItem);
     ui->analysisStrategyList->setItem(currRows,2,analysisReturnsItem);
-    ui->analysisStrategyList->setItem(currRows,3,inputCSVItem);
+    //ui->analysisStrategyList->setItem(currRows,3,inputCSVItem);
 }
 
 void MainWindow::on_analysisAddDateButton_clicked(){
@@ -396,7 +403,10 @@ tuple<vector<ParamSet>, vector<tuple<string, string, string>>> MainWindow::doExe
         QString analysisStrategy = ui->analysisStrategyList->item(analysisCounter,0)->text();
         QString analysisThreshold = ui->analysisStrategyList->item(analysisCounter,1)->text();
         QString analysisReturns = ui->analysisStrategyList->item(analysisCounter,2)->text();
-        QString inputCSV = ui->analysisStrategyList->item(analysisCounter,3)->text();
+        QString inputCSV = ui->analysisInputCSVField->text();
+
+
+        //ui->analysisStrategyList->item(analysisCounter,3)->text();
 
         StrategyData strategyData;
         if (formatForCSV)
@@ -594,6 +604,11 @@ tuple<vector<ParamSet>, vector<tuple<string, string, string>>> MainWindow::doExe
 
 void MainWindow::on_analysisExecuteButton_clicked(){
 
+    if (ui->analysisInputCSVField->text().isEmpty()) {
+        QMessageBox::question(this, "CSV Input Required", "You must choose an input CSV file.", QMessageBox::Ok);
+        return;
+    }
+
 
     tuple<vector<ParamSet>, vector<tuple<string, string, string>>> analysis = this->doExecuteAnalysis(false);
 
@@ -614,6 +629,11 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 }
 
 void MainWindow::on_saveCSVExecuteButton_clicked() {
+
+    if (ui->analysisInputCSVField->text().isEmpty()) {
+        QMessageBox::question(this, "CSV Input Required", "You must choose an input CSV file.", QMessageBox::Ok);
+        return;
+    }
 
     tuple<vector<ParamSet>, vector<tuple<string,string,string>>> analysis = this->doExecuteAnalysis(true);
     QString fileName =

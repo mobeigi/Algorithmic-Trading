@@ -283,11 +283,6 @@ Calculation</string>
                <set>AlignHCenter|AlignVCenter|AlignCenter</set>
               </property>
              </column>
-             <column>
-              <property name="text">
-               <string>CSV file</string>
-              </property>
-             </column>
             </widget>
            </item>
           </layout>

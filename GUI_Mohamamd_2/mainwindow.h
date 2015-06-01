@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QTextStream>
+#include <QMessageBox>
 #include <QDir>         //for processing directories
 
 #ifdef _WIN32 //windows 32 and 64bit
