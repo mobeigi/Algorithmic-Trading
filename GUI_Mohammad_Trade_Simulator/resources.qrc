@@ -10,5 +10,6 @@
         <file>resources/analyse.jpg</file>
         <file>resources/letterB.png</file>
         <file>resources/letterS.png</file>
+        <file>resources/globe.gif</file>
     </qresource>
 </RCC>

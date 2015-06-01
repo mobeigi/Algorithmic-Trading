@@ -74,7 +74,7 @@ private slots:
     void on_analysisAddDateButton_clicked();
     void on_analysisExecuteButton_clicked();
     void on_saveCSVExecuteButton_clicked();
-
+    void on_tradeSimulator_browseCSV_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -26,7 +26,8 @@ SOURCES +=\
     SummaryForm.cpp \
     QuantitativeAnalysisDisplay.cpp \
     CamelPushButton.cpp \
-    TradeSimulator.cpp
+    TradeSimulator.cpp \
+    ParseInputCSVData.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -43,7 +44,8 @@ HEADERS  += mainwindow.h\
     CamelPushButton.h \
     MyTableWidgetItem.h \
     MyDateTableWidgetItem.h \
-    TradeSimulator.h
+    TradeSimulator.h \
+    ParseInputCSVData.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \
