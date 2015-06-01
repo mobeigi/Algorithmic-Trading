@@ -627,7 +627,7 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
 
         QTextStream stream(&file);
 
-        stream << ",Strategy";
+        stream << ",,Strategy";
         for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
             string strategy = get<0>(stratData);
             string thresh = get<1>(stratData);
@@ -637,7 +637,7 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
                                              + strategy + "," + strategy);
 
         }
-        stream << endl << ",Threshold";
+        stream << endl << ",,Threshold";
         for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
             string thresh = get<1>(stratData);
             stream << QString::fromStdString("," + thresh + "," + thresh + "," + thresh
@@ -645,7 +645,7 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
                                              + thresh + "," + thresh);
 
         }
-        stream << endl << ",Returns";
+        stream << endl << ",,Returns";
         for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
             string returns = get<2>(stratData);
             stream << QString::fromStdString("," + returns + "," + returns + "," + returns
@@ -658,7 +658,7 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
         bool first = true;
         for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
             if (first) {
-                stream << ",";
+                stream << ",Start Date,End Date";
                 first = false;
             }
             stream << ",Returns,Returns (raw),Granality,Granality (raw),Volatility,Volatility (raw),RGV Sum";
@@ -673,7 +673,7 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
         for (std::ParamSet paramSet : get<0>(analysis)) {
             //rowIndex++;
             stream << QString::fromStdString(paramSet.getEquityType() +
-                            "," + paramSet.getStartDate() + " to "
+                            "," + paramSet.getStartDate() + ","
                             + paramSet.getEndDate() + "");
 
             for (int i = 0; i < paramSet.getNumberOfStrategies(); ++i) {
