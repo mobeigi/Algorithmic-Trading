@@ -129,6 +129,19 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
 
     int startY = 2;
 
+    this->drawTitle(ui->gridLayout, "", startY + (int)(analysisData.size()),
+                    0, __WID_TITLES_EQUITY, 1);
+    int sumRow = startY + (int)(analysisData.size()) + 1;
+    this->drawTitle(ui->gridLayout, "Sum Total", sumRow,
+                    0, __WID_TITLES_EQUITY, 1);
+
+    std::Para zeroPara;
+    zeroPara.valid = true;
+    zeroPara.qnt = 0;
+    zeroPara.raw = 0;
+
+    vector<tuple<Para,Para,Para,Para>> sums = vector<tuple<Para,Para,Para,Para>>();
+
     int rowIndex = -1;
     for (std::ParamSet paramSet : analysisData) {
         rowIndex++;
@@ -141,6 +154,15 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
             std::Para r = paramSet.getQuantifiedParameter(std::paraReturns, i);
             std::Para g = paramSet.getQuantifiedParameter(std::paraGranality, i);
             std::Para v = paramSet.getQuantifiedParameter(std::paraVolatility, i);
+
+            if (i >= sums.size()) {
+                sums.push_back(make_tuple(zeroPara,zeroPara,zeroPara,zeroPara));
+            }
+
+            get<0>(sums[i]) = get<0>(sums[i]) + r;
+            get<1>(sums[i]) = get<1>(sums[i]) + g;
+            get<2>(sums[i]) = get<2>(sums[i]) + v;
+            get<3>(sums[i]) = get<3>(sums[i]) + r + g + v;
 
             if (displayOption == -1) {
                 this->drawQuantValue(ui->gridLayout, r, rowIndex + startY,
@@ -172,6 +194,31 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
         }
 
         //paramSet.getEquityType()
+    }
+
+    int index = -1;
+    for (tuple<Para,Para,Para,Para> summm : sums) {
+        index++;
+        if (displayOption == -1) {
+            this->drawQuantValue(ui->gridLayout, get<0>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 1, 1, true);
+            this->drawQuantValue(ui->gridLayout, get<1>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 1, 1, 1, true);
+            this->drawQuantValue(ui->gridLayout, get<2>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 2, 1, 1, true);
+        } else if (displayOption == 0) {
+            this->drawQuantValue(ui->gridLayout, get<0>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 3, 1, true);
+        } else if (displayOption == 1) {
+            this->drawQuantValue(ui->gridLayout, get<1>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 3, 1, true);
+        } else if (displayOption == 2) {
+            this->drawQuantValue(ui->gridLayout, get<2>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 3, 1, true);
+        } else if (displayOption == 3) {
+            this->drawQuantValue(ui->gridLayout, get<3>(summm), sumRow,
+                                 __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 3, 1, false);
+        }
     }
 
     /*int strategyIndex = -1;

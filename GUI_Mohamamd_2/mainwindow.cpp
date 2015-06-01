@@ -689,6 +689,13 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
 
         //int startY = 2;
 
+        std::Para zeroPara;
+        zeroPara.valid = true;
+        zeroPara.qnt = 0;
+        zeroPara.raw = 0;
+
+        vector<tuple<Para,Para,Para,Para>> sums = vector<tuple<Para,Para,Para,Para>>();
+
         //int rowIndex = -1;
         for (std::ParamSet paramSet : get<0>(analysis)) {
             //rowIndex++;
@@ -701,6 +708,15 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
                 std::Para g = paramSet.getQuantifiedParameter(std::paraGranality, i);
                 std::Para v = paramSet.getQuantifiedParameter(std::paraVolatility, i);
                 std::Para sum = r + g + v;
+
+                if (i >= sums.size()) {
+                    sums.push_back(make_tuple(zeroPara,zeroPara,zeroPara,zeroPara));
+                }
+
+                get<0>(sums[i]) = get<0>(sums[i]) + r;
+                get<1>(sums[i]) = get<1>(sums[i]) + g;
+                get<2>(sums[i]) = get<2>(sums[i]) + v;
+                get<3>(sums[i]) = get<3>(sums[i]) + r + g + v;
 
                 stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(r.qnt));
                 stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(r.raw));
@@ -716,6 +732,22 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
 
             stream << endl;
         }
+
+        stream << ",,Sum Total";
+        int index = -1;
+        for (tuple<Para,Para,Para,Para> summm : sums) {
+            index++;
+
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<0>(summm).qnt));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<0>(summm).raw));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<1>(summm).qnt));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<1>(summm).raw));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<2>(summm).qnt));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<2>(summm).raw));
+            stream << "," << QString::fromStdString(std::Helper::formatDoubleSmall(get<3>(summm).qnt));
+
+        }
+        stream << endl;
 
     }
 
