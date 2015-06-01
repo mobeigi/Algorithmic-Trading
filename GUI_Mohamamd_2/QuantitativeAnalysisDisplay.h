@@ -50,7 +50,7 @@ private:
     void drawTitle(QGridLayout *layout, std::string text, int row, int col, int width, int height);
     void drawQuantValue(QGridLayout *layout, std::Para para, int row, int col, int width, int height, bool showRaw);
 
-    //displayOption = -1 normal, 0 = returns, 1 = granality, 2 = volatility
+    //displayOption = -1 normal, 0 = returns, 1 = granularity, 2 = volatility
     std::vector<std::ParamSet> analysisData;
     std::vector<std::string> strategies;
     int currentDisplayOption;

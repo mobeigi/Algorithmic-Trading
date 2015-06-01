@@ -55,6 +55,7 @@ private:
     Ui::TradeSimulator *ui;
     std::string eqType;
     vector<TradeDayData> data;
+    vector<TradeDayData> userTrades;
     QGraphicsScene *scene = nullptr;
     std::thread *simWorker = nullptr;
     std::AnalysisData *cumulativeData = nullptr;

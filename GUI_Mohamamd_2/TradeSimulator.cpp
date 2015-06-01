@@ -2,6 +2,9 @@
 #include "MyTableWidgetItem.h"
 #include "MyDateTableWidgetItem.h"
 
+#include <QFile>
+#include <QFileDialog>
+#include <QTextStream>
 #include <chrono>
 
 TradeSimulator::TradeSimulator(QWidget *parent) :
@@ -118,6 +121,9 @@ void TradeSimulator::on_sendBuySignal_clicked() {
     //Add data to analysis data
     TradeDayData tdd = this->data.at(this->index);
     this->cumulativeData->addNextTradeData(std::signal::BUY, tdd.date, tdd.last, 100);
+
+    //Add buy to user trades
+    this->userTrades.push_back(tdd);
 }
 
 void TradeSimulator::on_sendSellSignal_clicked() {
@@ -146,6 +152,9 @@ void TradeSimulator::on_sendSellSignal_clicked() {
     TradeDayData tdd = this->data.at(this->index);
     this->cumulativeData->addNextTradeData(std::signal::SELL, tdd.date, tdd.last, 100);
 
+    //Add buy to user trades
+    this->userTrades.push_back(tdd);
+
     //On sell signals, update buysell pair list
     displayReturnsAnalysis(this->cumulativeData); //show analysis
 
@@ -155,7 +164,44 @@ void TradeSimulator::on_sendSellSignal_clicked() {
 
 //Generate an order CSV File using trades that user made
 void TradeSimulator::on_exportOrderFileButton_clicked() {
-    //
+
+    if (this->lastTradeIndex == -1) {
+        ui->simulator_error_box->setText("No trades were made.");
+        return;
+    } else {
+        //Check if a final 'dangling' buy order exists (ignore if so)
+        size_t totalTrades = userTrades.size();
+
+        //if not even, dangling buy order (ignore last order)
+        if (userTrades.size() % 2 != 0)
+            --totalTrades;
+
+        //prepare output file
+        QString filename = QFileDialog::getSaveFileName(this, tr("Save Order File"), "/path/to/file/", tr("CSV File (*.csv)"));
+        QFile file(filename);
+        if(file.open(QIODevice::ReadWrite)) {
+            QTextStream stream(&file);
+
+            //Output header
+            stream << "#Company, Date, Price, Volume, Value, Signal" << endl;
+
+            size_t counter = 0;
+
+            //Now output trades
+            for (auto it = userTrades.begin(); it != userTrades.end(); ++it) {
+                TradeDayData tdd = *it;
+                stream << QString::fromStdString(this->eqType) << ","
+                       << QString::fromStdString(tdd.date) << ","
+                       << QString::number(tdd.last) << ","
+                       << QString::number(100) << ","
+                       << QString::number(100 * tdd.last) << ","
+                       << ((counter % 2 == 0) ? QString::fromStdString("B") : QString::fromStdString("S"))
+                       << endl;
+                ++counter;
+            }
+        }
+        file.close();
+    }
 }
 
 void TradeSimulator::displayReturnsAnalysis(std::AnalysisData *data) {

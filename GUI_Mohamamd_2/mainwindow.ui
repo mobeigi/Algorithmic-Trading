@@ -71,7 +71,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Input CSV</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Input CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -132,7 +132,7 @@
                   <string notr="true">qproperty-alignment: AlignCenter;</string>
                  </property>
                  <property name="text">
-                  <string>Strategy Module</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Strategy Module&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -535,7 +535,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
           <item>
            <widget class="QLabel" name="strategy_module_label">
             <property name="text">
-             <string>Strategy Module</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Strategy Module&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -575,7 +575,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
           <item>
            <widget class="QLabel" name="input_csv_label">
             <property name="text">
-             <string>Input CSV</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Input CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -852,7 +852,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
           <item>
            <widget class="QLabel" name="outputcsv_label">
             <property name="text">
-             <string>Output Order CSV File:</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Output Order CSV File:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -1211,7 +1211,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                </size>
               </property>
               <property name="text">
-               <string>Input CSV</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Input CSV&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="margin">
                <number>0</number>
@@ -1269,20 +1269,15 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                </size>
               </property>
               <property name="text">
-               <string>Select Equity to Monitor</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Equity to Monitor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QComboBox" name="tradeSimulator_comboBox">
               <property name="maxVisibleItems">
-               <number>12</number>
+               <number>16</number>
               </property>
-              <item>
-               <property name="text">
-                <string>-- Please select an input CSV file --</string>
-               </property>
-              </item>
              </widget>
             </item>
             <item>
@@ -1297,6 +1292,22 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="simulations_error_msg">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 0, 0);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="tradeSimulatorRunSimulationButton">
@@ -1413,7 +1424,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
       <item>
        <widget class="QLabel" name="companylabel">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Trock Pty Ltd. Version v1.30 (build216). &lt;span style=&quot; font-weight:600;&quot;&gt;Web&lt;/span&gt;: &lt;a href=&quot;http://www.trock.net/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.trock.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Trock Pty Ltd. Version v2.0 (build 218). &lt;span style=&quot; font-weight:600;&quot;&gt;Web&lt;/span&gt;: &lt;a href=&quot;http://www.trock.net/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.trock.net/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="openExternalLinks">
          <bool>true</bool>

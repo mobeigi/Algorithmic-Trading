@@ -826,6 +826,8 @@ void MainWindow::on_tradeSimulator_browseCSV_clicked() {
     ui->tradeSimulator_input_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Input CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
     ui->tradeSimulator_input_csv_location->displayText();
 
+    ui->simulations_error_msg->setText("");
+
     //Clear CSV ma
     inputCSV.data.clear();
 
@@ -843,6 +845,12 @@ void MainWindow::on_tradeSimulator_browseCSV_clicked() {
 }
 
 void MainWindow::on_tradeSimulatorRunSimulationButton_clicked() {
+    //If count is 0 return
+    if (ui->tradeSimulator_comboBox->count() == 0) {
+        ui->simulations_error_msg->setText("Please select a valid equity type.");
+        return;
+    }
+
     //Get dropdown selection
     std::string eqType = ui->tradeSimulator_comboBox->currentText().toStdString();
 

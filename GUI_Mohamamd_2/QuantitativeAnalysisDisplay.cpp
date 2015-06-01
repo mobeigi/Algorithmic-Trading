@@ -107,7 +107,7 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
         if (displayOption == -1) {
             this->drawTitle(ui->gridLayout, "Returns", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS + 0, 1, 1);
-            this->drawTitle(ui->gridLayout, "Granality", 1, __WID_TITLES_EQUITY +
+            this->drawTitle(ui->gridLayout, "Granularity", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS + 1, 1, 1);
             this->drawTitle(ui->gridLayout, "Volatility", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS + 2, 1, 1);
@@ -115,7 +115,7 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
             this->drawTitle(ui->gridLayout, "Returns", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS, 3, 1);
         } else if (displayOption == 1) {
-            this->drawTitle(ui->gridLayout, "Granality", 1, __WID_TITLES_EQUITY +
+            this->drawTitle(ui->gridLayout, "Granularity", 1, __WID_TITLES_EQUITY +
                         strategyIndex*__WID_TITLES_STRATS, 3, 1);
         } else if (displayOption == 2) {
             this->drawTitle(ui->gridLayout, "Volatility", 1, __WID_TITLES_EQUITY +

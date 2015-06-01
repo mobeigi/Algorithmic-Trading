@@ -31,7 +31,7 @@ double ParaReturns::calculateParam(double rawVal, double max, double min, double
     return QuantPara::calculateParam(rawVal, max, min, avg);
 }
 
-ParaGranality::ParaGranality() : QuantPara("Granality") {}
+ParaGranality::ParaGranality() : QuantPara("Granularity") {}
 double ParaGranality::calculateParam(double rawVal, double max, double min, double avg) {
     return -QuantPara::calculateParam(rawVal, max, min, avg);
 }
