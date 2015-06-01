@@ -1,7 +1,7 @@
-:input_csvFile:/Users/admin/Desktop/do/asd.csv\
-:output_csvFile:/Users/admin/Documents/COMP3011/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_clang_64bit-Debug/AlgorithmicTrading.app/Contents/MacOS/orders.csv\
-:output_logFile:/Users/admin/Documents/COMP3011/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_clang_64bit-Debug/AlgorithmicTrading.app/Contents/MacOS/AlgorithmicTrading.log\
-:returnsInCalculation:40\
-:threshold:1e-06\
+:input_csvFile:/Users/jsfn660/Downloads/f.rabhi@unsw.edu.au-ASXMidCap50Companies-N84692192.csv\
+:output_csvFile:/Users/jsfn660/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_clang_64bit-Debug/AlgorithmicTrading.app/Contents/MacOS/orders.csv\
+:output_logFile:/Users/jsfn660/Algorithmic-Trading/build-AlgorithmicTrading-Desktop_Qt_5_4_1_clang_64bit-Debug/AlgorithmicTrading.app/Contents/MacOS/AlgorithmicTrading.log\
+:returnsInCalculation:3\
+:threshold:0.000100\
 :startDate:01-JAN-2000\
-:endDate:14-JAN-2015\
+:endDate:01-JAN-2015\

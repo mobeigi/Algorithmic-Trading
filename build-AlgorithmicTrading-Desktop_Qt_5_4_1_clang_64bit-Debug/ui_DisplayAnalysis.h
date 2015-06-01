@@ -77,6 +77,7 @@ public:
 
         returnsAnalysis = new QTableWidget(scrollViewGraph);
         returnsAnalysis->setObjectName(QStringLiteral("returnsAnalysis"));
+        returnsAnalysis->setSortingEnabled(true);
 
         verticalLayout->addWidget(returnsAnalysis);
 

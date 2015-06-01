@@ -141,3 +141,72 @@ void SummaryForm::setTotalNetReturns(ParseCSVData * pCSVdata, vector<string> eqT
     lp_net_return_perc_str.append(" (" + QString::number(leastProfitableReturnsPerc) + "%)");
     ui->summary_leastprofitableequity->setText(lp_net_return_perc_str);
 }
+
+
+vector<tuple<string, double>> SummaryForm::export_Summary(ParseCSVData * pCSVdata, vector<string> eqTypes) {
+    double runningNetValue = 0;
+    double runningNetPerc = 0;
+
+    vector<tuple<string, double>> summaryData;
+
+    //Loop through provided list of companies
+    for (auto eqType = eqTypes.begin(); eqType != eqTypes.end(); ++eqType) {
+        AnalysisData *ad = pCSVdata->getDataForEquityType(*eqType);
+
+        //maintain queues of trades, one for buy and one for sell
+        // int is for maintaining which one came first
+        vector<tuple<TradeData, int>> buy_trades;
+        vector<tuple<TradeData, int>> sell_trades;
+
+        //maintain total return percentage
+        double net_return_value = 0;
+        double net_return_perc = 0;
+
+        //read the trade orders line by line
+        for (int i = 0; i < ad->tradeDataAvailable(); i++) {
+
+            //load the vectors as appropriate
+            if (ad->getData(i).tradeSignal == BUY) {
+                buy_trades.push_back(tuple<TradeData,int>(ad->getData(i),i));
+            } else {
+                sell_trades.push_back(tuple<TradeData,int>(ad->getData(i),i));
+            }
+
+            //Determine whether there is a buy-sell / sell-buy pair
+            if (buy_trades.size() > 0 && sell_trades.size() > 0) {
+                tuple<TradeData,int> buy_trade = buy_trades.front();
+                tuple<TradeData,int> sell_trade = sell_trades.front();
+
+                //Calculate and construct return value string
+                double return_value =(get<0>(sell_trade).price - get<0>(buy_trade).price);
+
+
+                //Calculate and construct return percentage string
+                double return_perc = (get<0>(sell_trade).price - get<0>(buy_trade).price) * 100 / get<0>(buy_trade).price;
+
+                //update total return value and percentage
+                net_return_value += return_value;
+                net_return_perc += return_perc;
+
+                //Remove the first trades from both queues
+                buy_trades.erase(buy_trades.begin(),buy_trades.begin()+1);
+                sell_trades.erase(sell_trades.begin(),sell_trades.begin()+1);
+            }
+        }
+
+        //Update running net returns
+        runningNetValue += net_return_value;
+        runningNetPerc += net_return_perc;
+
+        // *eqType (company name)
+        // net_return_prec (return returns %)
+
+        tuple<string, double> temp = make_tuple(*eqType, net_return_perc);
+        summaryData.push_back(temp);
+    }
+    tuple<string, double> totals = make_tuple("Total", runningNetPerc);
+    summaryData.push_back(totals);
+
+    return summaryData;
+
+}

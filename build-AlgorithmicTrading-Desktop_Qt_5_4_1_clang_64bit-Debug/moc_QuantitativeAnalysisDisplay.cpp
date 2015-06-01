@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../gui_antheny/QuantitativeAnalysisDisplay.h"
+#include "../GUI_Mohamamd_2/QuantitativeAnalysisDisplay.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_QuantitativeAnalysisDisplay_t {
-    QByteArrayData data[4];
-    char stringdata[58];
+    QByteArrayData data[5];
+    char stringdata[70];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,11 +32,12 @@ static const qt_meta_stringdata_QuantitativeAnalysisDisplay_t qt_meta_stringdata
 QT_MOC_LITERAL(0, 0, 27), // "QuantitativeAnalysisDisplay"
 QT_MOC_LITERAL(1, 28, 22), // "handleSelectionChanged"
 QT_MOC_LITERAL(2, 51, 0), // ""
-QT_MOC_LITERAL(3, 52, 5) // "index"
+QT_MOC_LITERAL(3, 52, 5), // "index"
+QT_MOC_LITERAL(4, 58, 11) // "clickedSlot"
 
     },
     "QuantitativeAnalysisDisplay\0"
-    "handleSelectionChanged\0\0index"
+    "handleSelectionChanged\0\0index\0clickedSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -46,7 +47,7 @@ static const uint qt_meta_data_QuantitativeAnalysisDisplay[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,10 +55,12 @@ static const uint qt_meta_data_QuantitativeAnalysisDisplay[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x0a /* Public */,
+       1,    1,   24,    2, 0x0a /* Public */,
+       4,    0,   27,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -68,6 +71,7 @@ void QuantitativeAnalysisDisplay::qt_static_metacall(QObject *_o, QMetaObject::C
         QuantitativeAnalysisDisplay *_t = static_cast<QuantitativeAnalysisDisplay *>(_o);
         switch (_id) {
         case 0: _t->handleSelectionChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->clickedSlot(); break;
         default: ;
         }
     }
@@ -98,13 +102,13 @@ int QuantitativeAnalysisDisplay::qt_metacall(QMetaObject::Call _c, int _id, void
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

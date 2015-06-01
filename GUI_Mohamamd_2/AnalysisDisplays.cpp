@@ -44,6 +44,15 @@ void AnalysisDisplays::showCheckList(std::string csvFile, QListWidget* lw, QWidg
 
 }
 
+ vector<tuple<string,double>> AnalysisDisplays::exportAnalysisData(){
+	vector<string> eqTypeList;
+	for (QListWidgetItem *wi: listItems) {
+		if(wi->checkState()) {
+			eqTypeList.push_back(wi->text().toStdString());
+		}
+	}
+    return SummaryForm::export_Summary(this->parseCSV, eqTypeList);
+}
 void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
 
     QMainWindow *mw = new QMainWindow(parent);

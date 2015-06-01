@@ -16,6 +16,7 @@
 #include "AnalysisDisplays.h"
 #include "ParamAnalysisHelper.h"
 #include "QuantitativeAnalysisDisplay.h"
+#include "SummaryForm.h"
 
 #include <tuple>
 #include <string>
@@ -75,6 +76,7 @@ private slots:
     void on_analysisAddDateButton_clicked();
     void on_analysisExecuteButton_clicked();
     void on_saveCSVExecuteButton_clicked();
+    void on_exportsummary_clicked();
 
 
 private:

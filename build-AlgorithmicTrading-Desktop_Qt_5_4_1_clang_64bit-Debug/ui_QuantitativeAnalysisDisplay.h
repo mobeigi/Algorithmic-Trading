@@ -31,17 +31,17 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout;
     QWidget *widget;
     QLabel *label;
     QComboBox *comboBox;
-    QGridLayout *gridLayout;
 
     void setupUi(QWidget *QuantitativeAnalysisDisplay)
     {
         if (QuantitativeAnalysisDisplay->objectName().isEmpty())
             QuantitativeAnalysisDisplay->setObjectName(QStringLiteral("QuantitativeAnalysisDisplay"));
-        QuantitativeAnalysisDisplay->resize(400, 300);
+        QuantitativeAnalysisDisplay->resize(640, 640);
         gridLayout_2 = new QGridLayout(QuantitativeAnalysisDisplay);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         scrollArea = new QScrollArea(QuantitativeAnalysisDisplay);
@@ -49,12 +49,21 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 374, 274));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 614, 542));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+
+        verticalLayout->addLayout(gridLayout);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        gridLayout_2->addWidget(scrollArea, 1, 0, 1, 1);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        widget = new QWidget(scrollAreaWidgetContents);
+        widget = new QWidget(QuantitativeAnalysisDisplay);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setMinimumSize(QSize(0, 60));
         label = new QLabel(widget);
@@ -67,16 +76,7 @@ public:
         horizontalLayout->addWidget(widget);
 
 
-        verticalLayout->addLayout(horizontalLayout);
-
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-
-        verticalLayout->addLayout(gridLayout);
-
-        scrollArea->setWidget(scrollAreaWidgetContents);
-
-        gridLayout_2->addWidget(scrollArea, 0, 0, 1, 1);
+        gridLayout_2->addLayout(horizontalLayout, 0, 0, 1, 1);
 
 
         retranslateUi(QuantitativeAnalysisDisplay);
@@ -94,6 +94,7 @@ public:
          << QApplication::translate("QuantitativeAnalysisDisplay", "Returns", 0)
          << QApplication::translate("QuantitativeAnalysisDisplay", "Granality", 0)
          << QApplication::translate("QuantitativeAnalysisDisplay", "Volatility", 0)
+         << QApplication::translate("QuantitativeAnalysisDisplay", "Display Sum", 0)
         );
     } // retranslateUi
 

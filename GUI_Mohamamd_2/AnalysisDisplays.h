@@ -23,6 +23,7 @@ public:
     AnalysisDisplays();
     ~AnalysisDisplays();
     static AnalysisDisplays *instance();
+	vector<tuple<string,double>> exportAnalysisData();
 
     inline std::vector<QListWidgetItem *> getListItems() { return listItems; }
     void analyzeCSVOutput(std::string csvFile, QWidget *parent);

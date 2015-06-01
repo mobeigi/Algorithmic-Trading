@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>960</height>
+    <width>568</width>
+    <height>1180</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -39,7 +39,7 @@
     <item>
      <widget class="QTabWidget" name="analysis_prep">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="quantitative_tab">
        <property name="layoutDirection">
@@ -1042,23 +1042,25 @@ border: 1px solid #555;
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="showanalysis_button">
-          <property name="font">
-           <font>
-            <family>Arial</family>
-            <pointsize>-1</pointsize>
-            <underline>false</underline>
-            <strikeout>false</strikeout>
-           </font>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="bottomMargin">
+           <number>0</number>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display analysis results for selected equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">#MainWindow QPushButton {
+          <item>
+           <widget class="QPushButton" name="exportsummary">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Execute all stragegy modules with provided parameters for every date range and save quantitative analysis results to a CSV file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#MainWindow QPushButton {
 background: qradialgradient(cx: 0.3, cy: -0.4,
 fx: 0.3, fy: -0.4,
 radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
@@ -1081,30 +1083,88 @@ background: qradialgradient(cx: 0.3, cy: -0.4,
 fx: 0.3, fy: -0.4,
 radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
 }</string>
-          </property>
-          <property name="text">
-           <string>Display Analysis</string>
-          </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/images/resources/displayanalysis.png</normaloff>:/images/resources/displayanalysis.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Export to CSV</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/images/resources/export_csv.png</normaloff>:/images/resources/export_csv.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showanalysis_button">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Display analysis results for selected equity types.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#MainWindow QPushButton {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+border: 1px solid #555;
+font-family: Arial;
+color: #ffffff;
+font-size: 16px;
+padding: 10px 5px 10px 5px;
+text-decoration: none;
+}
+
+#MainWindow QPushButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3cb1ff);
+}
+
+#MainWindow QPushButton:pressed {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
+}</string>
+            </property>
+            <property name="text">
+             <string>Display Analysis</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/images/resources/displayanalysis.png</normaloff>:/images/resources/displayanalysis.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

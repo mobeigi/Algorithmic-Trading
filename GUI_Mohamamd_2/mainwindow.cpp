@@ -783,3 +783,41 @@ QString MainWindow::getYear(QString yr) {
     }
     return yearStr;
 }
+
+void MainWindow::on_exportsummary_clicked() {
+    ui->analysis_error_msg->setText("");
+    if (!ad) {
+        ui->analysis_error_msg->setText("Please load some CSV order data first.");
+        return;
+    }
+    if (ad->getListItems().size() < 1) {
+        ui->analysis_error_msg->setText("There was no Equity types in the provided CSV file");
+        return;
+    }
+    int count = 0;
+    for (QListWidgetItem *item : ad->getListItems()) {
+        if (item->checkState()) {
+            ++count; //Increment counter
+            break;
+        }
+    }
+    if (count == 0) {
+        ui->analysis_error_msg->setText("You must select at least 1 Equity type to analyse.");
+        return;
+    } else {
+        QString filename = QFileDialog::getSaveFileName(this, tr("Save Summary"), "/path/to/file/", tr("CSV File (*.csv)"));
+        QFile file(filename);
+        if(file.open(QIODevice::ReadWrite)) {
+            QTextStream stream(&file);
+            stream << "Company,Returns(%)" << endl;
+            vector<tuple<string,double>> summaryData = ad->exportAnalysisData();
+            for(auto i = summaryData.begin(); i != summaryData.end(); ++i) {
+                stream << QString::fromStdString(get<0>(*i)) 
+            << ',' << QString::number(get<1>(*i)) << endl;
+            }
+        }
+        file.close();
+    }
+}
+
+
