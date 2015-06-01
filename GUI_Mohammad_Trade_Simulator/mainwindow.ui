@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
+    <width>720</width>
     <height>960</height>
    </rect>
   </property>
@@ -1201,19 +1201,6 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
              </widget>
             </item>
             <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
              <widget class="QLabel" name="input_csv_label_3">
               <property name="maximumSize">
                <size>
@@ -1252,7 +1239,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="tradeSimulator_runSimulationButton">
+             <widget class="QPushButton" name="tradeSimulatorRunSimulationButton">
               <property name="font">
                <font>
                 <family>Arial</family>

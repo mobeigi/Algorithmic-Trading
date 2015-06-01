@@ -3,6 +3,8 @@
 #include "ParseInputCSVData.h"
 #include "TradeSimulator.h"
 
+#include <iostream>
+
 #define ANALYSIS_TAB 2
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -619,15 +621,17 @@ void MainWindow::on_tradeSimulator_browseCSV_clicked() {
     }
 }
 
-void on_tradeSimulator_runSimulationButton() {
+void MainWindow::on_tradeSimulatorRunSimulationButton_clicked() {
     //Get dropdown selection
-    std::string eqType = ui->tradeSimulator_comboBox->text()->toStdString();
+    std::string eqType = ui->tradeSimulator_comboBox->currentText().toStdString();
 
     //Create Trade Simulator form
-    TradeSimulator *ts = new TradeSimulator();
-    ts->addTradeData(eqType, this->inputCSV.data[eqType] );
+    this->ts = new TradeSimulator();
+    this->ts->addTradeData(eqType, this->inputCSV.data[eqType] );
+    this->ts->show();
 
-    ts->show();
+    //Run simulation which will start worker thread
+    this->ts->runSimulation();
 }
 
 

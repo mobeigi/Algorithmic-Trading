@@ -26,6 +26,7 @@ class ParseInputCSVData
 private:
 
 public:
+    ParseInputCSVData() {};
     ParseInputCSVData(string fileStr);
     vector<string> parseCSVLine(string line);
 

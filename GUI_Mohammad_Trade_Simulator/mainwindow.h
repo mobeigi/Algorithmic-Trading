@@ -16,6 +16,7 @@
 #include "ParamAnalysisHelper.h"
 #include "QuantitativeAnalysisDisplay.h"
 #include "ParseInputCSVData.h"
+#include "TradeSimulator.h"
 
 #include <tuple>
 #include <string>
@@ -76,12 +77,13 @@ private slots:
     void on_analysisExecuteButton_clicked();
     void on_saveCSVExecuteButton_clicked();
     void on_tradeSimulator_browseCSV_clicked();
-    void on_tradeSimulator_runSimulationButton();
+    void on_tradeSimulatorRunSimulationButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     AnalysisDisplays *ad = nullptr;
     ParseInputCSVData inputCSV;
+    TradeSimulator *ts = nullptr;
     string construct_date_string(int day, int month, int year);
     QString getRandomString() const;
     QString getYear(QString yr);
