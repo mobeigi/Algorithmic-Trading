@@ -360,7 +360,8 @@ void MainWindow::on_analysisAddDateButton_clicked(){
     ui->analysisListDate->setItem(currRows,1,endDateItem);
 }
 
-tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool formatForCSV) {
+//returns param set and list of strategies (name, threshold, returns)
+tuple<vector<ParamSet>, vector<tuple<string, string, string>>> MainWindow::doExecuteAnalysis(bool formatForCSV) {
     //QString s = getRandomString();
     //cout << s.toStdString() << endl;
 
@@ -372,7 +373,8 @@ tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool forma
     int analysisListRows = ui->analysisStrategyList->rowCount();
     int dateListRows = ui->analysisListDate->rowCount();
 
-    vector<string> strategieStrs = vector<string>();
+    //vector<string> strategieStrs = vector<string>();
+    vector<tuple<string,string,string>> strategies = vector<tuple<string,string,string>>();
     vector<ParseCSVData *> allCSVData = vector<ParseCSVData *>();
     map<string, bool> equityTypesMap = map<string, bool>();
     vector<StrategyData> strategyDatas = vector<StrategyData>();
@@ -398,18 +400,92 @@ tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool forma
 
         StrategyData strategyData;
         if (formatForCSV)
-            strategyData.name = analysisStrategy.toStdString() + " Th: " + analysisThreshold.toStdString() + " Rt: " + analysisReturns.toStdString();
+            strategyData.name = analysisStrategy.toStdString();
         else
             strategyData.name = analysisStrategy.toStdString() + "\nTh: " + analysisThreshold.toStdString() + ", Rt: " + analysisReturns.toStdString();
         strategyData.dataForEachDateRange = vector<ParseCSVData *>();
-        strategieStrs.push_back(strategyData.name);
+        strategies.push_back(std::make_tuple(strategyData.name, analysisThreshold.toStdString(), analysisReturns.toStdString()));
 
         int dateCount;
         for(dateCount=0;dateCount<dateListRows;dateCount++){
             QString startDate = ui->analysisListDate->item(dateCount,0)->text();
             QString endDate = ui->analysisListDate->item(dateCount,1)->text();
 
-            if (analysisStrategy.contains(QRegularExpression("wolf"))){
+            QString startYr = getYear(startDate);
+            QString endYr = getYear(endDate);
+            cout << startYr.toStdString() << endl;
+
+            //delete old orders file if it exists
+            QFile::remove(QString::fromStdString(curr_path + "/orders.csv"));
+
+            ofstream outputFile;
+            outputFile.open ("params.param");
+            outputFile << (":input_csvFile:" + inputCSV.toStdString() + "\\\n");
+            outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
+            outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
+            outputFile << (":returnsInCalculation:" + analysisReturns.toStdString() + "\\\n");
+            outputFile << (":threshold:" + analysisThreshold.toStdString() + "\\\n");
+            outputFile << (":startDate:" + startDate.toStdString() + "\\\n");
+            outputFile << (":endDate:" + endDate.toStdString() + "\\\n");
+            outputFile.close();
+
+            ofstream outputFile2;
+            outputFile2.open ("params2.param");
+            outputFile2 << ("N,TH,DateRange\n");
+            outputFile2 << (analysisReturns.toStdString() + ","
+                            + analysisThreshold.toStdString() + ","
+                            + startYr.toStdString()
+                            + "-" + endYr.toStdString() + "\n");
+            outputFile2.close();
+
+            //Run the program by feeding param file
+            //Construct location of params file
+            string params_location = curr_path + "/params.param";
+
+            string params2_location = curr_path + "/params2.param";
+
+            //Construct the command string
+            string command_str = analysisStrategy.toStdString(); //program location
+            command_str.append(" ");
+            command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
+            command_str.append(" ");
+            command_str.append(params2_location); //params2 file location (the wolf of seng support)
+            command_str.append(" ");
+            command_str.append(params_location); //params file location
+
+            system(command_str.c_str());
+
+            cout << "execution complete trock" << endl;
+
+            QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+
+            ParseCSVData *parseCSVDat = new ParseCSVData(currOrdersCSV.toStdString());
+            strategyData.dataForEachDateRange.push_back(parseCSVDat);
+            allCSVData.push_back(parseCSVDat);
+
+            for (string equType : parseCSVDat->getAllEquityTypes()) {
+                equityTypesMap[equType] = true;
+            }
+
+            /*QString s = getRandomString();
+            QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
+            QString newOrdersCSV = QDir::currentPath() + "/output_" + s + ".csv";
+            cout << newOrdersCSV.toStdString() << endl;
+            QFile::rename(currOrdersCSV,newOrdersCSV);
+            outputList.append(newOrdersCSV);
+
+            ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
+            strategyData.dataForEachDateRange.push_back(parseCSVDat);
+            allCSVData.push_back(parseCSVDat);
+
+            for (string equType : parseCSVDat->getAllEquityTypes()) {
+                equityTypesMap[equType] = true;
+            }*/
+
+
+
+
+            /*if (analysisStrategy.contains(QRegularExpression("wolf"))){
                 QString startYr = getYear(startDate);
                 QString endYr = getYear(endDate);
                 cout << startYr.toStdString() << endl;
@@ -490,7 +566,7 @@ tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool forma
                     equityTypesMap[equType] = true;
                 }
 
-            }
+            }*/
 
 
 
@@ -512,20 +588,25 @@ tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool forma
         delete dat;
     }*/
 
-    return {pset, strategieStrs};
+    return std::make_tuple(pset, strategies);
 
 }
 
 void MainWindow::on_analysisExecuteButton_clicked(){
 
 
-    tuple<vector<ParamSet>, vector<string>> analysis = this->doExecuteAnalysis(false);
+    tuple<vector<ParamSet>, vector<tuple<string, string, string>>> analysis = this->doExecuteAnalysis(false);
 
     QuantitativeAnalysisDisplay *qad = new QuantitativeAnalysisDisplay();
     qad->show();
 
+    vector<string> cobbleStr;
+    for (tuple<string, string, string> allStr : get<1>(analysis)) {
+        cobbleStr.push_back(get<0>(allStr));
+    }
+
     //QAD becomes owner of all csv data stored in pset
-    qad->setAnalysis(get<0>(analysis), get<1>(analysis));
+    qad->setAnalysis(get<0>(analysis), cobbleStr);
 
 //    for (QString s : outputList){
 //        cout << s.toStdString() << endl;
@@ -534,7 +615,7 @@ void MainWindow::on_analysisExecuteButton_clicked(){
 
 void MainWindow::on_saveCSVExecuteButton_clicked() {
 
-    tuple<vector<ParamSet>, vector<string>> analysis = this->doExecuteAnalysis(true);
+    tuple<vector<ParamSet>, vector<tuple<string,string,string>>> analysis = this->doExecuteAnalysis(true);
     QString fileName =
             QFileDialog::getSaveFileName(this, tr("Save Analysis"),
                                          "/path/to/file/", tr("CSV File (*.csv)"));
@@ -545,16 +626,41 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
     if (file.open(QIODevice::ReadWrite)) {
 
         QTextStream stream(&file);
-        //stream << "bla" << endl;
 
-        for (std::string strategy : get<1>(analysis)) {
+        stream << ",Strategy";
+        for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
+            string strategy = get<0>(stratData);
+            string thresh = get<1>(stratData);
+            string returns = get<2>(stratData);
             stream << QString::fromStdString("," + strategy + "," + strategy + "," + strategy
                                              + "," + strategy + "," + strategy + ","
                                              + strategy + "," + strategy);
 
         }
+        stream << endl << ",Threshold";
+        for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
+            string thresh = get<1>(stratData);
+            stream << QString::fromStdString("," + thresh + "," + thresh + "," + thresh
+                                             + "," + thresh + "," + thresh + ","
+                                             + thresh + "," + thresh);
+
+        }
+        stream << endl << ",Returns";
+        for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
+            string returns = get<2>(stratData);
+            stream << QString::fromStdString("," + returns + "," + returns + "," + returns
+                                             + "," + returns + "," + returns + ","
+                                             + returns + "," + returns);
+
+        }
         stream << endl;
-        for (std::string strategy : get<1>(analysis)) {
+
+        bool first = true;
+        for (std::tuple<string,string,string> stratData : get<1>(analysis)) {
+            if (first) {
+                stream << ",";
+                first = false;
+            }
             stream << ",Returns,Returns (raw),Granality,Granality (raw),Volatility,Volatility (raw),RGV Sum";
 
         }
@@ -567,8 +673,8 @@ void MainWindow::on_saveCSVExecuteButton_clicked() {
         for (std::ParamSet paramSet : get<0>(analysis)) {
             //rowIndex++;
             stream << QString::fromStdString(paramSet.getEquityType() +
-                            " (" + paramSet.getStartDate() + " to "
-                            + paramSet.getEndDate() + ")");
+                            "," + paramSet.getStartDate() + " to "
+                            + paramSet.getEndDate() + "");
 
             for (int i = 0; i < paramSet.getNumberOfStrategies(); ++i) {
                 std::Para r = paramSet.getQuantifiedParameter(std::paraReturns, i);

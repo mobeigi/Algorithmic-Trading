@@ -64,8 +64,8 @@ private slots:
     int check_outputcsv(void);
 
     //quantative analysis
-    //returns param set and list of strategies (names)
-    tuple<vector<ParamSet>, vector<string>> doExecuteAnalysis(bool formatForCSV);
+    //returns param set and list of strategies (name, threshold, returns)
+    tuple<vector<ParamSet>, vector<tuple<string, string, string>>> doExecuteAnalysis(bool formatForCSV);
     void on_analysisInputCSVButton_clicked();
     void on_analysisBrowseStrategyButton_clicked();
     void on_clearStrategyButton_clicked();
