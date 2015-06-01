@@ -455,11 +455,11 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
 }</string>
             </property>
             <property name="text">
-             <string>Save CSV</string>
+             <string>Export to CSV</string>
             </property>
             <property name="icon">
              <iconset resource="resources.qrc">
-              <normaloff>:/images/resources/run.png</normaloff>:/images/resources/run.png</iconset>
+              <normaloff>:/images/resources/export_csv.png</normaloff>:/images/resources/export_csv.png</iconset>
             </property>
             <property name="iconSize">
              <size>
