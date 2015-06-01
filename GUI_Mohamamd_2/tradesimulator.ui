@@ -83,7 +83,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QWidget" name="" native="true">
+      <widget class="QWidget" name="widget" native="true">
        <property name="maximumSize">
         <size>
          <width>360</width>
@@ -619,7 +619,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #3498db);
                 </property>
                 <property name="icon">
                  <iconset resource="resources.qrc">
-                  <normaloff>:/images/resources/run_program.gif</normaloff>:/images/resources/run_program.gif</iconset>
+                  <normaloff>:/images/resources/export_csv.png</normaloff>:/images/resources/export_csv.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>

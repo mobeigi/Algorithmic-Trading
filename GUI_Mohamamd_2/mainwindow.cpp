@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ParseInputCSVData.h"
+#include "TradeSimulator.h"
 
 #define ANALYSIS_TAB 2
 
@@ -820,4 +822,35 @@ void MainWindow::on_exportsummary_clicked() {
     }
 }
 
+void MainWindow::on_tradeSimulator_browseCSV_clicked() {
+    ui->tradeSimulator_input_csv_location->setText(QFileDialog::getOpenFileName(this, tr("Input CSV File"),"/path/to/file/",tr("CSV Files (*.csv)")));
+    ui->tradeSimulator_input_csv_location->displayText();
 
+    //Clear CSV ma
+    inputCSV.data.clear();
+
+    //Parse CSV File
+    this->inputCSV = ParseInputCSVData(ui->tradeSimulator_input_csv_location->text().toStdString());
+
+    //Clear combo list
+    ui->tradeSimulator_comboBox->clear();
+
+    //Load dropdown box with neccessary information
+    for(auto it = inputCSV.data.begin(); it != inputCSV.data.end(); ++it)
+    {
+        ui->tradeSimulator_comboBox->addItem(it->first.c_str());
+    }
+}
+
+void MainWindow::on_tradeSimulatorRunSimulationButton_clicked() {
+    //Get dropdown selection
+    std::string eqType = ui->tradeSimulator_comboBox->currentText().toStdString();
+
+    //Create Trade Simulator form
+    this->ts = new TradeSimulator();
+    this->ts->addTradeData(eqType, this->inputCSV.data[eqType] );
+    this->ts->show();
+
+    //Run simulation which will start worker thread
+    this->ts->runSimulation();
+}
