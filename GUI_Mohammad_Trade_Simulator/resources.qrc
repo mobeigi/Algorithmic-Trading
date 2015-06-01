@@ -8,5 +8,7 @@
         <file>resources/run_program.gif</file>
         <file>resources/barchart.png</file>
         <file>resources/analyse.jpg</file>
+        <file>resources/letterB.png</file>
+        <file>resources/letterS.png</file>
     </qresource>
 </RCC>
