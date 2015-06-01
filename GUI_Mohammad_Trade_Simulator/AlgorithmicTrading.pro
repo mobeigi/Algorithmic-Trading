@@ -22,7 +22,10 @@ SOURCES +=\
     DisplayAnalysis.cpp \
     QuantPara.cpp \
     ParamAnalysisHelper.cpp \
-    ParamSet.cpp
+    ParamSet.cpp \
+    SummaryForm.cpp \
+    QuantitativeAnalysisDisplay.cpp \
+    CamelPushButton.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -32,11 +35,22 @@ HEADERS  += mainwindow.h\
     DisplayAnalysis.h \
     QuantPara.h \
     ParamAnalysisHelper.h \
-    ParamSet.h
+    ParamSet.h \
+    MyTabWindow.h \
+    SummaryForm.h \
+    QuantitativeAnalysisDisplay.h \
+    CamelPushButton.h \
+    MyTableWidgetItem.h \
+    MyDateTableWidgetItem.h
 
 FORMS    += mainwindow.ui \
-    DisplayAnalysis.ui
+    DisplayAnalysis.ui \
+    summaryform.ui \
+    QuantitativeAnalysisDisplay.ui
 
 RC_FILE = iconise.rc
 
 QMAKE_LFLAGS += -Wl,-rpath,"'\$$ORIGIN'"
+
+RESOURCES += \
+    resources.qrc

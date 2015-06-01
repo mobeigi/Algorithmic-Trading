@@ -1,6 +1,7 @@
 #include "DisplayAnalysis.h"
 #include "ui_DisplayAnalysis.h"
-
+#include "MyTableWidgetItem.h"
+#include "MyDateTableWidgetItem.h"
 #include "AnalysisDisplays.h"
 
 DisplayAnalysis::DisplayAnalysis(QWidget *parent) :
@@ -264,15 +265,6 @@ void DisplayAnalysis::displayReturnsAnalysis(std::AnalysisData *data) {
 
     //Display net return
     QString net_return_perc_str;
-    char netReturnValueBuffer[50];
-    if (net_return_value < 0) {
-        sprintf(netReturnValueBuffer,"-$%.2lf",net_return_value * (-1));
-    } else {
-        sprintf(netReturnValueBuffer,"$%.2lf",net_return_value);
-    }
-    //net_return_perc_str.append(netReturnValueBuffer);
-
-    //net_return_perc_str.append(" (");
     net_return_perc_str.append(QString::number(net_return_perc));
     net_return_perc_str.append("%");
     ui->net_return_value_label->setText(net_return_perc_str);
@@ -294,17 +286,18 @@ void DisplayAnalysis::insertRowIntoReturnsAnalysis(std::string buySellPair,
     col0->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows,0, col0);
 
-    QTableWidgetItem* col1 = new QTableWidgetItem(QString::fromStdString(date), QTableWidgetItem::Type);
+    MyDateTableWidgetItem* col1 = new MyDateTableWidgetItem(QString::fromStdString(date));
     col1->setFlags(col1->flags() ^ Qt::ItemIsEditable);
     col1->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 1, col1);
 
-    QTableWidgetItem* col2 = new QTableWidgetItem(QString::fromStdString(returnValue), QTableWidgetItem::Type);
+
+    MyTableWidgetItem* col2 = new MyTableWidgetItem(QString::fromStdString(returnValue));
     col2->setFlags(col2->flags() ^ Qt::ItemIsEditable);
     col2->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 2, col2);
 
-    QTableWidgetItem* col3 = new QTableWidgetItem(QString::fromStdString(returnPerc), QTableWidgetItem::Type);
+    MyTableWidgetItem* col3 = new MyTableWidgetItem(QString::fromStdString(returnPerc));
     col3->setFlags(col2->flags() ^ Qt::ItemIsEditable);
     col3->setTextAlignment(Qt::AlignHCenter);
     ui->returnsAnalysis->setItem(currRows, 3, col3);

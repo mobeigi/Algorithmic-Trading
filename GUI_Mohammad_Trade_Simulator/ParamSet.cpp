@@ -15,6 +15,12 @@ ParamSet::ParamSet(string equityType, string dateStart,
 
 ParamSet::~ParamSet() {}
 
+void ParamSet::releaseAllAnalysisData() {
+    for (AnalysisData *dat : analysisData) {
+        if (dat != nullptr) delete dat;
+    }
+    analysisData = vector<AnalysisData *>();
+}
 
 //rawValsForEachStrat should be in same order, first strategy at index 0 and so on
 void ParamSet::setParam(QuantPara *paraType, vector<Para> rawValsForEachStrat) {
@@ -51,6 +57,17 @@ void ParamSet::setParam(QuantPara *paraType, vector<Para> rawValsForEachStrat) {
     }
 
     quantifiedParameters[paraId] = quantParams;
+}
+
+void ParamSet::setAnalysisDataForEachStrat(vector<AnalysisData *> analysisData) {
+    this->analysisData = analysisData;
+}
+
+
+AnalysisData *ParamSet::getAnalysisDataForStrat(int strategyIndex) {
+    if (strategyIndex >= analysisData.size() || strategyIndex < 0)
+        return nullptr;
+    return analysisData[strategyIndex];
 }
 
 Para ParamSet::getQuantifiedParameter(QuantPara *paraType, int strategyIndex) {

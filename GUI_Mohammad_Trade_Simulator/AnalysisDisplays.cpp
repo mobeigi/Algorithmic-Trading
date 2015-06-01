@@ -1,5 +1,7 @@
 #include "AnalysisDisplays.h"
 #include "DisplayAnalysis.h"
+#include "SummaryForm.h"
+#include "MyTabWindow.h"
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -49,12 +51,33 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
     mw->setWindowTitle("Equity Strategy Analysis");
     mw->setMinimumSize(750, 700);
 
-    QTabWidget *tabw = new QTabWidget(mw);
+    MyTabWidget *tabw = new MyTabWidget(mw, this->parseCSV);
     mw->setCentralWidget(tabw);
 
+    //Load summary tab
+    SummaryForm *summary = new SummaryForm(tabw);
+    std::string summaryText = "Summary";
+    tabw->addTab(summary, summaryText.c_str());
+    tabw->addEqType(summaryText);
+
+    //Create vector of checked equities
+    vector<string> eqTypeList;
+    for (QListWidgetItem *wi: listItems) {
+         if (wi->checkState()) {
+            eqTypeList.push_back(wi->text().toStdString());
+        }
+    }
+
+    //Set total returns
+    summary->setTotalNetReturns(this->parseCSV, eqTypeList);
+    summary->show();
+
+    //Load company tabs
     for (QListWidgetItem *wi: listItems) {
         if (wi->checkState()) {
             std::string eqType = wi->text().toStdString();
+
+            tabw->addEqType(eqType);
 
             DisplayAnalysis *dw = new DisplayAnalysis();
 
@@ -65,9 +88,6 @@ void AnalysisDisplays::showAnalysisDisplays(QWidget *parent) {
 
             dw->setDisplayId(currentDisplayId);
             currentDisplayId++;
-            dw->show();
-
-            dw->displayAnalysis(parseCSV->getDataForEquityType(eqType));
         }
     }
 
