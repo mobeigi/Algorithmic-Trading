@@ -512,7 +512,7 @@ tuple<vector<ParamSet>, vector<string>> MainWindow::doExecuteAnalysis(bool forma
         delete dat;
     }*/
 
-    return {pset, strategieStrs};
+    return std::make_tuple(pset, strategieStrs);
 
 }
 

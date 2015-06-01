@@ -25,7 +25,8 @@ SOURCES +=\
     ParamSet.cpp \
     SummaryForm.cpp \
     QuantitativeAnalysisDisplay.cpp \
-    CamelPushButton.cpp
+    CamelPushButton.cpp \
+    TradeSimulator.cpp
 
 HEADERS  += mainwindow.h\
          GlobalIncludes.h \ 
@@ -41,12 +42,14 @@ HEADERS  += mainwindow.h\
     QuantitativeAnalysisDisplay.h \
     CamelPushButton.h \
     MyTableWidgetItem.h \
-    MyDateTableWidgetItem.h
+    MyDateTableWidgetItem.h \
+    TradeSimulator.h
 
 FORMS    += mainwindow.ui \
     DisplayAnalysis.ui \
     summaryform.ui \
-    QuantitativeAnalysisDisplay.ui
+    QuantitativeAnalysisDisplay.ui \
+    tradesimulator.ui
 
 RC_FILE = iconise.rc
 
