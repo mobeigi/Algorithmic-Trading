@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>resources/file_csv.png</file>
+        <file>resources/displayanalysis.png</file>
+        <file>resources/logo.png</file>
+        <file>resources/terminal.gif</file>
+        <file>resources/run.png</file>
+        <file>resources/run_program.gif</file>
+        <file>resources/barchart.png</file>
+        <file>resources/analyse.jpg</file>
+        <file>resources/export_csv.png</file>
+        <file>resources/globe.gif</file>
+        <file>resources/letterB.png</file>
+        <file>resources/letterS.png</file>
+    </qresource>
+</RCC>
