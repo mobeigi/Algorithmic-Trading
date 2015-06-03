@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ParseInputCSVData.h"
-#include "TradeSimulator.h"
+
 
 #define ANALYSIS_TAB 2
 

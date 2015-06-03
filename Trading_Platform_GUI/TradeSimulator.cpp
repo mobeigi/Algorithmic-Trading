@@ -2,6 +2,8 @@
 #include "MyTableWidgetItem.h"
 #include "MyDateTableWidgetItem.h"
 
+#include <math.h>
+
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>

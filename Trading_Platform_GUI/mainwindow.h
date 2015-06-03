@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "GlobalIncludes.h"
+#include "TradeSimulator.h"
 
 #include <QMainWindow>
 #include <QFileDialog>
@@ -18,7 +19,6 @@
 #include "QuantitativeAnalysisDisplay.h"
 #include "SummaryForm.h"
 #include "ParseInputCSVData.h"
-#include "TradeSimulator.h"
 
 #include <tuple>
 #include <string>

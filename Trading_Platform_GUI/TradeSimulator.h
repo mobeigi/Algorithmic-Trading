@@ -27,7 +27,7 @@ class TradeSimulator : public QWidget
 
 public:
     explicit TradeSimulator(QWidget *parent = 0);
-    void addTradeData(std::string eqType, vector<TradeDayData> data);
+    void addTradeData(string eqType, vector<TradeDayData> data);
 
     //Runs trade simulation in a thread
     void runSimulation();
