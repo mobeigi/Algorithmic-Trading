@@ -62,7 +62,6 @@ int MainWindow::on_execute_button_clicked()
 
     //delete old orders file if it exists
     QFile::remove(QString::fromStdString(curr_path + "/orders.csv"));
-   // remove((const char *)(curr_path + "/orders.csv"));
 
     //Generate the params file from fields
     //NOTE: Output csv is the same directory as this executable path
@@ -477,110 +476,7 @@ tuple<vector<ParamSet>, vector<tuple<string, string, string>>> MainWindow::doExe
 
             for (string equType : parseCSVDat->getAllEquityTypes()) {
                 equityTypesMap[equType] = true;
-            }
-
-            /*QString s = getRandomString();
-            QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
-            QString newOrdersCSV = QDir::currentPath() + "/output_" + s + ".csv";
-            cout << newOrdersCSV.toStdString() << endl;
-            QFile::rename(currOrdersCSV,newOrdersCSV);
-            outputList.append(newOrdersCSV);
-
-            ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
-            strategyData.dataForEachDateRange.push_back(parseCSVDat);
-            allCSVData.push_back(parseCSVDat);
-
-            for (string equType : parseCSVDat->getAllEquityTypes()) {
-                equityTypesMap[equType] = true;
-            }*/
-
-
-
-
-            /*if (analysisStrategy.contains(QRegularExpression("wolf"))){
-                QString startYr = getYear(startDate);
-                QString endYr = getYear(endDate);
-                cout << startYr.toStdString() << endl;
-//                cout << endYr.toStdString() << endl;
-
-                ofstream outputFile2;
-                outputFile2.open ("params.param");
-                outputFile2 << ("N,TH,DateRange\n");
-                outputFile2 << (analysisReturns.toStdString() + ","
-                                + analysisThreshold.toStdString() + ","
-                                + startYr.toStdString()
-                                + "-" + endYr.toStdString() + "\n");
-                outputFile2.close();
-
-                //construct the command string
-                string params_location = curr_path + "/params.param"; //location of the params file
-                string command_str = analysisStrategy.toStdString(); //program location
-                command_str.append(" ");
-                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
-                command_str.append(" ");
-                command_str.append(params_location); //params2 file location (the wolf of seng support)
-
-                //execute the file
-                system(command_str.c_str());
-//                cout << "execution complete wolf" << endl;
-
-                QString s = getRandomString();
-                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
-                QString newOrdersCSV = QDir::currentPath() + "/wolf_" + s + ".csv";
-                cout << newOrdersCSV.toStdString() << endl;
-                QFile::rename(currOrdersCSV,newOrdersCSV);
-                outputList.append(newOrdersCSV);
-
-                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
-                strategyData.dataForEachDateRange.push_back(parseCSVDat);
-                allCSVData.push_back(parseCSVDat);
-
-                for (string equType : parseCSVDat->getAllEquityTypes()) {
-                    equityTypesMap[equType] = true;
-                }
-
-            } else {
-                ofstream outputFile;
-                outputFile.open ("params.param");
-                outputFile << (":input_csvFile:" + inputCSV.toStdString() + "\\\n");
-                outputFile << (":output_csvFile:"+ curr_path +"/orders.csv\\\n");
-                outputFile << (":output_logFile:"+curr_path+"/AlgorithmicTrading.log\\\n");
-                outputFile << (":returnsInCalculation:" + analysisReturns.toStdString() + "\\\n");
-                outputFile << (":threshold:" + analysisThreshold.toStdString() + "\\\n");
-                outputFile << (":startDate:" + startDate.toStdString() + "\\\n");
-                outputFile << (":endDate:" + endDate.toStdString() + "\\\n");
-                outputFile.close();
-
-                //construct the command string
-                string params_location = curr_path + "/params.param"; //location of the params file
-                string command_str = analysisStrategy.toStdString(); //program location
-                command_str.append(" ");
-                command_str.append(inputCSV.toStdString()); //csv location (the wolf of seng support)
-                command_str.append(" ");
-                command_str.append(params_location); //params2 file location (the wolf of seng support)
-
-                //execute the file
-                system(command_str.c_str());
-                cout << "execution complete trock" << endl;
-
-                QString s = getRandomString();
-                QString currOrdersCSV = QDir::currentPath() + "/orders.csv";
-                QString newOrdersCSV = QDir::currentPath() + "/trock_" + s + ".csv";
-                cout << newOrdersCSV.toStdString() << endl;
-                QFile::rename(currOrdersCSV,newOrdersCSV);
-                outputList.append(newOrdersCSV);
-
-                ParseCSVData *parseCSVDat = new ParseCSVData(newOrdersCSV.toStdString());
-                strategyData.dataForEachDateRange.push_back(parseCSVDat);
-                allCSVData.push_back(parseCSVDat);
-
-                for (string equType : parseCSVDat->getAllEquityTypes()) {
-                    equityTypesMap[equType] = true;
-                }
-
-            }*/
-
-
+            } 
 
         }
         strategyDatas.push_back(strategyData);
@@ -594,11 +490,6 @@ tuple<vector<ParamSet>, vector<tuple<string, string, string>>> MainWindow::doExe
     }
 
     vector<ParamSet> pset = ParamAnalysisHelper::performParamAnalysis(equityTypes, dateRanges, strategyDatas);
-
-    //dont delete anymore!, performparamanalysis becomes owner now
-    /*for (ParseCSVData *dat : allCSVData) {
-        delete dat;
-    }*/
 
     return std::make_tuple(pset, strategies);
 
@@ -625,9 +516,6 @@ void MainWindow::on_analysisExecuteButton_clicked(){
     //QAD becomes owner of all csv data stored in pset
     qad->setAnalysis(get<0>(analysis), cobbleStr);
 
-//    for (QString s : outputList){
-//        cout << s.toStdString() << endl;
-//    }
 }
 
 void MainWindow::on_saveCSVExecuteButton_clicked() {

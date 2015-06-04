@@ -375,11 +375,6 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
 
     scene->setSceneRect(0, shiftY - (chartHeight/2.0), daySize * data->daysTrading() + extraWidth, chartHeight + extraBase);
 
-    //scene->setSceneRect(shiftX + (-daySize) * data->daysTrading() / 2 - extraWidth/2.0, shiftY - (chartHeight/2.0), daySize * data->daysTrading() + extraWidth, chartHeight + extraBase);
-
-    //scene->setSceneRect(shiftX + (-daySize) * data->daysTrading() / 2 - extraWidth/2.0, shiftY - (chartHeight/2.0), daySize * data->daysTrading() + extraWidth, chartHeight + extraBase);
-
-
     QPen pen;
 
     //draw y axis label "Equity Price"
@@ -401,7 +396,6 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
     double markerPriceX = startX - 70.0;
     int numPriceMarkers = 6;
 
-    //chartHeight/2.0 - chartHeight * pricePercentToMax + daySize/2.0;
     double percentUsed = (floor(data->highestPrice() - ceil(data->lowestPrice())) / (data->highestPrice() - data->lowestPrice()));
 
     if (percentUsed <= 0.0) {
@@ -416,18 +410,12 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
 
         for (int i = 0; i != numPriceMarkers + 1; ++i) {
             double additionOfPercentForSmoothness = 1.0 - (data->highestPrice() - ceil(data->lowestPrice())) / (data->highestPrice() - data->lowestPrice());
-            //double additionOfPercentForSmoothness = 1.0 - (data->highestPrice() - ceil(data->lowestPrice())) / (data->highestPrice() - data->lowestPrice());
             double percentMarkerIncr = percentUsed * (static_cast<double>(1.0) / (static_cast<double>(numPriceMarkers) - 1.0));
             if (additionOfPercentForSmoothness >= percentMarkerIncr) {
                 additionOfPercentForSmoothness -= percentMarkerIncr;
             }
             double percentMarker = percentUsed * (static_cast<double>(i) / (static_cast<double>(numPriceMarkers) - 1.0)) + additionOfPercentForSmoothness;
 
-
-            //double percentMarkerIncr = 1.0 / (static_cast<double>(numPriceMarkers) - 1.0);
-            //double priceIncr = percentMarkerIncr * (data->highestPrice() - data->lowestPrice()) + data->lowestPrice();
-            //double percentMarker = (floor(priceIncr) / priceIncr) * (static_cast<double>(i) / (static_cast<double>(numPriceMarkers) - 1.0));
-            //double percentMarker = (floor(priceIncr) / (data->highestPrice() - data->lowestPrice()));
 
             double markerPriceY = shiftY + chartHeight/2.0 - chartHeight * percentMarker + daySize/2.0;
             scene->addText(QString::fromStdString(std::Helper::formatPrice(percentMarker * (data->highestPrice() - data->lowestPrice()) + data->lowestPrice())), normalFont)->setPos(markerPriceX, markerPriceY);
@@ -446,7 +434,6 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
 
 
         while (dayUpto < data->daysTrading()) {
-            //scene->addText("asdasdsad", QFont("Times", 13))->setPos(startX + dayUpto*daySize, startY);
             scene->addLine(startX + dayUpto*daySize, startY, startX + dayUpto*daySize, -startY, pen);
             scene->addText(QString::fromStdString(std::Helper::dateString(currDate)), normalFont)->setPos(startX + dayUpto*daySize - 9.0, startY);
             currDate = std::Helper::addDays(currDate, daysBetweenDateMarkers);
@@ -454,8 +441,6 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
         }
 
     }
-
-    //scene->addText("asd", QFont());
 
     int startOfDaysPos = (-daySize) * data->daysTrading() / 2;
 
@@ -488,7 +473,4 @@ void TradeSimulator::displayGraphAnalysis(std::AnalysisData *data) {
 
     ui->tradeSimulator_graphicsGraphDisplay->setScene(scene);
     ui->tradeSimulator_graphicsGraphDisplay->setRenderHints( QPainter::Antialiasing );
-    //ui->graphicsGraphDisplay->setHorizontalScrollBar();
-    //ui->graphicsGraphDisplay->scrollContentsBy(0, 0);
-    //ui->scrollArea_2->horizontalScrollBar()->setValue(0);
 }

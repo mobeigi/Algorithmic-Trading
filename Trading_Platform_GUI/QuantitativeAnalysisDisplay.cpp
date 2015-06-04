@@ -60,14 +60,6 @@ void QuantitativeAnalysisDisplay::drawQuantValue(QGridLayout *layout, std::Para 
     l->setFixedSize(__WID * width, __HEI * height);
     layout->addWidget(l, row, col, height, width);
 }
-//void handleSelectionChanged(int index)
-/*{
-    QMessageBox* msg = new QMessageBox();
-    msg->setWindowTitle("Hello !");
-    msg->setText("Selected Index is :"+QString::number(index));
-    msg->show();
-};*/
-
 
 QuantitativeAnalysisDisplay::~QuantitativeAnalysisDisplay()
 {
@@ -86,14 +78,10 @@ void QuantitativeAnalysisDisplay::setAnalysis(std::vector<std::ParamSet> analysi
     this->currentDisplayOption = -1;
     this->buildAnalysis(this->analysisData, this->strategies, 0);
     this->buildAnalysis(this->analysisData, this->strategies, -1);
-    //this->buildAnalysis(this->analysisData, this->strategies, 0);
 }
 
 void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analysisData, std::vector<std::string> strategies, int displayOption) {
     //accesses the param for the first row, the second column (strategy), and the return param (out of the three types)
-    //analysisData[0].getQuantifiedParameter(std::paraReturns, 1);
-
-    //int extraGap = 1;
 
     while (ui->gridLayout->count() > 0) {
         ui->gridLayout->takeAt(0)->widget()->deleteLater();
@@ -192,8 +180,6 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
             QObject::connect(button, SIGNAL(clicked()),this, SLOT(clickedSlot()));
             ui->gridLayout->addWidget(button, rowIndex + startY, __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 3, 1, 1);
         }
-
-        //paramSet.getEquityType()
     }
 
     int index = -1;
@@ -220,61 +206,6 @@ void QuantitativeAnalysisDisplay::buildAnalysis(std::vector<std::ParamSet> analy
                                  __WID_TITLES_EQUITY + index*__WID_TITLES_STRATS + 0, 3, 1, false);
         }
     }
-
-    /*int strategyIndex = -1;
-    for (std::string strategy : strategies) {
-        strategyIndex++;
-        this->drawTitle(ui->gridLayout, strategy, 0, __WID_TITLES_EQUITY + strategyIndex*__WID_TITLES_STRATS, __WID_TITLES_STRATS, 1);
-
-        this->drawTitle(ui->gridLayout, "Returns", 1, __WID_TITLES_EQUITY +
-                        strategyIndex*__WID_TITLES_STRATS + 0, 1, 1);
-        this->drawTitle(ui->gridLayout, "Granality", 1, __WID_TITLES_EQUITY +
-                        strategyIndex*__WID_TITLES_STRATS + 1, 1, 1);
-        this->drawTitle(ui->gridLayout, "Volatility", 1, __WID_TITLES_EQUITY +
-                        strategyIndex*__WID_TITLES_STRATS + 2, 1, 1);
-
-    }
-
-    int startY = 2;
-
-    int rowIndex = -1;
-    for (std::ParamSet paramSet : analysisData) {
-        rowIndex++;
-        this->drawTitle(ui->gridLayout, paramSet.getEquityType() +
-                        " \n(" + paramSet.getStartDate() + " to "
-                        + paramSet.getEndDate() + ")", startY + rowIndex,
-                        0, __WID_TITLES_EQUITY, 1);
-
-        for (int i = 0; i < paramSet.getNumberOfStrategies(); ++i) {
-            std::Para r = paramSet.getQuantifiedParameter(std::paraReturns, i);
-            std::Para g = paramSet.getQuantifiedParameter(std::paraGranality, i);
-            std::Para v = paramSet.getQuantifiedParameter(std::paraVolatility, i);
-
-            this->drawQuantValue(ui->gridLayout, r, rowIndex + startY,
-                                 __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 0, 1, 1);
-            this->drawQuantValue(ui->gridLayout, g, rowIndex + startY,
-                                 __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 1, 1, 1);
-            this->drawQuantValue(ui->gridLayout, v, rowIndex + startY,
-                                 __WID_TITLES_EQUITY + i*__WID_TITLES_STRATS + 2, 1, 1);
-        }
-
-        //paramSet.getEquityType()
-    }*/
-
-
-    /*QLabel *l = new QLabel();
-    l->setText("Test");
-    l->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    l->setStyleSheet("QLabel { background-color : #FF5555; color : black; }");
-    l->setFixedSize(100, 40);
-    ui->gridLayout->addWidget(l, 1, 1, 1, 1);
-
-    l = new QLabel();
-    l->setText("Text");
-    l->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    l->setStyleSheet("QLabel { background-color : #FF5555; color : black; }");
-    l->setFixedSize(100, 40);
-    ui->gridLayout->addWidget(l, 0, 0, 1, 2);*/
 
 }
 

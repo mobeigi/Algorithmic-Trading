@@ -32,7 +32,7 @@ struct Date {
     class Helper {
     public:
 
-        //trtim functions from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+        //trim functions from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
         //self explainitory
 
         // trim from start

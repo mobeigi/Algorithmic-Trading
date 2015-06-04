@@ -19,8 +19,6 @@ struct TradeData {
     string date;
     double price;
     int tradeDayOffset; //days from the start of trading
-    //int volume; not needed atm
-    //double value; not needed atm
 };
 
 
