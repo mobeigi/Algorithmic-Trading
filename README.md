@@ -14,27 +14,35 @@ Images
 -----
 
 <h4>Analytics Summary:</h4>
+
 ![Analytics Summary](/../screenshots/screenshots/analysis%20summary.png?raw=true "Analytics Summary")
 
 <h4>Analysis Tab:</h4>
+
 ![Analysis Tab](/../screenshots/screenshots/analysis%20tab.png?raw=true "Analysis Tab")
 
 <h4>Graph View:</h4>
+
 ![Graph View](/../screenshots/screenshots/graph%20view.png?raw=true "Graph View")
 
 <h4>Quantitative Analysis Tab:</h4>
+
 ![Quantitative Analysis Tab](/../screenshots/screenshots/quantitative%20analysis%20tab.png?raw=true "Quantitative Analysis Tab")
 
 <h4>Quantitative Analysis:</h4>
+
 ![Quantitative Analysis](/../screenshots/screenshots/quantitative%20analysis.png?raw=true "Quantitative Analysis")
 
 <h4>Run Strategy:</h4>
+
 ![Run Strategy](/../screenshots/screenshots/run%20strategy.png?raw=true "Run Strategy")
 
 <h4>Trade Simulator Tab:</h4>
+
 ![Trade Simulator Tab](/../screenshots/screenshots/trade%20simulator%20tab.png?raw=true "Trade Simulator Tab")
 
 <h4>Trade Simulator:</h4>
+
 ![Trade Simulator](/../screenshots/screenshots/trade%20simulator.png?raw=true "Trade Simulator")
 
 
